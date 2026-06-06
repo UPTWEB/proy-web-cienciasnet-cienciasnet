@@ -7,7 +7,9 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-cienciasnet_local}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks: [private]
+    ports:
+      - "5432:5432"
+    networks: [private, public]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-cienciasnet} -d ${DB_DATABASE:-cienciasnet}"]
       interval: 5s
