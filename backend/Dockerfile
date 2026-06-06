@@ -1,6 +1,7 @@
-FROM php:8.2-fpm-alpine AS production
+FROM php:8.3-fpm-alpine AS production
 
 RUN apk add --no-cache \
+    $PHPIZE_DEPS \
     postgresql-dev \
     libpng-dev \
     libjpeg-turbo-dev \
@@ -9,6 +10,7 @@ RUN apk add --no-cache \
     oniguruma-dev \
     libxml2-dev \
     libzip-dev \
+    curl-dev \
     icu-dev \
     imagemagick-dev \
     imagemagick \
