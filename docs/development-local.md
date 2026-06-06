@@ -42,10 +42,12 @@ docker compose ps
 docker compose logs -f backend frontend
 docker compose exec backend php artisan test
 docker compose exec frontend npm run test
+docker compose exec frontend npm run quality
 docker compose down
 ```
 
 `docker compose down` conserva PostgreSQL. `docker compose down -v` elimina volúmenes y borra la base local.
+El frontend ejecuta `npm ci` al iniciar para sincronizar su volumen de dependencias con `package-lock.json`.
 
 ## Verificación completa
 
@@ -57,6 +59,12 @@ docker compose exec backend php artisan scribe:generate
 docker compose exec frontend npm run lint
 docker compose exec frontend npm run test
 docker compose exec frontend npm run build
+```
+
+Las pruebas E2E se ejecutan de forma reproducible con la imagen oficial de Playwright:
+
+```bash
+docker compose --profile test run --rm frontend-e2e
 ```
 
 Comprobar además que `/health`, `/api/v1/health` y `http://localhost:5173` respondan, y que `docker compose ps` muestre

@@ -1,0 +1,60 @@
+name: Backend quality
+
+on:
+  pull_request:
+    paths: ["backend/**", ".github/workflows/backend-quality.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/**", ".github/workflows/backend-quality.yml"]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: cienciasnet_test
+          POSTGRES_USER: cienciasnet
+          POSTGRES_PASSWORD: cienciasnet_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U cienciasnet -d cienciasnet_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDE=
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: cienciasnet_test
+      DB_USERNAME: cienciasnet
+      DB_PASSWORD: cienciasnet_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, pdo_pgsql, pgsql, xml, curl, zip, intl, bcmath, gd
+          coverage: none
+      - uses: ramsey/composer-install@v3
+        with:
+          working-directory: backend
+      - run: composer validate --strict
+      - run: composer audit
+      - run: php vendor/bin/pint --test
+      - run: php artisan migrate:fresh --force
+      - run: php artisan test
+      - run: php artisan scribe:generate
+      - run: git diff --exit-code -- public/docs
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2

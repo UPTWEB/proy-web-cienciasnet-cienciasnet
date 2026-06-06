@@ -26,7 +26,7 @@ return [
 
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
-    'base_url' => config('app.url'),
+    'base_url' => env('SCRIBE_BASE_URL', 'http://localhost'),
 
     // Routes to include in the docs
     'routes' => [
@@ -143,7 +143,7 @@ return [
     // For 'laravel' docs, it will be generated to storage/app/scribe/collection.json.
     // Setting `laravel.add_routes` to true (above) will also add a route for the collection.
     'postman' => [
-        'enabled' => true,
+        'enabled' => false,
 
         'overrides' => [
             // 'info.version' => '2.0.0',

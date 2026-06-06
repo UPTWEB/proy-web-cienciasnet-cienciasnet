@@ -38,6 +38,7 @@ services:
       RUN_MIGRATIONS: "true"
     volumes:
       - ./backend:/var/www
+      - ./backend/.env.example:/var/www/.env:ro
       - backend_vendor:/var/www/vendor
     ports:
       - "127.0.0.1:8000:8000"
@@ -62,6 +63,7 @@ services:
       RUN_MIGRATIONS: "false"
     volumes:
       - ./backend:/var/www
+      - ./backend/.env.example:/var/www/.env:ro
       - backend_vendor:/var/www/vendor
     command: php artisan queue:work --sleep=3 --tries=3
     networks: [private]
@@ -89,6 +91,7 @@ services:
     volumes:
       - ./frontend:/app
       - frontend_node_modules:/app/node_modules
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
     ports:
       - "127.0.0.1:5173:5173"
     networks: [public]
@@ -100,6 +103,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 12
+
+  frontend-e2e:
+    image: mcr.microsoft.com/playwright:v1.60.0-noble
+    profiles: [test]
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    command: sh -c "npm run build && npx playwright test"
+    networks: [public]
+    depends_on:
+      frontend:
+        condition: service_healthy
 
 volumes:
   pgdata:

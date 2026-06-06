@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: 'Laravel API Documentation'
+  title: 'CienciasNET API API Documentation'
   description: 'Contrato HTTP versionado de CienciasNET.'
   version: 1.0.0
 servers:
