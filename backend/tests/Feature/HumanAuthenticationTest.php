@@ -93,5 +93,6 @@ it('rejects a stateful mutation without a CSRF token', function () {
 
     $this->withHeader('Origin', 'http://localhost:5173')
         ->postJson('/api/v1/auth/login', ['email' => $user->email, 'password' => 'correct-password'])
-        ->assertStatus(419);
+        ->assertStatus(419)
+        ->assertJsonPath('error.code', 'csrf_token_mismatch');
 });

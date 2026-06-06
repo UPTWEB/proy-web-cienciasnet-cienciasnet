@@ -56,6 +56,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 $exception instanceof AuthenticationException => [401, 'unauthenticated', 'Debes iniciar sesión.'],
                 $exception instanceof AuthorizationException => [403, 'forbidden', 'No tienes permiso para realizar esta acción.'],
                 $exception instanceof ModelNotFoundException => [404, 'not_found', 'El recurso solicitado no existe.'],
+                $exception instanceof HttpExceptionInterface && $exception->getStatusCode() === 419 => [419, 'csrf_token_mismatch', 'La sesión de seguridad expiró.'],
                 $exception instanceof HttpExceptionInterface => [$exception->getStatusCode(), 'http_error', $exception->getMessage() ?: 'La solicitud no pudo procesarse.'],
                 default => [500, 'server_error', 'Ocurrió un error inesperado.'],
             };
