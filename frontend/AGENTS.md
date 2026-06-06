@@ -21,8 +21,9 @@ y contrato aceptado.
 
 ## Coordinación
 
+- Al recibir una tarea, confirmar el ID/change y seguir `openspec/TASK_REQUEST.md`.
+- Mantener sincronizados `EXECUTION_PLAN.md`, `tasks.md` y `verification.md` mientras se trabaja.
 - Kiara revisa consistencia visual, responsive y accesibilidad.
 - Vincenzo revisa rutas, API client, caché, manejo de sesión y E2E.
 - No simular como definitivo un contrato backend no aceptado.
 - Los mocks temporales deben marcarse y retirarse antes de cerrar el change.
-

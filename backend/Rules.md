@@ -36,3 +36,19 @@ Estas reglas son obligatorias para cualquier cambio backend.
 - Agregar pruebas unitarias, integración, feature y autorización según riesgo.
 - Un change no termina sin verificación, contrato actualizado y documentación aplicable.
 
+## Ejecución obligatoria de OpenSpec
+
+- Toda tarea backend debe identificar un único change de `openspec/EXECUTION_PLAN.md`.
+- Antes de editar código, leer `Rules.md`, `AGENTS.md`, `openspec/WORKFLOW.md`, todos los artefactos del change, sus
+  documentos fuente y specs aceptadas relacionadas.
+- Al iniciar trabajo real, cambiar el estado del change de `[ ]` a `[~]` en `openspec/EXECUTION_PLAN.md`.
+- Marcar una casilla de `tasks.md` únicamente después de implementar y comprobar esa tarea. No marcar tareas por
+  anticipado ni todas juntas al final.
+- Registrar comandos, resultados, limitaciones y evidencias en `verification.md` durante el trabajo.
+- Si aparece un bloqueo real, marcar `[-]`, explicar el bloqueo en `verification.md` y no fingir que el change terminó.
+- El owner puede completar implementación y verificación, pero el reviewer debe aprobar el cierre y archivado.
+- Solo después de cumplir todas las tareas, escenarios, verificaciones, contratos y revisión:
+  1. Fusionar cada delta spec en `openspec/specs/<capability>/spec.md`.
+  2. Mover el change completo a `openspec/changes/archive/YYYY-MM-DD-<change-name>/`.
+  3. Cambiar su estado a `[x]` en `openspec/EXECUTION_PLAN.md`.
+- No eliminar historial del change ni marcar `[x]` dejando casillas pendientes.

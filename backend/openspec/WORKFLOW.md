@@ -9,18 +9,29 @@
 
 ## Flujo
 
-1. Confirmar dependencias aceptadas.
-2. Leer reglas de dominio, arquitectura, seguridad y esquema relacionados.
-3. Confirmar que `specs/<capability>/spec.md` contiene requisitos SHALL y escenarios GIVEN/WHEN/THEN.
-4. Actualizar `proposal.md` y `design.md` si cambia el alcance.
-5. Ejecutar tareas pequeñas en orden.
-6. Verificar migraciones, pruebas, autorización, rendimiento y OpenAPI aplicables.
-7. Registrar resultados en `verification.md`.
-8. Validar y archivar el change.
-9. Confirmar spec aceptada en `openspec/specs/`.
-10. Actualizar `EXECUTION_PLAN.md` y crear commit enfocado.
+1. Confirmar que el change está desbloqueado y sus dependencias están aceptadas.
+2. Leer `Rules.md`, `AGENTS.md`, este workflow, todos los artefactos del change, documentos fuente y specs relacionadas.
+3. Cambiar el estado del change de `[ ]` a `[~]` en `EXECUTION_PLAN.md` al iniciar implementación.
+4. Confirmar que `specs/<capability>/spec.md` contiene requisitos SHALL y escenarios GIVEN/WHEN/THEN.
+5. Actualizar `proposal.md` y `design.md` si cambia el alcance antes de continuar.
+6. Ejecutar tareas pequeñas en orden y marcar cada `[x]` solamente tras comprobarla.
+7. Ejecutar migraciones, pruebas, autorización, rendimiento y OpenAPI aplicables.
+8. Marcar las verificaciones cumplidas y registrar resultados reales en `verification.md`.
+9. Solicitar revisión. El reviewer confirma tareas, escenarios, contrato y evidencia.
+10. Fusionar las delta specs aceptadas en `openspec/specs/<capability>/spec.md`.
+11. Mover el change a `openspec/changes/archive/YYYY-MM-DD-<change-name>/`.
+12. Cambiar el plan a `[x]` y crear un commit enfocado.
+
+## Sincronización de estados
+
+| Momento | `EXECUTION_PLAN.md` | `tasks.md` | `verification.md` |
+|---|---|---|---|
+| Antes de iniciar | `[ ]` | Casillas pendientes | Resultados pendientes |
+| Trabajo activo | `[~]` | Marcar solo tareas demostradas | Registrar evidencia progresivamente |
+| Bloqueado | `[-]` | Conservar estado real | Explicar bloqueo y siguiente condición |
+| Revisado y archivado | `[x]` | Todas las casillas completas | Todas las verificaciones y resultado final |
 
 ## Cierre obligatorio
 
 Un change backend no se marca `[x]` si falta contrato API, pruebas negativas de permisos, rollback de migración,
-verificación de consultas o documentación requerida.
+verificación de consultas, documentación requerida, aprobación del reviewer, spec aceptada o archivado del change.

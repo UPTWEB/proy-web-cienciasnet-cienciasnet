@@ -2,6 +2,8 @@
 
 Organiza pantallas, navegación, componentes, integración API, accesibilidad y pruebas frontend.
 
+Para asignar trabajo, usar la plantilla de [`TASK_REQUEST.md`](TASK_REQUEST.md).
+
 ## Flujo
 
 1. Elegir el siguiente change desbloqueado de `EXECUTION_PLAN.md`.

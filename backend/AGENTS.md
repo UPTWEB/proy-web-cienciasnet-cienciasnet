@@ -23,8 +23,9 @@ changes backend; cada change debe conservar owner y reviewer diferentes.
 ## Coordinación
 
 - No implementar un change bloqueado por una spec pendiente.
+- Al recibir una tarea, confirmar el ID/change y seguir `openspec/TASK_REQUEST.md`.
+- Mantener sincronizados `EXECUTION_PLAN.md`, `tasks.md` y `verification.md` mientras se trabaja.
 - Publicar OpenAPI/spec aceptada antes de desbloquear frontend.
 - André revisa impacto Docker/deploy de nuevas dependencias o servicios.
 - Fátima revisa migraciones, constraints e índices.
 - Jefferson revisa contratos API, límites de módulos y autorización.
-

@@ -2,6 +2,8 @@
 
 Organiza migraciones, casos de uso, APIs, seguridad, integraciones e infraestructura backend.
 
+Para asignar trabajo, usar la plantilla de [`TASK_REQUEST.md`](TASK_REQUEST.md).
+
 ## Flujo
 
 1. Elegir el siguiente change desbloqueado de `EXECUTION_PLAN.md`.
