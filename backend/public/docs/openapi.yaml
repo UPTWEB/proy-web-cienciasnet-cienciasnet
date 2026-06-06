@@ -37,3 +37,135 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/v1/auth/login:
+    post:
+      summary: ''
+      operationId: postApiV1AuthLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Correo único de la cuenta humana. validation.email validation.max.'
+                  example: usuario@example.test
+                password:
+                  type: string
+                  description: 'Contraseña de la cuenta.'
+                  example: correct-password
+                remember:
+                  type: boolean
+                  description: 'Mantener la sesión al cerrar el navegador.'
+                  example: false
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/auth/forgot-password:
+    post:
+      summary: ''
+      operationId: postApiV1AuthForgotPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Correo al que se enviarán instrucciones si existe. validation.email validation.max.'
+                  example: usuario@example.test
+              required:
+                - email
+      security: []
+  /api/v1/auth/reset-password:
+    post:
+      summary: ''
+      operationId: postApiV1AuthResetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 'Token recibido por correo.'
+                  example: reset-token
+                email:
+                  type: string
+                  description: 'Correo asociado al token. validation.email validation.max.'
+                  example: usuario@example.test
+                password:
+                  type: string
+                  description: 'Nueva contraseña.'
+                  example: new-secure-password
+              required:
+                - token
+                - email
+                - password
+      security: []
+  /api/v1/auth/session:
+    get:
+      summary: ''
+      operationId: getApiV1AuthSession
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/auth/logout:
+    post:
+      summary: ''
+      operationId: postApiV1AuthLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []

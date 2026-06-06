@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureActiveHumanAccount;
 use App\Http\Middleware\EnsureIdempotentRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -20,7 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->statefulApi();
+
         $middleware->alias([
+            'active.account' => EnsureActiveHumanAccount::class,
             'idempotent' => EnsureIdempotentRequest::class,
         ]);
     })
