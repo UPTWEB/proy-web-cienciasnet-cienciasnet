@@ -12,9 +12,9 @@
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
 | BE-001 | `[x]` | `initialize-backend-foundation` | Jefferson | Fátima | Ninguna |
-| OPS-001 | `[ ]` | `initialize-docker-development` | André | Jefferson | Ninguna |
-| BE-002 | `[ ]` | `define-api-contract-conventions` | Jefferson | Fátima | BE-001 |
-| OPS-002 | `[ ]` | `configure-backend-quality-ci` | André | Jefferson | BE-001, OPS-001 |
+| OPS-001 | `[x]` | `initialize-docker-development` | André | Jefferson | Ninguna |
+| BE-002 | `[x]` | `define-api-contract-conventions` | Jefferson | Fátima | BE-001 |
+| OPS-002 | `[~]` | `configure-backend-quality-ci` | André | Jefferson | BE-001, OPS-001 |
 
 ## Fase 1: Identidad y estructura académica
 

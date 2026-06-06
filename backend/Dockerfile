@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     imagemagick-dev \
     imagemagick \
     fcgi \
+    postgresql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
     pdo_pgsql \
@@ -52,3 +53,11 @@ COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
+
+FROM production AS development
+
+ENV APP_ENV=local
+
+RUN composer install --no-interaction
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

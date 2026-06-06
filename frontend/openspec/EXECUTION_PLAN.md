@@ -11,8 +11,8 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-001 | `[ ]` | `initialize-vite-frontend-foundation` | Vincenzo | Kiara | Ninguna |
-| FE-002 | `[ ]` | `add-design-system-layouts` | Kiara | Vincenzo | FE-001 |
+| FE-001 | `[x]` | `initialize-vite-frontend-foundation` | Vincenzo | Kiara | Ninguna |
+| FE-002 | `[x]` | `add-design-system-layouts` | Kiara | Vincenzo | FE-001 |
 | FE-003 | `[ ]` | `add-api-client-routing-auth` | Vincenzo | Kiara | FE-001, Backend BE-002/BE-003 |
 | FE-004 | `[ ]` | `configure-frontend-quality-e2e` | Vincenzo | Kiara | FE-001, FE-002 |
 

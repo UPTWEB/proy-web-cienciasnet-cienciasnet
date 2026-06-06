@@ -1,24 +1,12 @@
 #!/bin/sh
-set -e
+set -eu
 
-echo "⏳ Esperando a PostgreSQL..."
-until PGPASSWORD="${DB_PASSWORD}" pg_isready -h "${DB_HOST:-db}" -U "${DB_USERNAME:-cienciasnet_user}" -d "${DB_DATABASE:-cienciasnet}" -q; do
+until PGPASSWORD="${DB_PASSWORD}" pg_isready -h "${DB_HOST:-db}" -U "${DB_USERNAME:-cienciasnet}" -d "${DB_DATABASE:-cienciasnet}" -q; do
   sleep 2
 done
-echo "✓ PostgreSQL listo"
 
-php artisan key:generate --no-interaction --force
+if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
+  php artisan migrate --force --no-interaction
+fi
 
-php artisan migrate --force --no-interaction
-
-php artisan db:seed --force --no-interaction
-
-php artisan storage:link --force
-
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan event:cache
-
-echo "✓ Backend listo. Iniciando PHP-FPM..."
 exec "$@"

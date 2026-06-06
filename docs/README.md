@@ -1,5 +1,7 @@
 # Documentación Compartida de CienciasNET
 
+Guía de entorno reproducible: [`development-local.md`](development-local.md).
+
 Esta carpeta es la fuente estable y compartida del producto. Explica **qué debe hacer CienciasNET** y las decisiones que
 frontend y backend deben respetar.
 

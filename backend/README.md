@@ -8,7 +8,7 @@ viven en `openspec/`.
 - PHP 8.3 o superior.
 - Composer 2.
 - PostgreSQL 16.
-- Node.js solo para compilar los recursos incluidos por Laravel.
+- Docker Desktop con Docker Compose es el flujo recomendado del equipo.
 
 El host actual puede ejecutar Composer y las pruebas mediante Docker cuando no tenga PHP 8.3:
 
@@ -17,18 +17,16 @@ docker run --rm -v "$PWD:/app" -w /app composer:2 composer install
 docker run --rm -v "$PWD:/app" -w /app composer:2 php artisan test
 ```
 
-## Primer arranque
+## Primer arranque recomendado
+
+Desde la raíz del repositorio:
 
 ```bash
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-php artisan test
-php artisan serve
+docker compose up -d --build
+docker compose exec backend php artisan test
 ```
 
-Configurar previamente las credenciales PostgreSQL en `.env`. El archivo `.env` nunca se versiona.
+La guía completa está en [`../docs/development-local.md`](../docs/development-local.md).
 
 ## Verificación rápida
 

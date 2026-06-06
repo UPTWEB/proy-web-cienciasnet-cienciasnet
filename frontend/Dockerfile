@@ -1,13 +1,19 @@
-FROM node:20-alpine AS builder
-
-ARG VITE_API_URL=https://api.cienciascolegio.pe
-ENV VITE_API_URL=${VITE_API_URL}
+FROM node:22-alpine AS dependencies
 
 WORKDIR /app
-
-COPY package.json package-lock.json* ./
-
+COPY package.json package-lock.json ./
 RUN npm ci
+
+FROM dependencies AS development
+
+COPY . .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+FROM dependencies AS builder
+
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=${VITE_API_URL}
 
 COPY . .
 

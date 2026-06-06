@@ -1,5 +1,7 @@
 # CienciasNET
 
+> Desarrollo local reproducible: [`docs/development-local.md`](docs/development-local.md)
+
 Sistema web académico y administrativo para el Colegio Ciencias. Centraliza estructura académica, asistencia facial,
 planilla docente, finanzas, evaluaciones, incidencias, Psicología, materiales, horarios y comunicaciones.
 
