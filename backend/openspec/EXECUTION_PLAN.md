@@ -20,7 +20,7 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| DB-001 | `[ ]` | `add-identity-academic-schema` | Fátima | Jefferson | BE-001 |
+| DB-001 | `[x]` | `add-identity-academic-schema` | Fátima | Jefferson | BE-001 |
 | BE-003 | `[ ]` | `add-human-authentication` | Jefferson | Fátima | BE-002, DB-001 |
 | BE-004 | `[ ]` | `add-roles-permissions-account-management` | Jefferson | Fátima | BE-003 |
 | BE-005 | `[ ]` | `add-family-links-management` | Fátima | Jefferson | BE-004 |
