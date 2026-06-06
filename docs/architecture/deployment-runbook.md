@@ -1,5 +1,8 @@
 # Guía de Despliegue — CienciasNET (Colegio Ciencias)
 
+> **Runbook detallado de referencia.** Los comandos deben validarse contra el código y versiones reales antes de ejecutar
+> en producción. Los principios obligatorios están resumidos en `deployment.md`.
+
 Dos opciones de despliegue:
 
 - **Opción A: Instalación Manual** — Control total sobre cada componente. Requiere instalar PHP, PostgreSQL, Nginx y
@@ -16,6 +19,14 @@ Dos opciones de despliegue:
 | **Hetzner CX32** | 4    | 8 GB | 80 GB SSD | ~$10       |
 
 Ubuntu 22.04 LTS. Suficiente para Laravel + React (Vite) + PostgreSQL para el colegio completo.
+
+El mismo VPS puede ejecutar inicialmente el servicio facial Python para varios dispositivos que envían capturas
+puntuales. Antes del despliegue definitivo se debe realizar una prueba en hora de ingreso con la concurrencia esperada y
+medir CPU, memoria y latencia. Si afecta a Laravel o no procesa el flujo esperado, el servicio facial se mueve a un VPS
+separado sin cambiar su contrato con Laravel.
+
+El servicio facial, sus credenciales técnicas y R2 forman parte del despliegue inicial obligatorio. Aunque el repositorio
+actual todavía sea un scaffold documental, no se considera completa la primera versión sin estos componentes.
 
 ---
 
@@ -179,12 +190,11 @@ nano .env
 
 php artisan migrate --force
 php artisan db:seed --force
-php artisan storage:link
 
-mkdir -p storage/app/public/fotos
-mkdir -p storage/app/public/separatas
-mkdir -p storage/app/public/comprobantes
-mkdir -p storage/app/public/temp
+mkdir -p storage/app/private/fotos
+mkdir -p storage/app/private/separatas
+mkdir -p storage/app/private/comprobantes
+mkdir -p storage/app/private/temp
 
 php artisan config:cache
 php artisan route:cache
@@ -206,6 +216,24 @@ nano .env  # VITE_API_URL=https://api.cienciascolegio.pe
 npm run build
 chown -R www-data:www-data dist/
 ```
+
+---
+
+## A.9.1. Deploy del Servicio Facial Python
+
+El servicio facial se ejecuta como proceso independiente y no debe exponerse directamente a Internet. Las estaciones web
+envían capturas al endpoint HTTPS de Laravel; Laravel se comunica internamente con el servicio facial.
+
+```bash
+cd /var/www/CienciasNET/facial-service
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Crear una unidad `systemd` que ejecute FastAPI/Uvicorn con usuario sin privilegios, reinicio automático y variables
+secretas fuera del repositorio. Laravel envía las capturas al servicio por la red privada y recibe como respuesta la
+identificación, confianza y prueba de vida; el servicio no expone endpoints al navegador.
 
 ---
 
@@ -246,22 +274,23 @@ jobs:
 
 ---
 
-## A.11. Backups Automáticos de PostgreSQL
+## A.11. Política de Backups
 
-```bash
-mkdir -p /backups/postgresql
-crontab -e
-
-0 8 * * * PGPASSWORD='contraseña' pg_dump -U cienciasnet_user -h 127.0.0.1 cienciasnet | gzip > /backups/postgresql/cienciasnet_$(date +\%Y\%m\%d).sql.gz
-30 8 * * * find /backups/postgresql/ -name "*.sql.gz" -mtime +30 -delete
-```
+- Alcance obligatorio: PostgreSQL, `storage/app/private`, objetos/inventario de R2 y copia custodiada de las claves
+  necesarias para restaurar datos cifrados.
+- Los respaldos se cifran antes de enviarse a un almacenamiento externo al VPS.
+- Retención inicial: 30 respaldos diarios y 12 mensuales.
+- Objetivos iniciales: RPO máximo de 24 horas y RTO máximo de 4 horas.
+- Se ejecuta una restauración de prueba trimestral en un entorno aislado y se documenta resultado, duración y faltantes.
+- Las credenciales y claves nunca se incluyen en el repositorio ni dentro del mismo respaldo sin cifrado independiente.
+- Una tarea diaria genera y verifica checksums; otra replica fuera del VPS y alerta si falla.
 
 ---
 
 ## A.12. Limpieza de Archivos Temporales
 
 ```bash
-0 9 * * * find /var/www/CienciasNET/backend/storage/app/public/temp/ -mtime +1 -delete
+0 9 * * * find /var/www/CienciasNET/backend/storage/app/private/temp/ -mtime +1 -delete
 ```
 
 ---
@@ -274,7 +303,7 @@ systemctl status nginx
 systemctl restart php8.2-fpm
 sudo -u postgres psql cienciasnet
 df -h /var/www/CienciasNET/backend/storage/
-du -sh /var/www/CienciasNET/backend/storage/app/public/*/
+du -sh /var/www/CienciasNET/backend/storage/app/private/*/
 ```
 
 ---
@@ -306,11 +335,14 @@ docker compose version
 
 ```
 CienciasNET/
-├── docker-compose.yml          # Orquesta los 4 servicios
+├── docker-compose.yml          # Orquesta los servicios
 ├── .env                        # Variables de entorno (copiar de .env.docker.example)
 ├── backend/
 │   ├── Dockerfile              # PHP 8.2-FPM + extensiones + Composer
 │   └── entrypoint.sh           # Espera BD → migraciones → seeders → inicia
+├── facial-service/
+│   ├── Dockerfile              # Python + API facial
+│   └── requirements.txt
 └── frontend/
     ├── Dockerfile              # Multi-stage: node build → nginx serve
     └── nginx.conf              # SPA routing + proxy /api/ → backend
@@ -323,7 +355,12 @@ CienciasNET/
 | `db`       | `postgres:16-alpine` | PostgreSQL con volume `pgdata`                 |
 | `backend`  | `php:8.2-fpm-alpine` | Laravel API. Volume `storage` para archivos    |
 | `queue`    | Mismo que backend    | Colas Laravel (emails)                         |
+| `facial-api` | Python / FastAPI   | Reconocimiento facial; sin reglas de asistencia |
 | `frontend` | `nginx:alpine`       | Sirve build estático. Proxy `/api/` al backend |
+
+`facial-api` comparte una red Docker privada con Laravel. Nginx expone únicamente el endpoint HTTPS de Laravel requerido
+por las estaciones web, protegido con sesiones técnicas limitadas y rate limiting; `facial-api` permanece disponible
+solo dentro de la red privada.
 
 ---
 
@@ -345,6 +382,12 @@ Variables clave a configurar:
 | `MAIL_HOST`     | `smtp.gmail.com`                 | Servidor SMTP                     |
 | `MAIL_USERNAME` | —                                | Credenciales de correo            |
 | `MAIL_PASSWORD` | —                                | Password de aplicación            |
+| `FACIAL_SERVICE_TOKEN` | —                         | Token largo para comunicación interna |
+| `BIOMETRIC_ENCRYPTION_KEY` | —                    | Clave independiente para embeddings |
+| `R2_ENDPOINT` | —                                 | Endpoint S3 compatible de R2       |
+| `R2_BUCKET_BIOMETRICS` | `cienciasnet-biometria` | Bucket privado                     |
+| `R2_ACCESS_KEY_ID` | —                            | Credencial limitada al bucket      |
+| `R2_SECRET_ACCESS_KEY` | —                        | Secreto limitado al bucket         |
 
 ---
 
@@ -403,6 +446,21 @@ docker compose logs -f
 ```
 
 El primer deploy tarda 2-3 minutos (build de imágenes + migraciones). Los siguientes son casi instantáneos.
+
+---
+
+## B.4.1. Configuración de Cloudflare R2
+
+- Crear un bucket exclusivo para biometría y mantener desactivado el acceso público.
+- Crear credenciales S3 limitadas únicamente a ese bucket.
+- Guardar fotos de enrolamiento bajo `enrollment/{user_uuid}/`.
+- Guardar evidencia excepcional bajo `evidence/YYYY/MM/DD/`.
+- Configurar eliminación automática de evidencia según `expira_en`, con máximo recomendado de 30 días.
+- No usar R2 para video ni para capturas rutinarias.
+- Verificar periódicamente que los objetos eliminados o revocados no queden huérfanos.
+
+El acceso de revisión se realiza mediante URLs firmadas de corta duración generadas por Laravel. Nunca se guarda una URL
+firmada en PostgreSQL; solo se conserva `r2_object_key`.
 
 ---
 
@@ -511,7 +569,7 @@ jobs:
 
 ---
 
-## B.8. Backups PostgreSQL (Docker)
+## B.8. Backups Integrales (Docker)
 
 ```bash
 mkdir -p /backups/postgresql
@@ -522,14 +580,17 @@ crontab -e
 # Backup diario a las 3:00 AM hora Lima (UTC-5 = 08:00 UTC)
 0 8 * * * docker exec cienciasnet-db pg_dump -U cienciasnet_user cienciasnet | gzip > /backups/postgresql/cienciasnet_$(date +\%Y\%m\%d).sql.gz
 
-# Eliminar backups de más de 30 días
-30 8 * * * find /backups/postgresql/ -name "*.sql.gz" -mtime +30 -delete
+# Este dump es solo una parte del backup integral. El job debe cifrarlo, copiar también
+# storage/app/private y el inventario/objetos R2, y replicarlo fuera del VPS.
 ```
 
 ```bash
 # Restaurar backup
 gunzip -c /backups/postgresql/cienciasnet_20250101.sql.gz | docker exec -i cienciasnet-db psql -U cienciasnet_user cienciasnet
 ```
+
+La restauración no se considera exitosa hasta verificar base de datos, archivos privados, objetos R2, lectura de datos
+cifrados y acceso funcional desde una instalación aislada. Debe probarse trimestralmente.
 
 ---
 
@@ -546,9 +607,11 @@ docker compose logs -f
 docker compose logs -f backend
 docker compose logs -f frontend
 docker compose logs -f queue
+docker compose logs -f facial-api
 
 # Reiniciar un servicio
 docker compose restart backend
+docker compose restart facial-api
 
 # Ejecutar comandos Artisan
 docker compose exec backend php artisan migrate:status

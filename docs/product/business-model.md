@@ -1,5 +1,7 @@
 # Modelo de Negocio — CienciasNET
 
+> **Referencia comercial vigente.** Debe revisarse con los responsables antes de firmar contratos o comprometer costos.
+
 ## Modelo Definido: Pago Único + Mantenimiento Mensual
 
 CienciasNET se entrega bajo **licencia única con soporte continuo**. El cliente paga una sola vez por el desarrollo y
@@ -88,17 +90,20 @@ Con 3 clientes activos:
 
 ## Almacenamiento — Estimación de Costos
 
-Una de las ventajas de guardar archivos en el VPS local (sin Cloudflare R2):
+Los archivos generales permanecen en el VPS. Las fotos de enrolamiento y evidencias excepcionales del reconocimiento
+facial se guardan en un bucket Cloudflare R2 privado para separar los datos biométricos del almacenamiento general.
 
 | Concepto                                        | Estimación   |
 |-------------------------------------------------|--------------|
 | Fotos de alumnos (300 alumnos, ~50 KB WebP c/u) | ~15 MB       |
 | Separatas PDF (100 archivos, ~500 KB c/u)       | ~50 MB       |
 | Comprobantes PDF (1,000 archivos, ~200 KB c/u)  | ~200 MB      |
+| Fotos biométricas de enrolamiento                | < 100 MB     |
+| Evidencias faciales temporales                   | Variable; retención máxima recomendada de 30 días |
 | **Total estimado para 1 año de operación**      | **< 500 MB** |
 
-Con 80 GB en el Hetzner CX32, el almacenamiento de archivos **no es un problema por varios años**. Cero costo adicional
-por storage externo.
+Con 80 GB en el Hetzner CX32, el almacenamiento general **no es un problema por varios años**. R2 agrega un costo externo
+pequeño y variable, compensado por el aislamiento y la eliminación automática de evidencia biométrica.
 
 ---
 
