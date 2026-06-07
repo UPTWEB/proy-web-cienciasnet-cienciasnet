@@ -54,6 +54,7 @@ ciencias-net/
 │   └── legacy/                   # Documentos históricos no autoritativos
 ├── backend/                      # Proyecto backend independiente
 ├── frontend/                     # Proyecto frontend independiente
+├── facial-service/               # Servicio biométrico independiente (Python/FastAPI)
 ├── docker-compose.yml
 └── README.md
 ```
