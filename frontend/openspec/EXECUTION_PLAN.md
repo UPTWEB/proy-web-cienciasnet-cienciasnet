@@ -20,10 +20,10 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-005 | `[~]` | `add-account-role-administration` | Kiara | Jefferson | FE-002, FE-003 |
-| FE-006 | `[~]` | `add-family-links-administration` | Kiara | Jefferson | FE-003 |
-| FE-007 | `[~]` | `add-academic-structure-administration` | Kiara | Jefferson | FE-002, FE-003 |
-| FE-008 | `[~]` | `add-family-student-portal-shell` | Kiara | Jefferson | FE-003 |
+| FE-005 | `[x]` | `add-account-role-administration` | Kiara | Jefferson | FE-002, FE-003 |
+| FE-006 | `[x]` | `add-family-links-administration` | Kiara | Jefferson | FE-003 |
+| FE-007 | `[x]` | `add-academic-structure-administration` | Kiara | Jefferson | FE-002, FE-003 |
+| FE-008 | `[x]` | `add-family-student-portal-shell` | Kiara | Jefferson | FE-003 |
 
 ## Fase 2: Facial y asistencia
 

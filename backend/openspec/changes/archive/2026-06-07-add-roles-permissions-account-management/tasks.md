@@ -1,4 +1,4 @@
-﻿# Tasks: add-roles-permissions-account-management
+# Tasks: add-roles-permissions-account-management
 
 ## Implementation
 - [x] 1.1 Crear Policies y casos de uso de cuentas/roles. Owner: Jefferson
@@ -9,8 +9,8 @@
 ## Verification
 - [x] 2.1 Verificar que matriz positiva y negativa pasa. Owner: Jefferson
 - [x] 2.2 Verificar que cambios propios bloqueados. Owner: Jefferson
-- [x] 2.3 Verificar que desactivaciÃ³n conserva historial. Owner: Jefferson
+- [x] 2.3 Verificar que desactivación conserva historial. Owner: Jefferson
 
 ## Review and Archive
-- [x] 3.1 Publicar contratos/documentaciÃ³n afectados. Owner: Jefferson
-- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: AndrÃ©
+- [x] 3.1 Publicar contratos/documentación afectados. Owner: Jefferson
+- [x] 3.2 Revisar y archivar la spec aceptada. Reviewer: André
