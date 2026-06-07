@@ -22,9 +22,9 @@
 |---|---|---|---|---|---|
 | DB-001 | `[x]` | `add-identity-academic-schema` | Jefferson | André | BE-001 |
 | BE-003 | `[x]` | `add-human-authentication` | Jefferson | André | BE-002, DB-001 |
-| BE-004 | `[~]` | `add-roles-permissions-account-management` | Jefferson | André | BE-003 |
-| BE-005 | `[~]` | `add-family-links-management` | Jefferson | André | BE-004 |
-| BE-006 | `[~]` | `add-academic-structure-management` | Jefferson | André | DB-001, BE-004 |
+| BE-004 | `[x]` | `add-roles-permissions-account-management` | Jefferson | André | BE-003 |
+| BE-005 | `[x]` | `add-family-links-management` | Jefferson | André | BE-004 |
+| BE-006 | `[x]` | `add-academic-structure-management` | Jefferson | André | DB-001, BE-004 |
 
 ## Fase 2: Facial y asistencia
 
