@@ -1,0 +1,53 @@
+EmailRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+        properties:
+          email:
+            type: string
+            format: email
+ActivationRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - active
+        properties:
+          active:
+            type: boolean
+          reason:
+            type: string
+            maxLength: 500
+RolesRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - roles
+        properties:
+          roles:
+            type: array
+            uniqueItems: true
+            items:
+              $ref: '../openapi.yaml#/components/schemas/Role'
+ReasonRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - reason
+        properties:
+          reason:
+            type: string
+            minLength: 3
+            maxLength: 1000

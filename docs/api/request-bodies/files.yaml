@@ -1,0 +1,6 @@
+uploadPrivateFileRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/uploadPrivateFileRequest'

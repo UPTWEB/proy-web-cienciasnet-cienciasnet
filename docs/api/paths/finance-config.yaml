@@ -1,0 +1,96 @@
+listPaymentConcepts:
+  get:
+    tags:
+      - FinanceConfig
+    operationId: listPaymentConcepts
+    x-permissions:
+      - gestionar_finanzas
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - FinanceConfig
+    operationId: createPaymentConcept
+    x-permissions:
+      - gestionar_finanzas
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createPaymentConceptRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listStudentBenefits:
+  get:
+    tags:
+      - FinanceConfig
+    operationId: listStudentBenefits
+    x-permissions:
+      - gestionar_finanzas
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - FinanceConfig
+    operationId: createStudentBenefit
+    x-permissions:
+      - gestionar_finanzas
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createStudentBenefitRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+deactivateStudentBenefit:
+  parameters:
+    - name: benefitId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  post:
+    tags:
+      - FinanceConfig
+    operationId: deactivateStudentBenefit
+    x-permissions:
+      - gestionar_finanzas
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+updatePaymentConcept:
+  parameters:
+    - name: conceptId
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+  patch:
+    tags: [FinanceConfig]
+    operationId: updatePaymentConcept
+    x-permissions: [gestionar_finanzas]
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/updatePaymentConceptRequest' }
+    responses:
+      '200': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '404': { $ref: '../openapi.yaml#/components/responses/NotFoundError' }
+      '409': { $ref: '../openapi.yaml#/components/responses/ConflictError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }

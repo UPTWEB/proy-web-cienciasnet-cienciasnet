@@ -18,6 +18,8 @@ Durante el trabajo:
 - Marca cada casilla de tasks.md solo después de implementarla y verificarla.
 - Registra comandos, pruebas, resultados y limitaciones en verification.md.
 - Mantén OpenAPI y documentación sincronizados.
+- Antes de implementar, confirma la fila del change en `API_CONTRACTS.md` y los archivos concretos de `../../docs/api/`.
+- Si la fila declara `Sin contrato HTTP`, registra la justificación; no inventes endpoints para completar el change.
 
 Al terminar:
 - Ejecuta todas las verificaciones y demuestra los escenarios de la delta spec.

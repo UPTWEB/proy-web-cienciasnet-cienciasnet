@@ -5,6 +5,7 @@ use App\Http\Middleware\EnsureIdempotentRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -56,6 +57,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 $exception instanceof AuthenticationException => [401, 'unauthenticated', 'Debes iniciar sesión.'],
                 $exception instanceof AuthorizationException => [403, 'forbidden', 'No tienes permiso para realizar esta acción.'],
                 $exception instanceof ModelNotFoundException => [404, 'not_found', 'El recurso solicitado no existe.'],
+                $exception instanceof QueryException && in_array((string) $exception->getCode(), ['23000', '23505'], true) => [409, 'conflict', 'El recurso entra en conflicto con un registro existente.'],
                 $exception instanceof HttpExceptionInterface && $exception->getStatusCode() === 419 => [419, 'csrf_token_mismatch', 'La sesión de seguridad expiró.'],
                 $exception instanceof HttpExceptionInterface => [$exception->getStatusCode(), 'http_error', $exception->getMessage() ?: 'La solicitud no pudo procesarse.'],
                 default => [500, 'server_error', 'Ocurrió un error inesperado.'],

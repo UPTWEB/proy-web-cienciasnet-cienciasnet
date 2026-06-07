@@ -1,0 +1,103 @@
+listPaymentObligations:
+  get:
+    tags:
+      - FinanceOperations
+    operationId: listPaymentObligations
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+generatePaymentObligations:
+  post:
+    tags:
+      - FinanceOperations
+    operationId: generatePaymentObligations
+    x-permissions:
+      - gestionar_finanzas
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/generatePaymentObligationsRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+adjustPaymentObligation:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/ObligationId'
+  post:
+    tags:
+      - FinanceOperations
+    operationId: adjustPaymentObligation
+    x-permissions:
+      - gestionar_finanzas
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/adjustPaymentObligationRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+createPaymentMovement:
+  post:
+    tags:
+      - FinanceOperations
+    operationId: createPaymentMovement
+    x-permissions:
+      - gestionar_finanzas
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createPaymentMovementRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+downloadPaymentReceipt:
+  parameters:
+    - name: paymentMovementId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  get:
+    tags:
+      - FinanceOperations
+    operationId: downloadPaymentReceipt
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PdfDownload'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+createBulkPaymentObligationAdjustment:
+  post:
+    tags: [FinanceOperations]
+    operationId: createBulkPaymentObligationAdjustment
+    x-permissions: [gestionar_finanzas]
+    parameters: [ { $ref: '../openapi.yaml#/components/parameters/IdempotencyKey' } ]
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/createBulkPaymentObligationAdjustmentRequest' }
+    responses:
+      '202': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '409': { $ref: '../openapi.yaml#/components/responses/ConflictError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }

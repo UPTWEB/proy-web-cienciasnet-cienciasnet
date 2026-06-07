@@ -1,0 +1,93 @@
+publishAssessment:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AssessmentId'
+  post:
+    tags:
+      - AcademicReports
+    operationId: publishAssessment
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+listRankings:
+  get:
+    tags:
+      - AcademicReports
+    operationId: listRankings
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+generateAcademicReport:
+  post:
+    tags:
+      - AcademicReports
+    operationId: generateAcademicReport
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/generateAcademicReportRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+setAssessmentClosure:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AssessmentId'
+  put:
+    tags:
+      - AcademicReports
+    operationId: setAssessmentClosure
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/setAssessmentClosureRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+correctPublishedAssessmentResult:
+  parameters:
+    - name: assessmentResultId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  post:
+    tags:
+      - AcademicReports
+    operationId: correctPublishedAssessmentResult
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/correctPublishedAssessmentResultRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

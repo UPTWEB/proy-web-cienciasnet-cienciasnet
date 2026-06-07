@@ -3,20 +3,36 @@
 namespace Database\Seeders;
 
 use App\Models\Alumno;
+use App\Models\CargaAcademica;
 use App\Models\Curso;
 use App\Models\Docente;
 use App\Models\Grado;
 use App\Models\Matricula;
+use App\Models\Padre;
 use App\Models\PeriodoAcademico;
 use App\Models\Seccion;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class IdentityAcademicSeeder extends Seeder
 {
     public function run(): void
     {
-        $coordinator = User::factory()->create(['email' => 'coordinacion@example.test']);
+        $this->demoUser('superadmin@example.test', 'Superadmin Demo', 'superadmin');
+        $this->demoUser('gestor@example.test', 'Gestor de Usuarios Demo', 'gestor_usuarios');
+        $this->demoUser('toe@example.test', 'TOE Demo', 'toe');
+        $this->demoUser('psicologia@example.test', 'Psicologia Demo', 'psicologia');
+        $this->demoUser('auxiliar@example.test', 'Auxiliar Demo', 'auxiliar');
+        $this->demoUser('administrativo@example.test', 'Administrativo Demo', 'administrativo');
+
+        $coordinator = $this->demoUser('coordinacion@example.test', 'Coordinacion Academica Demo', 'coordinador_academico');
+        $teacherUser = $this->demoUser('docente@example.test', 'Docente Demo', 'docente');
+        $parentUser = $this->demoUser('padre@example.test', 'Padre Demo', 'padre');
+        $studentUser = $this->demoUser('alumno@example.test', 'Alumno Demo', 'alumno');
+
         $period = PeriodoAcademico::factory()->create(['creado_por' => $coordinator->id]);
         $grade = Grado::create([
             'periodo_academico_id' => $period->id,
@@ -31,7 +47,37 @@ class IdentityAcademicSeeder extends Seeder
             'turno' => 'manana',
             'activo' => true,
         ]);
-        $student = Alumno::factory()->create();
+
+        $student = Alumno::create([
+            'user_id' => $studentUser->id,
+            'dni' => '70000001',
+            'nombres' => 'Alumno',
+            'apellidos' => 'Demo',
+        ]);
+        $parent = Padre::create([
+            'user_id' => $parentUser->id,
+            'dni' => '70000002',
+            'nombres' => 'Padre',
+            'apellidos' => 'Demo',
+            'celular' => '900000001',
+            'correo_notificaciones' => 'padre@example.test',
+        ]);
+        $teacher = Docente::create([
+            'user_id' => $teacherUser->id,
+            'dni' => '70000003',
+            'nombres' => 'Docente',
+            'apellidos' => 'Demo',
+            'telefono' => '900000002',
+        ]);
+
+        DB::table('alumno_padre')->insert([
+            'id' => (string) Str::uuid(),
+            'alumno_id' => $student->id,
+            'padre_id' => $parent->id,
+            'relacion' => 'padre',
+            'es_contacto_principal' => true,
+            'recibe_notificaciones' => true,
+        ]);
         Matricula::create([
             'alumno_id' => $student->id,
             'seccion_id' => $section->id,
@@ -40,7 +86,36 @@ class IdentityAcademicSeeder extends Seeder
             'estado' => 'activo',
             'registrado_por' => $coordinator->id,
         ]);
-        Curso::factory()->create(['codigo' => 'MAT-001', 'nombre' => 'Matemática']);
-        Docente::factory()->create();
+        $course = Curso::create([
+            'codigo' => 'MAT-001',
+            'nombre' => 'Matematica',
+            'area' => 'Ciencias',
+            'descripcion' => 'Curso demo para desarrollo local.',
+            'activo' => true,
+        ]);
+        CargaAcademica::create([
+            'seccion_id' => $section->id,
+            'curso_id' => $course->id,
+            'docente_id' => $teacher->id,
+            'vigente_desde' => now()->startOfYear()->toDateString(),
+            'activo' => true,
+            'asignado_por' => $coordinator->id,
+        ]);
+    }
+
+    private function demoUser(string $email, string $name, string $role): User
+    {
+        $user = User::updateOrCreate(
+            ['email' => $email],
+            [
+                'name' => $name,
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+                'activo' => true,
+            ],
+        );
+        $user->syncRoles([$role]);
+
+        return $user;
     }
 }

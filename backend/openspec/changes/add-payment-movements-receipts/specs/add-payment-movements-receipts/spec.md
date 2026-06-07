@@ -6,7 +6,7 @@ Registrar pagos completos y correcciones como movimientos inmutables.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 El pago SHALL ser completo por monto aplicable
 
@@ -16,7 +16,7 @@ El pago SHALL ser completo por monto aplicable
 - WHEN se intenta pagar otro monto
 - THEN se rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Corregir pago SHALL crear movimiento compensatorio
 

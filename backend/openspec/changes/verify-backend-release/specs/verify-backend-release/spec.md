@@ -6,7 +6,7 @@ Demostrar que backend cubre todos los dominios y puede salir a producción.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 El release SHALL cumplir todos los escenarios aceptados
 
@@ -16,7 +16,7 @@ El release SHALL cumplir todos los escenarios aceptados
 - WHEN se ejecuta verificación
 - THEN no quedan fallos críticos
 
-### Requirement 2
+### Requirement: 2
 
 OpenAPI SHALL representar endpoints liberados
 

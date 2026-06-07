@@ -6,7 +6,7 @@ Administrar consentimiento, enrolamiento y dispositivos sin acceder a datos biom
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Gestor autorizado SHALL enrolar solo con consentimiento
 
@@ -16,7 +16,7 @@ Gestor autorizado SHALL enrolar solo con consentimiento
 - WHEN intenta iniciar enrolamiento
 - THEN UI y API lo bloquean
 
-### Requirement 2
+### Requirement: 2
 
 Gestor SHALL revocar una estación comprometida
 

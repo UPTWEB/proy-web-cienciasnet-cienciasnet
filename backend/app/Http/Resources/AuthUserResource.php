@@ -13,7 +13,9 @@ class AuthUserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'active' => $this->activo,
             'roles' => $this->whenLoaded('roles', fn () => $this->roles->pluck('name')->values()),
+            'permissions' => $this->getAllPermissions()->pluck('name')->values(),
         ];
     }
 }

@@ -6,7 +6,7 @@ Delegar cuentas y roles sin entregar privilegios sensibles por accidente.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Solo superadmin SHALL asignar superadmin o gestor_usuarios
 
@@ -16,7 +16,7 @@ Solo superadmin SHALL asignar superadmin o gestor_usuarios
 - WHEN envía el cambio
 - THEN la operación se rechaza y audita
 
-### Requirement 2
+### Requirement: 2
 
 Gestor de usuarios SHALL administrar roles operativos sin modificar los propios
 

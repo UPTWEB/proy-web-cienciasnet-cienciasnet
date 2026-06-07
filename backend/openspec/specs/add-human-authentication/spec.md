@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Permitir acceso humano seguro sin autorregistro.
+Permitir acceso humano seguro a la SPA mediante sesiones protegidas, sin autorregistro ni exposición de tokens.
 
 ## Requirements
 
-### Requirement 1
+### Requirement: Autenticación humana mediante sesión
 
 El sistema SHALL autenticar la SPA mediante cookie y CSRF.
 
@@ -16,7 +16,7 @@ El sistema SHALL autenticar la SPA mediante cookie y CSRF.
 - WHEN inicia sesión
 - THEN recibe sesión sin token en localStorage
 
-### Requirement 2
+### Requirement: Bloqueo de cuentas desactivadas
 
 Una cuenta desactivada SHALL perder acceso.
 

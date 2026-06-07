@@ -27,6 +27,11 @@ Relacionar asistencia docente con clases programadas, cancelaciones y sustitutos
 - Proyecto: `backend`.
 - Capacidades: sesiones de clase y primera clase, falta al terminar clase, cancelación por coordinación y sustitución, correcciones por Yanina.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-teacher-attendance-sessions` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

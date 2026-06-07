@@ -1,0 +1,19 @@
+uploadPrivateFileRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - file
+    - purpose
+  properties:
+    file:
+      type: string
+      format: binary
+    purpose:
+      type: string
+      enum:
+        - material
+        - incident_evidence
+        - psychology
+        - biometric_exception
+        - report
+        - other

@@ -6,7 +6,7 @@ Operar estaciones web limitadas en celular, tablet o PC multicámara.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Estación SHALL activarse sin sesión humana
 
@@ -16,7 +16,7 @@ Estación SHALL activarse sin sesión humana
 - WHEN lo ingresa
 - THEN abre captura técnica
 
-### Requirement 2
+### Requirement: 2
 
 PC SHALL seleccionar varias cámaras
 

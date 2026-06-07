@@ -2,7 +2,7 @@
 
 ## Arquitectura
 
-- Leer primero `../docs/README.md`, dominio relacionado y specs backend aceptadas.
+- Leer primero `../docs/README.md`, dominio relacionado y contratos OpenAPI aprobados.
 - No depender de changes backend activos como contrato estable.
 - React + TypeScript + Vite, organizado por features.
 - Estado local primero; Zustand solo para estado transversal necesario.
@@ -13,6 +13,8 @@
 
 - React Router con layouts, rutas protegidas y verificación de permisos para UX.
 - El backend sigue siendo autoridad; manejar correctamente `401`, `403`, `404` y errores de validación.
+- Los mocks deben cubrir éxito, datos vacíos, latencia, error inesperado, `401`, `403`, `404`, `409` y `422` cuando
+  correspondan.
 - Nunca almacenar tokens, secretos o datos sensibles en `localStorage`.
 - Estaciones web usan sesión técnica y layout separados del portal humano.
 
@@ -28,7 +30,7 @@
 
 ## Calidad
 
-- Contratos/tipos alineados con OpenAPI backend aceptado.
+- Contratos, tipos y mocks alineados con OpenAPI aprobado en `../docs/api/`.
 - Vitest y Testing Library para lógica/componentes; Playwright para flujos críticos.
 - No cerrar changes con errores de consola, rutas rotas o estados sin manejar.
 

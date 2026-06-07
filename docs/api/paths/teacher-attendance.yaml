@@ -1,0 +1,164 @@
+listTeacherAttendance:
+  get:
+    tags:
+      - TeacherAttendance
+    operationId: listTeacherAttendance
+    x-permissions:
+      - gestionar_planilla
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+listTeacherRates:
+  get:
+    tags:
+      - TeacherAttendance
+    operationId: listTeacherRates
+    x-permissions:
+      - gestionar_planilla
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - TeacherAttendance
+    operationId: createTeacherRate
+    x-permissions:
+      - gestionar_planilla
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createTeacherRateRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listPayrollLiquidations:
+  get:
+    tags:
+      - TeacherAttendance
+    operationId: listPayrollLiquidations
+    x-permissions:
+      - gestionar_planilla
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - TeacherAttendance
+    operationId: createPayrollLiquidation
+    x-permissions:
+      - gestionar_planilla
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createPayrollLiquidationRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+closePayrollLiquidation:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/LiquidationId'
+  post:
+    tags:
+      - TeacherAttendance
+    operationId: closePayrollLiquidation
+    x-permissions:
+      - cerrar_liquidacion
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+createTeacherAttendanceAdjustment:
+  post:
+    tags:
+      - TeacherAttendance
+    operationId: createTeacherAttendanceAdjustment
+    x-permissions:
+      - gestionar_planilla
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createTeacherAttendanceAdjustmentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+cancelClassSession:
+  parameters:
+    - name: classSessionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  post:
+    tags:
+      - TeacherAttendance
+    operationId: cancelClassSession
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+assignClassSessionSubstitute:
+  parameters:
+    - name: classSessionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  put:
+    tags:
+      - TeacherAttendance
+    operationId: assignClassSessionSubstitute
+    x-permissions:
+      - gestionar_planilla
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/assignClassSessionSubstituteRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+generateTeacherPayrollReport:
+  post:
+    tags: [TeacherAttendance]
+    operationId: generateTeacherPayrollReport
+    x-permissions: [gestionar_planilla]
+    parameters: [ { $ref: '../openapi.yaml#/components/parameters/IdempotencyKey' } ]
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/generateTeacherPayrollReportRequest' }
+    responses:
+      '202': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }

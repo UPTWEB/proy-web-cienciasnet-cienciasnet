@@ -3,7 +3,7 @@
 **ID:** FE-014  
 **Fase:** Fase 3: Finanzas  
 **Owner:** Vincenzo  
-**Reviewer:** Kiara  
+**Reviewer:** Jefferson
 **Dependencias:** FE-008, Backend BE-017
 
 ## Why
@@ -25,6 +25,11 @@ Mostrar estado de cuenta comprensible a familias y reportes a Yanina.
 
 - Proyecto: `frontend`.
 - Capacidades: estado por alumno/hijo, pronto pago y vencimiento, morosos, caja y recordatorios.
+
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-finance-state-portals` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
 
 ## Source Documents
 

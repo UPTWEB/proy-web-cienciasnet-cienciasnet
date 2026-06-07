@@ -1,0 +1,52 @@
+listAccountStatements:
+  get:
+    tags:
+      - FinanceQueries
+    operationId: listAccountStatements
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+listDebtors:
+  get:
+    tags:
+      - FinanceQueries
+    operationId: listDebtors
+    x-permissions:
+      - gestionar_finanzas
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+getCashReport:
+  get:
+    tags:
+      - FinanceQueries
+    operationId: getCashReport
+    x-permissions:
+      - gestionar_finanzas
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+sendPaymentReminders:
+  post:
+    tags:
+      - FinanceQueries
+    operationId: sendPaymentReminders
+    x-permissions:
+      - gestionar_finanzas
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/sendPaymentRemindersRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

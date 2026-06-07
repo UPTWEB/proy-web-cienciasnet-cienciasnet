@@ -1,0 +1,147 @@
+createAcademicPeriodRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - name
+    - start_date
+    - end_date
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 100
+    start_date:
+      type: string
+      format: date
+    end_date:
+      type: string
+      format: date
+    status:
+      type: string
+      enum:
+        - draft
+        - active
+        - closed
+updateAcademicPeriodRequest:
+  type: object
+  additionalProperties: false
+  required: []
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 100
+    start_date:
+      type: string
+      format: date
+    end_date:
+      type: string
+      format: date
+    status:
+      type: string
+      enum:
+        - draft
+        - active
+        - closed
+createGradeRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - name
+    - level
+    - academic_period_id
+  properties:
+    academic_period_id:
+      type: string
+      format: uuid
+    name:
+      type: string
+      minLength: 1
+      maxLength: 100
+    level:
+      type: string
+      enum:
+        - inicial
+        - primaria
+        - secundaria
+    order:
+      type: integer
+      minimum: 1
+createSectionRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - grade_id
+    - name
+    - capacity
+  properties:
+    grade_id:
+      type: string
+      format: uuid
+    name:
+      type: string
+      minLength: 1
+      maxLength: 50
+    capacity:
+      type: integer
+      minimum: 1
+createCourseRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - code
+    - name
+  properties:
+    code:
+      type: string
+      minLength: 1
+      maxLength: 30
+    name:
+      type: string
+      minLength: 1
+      maxLength: 150
+    description:
+      type: string
+      minLength: 1
+      maxLength: 1000
+createEnrollmentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - section_id
+    - academic_period_id
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    section_id:
+      type: string
+      format: uuid
+    academic_period_id:
+      type: string
+      format: uuid
+    enrolled_at:
+      type: string
+      format: date
+createTeachingAssignmentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - teacher_id
+    - course_id
+    - section_id
+    - academic_period_id
+  properties:
+    teacher_id:
+      type: string
+      format: uuid
+    course_id:
+      type: string
+      format: uuid
+    section_id:
+      type: string
+      format: uuid
+    academic_period_id:
+      type: string
+      format: uuid

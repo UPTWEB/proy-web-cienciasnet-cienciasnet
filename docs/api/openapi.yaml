@@ -1,0 +1,571 @@
+openapi: 3.0.3
+info:
+  title: CienciasNET API
+  version: 1.0.0
+  description: |
+    Contrato HTTP autoritativo para la SPA y estaciones web de CienciasNET.
+    Las reglas de negocio provienen de docs/domain y los permisos de docs/security.
+servers:
+  - url: http://localhost:8000
+    description: Desarrollo local
+security:
+  - sanctumSession: []
+tags:
+  - name: Core
+    description: API-CORE
+  - name: Auth
+    description: API-AUTH
+  - name: IdentityAccess
+    description: API-IAM
+  - name: Family
+    description: API-FAMILY
+  - name: Academic
+    description: API-ACADEMIC
+  - name: Biometrics
+    description: API-BIOMETRICS
+  - name: Stations
+    description: API-STATIONS
+  - name: StudentAttendance
+    description: API-STUDENT-ATTENDANCE
+  - name: TeacherAttendance
+    description: API-TEACHER-ATTENDANCE
+  - name: FinanceConfig
+    description: API-FINANCE-CONFIG
+  - name: FinanceOperations
+    description: API-FINANCE-OPERATIONS
+  - name: FinanceQueries
+    description: API-FINANCE-QUERIES
+  - name: Assessments
+    description: API-ASSESSMENTS
+  - name: AcademicReports
+    description: API-ACADEMIC-REPORTS
+  - name: Materials
+    description: API-MATERIALS
+  - name: Schedules
+    description: API-SCHEDULES
+  - name: Communications
+    description: API-COMMUNICATIONS
+  - name: Incidents
+    description: API-INCIDENTS
+  - name: Psychology
+    description: API-PSYCHOLOGY
+  - name: Files
+    description: API-FILES
+paths:
+  /api/v1/health:
+    $ref: './paths/core.yaml#/getHealth'
+  /api/v1/auth/login:
+    $ref: './paths/auth.yaml#/login'
+  /api/v1/auth/session:
+    $ref: './paths/auth.yaml#/getSession'
+  /api/v1/auth/logout:
+    $ref: './paths/auth.yaml#/logout'
+  /api/v1/auth/forgot-password:
+    $ref: './paths/auth.yaml#/requestPasswordRecovery'
+  /api/v1/auth/reset-password:
+    $ref: './paths/auth.yaml#/resetPassword'
+  /api/v1/accounts:
+    $ref: './paths/identity-access.yaml#/listAccounts'
+  /api/v1/accounts/{accountId}:
+    $ref: './paths/identity-access.yaml#/getAccount'
+  /api/v1/accounts/{accountId}/activation:
+    $ref: './paths/identity-access.yaml#/setAccountActivation'
+  /api/v1/accounts/{accountId}/roles:
+    $ref: './paths/identity-access.yaml#/replaceAccountRoles'
+  /api/v1/family-links:
+    $ref: './paths/family.yaml#/listFamilyLinks'
+  /api/v1/family-links/{familyLinkId}:
+    $ref: './paths/family.yaml#/removeFamilyLink'
+  /api/v1/family/students:
+    $ref: './paths/family.yaml#/listLinkedStudents'
+  /api/v1/family/students/{studentId}/summary:
+    $ref: './paths/family.yaml#/getLinkedStudentSummary'
+  /api/v1/academic-periods:
+    $ref: './paths/academic.yaml#/listAcademicPeriods'
+  /api/v1/academic-periods/{academicPeriodId}:
+    $ref: './paths/academic.yaml#/getAcademicPeriod'
+  /api/v1/grades:
+    $ref: './paths/academic.yaml#/listGrades'
+  /api/v1/sections:
+    $ref: './paths/academic.yaml#/listSections'
+  /api/v1/courses:
+    $ref: './paths/academic.yaml#/listCourses'
+  /api/v1/enrollments:
+    $ref: './paths/academic.yaml#/listEnrollments'
+  /api/v1/teaching-assignments:
+    $ref: './paths/academic.yaml#/listTeachingAssignments'
+  /api/v1/biometric-consents:
+    $ref: './paths/biometrics.yaml#/listBiometricConsents'
+  /api/v1/biometric-consents/{consentId}/revocation:
+    $ref: './paths/biometrics.yaml#/revokeBiometricConsent'
+  /api/v1/biometric-enrollments:
+    $ref: './paths/biometrics.yaml#/enrollBiometricProfile'
+  /api/v1/stations:
+    $ref: './paths/stations.yaml#/listStations'
+  /api/v1/stations/{stationId}:
+    $ref: './paths/stations.yaml#/updateStation'
+  /api/v1/stations/{stationId}/activation-codes:
+    $ref: './paths/stations.yaml#/createStationActivationCode'
+  /api/v1/station-activations:
+    $ref: './paths/stations.yaml#/activateStation'
+  /api/v1/station/session:
+    $ref: './paths/stations.yaml#/getStationSession'
+  /api/v1/station/captures:
+    $ref: './paths/stations.yaml#/submitStationCapture'
+  /api/v1/student-attendance:
+    $ref: './paths/student-attendance.yaml#/listStudentAttendance'
+  /api/v1/student-attendance/manual-events:
+    $ref: './paths/student-attendance.yaml#/createManualStudentAttendanceEvent'
+  /api/v1/student-attendance/day-closures:
+    $ref: './paths/student-attendance.yaml#/closeStudentAttendanceDay'
+  /api/v1/student-attendance/anomalies:
+    $ref: './paths/student-attendance.yaml#/listStudentAttendanceAnomalies'
+  /api/v1/student-attendance/anomalies/{anomalyId}/resolution:
+    $ref: './paths/student-attendance.yaml#/resolveStudentAttendanceAnomaly'
+  /api/v1/student-attendance/absences/{attendanceId}/justification:
+    $ref: './paths/student-attendance.yaml#/justifyStudentAbsence'
+  /api/v1/teacher-attendance:
+    $ref: './paths/teacher-attendance.yaml#/listTeacherAttendance'
+  /api/v1/teacher-rates:
+    $ref: './paths/teacher-attendance.yaml#/listTeacherRates'
+  /api/v1/payroll-liquidations:
+    $ref: './paths/teacher-attendance.yaml#/listPayrollLiquidations'
+  /api/v1/payroll-liquidations/{liquidationId}/closure:
+    $ref: './paths/teacher-attendance.yaml#/closePayrollLiquidation'
+  /api/v1/payment-concepts:
+    $ref: './paths/finance-config.yaml#/listPaymentConcepts'
+  /api/v1/student-benefits:
+    $ref: './paths/finance-config.yaml#/listStudentBenefits'
+  /api/v1/payment-obligations:
+    $ref: './paths/finance-operations.yaml#/listPaymentObligations'
+  /api/v1/payment-obligation-generations:
+    $ref: './paths/finance-operations.yaml#/generatePaymentObligations'
+  /api/v1/payment-obligations/{obligationId}/adjustments:
+    $ref: './paths/finance-operations.yaml#/adjustPaymentObligation'
+  /api/v1/payment-movements:
+    $ref: './paths/finance-operations.yaml#/createPaymentMovement'
+  /api/v1/account-statements:
+    $ref: './paths/finance-queries.yaml#/listAccountStatements'
+  /api/v1/finance/debtors:
+    $ref: './paths/finance-queries.yaml#/listDebtors'
+  /api/v1/finance/cash-reports:
+    $ref: './paths/finance-queries.yaml#/getCashReport'
+  /api/v1/assessments:
+    $ref: './paths/assessments.yaml#/listAssessments'
+  /api/v1/assessments/{assessmentId}/results:
+    $ref: './paths/assessments.yaml#/listAssessmentResults'
+  /api/v1/assessment-result-imports:
+    $ref: './paths/assessments.yaml#/importAssessmentResults'
+  /api/v1/assessments/{assessmentId}/publication:
+    $ref: './paths/academic-reports.yaml#/publishAssessment'
+  /api/v1/rankings:
+    $ref: './paths/academic-reports.yaml#/listRankings'
+  /api/v1/academic-reports:
+    $ref: './paths/academic-reports.yaml#/generateAcademicReport'
+  /api/v1/materials:
+    $ref: './paths/materials.yaml#/listMaterials'
+  /api/v1/materials/{materialId}/download:
+    $ref: './paths/materials.yaml#/downloadMaterial'
+  /api/v1/schedules:
+    $ref: './paths/schedules.yaml#/listSchedules'
+  /api/v1/calendar-events:
+    $ref: './paths/schedules.yaml#/listCalendarEvents'
+  /api/v1/announcements:
+    $ref: './paths/communications.yaml#/listAnnouncements'
+  /api/v1/announcements/{announcementId}/read:
+    $ref: './paths/communications.yaml#/markAnnouncementRead'
+  /api/v1/notifications:
+    $ref: './paths/communications.yaml#/listNotifications'
+  /api/v1/incidents:
+    $ref: './paths/incidents.yaml#/listIncidents'
+  /api/v1/incidents/{incidentId}/transitions:
+    $ref: './paths/incidents.yaml#/transitionIncident'
+  /api/v1/incidents/{incidentId}/follow-ups:
+    $ref: './paths/incidents.yaml#/createIncidentFollowUp'
+  /api/v1/psychology-care:
+    $ref: './paths/psychology.yaml#/listPsychologyCare'
+  /api/v1/private-files:
+    $ref: './paths/files.yaml#/uploadPrivateFile'
+  /api/v1/private-files/{fileId}/download:
+    $ref: './paths/files.yaml#/downloadPrivateFile'
+  /api/v1/accounts/{accountId}/password-reset:
+    $ref: './paths/identity-access.yaml#/issueAccountPasswordReset'
+  /api/v1/stations/{stationId}/revocation:
+    $ref: './paths/stations.yaml#/revokeStation'
+  /api/v1/stations/{stationId}/cameras:
+    $ref: './paths/stations.yaml#/listStationCameras'
+  /api/v1/recognition-events:
+    $ref: './paths/student-attendance.yaml#/listRecognitionEventsForReview'
+  /api/v1/recognition-events/{recognitionEventId}/review:
+    $ref: './paths/student-attendance.yaml#/reviewRecognitionEvent'
+  /api/v1/teacher-attendance/adjustments:
+    $ref: './paths/teacher-attendance.yaml#/createTeacherAttendanceAdjustment'
+  /api/v1/class-sessions/{classSessionId}/cancellation:
+    $ref: './paths/teacher-attendance.yaml#/cancelClassSession'
+  /api/v1/class-sessions/{classSessionId}/substitute:
+    $ref: './paths/teacher-attendance.yaml#/assignClassSessionSubstitute'
+  /api/v1/student-benefits/{benefitId}/deactivation:
+    $ref: './paths/finance-config.yaml#/deactivateStudentBenefit'
+  /api/v1/payment-movements/{paymentMovementId}/receipt:
+    $ref: './paths/finance-operations.yaml#/downloadPaymentReceipt'
+  /api/v1/payment-reminders:
+    $ref: './paths/finance-queries.yaml#/sendPaymentReminders'
+  /api/v1/assessments/{assessmentId}/closure:
+    $ref: './paths/academic-reports.yaml#/setAssessmentClosure'
+  /api/v1/assessment-results/{assessmentResultId}/corrections:
+    $ref: './paths/academic-reports.yaml#/correctPublishedAssessmentResult'
+  /api/v1/materials/{materialId}:
+    $ref: './paths/materials.yaml#/updateMaterial'
+  /api/v1/announcements/{announcementId}/archive:
+    $ref: './paths/communications.yaml#/archiveAnnouncement'
+  /api/v1/incident-reports:
+    $ref: './paths/incidents.yaml#/generateIncidentReport'
+  /api/v1/student-attendance/settings:
+    $ref: './paths/student-attendance.yaml#/getStudentAttendanceSettings'
+  /api/v1/student-attendance/alerts:
+    $ref: './paths/student-attendance.yaml#/listStudentAttendanceAlerts'
+  /api/v1/student-attendance/reports:
+    $ref: './paths/student-attendance.yaml#/generateStudentAttendanceReport'
+  /api/v1/teacher-attendance/reports:
+    $ref: './paths/teacher-attendance.yaml#/generateTeacherPayrollReport'
+  /api/v1/payment-concepts/{conceptId}:
+    $ref: './paths/finance-config.yaml#/updatePaymentConcept'
+  /api/v1/payment-obligation-bulk-adjustments:
+    $ref: './paths/finance-operations.yaml#/createBulkPaymentObligationAdjustment'
+  /api/v1/material-links:
+    $ref: './paths/materials.yaml#/createExternalMaterial'
+  /api/v1/materials/{materialId}/file:
+    $ref: './paths/materials.yaml#/replaceMaterialFile'
+
+components:
+  securitySchemes:
+    sanctumSession:
+      $ref: './security-schemes/common.yaml#/sanctumSession'
+    stationSession:
+      $ref: './security-schemes/common.yaml#/stationSession'
+  parameters:
+    Page:
+      $ref: './parameters/common.yaml#/Page'
+    PerPage:
+      $ref: './parameters/common.yaml#/PerPage'
+    Search:
+      $ref: './parameters/common.yaml#/Search'
+    Active:
+      $ref: './parameters/common.yaml#/Active'
+    StudentIdQuery:
+      $ref: './parameters/common.yaml#/StudentIdQuery'
+    IdempotencyKey:
+      $ref: './parameters/common.yaml#/IdempotencyKey'
+    AccountId:
+      $ref: './parameters/common.yaml#/AccountId'
+    FamilyLinkId:
+      $ref: './parameters/common.yaml#/FamilyLinkId'
+    StudentId:
+      $ref: './parameters/common.yaml#/StudentId'
+    AcademicPeriodId:
+      $ref: './parameters/common.yaml#/AcademicPeriodId'
+    ConsentId:
+      $ref: './parameters/common.yaml#/ConsentId'
+    StationId:
+      $ref: './parameters/common.yaml#/StationId'
+    AnomalyId:
+      $ref: './parameters/common.yaml#/AnomalyId'
+    AttendanceId:
+      $ref: './parameters/common.yaml#/AttendanceId'
+    LiquidationId:
+      $ref: './parameters/common.yaml#/LiquidationId'
+    ObligationId:
+      $ref: './parameters/common.yaml#/ObligationId'
+    AssessmentId:
+      $ref: './parameters/common.yaml#/AssessmentId'
+    MaterialId:
+      $ref: './parameters/common.yaml#/MaterialId'
+    AnnouncementId:
+      $ref: './parameters/common.yaml#/AnnouncementId'
+    IncidentId:
+      $ref: './parameters/common.yaml#/IncidentId'
+    FileId:
+      $ref: './parameters/common.yaml#/FileId'
+  requestBodies:
+    EmailRequest:
+      $ref: './request-bodies/common.yaml#/EmailRequest'
+    createAccountRequest:
+      $ref: './request-bodies/identity-access.yaml#/createAccountRequest'
+    updateAccountRequest:
+      $ref: './request-bodies/identity-access.yaml#/updateAccountRequest'
+    createFamilyLinkRequest:
+      $ref: './request-bodies/family.yaml#/createFamilyLinkRequest'
+    createAcademicPeriodRequest:
+      $ref: './request-bodies/academic.yaml#/createAcademicPeriodRequest'
+    updateAcademicPeriodRequest:
+      $ref: './request-bodies/academic.yaml#/updateAcademicPeriodRequest'
+    createGradeRequest:
+      $ref: './request-bodies/academic.yaml#/createGradeRequest'
+    createSectionRequest:
+      $ref: './request-bodies/academic.yaml#/createSectionRequest'
+    createCourseRequest:
+      $ref: './request-bodies/academic.yaml#/createCourseRequest'
+    createEnrollmentRequest:
+      $ref: './request-bodies/academic.yaml#/createEnrollmentRequest'
+    createTeachingAssignmentRequest:
+      $ref: './request-bodies/academic.yaml#/createTeachingAssignmentRequest'
+    grantBiometricConsentRequest:
+      $ref: './request-bodies/biometrics.yaml#/grantBiometricConsentRequest'
+    enrollBiometricProfileRequest:
+      $ref: './request-bodies/biometrics.yaml#/enrollBiometricProfileRequest'
+    createStationRequest:
+      $ref: './request-bodies/stations.yaml#/createStationRequest'
+    updateStationRequest:
+      $ref: './request-bodies/stations.yaml#/updateStationRequest'
+    activateStationRequest:
+      $ref: './request-bodies/stations.yaml#/activateStationRequest'
+    submitStationCaptureRequest:
+      $ref: './request-bodies/stations.yaml#/submitStationCaptureRequest'
+    createManualStudentAttendanceEventRequest:
+      $ref: './request-bodies/student-attendance.yaml#/createManualStudentAttendanceEventRequest'
+    closeStudentAttendanceDayRequest:
+      $ref: './request-bodies/student-attendance.yaml#/closeStudentAttendanceDayRequest'
+    createTeacherRateRequest:
+      $ref: './request-bodies/teacher-attendance.yaml#/createTeacherRateRequest'
+    createPayrollLiquidationRequest:
+      $ref: './request-bodies/teacher-attendance.yaml#/createPayrollLiquidationRequest'
+    createPaymentConceptRequest:
+      $ref: './request-bodies/finance-config.yaml#/createPaymentConceptRequest'
+    createStudentBenefitRequest:
+      $ref: './request-bodies/finance-config.yaml#/createStudentBenefitRequest'
+    generatePaymentObligationsRequest:
+      $ref: './request-bodies/finance-operations.yaml#/generatePaymentObligationsRequest'
+    adjustPaymentObligationRequest:
+      $ref: './request-bodies/finance-operations.yaml#/adjustPaymentObligationRequest'
+    createPaymentMovementRequest:
+      $ref: './request-bodies/finance-operations.yaml#/createPaymentMovementRequest'
+    createAssessmentRequest:
+      $ref: './request-bodies/assessments.yaml#/createAssessmentRequest'
+    replaceAssessmentResultsRequest:
+      $ref: './request-bodies/assessments.yaml#/replaceAssessmentResultsRequest'
+    importAssessmentResultsRequest:
+      $ref: './request-bodies/assessments.yaml#/importAssessmentResultsRequest'
+    generateAcademicReportRequest:
+      $ref: './request-bodies/academic-reports.yaml#/generateAcademicReportRequest'
+    createMaterialRequest:
+      $ref: './request-bodies/materials.yaml#/createMaterialRequest'
+    createScheduleRequest:
+      $ref: './request-bodies/schedules.yaml#/createScheduleRequest'
+    createCalendarEventRequest:
+      $ref: './request-bodies/schedules.yaml#/createCalendarEventRequest'
+    createAnnouncementRequest:
+      $ref: './request-bodies/communications.yaml#/createAnnouncementRequest'
+    createIncidentRequest:
+      $ref: './request-bodies/incidents.yaml#/createIncidentRequest'
+    transitionIncidentRequest:
+      $ref: './request-bodies/incidents.yaml#/transitionIncidentRequest'
+    createIncidentFollowUpRequest:
+      $ref: './request-bodies/incidents.yaml#/createIncidentFollowUpRequest'
+    createPsychologyCareRequest:
+      $ref: './request-bodies/psychology.yaml#/createPsychologyCareRequest'
+    uploadPrivateFileRequest:
+      $ref: './request-bodies/files.yaml#/uploadPrivateFileRequest'
+    createStationCameraRequest:
+      $ref: './request-bodies/stations.yaml#/createStationCameraRequest'
+    reviewRecognitionEventRequest:
+      $ref: './request-bodies/student-attendance.yaml#/reviewRecognitionEventRequest'
+    createTeacherAttendanceAdjustmentRequest:
+      $ref: './request-bodies/teacher-attendance.yaml#/createTeacherAttendanceAdjustmentRequest'
+    assignClassSessionSubstituteRequest:
+      $ref: './request-bodies/teacher-attendance.yaml#/assignClassSessionSubstituteRequest'
+    sendPaymentRemindersRequest:
+      $ref: './request-bodies/finance-queries.yaml#/sendPaymentRemindersRequest'
+    setAssessmentClosureRequest:
+      $ref: './request-bodies/academic-reports.yaml#/setAssessmentClosureRequest'
+    correctPublishedAssessmentResultRequest:
+      $ref: './request-bodies/academic-reports.yaml#/correctPublishedAssessmentResultRequest'
+    updateMaterialRequest:
+      $ref: './request-bodies/materials.yaml#/updateMaterialRequest'
+    generateIncidentReportRequest:
+      $ref: './request-bodies/incidents.yaml#/generateIncidentReportRequest'
+    updateStudentAttendanceSettingsRequest:
+      $ref: './request-bodies/student-attendance.yaml#/updateStudentAttendanceSettingsRequest'
+    generateStudentAttendanceReportRequest:
+      $ref: './request-bodies/student-attendance.yaml#/generateStudentAttendanceReportRequest'
+    generateTeacherPayrollReportRequest:
+      $ref: './request-bodies/teacher-attendance.yaml#/generateTeacherPayrollReportRequest'
+    updatePaymentConceptRequest:
+      $ref: './request-bodies/finance-config.yaml#/updatePaymentConceptRequest'
+    createBulkPaymentObligationAdjustmentRequest:
+      $ref: './request-bodies/finance-operations.yaml#/createBulkPaymentObligationAdjustmentRequest'
+    createExternalMaterialRequest:
+      $ref: './request-bodies/materials.yaml#/createExternalMaterialRequest'
+    replaceMaterialFileRequest:
+      $ref: './request-bodies/materials.yaml#/replaceMaterialFileRequest'
+    ActivationRequest:
+      $ref: './request-bodies/common.yaml#/ActivationRequest'
+    RolesRequest:
+      $ref: './request-bodies/common.yaml#/RolesRequest'
+    ReasonRequest:
+      $ref: './request-bodies/common.yaml#/ReasonRequest'
+  responses:
+    AuthUserResponse:
+      $ref: './responses/common.yaml#/AuthUserResponse'
+    MessageResponse:
+      $ref: './responses/common.yaml#/MessageResponse'
+    ResourceResponse:
+      $ref: './responses/common.yaml#/ResourceResponse'
+    CollectionResponse:
+      $ref: './responses/common.yaml#/CollectionResponse'
+    PaginatedResponse:
+      $ref: './responses/common.yaml#/PaginatedResponse'
+    BinaryDownload:
+      $ref: './responses/common.yaml#/BinaryDownload'
+    PdfDownload:
+      $ref: './responses/common.yaml#/PdfDownload'
+    UnauthenticatedError:
+      $ref: './responses/common.yaml#/UnauthenticatedError'
+    ForbiddenError:
+      $ref: './responses/common.yaml#/ForbiddenError'
+    NotFoundError:
+      $ref: './responses/common.yaml#/NotFoundError'
+    ConflictError:
+      $ref: './responses/common.yaml#/ConflictError'
+    CsrfError:
+      $ref: './responses/common.yaml#/CsrfError'
+    ValidationError:
+      $ref: './responses/common.yaml#/ValidationError'
+    RateLimitedError:
+      $ref: './responses/common.yaml#/RateLimitedError'
+  schemas:
+    HealthResponse:
+      $ref: './schemas/common.yaml#/HealthResponse'
+    LoginRequest:
+      $ref: './schemas/common.yaml#/LoginRequest'
+    ResetPasswordRequest:
+      $ref: './schemas/common.yaml#/ResetPasswordRequest'
+    Role:
+      $ref: './schemas/common.yaml#/Role'
+    AuthUser:
+      $ref: './schemas/common.yaml#/AuthUser'
+    AuthUserResponse:
+      $ref: './schemas/common.yaml#/AuthUserResponse'
+    MessageResponse:
+      $ref: './schemas/common.yaml#/MessageResponse'
+    createAccountRequest:
+      $ref: './schemas/identity-access.yaml#/createAccountRequest'
+    updateAccountRequest:
+      $ref: './schemas/identity-access.yaml#/updateAccountRequest'
+    createFamilyLinkRequest:
+      $ref: './schemas/family.yaml#/createFamilyLinkRequest'
+    createAcademicPeriodRequest:
+      $ref: './schemas/academic.yaml#/createAcademicPeriodRequest'
+    updateAcademicPeriodRequest:
+      $ref: './schemas/academic.yaml#/updateAcademicPeriodRequest'
+    createGradeRequest:
+      $ref: './schemas/academic.yaml#/createGradeRequest'
+    createSectionRequest:
+      $ref: './schemas/academic.yaml#/createSectionRequest'
+    createCourseRequest:
+      $ref: './schemas/academic.yaml#/createCourseRequest'
+    createEnrollmentRequest:
+      $ref: './schemas/academic.yaml#/createEnrollmentRequest'
+    createTeachingAssignmentRequest:
+      $ref: './schemas/academic.yaml#/createTeachingAssignmentRequest'
+    grantBiometricConsentRequest:
+      $ref: './schemas/biometrics.yaml#/grantBiometricConsentRequest'
+    enrollBiometricProfileRequest:
+      $ref: './schemas/biometrics.yaml#/enrollBiometricProfileRequest'
+    createStationRequest:
+      $ref: './schemas/stations.yaml#/createStationRequest'
+    updateStationRequest:
+      $ref: './schemas/stations.yaml#/updateStationRequest'
+    activateStationRequest:
+      $ref: './schemas/stations.yaml#/activateStationRequest'
+    submitStationCaptureRequest:
+      $ref: './schemas/stations.yaml#/submitStationCaptureRequest'
+    createManualStudentAttendanceEventRequest:
+      $ref: './schemas/student-attendance.yaml#/createManualStudentAttendanceEventRequest'
+    closeStudentAttendanceDayRequest:
+      $ref: './schemas/student-attendance.yaml#/closeStudentAttendanceDayRequest'
+    createTeacherRateRequest:
+      $ref: './schemas/teacher-attendance.yaml#/createTeacherRateRequest'
+    createPayrollLiquidationRequest:
+      $ref: './schemas/teacher-attendance.yaml#/createPayrollLiquidationRequest'
+    createPaymentConceptRequest:
+      $ref: './schemas/finance-config.yaml#/createPaymentConceptRequest'
+    createStudentBenefitRequest:
+      $ref: './schemas/finance-config.yaml#/createStudentBenefitRequest'
+    generatePaymentObligationsRequest:
+      $ref: './schemas/finance-operations.yaml#/generatePaymentObligationsRequest'
+    adjustPaymentObligationRequest:
+      $ref: './schemas/finance-operations.yaml#/adjustPaymentObligationRequest'
+    createPaymentMovementRequest:
+      $ref: './schemas/finance-operations.yaml#/createPaymentMovementRequest'
+    createAssessmentRequest:
+      $ref: './schemas/assessments.yaml#/createAssessmentRequest'
+    replaceAssessmentResultsRequest:
+      $ref: './schemas/assessments.yaml#/replaceAssessmentResultsRequest'
+    importAssessmentResultsRequest:
+      $ref: './schemas/assessments.yaml#/importAssessmentResultsRequest'
+    generateAcademicReportRequest:
+      $ref: './schemas/academic-reports.yaml#/generateAcademicReportRequest'
+    createMaterialRequest:
+      $ref: './schemas/materials.yaml#/createMaterialRequest'
+    createScheduleRequest:
+      $ref: './schemas/schedules.yaml#/createScheduleRequest'
+    createCalendarEventRequest:
+      $ref: './schemas/schedules.yaml#/createCalendarEventRequest'
+    createAnnouncementRequest:
+      $ref: './schemas/communications.yaml#/createAnnouncementRequest'
+    createIncidentRequest:
+      $ref: './schemas/incidents.yaml#/createIncidentRequest'
+    transitionIncidentRequest:
+      $ref: './schemas/incidents.yaml#/transitionIncidentRequest'
+    createIncidentFollowUpRequest:
+      $ref: './schemas/incidents.yaml#/createIncidentFollowUpRequest'
+    createPsychologyCareRequest:
+      $ref: './schemas/psychology.yaml#/createPsychologyCareRequest'
+    uploadPrivateFileRequest:
+      $ref: './schemas/files.yaml#/uploadPrivateFileRequest'
+    createStationCameraRequest:
+      $ref: './schemas/stations.yaml#/createStationCameraRequest'
+    reviewRecognitionEventRequest:
+      $ref: './schemas/student-attendance.yaml#/reviewRecognitionEventRequest'
+    createTeacherAttendanceAdjustmentRequest:
+      $ref: './schemas/teacher-attendance.yaml#/createTeacherAttendanceAdjustmentRequest'
+    assignClassSessionSubstituteRequest:
+      $ref: './schemas/teacher-attendance.yaml#/assignClassSessionSubstituteRequest'
+    sendPaymentRemindersRequest:
+      $ref: './schemas/finance-queries.yaml#/sendPaymentRemindersRequest'
+    setAssessmentClosureRequest:
+      $ref: './schemas/academic-reports.yaml#/setAssessmentClosureRequest'
+    correctPublishedAssessmentResultRequest:
+      $ref: './schemas/academic-reports.yaml#/correctPublishedAssessmentResultRequest'
+    updateMaterialRequest:
+      $ref: './schemas/materials.yaml#/updateMaterialRequest'
+    generateIncidentReportRequest:
+      $ref: './schemas/incidents.yaml#/generateIncidentReportRequest'
+    updateStudentAttendanceSettingsRequest:
+      $ref: './schemas/student-attendance.yaml#/updateStudentAttendanceSettingsRequest'
+    generateStudentAttendanceReportRequest:
+      $ref: './schemas/student-attendance.yaml#/generateStudentAttendanceReportRequest'
+    generateTeacherPayrollReportRequest:
+      $ref: './schemas/teacher-attendance.yaml#/generateTeacherPayrollReportRequest'
+    updatePaymentConceptRequest:
+      $ref: './schemas/finance-config.yaml#/updatePaymentConceptRequest'
+    createBulkPaymentObligationAdjustmentRequest:
+      $ref: './schemas/finance-operations.yaml#/createBulkPaymentObligationAdjustmentRequest'
+    createExternalMaterialRequest:
+      $ref: './schemas/materials.yaml#/createExternalMaterialRequest'
+    replaceMaterialFileRequest:
+      $ref: './schemas/materials.yaml#/replaceMaterialFileRequest'
+    Resource:
+      $ref: './schemas/common.yaml#/Resource'
+    ResourceResponse:
+      $ref: './schemas/common.yaml#/ResourceResponse'
+    CollectionResponse:
+      $ref: './schemas/common.yaml#/CollectionResponse'
+    PaginationMeta:
+      $ref: './schemas/common.yaml#/PaginationMeta'
+    PaginationLinks:
+      $ref: './schemas/common.yaml#/PaginationLinks'
+    PaginatedResponse:
+      $ref: './schemas/common.yaml#/PaginatedResponse'
+    ErrorResponse:
+      $ref: './schemas/common.yaml#/ErrorResponse'

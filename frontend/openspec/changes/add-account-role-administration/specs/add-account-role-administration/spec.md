@@ -6,7 +6,7 @@ Permitir administrar cuentas y roles respetando restricciones.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Gestor SHALL administrar roles operativos
 
@@ -16,7 +16,7 @@ Gestor SHALL administrar roles operativos
 - WHEN edita rol permitido
 - THEN la UI confirma resultado
 
-### Requirement 2
+### Requirement: 2
 
 UI SHALL ocultar y bloquear privilegios no permitidos
 

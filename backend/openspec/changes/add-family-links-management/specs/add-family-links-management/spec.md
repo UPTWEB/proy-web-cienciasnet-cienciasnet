@@ -6,7 +6,7 @@ Gestionar relaciones N:M entre padres y alumnos con alcance seguro.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un padre SHALL poder vincularse con varios alumnos
 
@@ -16,7 +16,7 @@ Un padre SHALL poder vincularse con varios alumnos
 - WHEN crea vínculos
 - THEN todos quedan disponibles al padre
 
-### Requirement 2
+### Requirement: 2
 
 Un padre SHALL consultar solo hijos vinculados
 

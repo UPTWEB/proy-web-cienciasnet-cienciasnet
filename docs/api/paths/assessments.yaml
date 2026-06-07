@@ -1,0 +1,75 @@
+listAssessments:
+  get:
+    tags:
+      - Assessments
+    operationId: listAssessments
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Assessments
+    operationId: createAssessment
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createAssessmentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listAssessmentResults:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AssessmentId'
+  get:
+    tags:
+      - Assessments
+    operationId: listAssessmentResults
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+  put:
+    tags:
+      - Assessments
+    operationId: replaceAssessmentResults
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/replaceAssessmentResultsRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/CollectionResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+importAssessmentResults:
+  post:
+    tags:
+      - Assessments
+    operationId: importAssessmentResults
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/importAssessmentResultsRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

@@ -1,0 +1,12 @@
+grantBiometricConsentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/grantBiometricConsentRequest'
+enrollBiometricProfileRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/enrollBiometricProfileRequest'

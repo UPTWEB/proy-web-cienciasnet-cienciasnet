@@ -1,0 +1,12 @@
+createScheduleRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createScheduleRequest'
+createCalendarEventRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createCalendarEventRequest'

@@ -1,0 +1,12 @@
+createAccountRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createAccountRequest'
+updateAccountRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/updateAccountRequest'

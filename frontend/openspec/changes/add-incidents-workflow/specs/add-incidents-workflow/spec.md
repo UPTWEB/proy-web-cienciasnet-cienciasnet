@@ -6,7 +6,7 @@ Operar el cuaderno de incidencias y seguimiento TOE.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Auxiliar SHALL registrar y derivar incidencia
 
@@ -16,7 +16,7 @@ Auxiliar SHALL registrar y derivar incidencia
 - WHEN deriva a TOE
 - THEN historial muestra ambas acciones
 
-### Requirement 2
+### Requirement: 2
 
 TOE SHALL gestionar seguimiento
 

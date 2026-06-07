@@ -6,7 +6,7 @@ Asegurar que toda la SPA sea usable y eficiente antes del release.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Flujos críticos SHALL operarse con teclado
 
@@ -16,7 +16,7 @@ Flujos críticos SHALL operarse con teclado
 - WHEN recorre flujo
 - THEN completa acciones con foco visible
 
-### Requirement 2
+### Requirement: 2
 
 Módulos pesados SHALL cargar bajo demanda
 

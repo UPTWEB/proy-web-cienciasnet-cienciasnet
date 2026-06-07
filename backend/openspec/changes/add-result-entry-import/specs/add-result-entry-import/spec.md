@@ -6,7 +6,7 @@ Registrar resultados procesados manualmente sin que el sistema tome exámenes.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un docente SHALL registrar solo notas de su carga activa
 
@@ -16,7 +16,7 @@ Un docente SHALL registrar solo notas de su carga activa
 - WHEN envía nota
 - THEN Policy rechaza
 
-### Requirement 2
+### Requirement: 2
 
 La importación SHALL ser atómica
 

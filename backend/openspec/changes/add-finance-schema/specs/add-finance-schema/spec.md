@@ -6,7 +6,7 @@ Persistir configuración, beneficios, obligaciones y movimientos financieros inm
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Una obligación SHALL congelar montos y fecha límite
 
@@ -16,7 +16,7 @@ Una obligación SHALL congelar montos y fecha límite
 - WHEN se guarda
 - THEN cambios futuros no alteran sus valores
 
-### Requirement 2
+### Requirement: 2
 
 Una referencia SHALL ser única por medio/proveedor
 

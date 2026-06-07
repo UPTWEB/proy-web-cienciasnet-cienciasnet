@@ -27,6 +27,9 @@ incluye más de un módulo grande o no puede cerrarse en pocos días, dividirlo.
 - Integraciones y secretos.
 - Pruebas y rendimiento.
 - Dependencias frontend/backend/infra.
+- Relación `Implementa`, `Modifica`, `Verifica` o `Sin contrato HTTP`, registrada también en `API_CONTRACTS.md`.
+- Paquetes y archivos concretos de `../../docs/api/` afectados.
 
 No se acepta `specs/README.md` como sustituto de una delta spec. Cada capability debe declarar comportamiento
-observable y verificable.
+observable y verificable usando `## ADDED Requirements`, bloques `### Requirement: <nombre>` y al menos un
+`#### Scenario: <nombre>` por requisito.

@@ -6,7 +6,7 @@ Administrar horarios, calendario y días no laborables.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Coordinación SHALL gestionar horarios
 
@@ -16,7 +16,7 @@ Coordinación SHALL gestionar horarios
 - WHEN confirma
 - THEN queda consultable por actores vinculados
 
-### Requirement 2
+### Requirement: 2
 
 Un padre SHALL ver horario del hijo vinculado
 

@@ -6,7 +6,7 @@ Publicar y consultar materiales según carga/matrícula.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Alumno SHALL ver materiales de su matrícula
 
@@ -16,7 +16,7 @@ Alumno SHALL ver materiales de su matrícula
 - WHEN filtra semana
 - THEN solo aparecen permitidos
 
-### Requirement 2
+### Requirement: 2
 
 Upload SHALL mostrar validaciones
 

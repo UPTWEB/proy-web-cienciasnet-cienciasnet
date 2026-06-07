@@ -3,7 +3,7 @@
 **ID:** FE-005  
 **Fase:** Fase 1: Identidad y academia  
 **Owner:** Kiara  
-**Reviewer:** Vincenzo  
+**Reviewer:** Jefferson
 **Dependencias:** FE-002, FE-003, Backend BE-004
 
 ## Why
@@ -25,6 +25,11 @@ Permitir administrar cuentas y roles respetando restricciones.
 
 - Proyecto: `frontend`.
 - Capacidades: listado y formulario de cuentas, activar/desactivar y asignar roles operativos, estados sin permiso y confirmaciones.
+
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-account-role-administration` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
 
 ## Source Documents
 

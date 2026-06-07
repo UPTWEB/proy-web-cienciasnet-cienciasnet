@@ -6,7 +6,7 @@ Activar y revocar navegadores de asistencia sin compartir sesiones humanas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Una activación SHALL ser de un solo uso y expirar
 
@@ -16,7 +16,7 @@ Una activación SHALL ser de un solo uso y expirar
 - WHEN se intenta activar
 - THEN Laravel rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Una estación SHALL acceder solo a captura y estado mínimo
 

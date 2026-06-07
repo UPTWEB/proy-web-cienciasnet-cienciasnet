@@ -6,7 +6,7 @@ Publicar comunicaciones segmentadas y registrar su entrega/lectura.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un usuario SHALL recibir solo comunicados de su segmento
 
@@ -16,7 +16,7 @@ Un usuario SHALL recibir solo comunicados de su segmento
 - WHEN usuario consulta
 - THEN no aparece
 
-### Requirement 2
+### Requirement: 2
 
 Marcar leído SHALL ser idempotente
 

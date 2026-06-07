@@ -6,7 +6,7 @@ Publicar recursos académicos privados para matrículas autorizadas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Solo matrícula activa SHALL descargar material
 
@@ -16,7 +16,7 @@ Solo matrícula activa SHALL descargar material
 - WHEN consulta endpoint
 - THEN se rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Archivos SHALL servirse mediante endpoint autorizado
 

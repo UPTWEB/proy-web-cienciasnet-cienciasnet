@@ -7,8 +7,11 @@ Este proyecto es un **Monorepo** que contiene el Backend (Laravel) y el Frontend
 
 ## 1. Arquitectura API-First (Design-First)
 - **Prohibido adivinar contratos:** Nunca inventes endpoints ni asumas las respuestas del backend. 
-- Toda interacción entre frontend y backend debe estar documentada primero en la carpeta `docs/api/` (Formato OpenAPI). 
-- El frontend debe utilizar Mocks (ej. MSW) basados en este contrato si el backend aún no está listo.
+- Toda interacción entre frontend y backend debe aprobarse primero en `docs/api/` mediante OpenAPI.
+- Durante la primera etapa, Jefferson diseña y aprueba los contratos. Más adelante, los owners backend podrán
+  proponerlos, pero Jefferson conserva la aprobación.
+- El frontend debe utilizar mocks basados en el contrato aprobado si el backend aún no está listo y cubrir éxito,
+  errores, permisos, estados vacíos y latencia.
 
 ## 2. Flujo de Trabajo y Ramas (Git Flow)
 - **Prohibido tocar la rama `main` directamente.**

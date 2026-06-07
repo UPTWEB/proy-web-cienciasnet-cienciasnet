@@ -1,0 +1,53 @@
+createMaterialRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - file
+    - title
+    - teaching_assignment_id
+  properties:
+    file:
+      type: string
+      format: binary
+    title:
+      type: string
+      minLength: 1
+      maxLength: 200
+    description:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    teaching_assignment_id:
+      type: string
+      format: uuid
+    week: { type: integer, minimum: 1, maximum: 53 }
+updateMaterialRequest:
+  type: object
+  additionalProperties: false
+  required: []
+  properties:
+    title:
+      type: string
+      minLength: 1
+      maxLength: 200
+    description:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    week: { type: integer, minimum: 1, maximum: 53 }
+createExternalMaterialRequest:
+  type: object
+  additionalProperties: false
+  required: [url, title, teaching_assignment_id]
+  properties:
+    url: { type: string, format: uri }
+    title: { type: string, minLength: 1, maxLength: 200 }
+    description: { type: string, maxLength: 2000 }
+    teaching_assignment_id: { type: string, format: uuid }
+    week: { type: integer, minimum: 1, maximum: 53 }
+replaceMaterialFileRequest:
+  type: object
+  additionalProperties: false
+  required: [file]
+  properties:
+    file: { type: string, format: binary }

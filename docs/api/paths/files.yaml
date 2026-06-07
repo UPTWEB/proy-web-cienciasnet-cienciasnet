@@ -1,0 +1,30 @@
+uploadPrivateFile:
+  post:
+    tags:
+      - Files
+    operationId: uploadPrivateFile
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/uploadPrivateFileRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+downloadPrivateFile:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/FileId'
+  get:
+    tags:
+      - Files
+    operationId: downloadPrivateFile
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/BinaryDownload'
+      '302':
+        description: Redirección firmada de corta duración
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'

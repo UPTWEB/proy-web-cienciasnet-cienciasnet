@@ -6,7 +6,7 @@ Convertir capturas válidas en entradas, salidas y reingresos de alumnos.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 El primer evento bidireccional SHALL ser ingreso y los siguientes alternar
 
@@ -16,7 +16,7 @@ El primer evento bidireccional SHALL ser ingreso y los siguientes alternar
 - WHEN pasa dos veces
 - THEN se registran ingreso y salida
 
-### Requirement 2
+### Requirement: 2
 
 Una salida de emergencia SHALL ser manual y notificar al padre
 

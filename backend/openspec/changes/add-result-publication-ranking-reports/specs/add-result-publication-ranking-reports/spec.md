@@ -6,7 +6,7 @@ Publicar resultados, calcular ranking y producir reportes protegidos.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Resultados SHALL ser visibles solo publicados o cerrados
 
@@ -16,7 +16,7 @@ Resultados SHALL ser visibles solo publicados o cerrados
 - WHEN alumno consulta
 - THEN no recibe notas
 
-### Requirement 2
+### Requirement: 2
 
 Empates SHALL compartir posición
 

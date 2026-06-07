@@ -18,9 +18,17 @@ ejecución separados. La Fase 0 de ambos planes prepara bases clonables antes de
 Al ejecutar en entorno local, ten en cuenta las siguientes reglas y credenciales:
 
 - **Dominio estricto (CORS):** Debes acceder al frontend **únicamente** a través de `http://localhost:5173`. Si usas `127.0.0.1`, el inicio de sesión fallará por políticas de seguridad.
-- **Usuario de prueba:** Si la base de datos se pobló correctamente usando los seeders (`php artisan migrate:fresh --seed`), puedes probar el sistema con:
-  - **Email:** `coordinacion@example.test`
-  - **Contraseña:** `password`
+- **Usuarios de prueba:** Si la base de datos se pobló correctamente usando los seeders (`php artisan migrate:fresh --seed`), puedes probar el sistema con contraseña `password` en estas cuentas:
+  - `superadmin@example.test`
+  - `gestor@example.test`
+  - `coordinacion@example.test`
+  - `docente@example.test`
+  - `padre@example.test`
+  - `alumno@example.test`
+  - `toe@example.test`
+  - `psicologia@example.test`
+  - `auxiliar@example.test`
+  - `administrativo@example.test`
 
 ## Arquitectura prevista
 
@@ -69,6 +77,8 @@ Documentos principales:
 - [Roles y permisos](docs/product/roles-and-permissions.md)
 - [Reglas y casos de uso por dominio](docs/domain/)
 - [Arquitectura general](docs/architecture/system.md)
+- [Flujo API-First](docs/architecture/api-first-workflow.md)
+- [Contratos API](docs/api/)
 - [Diseño técnico detallado](docs/architecture/detailed-system-design.md)
 - [Arquitectura frontend](docs/architecture/frontend.md)
 - [Arquitectura y optimización PostgreSQL](docs/architecture/database.md)
@@ -115,7 +125,7 @@ frontend/
 ```
 
 Cada proyecto planificará y archivará sus propias capacidades. El frontend dependerá de documentación compartida,
-contratos API publicados y specs backend aceptadas, nunca de changes backend activos.
+contratos API aprobados y publicados, nunca de changes backend activos.
 
 - [Plan backend](backend/openspec/EXECUTION_PLAN.md)
 - [Plan frontend](frontend/openspec/EXECUTION_PLAN.md)

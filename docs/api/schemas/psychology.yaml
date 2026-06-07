@@ -1,0 +1,25 @@
+createPsychologyCareRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - occurred_at
+    - summary
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    occurred_at:
+      type: string
+      format: date-time
+    summary:
+      type: string
+      minLength: 1
+      maxLength: 5000
+    confidential_notes:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    incident_id:
+      type: string
+      format: uuid

@@ -1,0 +1,90 @@
+listIncidents:
+  get:
+    tags:
+      - Incidents
+    operationId: listIncidents
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Incidents
+    operationId: createIncident
+    x-roles:
+      - superadmin
+      - auxiliar
+      - toe
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createIncidentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+transitionIncident:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/IncidentId'
+  post:
+    tags:
+      - Incidents
+    operationId: transitionIncident
+    x-roles:
+      - superadmin
+      - auxiliar
+      - toe
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/transitionIncidentRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+createIncidentFollowUp:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/IncidentId'
+  post:
+    tags:
+      - Incidents
+    operationId: createIncidentFollowUp
+    x-roles:
+      - superadmin
+      - toe
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createIncidentFollowUpRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+generateIncidentReport:
+  post:
+    tags:
+      - Incidents
+    operationId: generateIncidentReport
+    x-roles:
+      - superadmin
+      - auxiliar
+      - toe
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/generateIncidentReportRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

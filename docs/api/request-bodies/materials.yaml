@@ -1,0 +1,22 @@
+createMaterialRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createMaterialRequest'
+updateMaterialRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/updateMaterialRequest'
+createExternalMaterialRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/createExternalMaterialRequest' }
+replaceMaterialFileRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema: { $ref: '../openapi.yaml#/components/schemas/replaceMaterialFileRequest' }

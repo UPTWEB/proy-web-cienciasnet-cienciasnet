@@ -1,0 +1,74 @@
+createManualStudentAttendanceEventRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - event_type
+    - occurred_at
+    - reason
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    event_type:
+      type: string
+      enum:
+        - entry
+        - exit
+        - absence
+        - late
+    occurred_at:
+      type: string
+      format: date-time
+    reason:
+      type: string
+      minLength: 1
+      maxLength: 1000
+closeStudentAttendanceDayRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - date
+  properties:
+    date:
+      type: string
+      format: date
+reviewRecognitionEventRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - outcome
+    - reason
+  properties:
+    outcome:
+      type: string
+      enum:
+        - confirmed
+        - rejected
+        - reassigned
+    matched_student_id:
+      type: string
+      format: uuid
+    reason:
+      type: string
+      minLength: 1
+      maxLength: 1000
+updateStudentAttendanceSettingsRequest:
+  type: object
+  additionalProperties: false
+  required: [on_time_until, day_closes_at, absence_alert_threshold]
+  properties:
+    on_time_until: { type: string, pattern: '^([01]\d|2[0-3]):[0-5]\d$' }
+    day_closes_at: { type: string, pattern: '^([01]\d|2[0-3]):[0-5]\d$' }
+    absence_alert_threshold: { type: integer, minimum: 1, maximum: 100 }
+generateStudentAttendanceReportRequest:
+  type: object
+  additionalProperties: false
+  required: [from_date, to_date, format]
+  properties:
+    from_date: { type: string, format: date }
+    to_date: { type: string, format: date }
+    format: { type: string, enum: [pdf, xlsx] }
+    student_id: { type: string, format: uuid }
+    grade_id: { type: string, format: uuid }
+    section_id: { type: string, format: uuid }

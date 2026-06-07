@@ -1,0 +1,18 @@
+createAssessmentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createAssessmentRequest'
+replaceAssessmentResultsRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/replaceAssessmentResultsRequest'
+importAssessmentResultsRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/importAssessmentResultsRequest'

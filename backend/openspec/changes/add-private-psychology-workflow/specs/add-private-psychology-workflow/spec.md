@@ -6,7 +6,7 @@ Registrar atención psicológica sin exponer notas privadas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Solo Psicología y superadmin SHALL consultar notas privadas
 
@@ -16,7 +16,7 @@ Solo Psicología y superadmin SHALL consultar notas privadas
 - WHEN envía solicitud
 - THEN se rechaza y no filtra contenido
 
-### Requirement 2
+### Requirement: 2
 
 Acceso sensible SHALL auditarse sin copiar notas
 

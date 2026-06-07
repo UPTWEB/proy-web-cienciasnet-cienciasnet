@@ -6,7 +6,7 @@ Persistir consentimiento, estaciones, reconocimientos y asistencia con trazabili
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Solo SHALL existir un perfil facial activo por persona
 
@@ -16,7 +16,7 @@ Solo SHALL existir un perfil facial activo por persona
 - WHEN se activa otro
 - THEN la base rechaza conflicto
 
-### Requirement 2
+### Requirement: 2
 
 Un movimiento SHALL pertenecer a alumno o docente, nunca ambos
 

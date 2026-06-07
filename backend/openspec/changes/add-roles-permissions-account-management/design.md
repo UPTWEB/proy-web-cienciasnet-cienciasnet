@@ -11,7 +11,7 @@
 - Crear Policies y casos de uso de cuentas/roles.
 - Sembrar roles y permisos.
 - Auditar cambios sensibles.
-- Exponer endpoints y OpenAPI.
+- Exponer endpoints conformes al OpenAPI aprobado y comparar Scribe contra él.
 
 ## Security and Authorization
 

@@ -6,7 +6,7 @@ Publicar, leer y archivar comunicaciones segmentadas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Publicador SHALL previsualizar destinatarios
 
@@ -16,7 +16,7 @@ Publicador SHALL previsualizar destinatarios
 - WHEN revisa antes de publicar
 - THEN ve alcance esperado
 
-### Requirement 2
+### Requirement: 2
 
 Usuario SHALL marcar lectura al abrir
 

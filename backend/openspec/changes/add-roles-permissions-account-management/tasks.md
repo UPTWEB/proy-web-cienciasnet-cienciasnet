@@ -1,16 +1,16 @@
-# Tasks: add-roles-permissions-account-management
+﻿# Tasks: add-roles-permissions-account-management
 
 ## Implementation
-- [ ] 1.1 Crear Policies y casos de uso de cuentas/roles. Owner: Jefferson
-- [ ] 1.2 Sembrar roles y permisos. Owner: Jefferson
-- [ ] 1.3 Auditar cambios sensibles. Owner: Jefferson
-- [ ] 1.4 Exponer endpoints y OpenAPI. Owner: Jefferson
+- [x] 1.1 Crear Policies y casos de uso de cuentas/roles. Owner: Jefferson
+- [x] 1.2 Sembrar roles y permisos. Owner: Jefferson
+- [x] 1.3 Auditar cambios sensibles. Owner: Jefferson
+- [x] 1.4 Exponer endpoints conformes al OpenAPI aprobado y comparar Scribe. Owner: Jefferson
 
 ## Verification
-- [ ] 2.1 Verificar que matriz positiva y negativa pasa. Owner: Jefferson
-- [ ] 2.2 Verificar que cambios propios bloqueados. Owner: Jefferson
-- [ ] 2.3 Verificar que desactivación conserva historial. Owner: Jefferson
+- [x] 2.1 Verificar que matriz positiva y negativa pasa. Owner: Jefferson
+- [x] 2.2 Verificar que cambios propios bloqueados. Owner: Jefferson
+- [x] 2.3 Verificar que desactivaciÃ³n conserva historial. Owner: Jefferson
 
 ## Review and Archive
-- [ ] 3.1 Publicar contratos/documentación afectados. Owner: Jefferson
-- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: Fátima
+- [x] 3.1 Publicar contratos/documentaciÃ³n afectados. Owner: Jefferson
+- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: AndrÃ©

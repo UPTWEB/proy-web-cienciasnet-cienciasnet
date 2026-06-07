@@ -3,7 +3,7 @@
 **ID:** BE-028  
 **Fase:** Fase 6: Operación y release  
 **Owner:** Jefferson  
-**Reviewer:** André  
+**Reviewer:** Jefferson
 **Dependencias:** BE-013, BE-017, BE-020, BE-023, BE-025, BE-027, OPS-003
 
 ## Why
@@ -25,6 +25,11 @@ Demostrar que backend cubre todos los dominios y puede salir a producción.
 
 - Proyecto: `backend`.
 - Capacidades: regresión completa y autorización negativa, rendimiento y OpenAPI, migración, backup y operación.
+
+## API Contract
+
+- Declaracion contractual: consultar la fila `verify-backend-release` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
 
 ## Source Documents
 

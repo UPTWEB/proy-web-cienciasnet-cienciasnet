@@ -1,0 +1,178 @@
+listAcademicPeriods:
+  get:
+    tags:
+      - Academic
+    operationId: listAcademicPeriods
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createAcademicPeriod
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createAcademicPeriodRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+getAcademicPeriod:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AcademicPeriodId'
+  get:
+    tags:
+      - Academic
+    operationId: getAcademicPeriod
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+  patch:
+    tags:
+      - Academic
+    operationId: updateAcademicPeriod
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/updateAcademicPeriodRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listGrades:
+  get:
+    tags:
+      - Academic
+    operationId: listGrades
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createGrade
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createGradeRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listSections:
+  get:
+    tags:
+      - Academic
+    operationId: listSections
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createSection
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createSectionRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listCourses:
+  get:
+    tags:
+      - Academic
+    operationId: listCourses
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createCourse
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createCourseRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listEnrollments:
+  get:
+    tags:
+      - Academic
+    operationId: listEnrollments
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createEnrollment
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createEnrollmentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listTeachingAssignments:
+  get:
+    tags:
+      - Academic
+    operationId: listTeachingAssignments
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Academic
+    operationId: createTeachingAssignment
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createTeachingAssignmentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

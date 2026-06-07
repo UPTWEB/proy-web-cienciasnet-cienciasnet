@@ -6,7 +6,7 @@ Integrar Laravel con Python sin delegar reglas de asistencia.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Python SHALL devolver identidad, confianza y prueba de vida sin registrar asistencia
 
@@ -16,7 +16,7 @@ Python SHALL devolver identidad, confianza y prueba de vida sin registrar asiste
 - WHEN procesa reconocimiento
 - THEN devuelve resultado mínimo
 
-### Requirement 2
+### Requirement: 2
 
 Laravel SHALL tratar timeout como evento no automático
 

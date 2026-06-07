@@ -17,6 +17,8 @@ Durante el trabajo:
 - Implementa únicamente el alcance del change.
 - Marca cada casilla de tasks.md solo después de implementarla y verificarla.
 - Registra pruebas, E2E, accesibilidad, responsive y limitaciones en verification.md.
+- Antes de implementar, confirma la fila del change en `API_CONTRACTS.md` y genera tipos/mocks desde los paquetes
+  OpenAPI aprobados indicados allí.
 - No cierres con mocks o contratos temporales.
 
 Al terminar:

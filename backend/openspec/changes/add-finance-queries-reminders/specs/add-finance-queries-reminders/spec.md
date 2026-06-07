@@ -6,7 +6,7 @@ Entregar estados de cuenta, morosidad, caja y recordatorios con alcance correcto
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un padre SHALL ver solo obligaciones de hijos vinculados
 
@@ -16,7 +16,7 @@ Un padre SHALL ver solo obligaciones de hijos vinculados
 - WHEN envía solicitud
 - THEN se rechaza sin filtrar datos
 
-### Requirement 2
+### Requirement: 2
 
 El estado SHALL mostrar monto pronto pago antes del límite
 

@@ -6,7 +6,7 @@ Configurar evaluaciones físicas y su ciclo de revisión.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Coordinación SHALL crear evaluaciones válidas
 
@@ -16,7 +16,7 @@ Coordinación SHALL crear evaluaciones válidas
 - WHEN guarda
 - THEN queda en borrador
 
-### Requirement 2
+### Requirement: 2
 
 Una evaluación cerrada SHALL cambiar solo tras reapertura auditada
 

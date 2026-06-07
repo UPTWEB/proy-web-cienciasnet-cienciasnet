@@ -1,0 +1,86 @@
+AuthUserResponse:
+  description: Cuenta autenticada
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/AuthUserResponse'
+MessageResponse:
+  description: Mensaje genérico
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/MessageResponse'
+ResourceResponse:
+  description: Recurso o resultado
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ResourceResponse'
+CollectionResponse:
+  description: Colección no paginada
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/CollectionResponse'
+PaginatedResponse:
+  description: Colección paginada
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/PaginatedResponse'
+BinaryDownload:
+  description: Archivo autorizado
+  content:
+    application/octet-stream:
+      schema:
+        type: string
+        format: binary
+PdfDownload:
+  description: Documento PDF autorizado
+  content:
+    application/pdf:
+      schema:
+        type: string
+        format: binary
+UnauthenticatedError:
+  description: Sesión ausente o expirada
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+ForbiddenError:
+  description: Sin permiso
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+NotFoundError:
+  description: Recurso inexistente o no visible
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+ConflictError:
+  description: Conflicto de estado o negocio
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+CsrfError:
+  description: Sesión CSRF expirada
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+ValidationError:
+  description: Validación fallida
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'
+RateLimitedError:
+  description: Demasiadas solicitudes
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/ErrorResponse'

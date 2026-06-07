@@ -1,0 +1,18 @@
+generateAcademicReportRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/generateAcademicReportRequest'
+setAssessmentClosureRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/setAssessmentClosureRequest'
+correctPublishedAssessmentResultRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/correctPublishedAssessmentResultRequest'

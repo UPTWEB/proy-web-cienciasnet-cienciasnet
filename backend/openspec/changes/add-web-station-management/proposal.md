@@ -26,6 +26,11 @@ Activar y revocar navegadores de asistencia sin compartir sesiones humanas.
 - Proyecto: `backend`.
 - Capacidades: crear estación/cámaras, QR o código de un uso por 10 minutos, sesión técnica limitada, rotación y revocación.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-web-station-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/architecture/facial-integration.md`

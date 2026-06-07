@@ -1,0 +1,49 @@
+generateAcademicReportRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - report_type
+    - format
+  properties:
+    report_type:
+      type: string
+      enum:
+        - report_card
+        - grade_summary
+        - ranking
+    format:
+      type: string
+      enum:
+        - pdf
+        - xlsx
+    academic_period_id:
+      type: string
+      format: uuid
+    section_id:
+      type: string
+      format: uuid
+    student_id:
+      type: string
+      format: uuid
+setAssessmentClosureRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - closed
+  properties:
+    closed:
+      type: boolean
+correctPublishedAssessmentResultRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - score
+    - reason
+  properties:
+    score:
+      type: string
+      pattern: ^\d{1,10}(\.\d{1,2})?$
+    reason:
+      type: string
+      minLength: 1
+      maxLength: 1000

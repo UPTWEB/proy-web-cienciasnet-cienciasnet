@@ -1,0 +1,125 @@
+listAccounts:
+  get:
+    tags:
+      - IdentityAccess
+    operationId: listAccounts
+    x-permissions:
+      - gestionar_usuarios
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Page'
+      - $ref: '../openapi.yaml#/components/parameters/PerPage'
+      - $ref: '../openapi.yaml#/components/parameters/Search'
+      - $ref: '../openapi.yaml#/components/parameters/Active'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - IdentityAccess
+    operationId: createAccount
+    x-permissions:
+      - gestionar_usuarios
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createAccountRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+getAccount:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AccountId'
+  get:
+    tags:
+      - IdentityAccess
+    operationId: getAccount
+    x-permissions:
+      - gestionar_usuarios
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+  patch:
+    tags:
+      - IdentityAccess
+    operationId: updateAccount
+    x-permissions:
+      - gestionar_usuarios
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/updateAccountRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+setAccountActivation:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AccountId'
+  put:
+    tags:
+      - IdentityAccess
+    operationId: setAccountActivation
+    x-permissions:
+      - gestionar_usuarios
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ActivationRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+replaceAccountRoles:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AccountId'
+  put:
+    tags:
+      - IdentityAccess
+    operationId: replaceAccountRoles
+    x-permissions:
+      - gestionar_usuarios
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/RolesRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+issueAccountPasswordReset:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AccountId'
+  post:
+    tags:
+      - IdentityAccess
+    operationId: issueAccountPasswordReset
+    x-permissions:
+      - gestionar_usuarios
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/MessageResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'

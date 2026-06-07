@@ -1,0 +1,38 @@
+grantBiometricConsentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - legal_basis
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    legal_basis:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    expires_at:
+      type: string
+      format: date-time
+enrollBiometricProfileRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - consent_id
+    - images
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    consent_id:
+      type: string
+      format: uuid
+    images:
+      type: array
+      minItems: 3
+      maxItems: 10
+      items:
+        type: string
+        format: binary

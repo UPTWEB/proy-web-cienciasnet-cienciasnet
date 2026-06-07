@@ -1,0 +1,63 @@
+listAnnouncements:
+  get:
+    tags:
+      - Communications
+    operationId: listAnnouncements
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Communications
+    operationId: createAnnouncement
+    x-roles:
+      - superadmin
+      - toe
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createAnnouncementRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+markAnnouncementRead:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AnnouncementId'
+  put:
+    tags:
+      - Communications
+    operationId: markAnnouncementRead
+    responses:
+      '204':
+        description: Lectura registrada
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+listNotifications:
+  get:
+    tags:
+      - Communications
+    operationId: listNotifications
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+archiveAnnouncement:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AnnouncementId'
+  put:
+    tags:
+      - Communications
+    operationId: archiveAnnouncement
+    x-roles:
+      - superadmin
+      - toe
+      - coordinador_academico
+    responses:
+      '204':
+        description: Comunicado archivado
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'

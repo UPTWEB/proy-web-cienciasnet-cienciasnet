@@ -20,10 +20,10 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-005 | `[ ]` | `add-account-role-administration` | Kiara | Jefferson | FE-002, FE-003 |
-| FE-006 | `[ ]` | `add-family-links-administration` | Kiara | Jefferson | FE-003 |
-| FE-007 | `[ ]` | `add-academic-structure-administration` | Kiara | Jefferson | FE-002, FE-003 |
-| FE-008 | `[ ]` | `add-family-student-portal-shell` | Kiara | Jefferson | FE-003 |
+| FE-005 | `[~]` | `add-account-role-administration` | Kiara | Jefferson | FE-002, FE-003 |
+| FE-006 | `[~]` | `add-family-links-administration` | Kiara | Jefferson | FE-003 |
+| FE-007 | `[~]` | `add-academic-structure-administration` | Kiara | Jefferson | FE-002, FE-003 |
+| FE-008 | `[~]` | `add-family-student-portal-shell` | Kiara | Jefferson | FE-003 |
 
 ## Fase 2: Facial y asistencia
 
@@ -68,4 +68,5 @@
 
 ## Regla de ejecución
 
-Cada change se detalla desde sus documentos fuente antes de implementarse. No se inicia un change bloqueado ni se archiva sin demostrar todos sus escenarios.
+Cada change se detalla desde sus documentos fuente y su fila en `API_CONTRACTS.md` antes de implementarse. No se inicia
+un change bloqueado, con contrato requerido sin aprobar, ni se archiva sin demostrar todos sus escenarios.

@@ -3,7 +3,7 @@
 **ID:** BE-021  
 **Fase:** Fase 4: Evaluación y contenido  
 **Owner:** André  
-**Reviewer:** Jefferson  
+**Reviewer:** André
 **Dependencias:** BE-006, DB-004
 
 ## Why
@@ -25,6 +25,11 @@ Publicar recursos académicos privados para matrículas autorizadas.
 
 - Proyecto: `backend`.
 - Capacidades: subir archivo o enlace, editar, reemplazar y eliminar, listar/descargar por carga y matrícula.
+
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-materials-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
 
 ## Source Documents
 

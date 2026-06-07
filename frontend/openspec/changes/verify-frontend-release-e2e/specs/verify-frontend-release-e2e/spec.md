@@ -6,7 +6,7 @@ Demostrar los flujos completos de todos los roles antes de liberar.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Release SHALL cubrir flujos críticos de cada rol
 
@@ -16,7 +16,7 @@ Release SHALL cubrir flujos críticos de cada rol
 - WHEN se ejecuta E2E
 - THEN todos los recorridos pasan
 
-### Requirement 2
+### Requirement: 2
 
 Release SHALL no contener rutas o mocks temporales
 

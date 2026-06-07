@@ -1,0 +1,70 @@
+createAssessmentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - teaching_assignment_id
+    - title
+    - assessment_type
+    - max_score
+    - assessment_date
+  properties:
+    teaching_assignment_id:
+      type: string
+      format: uuid
+    title:
+      type: string
+      minLength: 1
+      maxLength: 150
+    assessment_type:
+      type: string
+      enum:
+        - exam
+        - practice
+        - project
+        - participation
+        - other
+    max_score:
+      type: string
+      pattern: ^\d{1,10}(\.\d{1,2})?$
+    assessment_date:
+      type: string
+      format: date
+    channel: { type: string, enum: [general, sciences, humanities] }
+    total_questions: { type: integer, minimum: 1 }
+replaceAssessmentResultsRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - results
+  properties:
+    results:
+      type: array
+      minItems: 1
+      items:
+        type: object
+        additionalProperties: false
+        required:
+          - student_id
+          - status
+        properties:
+          student_id:
+            type: string
+            format: uuid
+          score:
+            type: string
+            nullable: true
+            pattern: ^\d{1,10}(\.\d{1,2})?$
+          status: { type: string, enum: [recorded, absent, exempt, pending] }
+          observations:
+            type: string
+            minLength: 1
+            maxLength: 1000
+importAssessmentResultsRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - file
+  properties:
+    file:
+      type: string
+      format: binary

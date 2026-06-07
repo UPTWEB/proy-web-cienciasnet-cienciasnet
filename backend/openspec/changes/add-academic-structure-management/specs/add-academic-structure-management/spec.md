@@ -6,7 +6,7 @@ Administrar la estructura que gobierna horarios, notas y materiales.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Coordinación SHALL gestionar estructura académica
 
@@ -16,7 +16,7 @@ Coordinación SHALL gestionar estructura académica
 - WHEN crea la estructura
 - THEN queda disponible para cargas
 
-### Requirement 2
+### Requirement: 2
 
 Cambiar docente SHALL conservar cargas históricas
 

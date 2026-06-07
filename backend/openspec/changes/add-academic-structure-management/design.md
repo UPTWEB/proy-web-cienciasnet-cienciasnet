@@ -11,7 +11,7 @@
 - Crear casos de uso y Policies académicas.
 - Implementar endpoints CRUD y filtros.
 - Proteger cambios con transacciones.
-- Publicar OpenAPI.
+- Implementar el OpenAPI aprobado y comparar Scribe contra el contrato design-first.
 
 ## Security and Authorization
 
