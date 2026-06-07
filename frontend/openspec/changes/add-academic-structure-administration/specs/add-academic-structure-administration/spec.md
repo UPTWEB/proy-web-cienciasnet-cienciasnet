@@ -6,7 +6,7 @@ Administrar periodos, grados, secciones, matrículas, cursos y cargas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Coordinación SHALL gestionar estructura desde panel
 
@@ -16,7 +16,7 @@ Coordinación SHALL gestionar estructura desde panel
 - WHEN crea entidades válidas
 - THEN listas se actualizan
 
-### Requirement 2
+### Requirement: 2
 
 Cambio de docente SHALL mostrar vigencia
 

@@ -1,0 +1,17 @@
+createPaymentConceptRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createPaymentConceptRequest'
+createStudentBenefitRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createStudentBenefitRequest'
+updatePaymentConceptRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/updatePaymentConceptRequest' }

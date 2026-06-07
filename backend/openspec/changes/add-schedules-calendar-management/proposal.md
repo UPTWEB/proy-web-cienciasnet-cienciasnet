@@ -26,6 +26,11 @@ Administrar horarios, calendario y días no laborables.
 - Proyecto: `backend`.
 - Capacidades: horario semanal por sección/docente, eventos de calendario, días no laborables y consultas familiares.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-schedules-calendar-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

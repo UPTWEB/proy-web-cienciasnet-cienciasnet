@@ -1,0 +1,28 @@
+createManualStudentAttendanceEventRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createManualStudentAttendanceEventRequest'
+closeStudentAttendanceDayRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/closeStudentAttendanceDayRequest'
+reviewRecognitionEventRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/reviewRecognitionEventRequest'
+updateStudentAttendanceSettingsRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/updateStudentAttendanceSettingsRequest' }
+generateStudentAttendanceReportRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/generateStudentAttendanceReportRequest' }

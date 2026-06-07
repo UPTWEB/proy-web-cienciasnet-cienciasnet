@@ -6,7 +6,7 @@ Publicar, corregir y consultar resultados/rankings protegidos.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Notas SHALL ocultarse antes de publicación
 
@@ -16,7 +16,7 @@ Notas SHALL ocultarse antes de publicación
 - WHEN familia consulta
 - THEN no ve resultados
 
-### Requirement 2
+### Requirement: 2
 
 Corrección publicada SHALL advertir recálculo/notificación
 

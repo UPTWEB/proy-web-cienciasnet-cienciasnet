@@ -1,0 +1,89 @@
+listMaterials:
+  get:
+    tags:
+      - Materials
+    operationId: listMaterials
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Materials
+    operationId: createMaterial
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createMaterialRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+downloadMaterial:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/MaterialId'
+  get:
+    tags:
+      - Materials
+    operationId: downloadMaterial
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/BinaryDownload'
+      '302':
+        description: Redirección firmada de corta duración
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+updateMaterial:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/MaterialId'
+  patch:
+    tags:
+      - Materials
+    operationId: updateMaterial
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/updateMaterialRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+  delete:
+    tags:
+      - Materials
+    operationId: archiveMaterial
+    responses:
+      '204':
+        description: Material archivado
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+createExternalMaterial:
+  post:
+    tags: [Materials]
+    operationId: createExternalMaterial
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/createExternalMaterialRequest' }
+    responses:
+      '201': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }
+replaceMaterialFile:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/MaterialId'
+  put:
+    tags: [Materials]
+    operationId: replaceMaterialFile
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/replaceMaterialFileRequest' }
+    responses:
+      '200': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '404': { $ref: '../openapi.yaml#/components/responses/NotFoundError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }

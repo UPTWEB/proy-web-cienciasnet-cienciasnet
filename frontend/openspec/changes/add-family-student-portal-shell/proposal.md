@@ -27,6 +27,11 @@ Dar a padres y alumnos un portal de consulta con contexto seguro.
 - Proyecto: `frontend`.
 - Capacidades: selector de hijo/contexto, inicio con accesos permitidos, historial y navegación solo lectura, estado de consentimiento/perfil biométrico sin exponer datos.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-family-student-portal-shell` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/product/roles-and-permissions.md`

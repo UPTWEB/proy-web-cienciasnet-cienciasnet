@@ -1,0 +1,29 @@
+listPsychologyCare:
+  get:
+    tags:
+      - Psychology
+    operationId: listPsychologyCare
+    x-roles:
+      - superadmin
+      - psicologia
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Psychology
+    operationId: createPsychologyCare
+    x-roles:
+      - superadmin
+      - psicologia
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createPsychologyCareRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

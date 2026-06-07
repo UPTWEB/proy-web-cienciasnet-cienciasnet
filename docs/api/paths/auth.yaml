@@ -1,0 +1,73 @@
+login:
+  post:
+    tags:
+      - Auth
+    operationId: login
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/LoginRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/AuthUserResponse'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/RateLimitedError'
+getSession:
+  get:
+    tags:
+      - Auth
+    operationId: getSession
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/AuthUserResponse'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/UnauthenticatedError'
+logout:
+  post:
+    tags:
+      - Auth
+    operationId: logout
+    responses:
+      '204':
+        description: Sesión invalidada
+      '401':
+        $ref: '../openapi.yaml#/components/responses/UnauthenticatedError'
+      '419':
+        $ref: '../openapi.yaml#/components/responses/CsrfError'
+requestPasswordRecovery:
+  post:
+    tags:
+      - Auth
+    operationId: requestPasswordRecovery
+    security: []
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/EmailRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/MessageResponse'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/RateLimitedError'
+resetPassword:
+  post:
+    tags:
+      - Auth
+    operationId: resetPassword
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yaml#/components/schemas/ResetPasswordRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/MessageResponse'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

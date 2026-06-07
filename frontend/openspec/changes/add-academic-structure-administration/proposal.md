@@ -26,6 +26,11 @@ Administrar periodos, grados, secciones, matrículas, cursos y cargas.
 - Proyecto: `frontend`.
 - Capacidades: navegación académica, CRUD y asignaciones, vigencias e historial de carga.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-academic-structure-administration` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

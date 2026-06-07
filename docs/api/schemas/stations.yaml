@@ -1,0 +1,92 @@
+createStationRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - name
+    - location
+    - mode
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 100
+    location:
+      type: string
+      minLength: 1
+      maxLength: 255
+    mode:
+      type: string
+      enum:
+        - entry
+        - exit
+        - mixed
+updateStationRequest:
+  type: object
+  additionalProperties: false
+  required: []
+  properties:
+    name:
+      type: string
+      minLength: 1
+      maxLength: 100
+    location:
+      type: string
+      minLength: 1
+      maxLength: 255
+    mode:
+      type: string
+      enum:
+        - entry
+        - exit
+        - mixed
+    active:
+      type: boolean
+activateStationRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - activation_code
+    - device_name
+  properties:
+    activation_code:
+      type: string
+      minLength: 1
+      maxLength: 191
+    device_name:
+      type: string
+      minLength: 1
+      maxLength: 150
+submitStationCaptureRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - image
+    - camera_id
+    - captured_at
+  properties:
+    image:
+      type: string
+      format: binary
+    camera_id:
+      type: string
+      format: uuid
+    captured_at:
+      type: string
+      format: date-time
+createStationCameraRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - label
+    - device_identifier
+  properties:
+    label:
+      type: string
+      minLength: 1
+      maxLength: 100
+    device_identifier:
+      type: string
+      minLength: 1
+      maxLength: 191
+    active:
+      type: boolean

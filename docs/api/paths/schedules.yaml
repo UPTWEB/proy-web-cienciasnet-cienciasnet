@@ -1,0 +1,52 @@
+listSchedules:
+  get:
+    tags:
+      - Schedules
+    operationId: listSchedules
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Schedules
+    operationId: createSchedule
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createScheduleRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+listCalendarEvents:
+  get:
+    tags:
+      - Schedules
+    operationId: listCalendarEvents
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+  post:
+    tags:
+      - Schedules
+    operationId: createCalendarEvent
+    x-roles:
+      - superadmin
+      - coordinador_academico
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createCalendarEventRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

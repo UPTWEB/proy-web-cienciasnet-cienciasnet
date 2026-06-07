@@ -6,7 +6,7 @@ Mostrar estado de cuenta comprensible a familias y reportes a Yanina.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Portal SHALL mostrar ambos montos antes del límite
 
@@ -16,7 +16,7 @@ Portal SHALL mostrar ambos montos antes del límite
 - WHEN familia consulta
 - THEN ve 450 hasta fecha y 480 después
 
-### Requirement 2
+### Requirement: 2
 
 Padre SHALL ver solo hijos vinculados
 

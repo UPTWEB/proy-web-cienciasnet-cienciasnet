@@ -6,7 +6,7 @@ Administrar y consultar horarios/calendario por contexto.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Cada actor SHALL ver su horario permitido
 
@@ -16,7 +16,7 @@ Cada actor SHALL ver su horario permitido
 - WHEN consulta
 - THEN recibe vista de su contexto
 
-### Requirement 2
+### Requirement: 2
 
 Editor SHALL advertir solapamientos
 

@@ -1,11 +1,15 @@
-import { House, SignOut, UserCircle } from '@phosphor-icons/react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { logout } from '@/features/auth/api'
+import { Books, House, SignOut, UserCircle, UsersThree } from '@phosphor-icons/react'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/features/auth/AuthContext'
+import { logout } from '@/features/auth/api'
 
 export function PortalLayout() {
   const auth = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const isAdmin = location.pathname.startsWith('/admin')
+  const canManageUsers = auth.user?.roles.some((role) => ['superadmin', 'gestor_usuarios'].includes(role))
+  const canManageAcademic = auth.user?.roles.some((role) => ['superadmin', 'coordinador_academico'].includes(role))
 
   async function closeSession() {
     await logout()
@@ -16,9 +20,11 @@ export function PortalLayout() {
   return (
     <div className="workspace">
       <aside className="sidebar">
-        <Link className="brand brand-light" to="/portal"><UserCircle size={30} weight="duotone" /> Portal</Link>
+        <Link className="brand brand-light" to={isAdmin ? '/admin' : '/portal'}><UserCircle size={30} weight="duotone" /> {isAdmin ? 'Administración' : 'Portal'}</Link>
         <nav aria-label="Navegación principal">
-          <Link className="nav-link nav-link-active" to="/portal"><House aria-hidden /> Inicio</Link>
+          <Link className="nav-link nav-link-active" to={isAdmin ? '/admin' : '/portal'}><House aria-hidden /> Inicio</Link>
+          {isAdmin && canManageUsers && <><Link className="nav-link" to="/admin/cuentas"><UserCircle aria-hidden /> Cuentas</Link><Link className="nav-link" to="/admin/familias"><UsersThree aria-hidden /> Familias</Link></>}
+          {isAdmin && canManageAcademic && <Link className="nav-link" to="/admin/academia"><Books aria-hidden /> Academia</Link>}
         </nav>
         <button className="nav-link nav-button" type="button" onClick={closeSession}><SignOut aria-hidden /> Salir</button>
       </aside>

@@ -6,7 +6,7 @@ Permitir al Auxiliar supervisar jornadas y resolver excepciones.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Auxiliar SHALL resolver reconocimiento dudoso
 
@@ -16,7 +16,7 @@ Auxiliar SHALL resolver reconocimiento dudoso
 - WHEN auxiliar confirma o rechaza
 - THEN tablero refleja decisión
 
-### Requirement 2
+### Requirement: 2
 
 UI SHALL no inventar salida
 

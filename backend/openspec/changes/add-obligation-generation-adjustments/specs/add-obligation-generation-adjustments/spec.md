@@ -6,7 +6,7 @@ Generar y ajustar deudas pendientes conservando el historial.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Generar obligación SHALL congelar beneficio y montos aplicables
 
@@ -16,7 +16,7 @@ Generar obligación SHALL congelar beneficio y montos aplicables
 - WHEN se generan deudas
 - THEN cada deuda conserva snapshot
 
-### Requirement 2
+### Requirement: 2
 
 Una deuda pagada SHALL ser inmutable
 

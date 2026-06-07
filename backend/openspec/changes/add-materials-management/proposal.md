@@ -26,6 +26,11 @@ Publicar recursos académicos privados para matrículas autorizadas.
 - Proyecto: `backend`.
 - Capacidades: subir archivo o enlace, editar, reemplazar y eliminar, listar/descargar por carga y matrícula.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-materials-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/use-case-catalog.md`

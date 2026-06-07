@@ -26,6 +26,11 @@ Registrar resultados procesados manualmente sin que el sistema tome exámenes.
 - Proyecto: `backend`.
 - Capacidades: registro individual docente, previsualización e importación masiva atómica, estados ausente, exonerado y pendiente.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-result-entry-import` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

@@ -26,6 +26,11 @@ Publicar comunicaciones segmentadas y registrar su entrega/lectura.
 - Proyecto: `backend`.
 - Capacidades: comunicado por rol, periodo, grado o sección, notificación de panel y correo, lectura y archivo.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-communications-notifications` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/incidents-communications.md`

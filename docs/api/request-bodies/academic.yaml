@@ -1,0 +1,42 @@
+createAcademicPeriodRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createAcademicPeriodRequest'
+updateAcademicPeriodRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/updateAcademicPeriodRequest'
+createGradeRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createGradeRequest'
+createSectionRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createSectionRequest'
+createCourseRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createCourseRequest'
+createEnrollmentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createEnrollmentRequest'
+createTeachingAssignmentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createTeachingAssignmentRequest'

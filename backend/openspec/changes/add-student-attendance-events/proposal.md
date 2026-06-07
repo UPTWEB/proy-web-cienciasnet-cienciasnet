@@ -26,6 +26,11 @@ Convertir capturas válidas en entradas, salidas y reingresos de alumnos.
 - Proyecto: `backend`.
 - Capacidades: idempotencia y modo de cámara, alternancia bidireccional, tardanza, salidas de emergencia y notificaciones.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-student-attendance-events` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

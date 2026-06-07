@@ -11,7 +11,7 @@ class Curso extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = ['codigo', 'nombre', 'area', 'activo'];
+    protected $fillable = ['codigo', 'nombre', 'area', 'descripcion', 'activo'];
 
     protected function casts(): array
     {

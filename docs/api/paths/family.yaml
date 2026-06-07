@@ -1,0 +1,75 @@
+listFamilyLinks:
+  get:
+    tags:
+      - Family
+    operationId: listFamilyLinks
+    x-permissions:
+      - gestionar_usuarios
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/Page'
+      - $ref: '../openapi.yaml#/components/parameters/PerPage'
+      - $ref: '../openapi.yaml#/components/parameters/StudentIdQuery'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Family
+    operationId: createFamilyLink
+    x-permissions:
+      - gestionar_usuarios
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createFamilyLinkRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+removeFamilyLink:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/FamilyLinkId'
+  delete:
+    tags:
+      - Family
+    operationId: removeFamilyLink
+    x-permissions:
+      - gestionar_usuarios
+    responses:
+      '204':
+        description: Vínculo retirado
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+listLinkedStudents:
+  get:
+    tags:
+      - Family
+    operationId: listLinkedStudents
+    x-roles:
+      - padre
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/CollectionResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+getLinkedStudentSummary:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/StudentId'
+  get:
+    tags:
+      - Family
+    operationId: getLinkedStudentSummary
+    x-roles:
+      - padre
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'

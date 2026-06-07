@@ -1,0 +1,165 @@
+listStations:
+  get:
+    tags:
+      - Stations
+    operationId: listStations
+    x-permissions:
+      - gestionar_dispositivos
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Stations
+    operationId: createStation
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createStationRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+updateStation:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/StationId'
+  patch:
+    tags:
+      - Stations
+    operationId: updateStation
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/updateStationRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+createStationActivationCode:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/StationId'
+  post:
+    tags:
+      - Stations
+    operationId: createStationActivationCode
+    x-permissions:
+      - gestionar_dispositivos
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/RateLimitedError'
+activateStation:
+  post:
+    tags:
+      - Stations
+    operationId: activateStation
+    security: []
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/activateStationRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/RateLimitedError'
+getStationSession:
+  get:
+    tags:
+      - Stations
+    operationId: getStationSession
+    security:
+      - stationSession: []
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/UnauthenticatedError'
+submitStationCapture:
+  post:
+    tags:
+      - Stations
+    operationId: submitStationCapture
+    security:
+      - stationSession: []
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/submitStationCaptureRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '401':
+        $ref: '../openapi.yaml#/components/responses/UnauthenticatedError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+      '429':
+        $ref: '../openapi.yaml#/components/responses/RateLimitedError'
+revokeStation:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/StationId'
+  post:
+    tags:
+      - Stations
+    operationId: revokeStation
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+listStationCameras:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/StationId'
+  get:
+    tags:
+      - Stations
+    operationId: listStationCameras
+    x-permissions:
+      - gestionar_dispositivos
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/CollectionResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+  post:
+    tags:
+      - Stations
+    operationId: createStationCamera
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createStationCameraRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

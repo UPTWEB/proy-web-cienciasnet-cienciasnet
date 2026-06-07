@@ -26,6 +26,11 @@ Gestionar perfiles y vínculos familiares sin autorregistro.
 - Proyecto: `frontend`.
 - Capacidades: crear padre/alumno, vincular/desvincular N:M, mostrar hijos/padres relacionados.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-family-links-administration` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/identity-access.md`

@@ -6,7 +6,7 @@ Permitir a Yanina revisar asistencia docente y cerrar planilla.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Yanina SHALL ver cálculo explicable
 
@@ -16,7 +16,7 @@ Yanina SHALL ver cálculo explicable
 - WHEN abre liquidación
 - THEN ve fórmula, tarifa y monto
 
-### Requirement 2
+### Requirement: 2
 
 Cerrar SHALL requerir confirmación explícita
 

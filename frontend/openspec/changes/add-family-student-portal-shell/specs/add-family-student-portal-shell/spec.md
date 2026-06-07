@@ -6,7 +6,7 @@ Dar a padres y alumnos un portal de consulta con contexto seguro.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un padre SHALL cambiar entre hijos vinculados
 
@@ -16,7 +16,7 @@ Un padre SHALL cambiar entre hijos vinculados
 - WHEN elige otro contexto
 - THEN panel muestra solo ese hijo
 
-### Requirement 2
+### Requirement: 2
 
 Alumno SHALL ver únicamente contexto propio
 
@@ -26,7 +26,7 @@ Alumno SHALL ver únicamente contexto propio
 - WHEN consulta módulos
 - THEN no puede cambiar a otro alumno
 
-### Requirement 3
+### Requirement: 3
 
 Familia SHALL consultar solo estado biométrico
 

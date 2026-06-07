@@ -6,7 +6,7 @@ Aplicar controles transversales, auditoría y observabilidad antes de producció
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Logs SHALL excluir secretos, biometría y notas privadas
 
@@ -16,7 +16,7 @@ Logs SHALL excluir secretos, biometría y notas privadas
 - WHEN se registra log
 - THEN solo contiene metadatos permitidos
 
-### Requirement 2
+### Requirement: 2
 
 Operaciones sensibles SHALL quedar auditadas
 

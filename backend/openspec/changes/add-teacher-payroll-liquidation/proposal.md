@@ -26,6 +26,11 @@ Calcular y cerrar descuentos docentes con tarifas históricas.
 - Proyecto: `backend`.
 - Capacidades: tarifas vigentes futuras, descuentos por tardanza y faltas, liquidación mensual revisada y cerrada.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-teacher-payroll-liquidation` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

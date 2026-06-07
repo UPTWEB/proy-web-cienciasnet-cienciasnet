@@ -3,6 +3,8 @@
 Esta matriz conecta las experiencias aprobadas con los changes frontend. Cada feature depende del contrato backend
 aceptado indicado en `EXECUTION_PLAN.md`.
 
+La trazabilidad OpenAPI concreta de cada change vive en [`API_CONTRACTS.md`](API_CONTRACTS.md).
+
 | Experiencia documentada | Changes principales |
 |---|---|
 | Fundación visual, routing, sesión y calidad | `FE-001` a `FE-004` |

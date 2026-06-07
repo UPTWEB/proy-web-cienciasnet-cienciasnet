@@ -6,7 +6,7 @@ Relacionar asistencia docente con clases programadas, cancelaciones y sustitutos
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Una clase cancelada SHALL no generar falta
 
@@ -16,7 +16,7 @@ Una clase cancelada SHALL no generar falta
 - WHEN termina su horario
 - THEN no se crea descuento
 
-### Requirement 2
+### Requirement: 2
 
 Una clase sin asistencia SHALL generar falta al finalizar
 

@@ -11,7 +11,7 @@
 - [ ] Resultados de pruebas o comandos adjuntos.
 - [ ] Escenarios de la delta spec demostrados.
 - [ ] Permisos negativos y datos sensibles revisados.
-- [ ] Contrato y documentos sincronizados.
+- [ ] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
 
 ## Results
 

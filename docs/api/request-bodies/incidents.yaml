@@ -1,0 +1,24 @@
+createIncidentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createIncidentRequest'
+transitionIncidentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/transitionIncidentRequest'
+createIncidentFollowUpRequest:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createIncidentFollowUpRequest'
+generateIncidentReportRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/generateIncidentReportRequest'

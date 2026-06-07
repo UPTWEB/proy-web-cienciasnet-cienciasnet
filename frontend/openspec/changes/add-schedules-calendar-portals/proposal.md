@@ -26,6 +26,11 @@ Administrar y consultar horarios/calendario por contexto.
 - Proyecto: `frontend`.
 - Capacidades: editor de horario coordinación, vistas docente, alumno y padre, calendario y días no laborables.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-schedules-calendar-portals` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

@@ -19,6 +19,7 @@ para cada change futuro es el indicado en `EXECUTION_PLAN.md`.
 
 - `../../docs/`: reglas compartidas y decisiones autoritativas.
 - `COVERAGE.md`: trazabilidad entre experiencias documentadas y changes frontend.
+- `API_CONTRACTS.md`: relación exacta entre cada change activo y los paquetes OpenAPI que consume o verifica.
 - `../../docs/api/`: contratos HTTP estables y autoritativos.
 - `../../backend/openspec/specs/`: comportamiento backend aceptado relacionado.
 - `specs/`: capacidades frontend aceptadas.
@@ -26,3 +27,6 @@ para cada change futuro es el indicado en `EXECUTION_PLAN.md`.
 
 Cada change activo contiene `proposal.md`, `design.md`, `tasks.md`, `verification.md` y al menos una delta spec en
 `specs/<capability>/spec.md`.
+
+La declaración `API Contract` de cada propuesta debe coincidir con `API_CONTRACTS.md`. Los mocks, tipos y clientes se
+construyen desde esos paquetes aprobados, nunca desde supuestos de pantalla ni desde changes backend activos.

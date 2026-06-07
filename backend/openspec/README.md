@@ -19,6 +19,7 @@ André pueden apoyar cualquier change backend. El reviewer válido es el indicad
 
 - `../../docs/`: reglas compartidas y decisiones autoritativas.
 - `COVERAGE.md`: trazabilidad entre dominios documentados y changes backend.
+- `API_CONTRACTS.md`: relación exacta entre cada change activo y sus paquetes/archivos OpenAPI.
 - `specs/`: capacidades backend aceptadas y estables.
 - `changes/`: trabajo propuesto o activo; no es contrato estable para frontend.
 - `../../docs/api/`: contrato HTTP aprobado y autoritativo para integración.
@@ -26,3 +27,6 @@ André pueden apoyar cualquier change backend. El reviewer válido es el indicad
 
 Cada change activo contiene `proposal.md`, `design.md`, `tasks.md`, `verification.md` y al menos una delta spec en
 `specs/<capability>/spec.md`.
+
+La declaración `API Contract` de cada propuesta debe coincidir con `API_CONTRACTS.md`. Los changes que implementan HTTP
+no diseñan rutas desde cero durante la implementación: implementan el contrato aprobado y comparan Scribe contra él.

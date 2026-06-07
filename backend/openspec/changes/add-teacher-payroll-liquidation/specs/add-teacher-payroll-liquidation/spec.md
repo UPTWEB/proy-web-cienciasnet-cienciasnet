@@ -6,7 +6,7 @@ Calcular y cerrar descuentos docentes con tarifas históricas.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Cambiar tarifa SHALL afectar solo periodos futuros
 
@@ -16,7 +16,7 @@ Cambiar tarifa SHALL afectar solo periodos futuros
 - WHEN Yanina cambia tarifa
 - THEN histórico conserva monto
 
-### Requirement 2
+### Requirement: 2
 
 Cerrar liquidación SHALL congelar resultados
 

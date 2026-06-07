@@ -1,0 +1,23 @@
+generatePaymentObligationsRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/generatePaymentObligationsRequest'
+adjustPaymentObligationRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/adjustPaymentObligationRequest'
+createPaymentMovementRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createPaymentMovementRequest'
+createBulkPaymentObligationAdjustmentRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/createBulkPaymentObligationAdjustmentRequest' }

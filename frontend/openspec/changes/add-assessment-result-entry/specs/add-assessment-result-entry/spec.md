@@ -6,7 +6,7 @@ Permitir configurar evaluaciones y cargar resultados procesados.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Docente SHALL cargar solo sus cursos
 
@@ -16,7 +16,7 @@ Docente SHALL cargar solo sus cursos
 - WHEN selecciona carga
 - THEN solo aparecen asignadas
 
-### Requirement 2
+### Requirement: 2
 
 Importación SHALL mostrar errores antes de confirmar
 

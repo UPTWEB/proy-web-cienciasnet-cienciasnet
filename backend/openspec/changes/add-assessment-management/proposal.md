@@ -26,6 +26,11 @@ Configurar evaluaciones físicas y su ciclo de revisión.
 - Proyecto: `backend`.
 - Capacidades: crear examen por carga/grado/canal, puntaje máximo y estados, cerrar y reabrir auditadamente.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-assessment-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

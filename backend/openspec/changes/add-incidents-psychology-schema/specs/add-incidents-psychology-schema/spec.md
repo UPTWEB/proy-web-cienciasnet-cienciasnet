@@ -6,7 +6,7 @@ Persistir incidencias, historial y atenciones privadas con separación clara.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 El historial SHALL conservar cada acción
 
@@ -16,7 +16,7 @@ El historial SHALL conservar cada acción
 - WHEN se persiste
 - THEN se agrega historial sin borrar anterior
 
-### Requirement 2
+### Requirement: 2
 
 Notas privadas SHALL permanecer separadas de incidencia general
 

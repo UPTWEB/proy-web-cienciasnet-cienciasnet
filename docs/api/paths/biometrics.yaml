@@ -1,0 +1,67 @@
+listBiometricConsents:
+  get:
+    tags:
+      - Biometrics
+    operationId: listBiometricConsents
+    x-permissions:
+      - gestionar_dispositivos
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+  post:
+    tags:
+      - Biometrics
+    operationId: grantBiometricConsent
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/grantBiometricConsentRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+revokeBiometricConsent:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/ConsentId'
+  post:
+    tags:
+      - Biometrics
+    operationId: revokeBiometricConsent
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+enrollBiometricProfile:
+  post:
+    tags:
+      - Biometrics
+    operationId: enrollBiometricProfile
+    x-permissions:
+      - gestionar_dispositivos
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/enrollBiometricProfileRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'

@@ -14,7 +14,7 @@ class Seccion extends Model
 
     protected $table = 'secciones';
 
-    protected $fillable = ['grado_id', 'nombre', 'turno', 'aula', 'activo'];
+    protected $fillable = ['grado_id', 'nombre', 'turno', 'aula', 'capacidad', 'activo'];
 
     protected function casts(): array
     {

@@ -6,7 +6,7 @@ Persistir evaluaciones, resultados, reportes, materiales, horarios y comunicaci�
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Una nota SHALL pertenecer a matrícula y examen compatibles
 
@@ -16,7 +16,7 @@ Una nota SHALL pertenecer a matrícula y examen compatibles
 - WHEN se guarda
 - THEN constraint o caso de uso rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Una lectura SHALL ser única por comunicado y usuario
 

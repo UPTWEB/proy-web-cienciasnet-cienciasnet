@@ -6,7 +6,7 @@ Gestionar perfiles y vínculos familiares sin autorregistro.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Gestor SHALL vincular varios padres e hijos
 
@@ -16,7 +16,7 @@ Gestor SHALL vincular varios padres e hijos
 - WHEN selecciona padres
 - THEN los vínculos quedan visibles
 
-### Requirement 2
+### Requirement: 2
 
 UI SHALL confirmar desvinculación
 

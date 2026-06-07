@@ -6,7 +6,7 @@ Implementar el cuaderno de incidencias desde Auxiliar hasta TOE.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Auxiliar SHALL registrar y derivar a TOE
 
@@ -16,7 +16,7 @@ Auxiliar SHALL registrar y derivar a TOE
 - WHEN deriva
 - THEN TOE puede continuarlo
 
-### Requirement 2
+### Requirement: 2
 
 TOE SHALL notificar al padre vinculado
 

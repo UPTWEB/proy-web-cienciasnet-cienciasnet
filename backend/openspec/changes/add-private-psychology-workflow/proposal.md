@@ -26,6 +26,11 @@ Registrar atención psicológica sin exponer notas privadas.
 - Proyecto: `backend`.
 - Capacidades: derivación TOE a Psicología, atención y notas confidenciales, consulta exclusiva Psicología/superadmin.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-private-psychology-workflow` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/incidents-communications.md`

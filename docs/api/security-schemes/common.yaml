@@ -1,0 +1,8 @@
+sanctumSession:
+  type: apiKey
+  in: cookie
+  name: cienciasnet_session
+stationSession:
+  type: apiKey
+  in: cookie
+  name: cienciasnet_station_session

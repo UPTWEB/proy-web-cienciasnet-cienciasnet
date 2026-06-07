@@ -26,6 +26,11 @@ Gestionar obligaciones, ajustes y pagos manuales sin alterar históricos.
 - Proyecto: `frontend`.
 - Capacidades: generar/ajustar pendientes, registrar pago completo y comprobante, anular/devolver y generar recibo.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-obligations-payments-administration` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/finance.md`

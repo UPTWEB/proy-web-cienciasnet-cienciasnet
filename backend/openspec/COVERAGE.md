@@ -3,6 +3,8 @@
 Esta matriz conecta la documentación compartida con los changes que la implementan. Un change debe releer sus fuentes
 antes de iniciarse; la matriz permite comprobar que ningún dominio aprobado quede sin backend.
 
+La trazabilidad HTTP concreta de cada change vive en [`API_CONTRACTS.md`](API_CONTRACTS.md).
+
 | Área documentada | Changes principales |
 |---|---|
 | Fundación Laravel, API y CI | `BE-001`, `BE-002`, `OPS-001`, `OPS-002` |

@@ -1,0 +1,29 @@
+createTeacherRateRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createTeacherRateRequest'
+createPayrollLiquidationRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createPayrollLiquidationRequest'
+createTeacherAttendanceAdjustmentRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createTeacherAttendanceAdjustmentRequest'
+assignClassSessionSubstituteRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/assignClassSessionSubstituteRequest'
+generateTeacherPayrollReportRequest:
+  required: true
+  content:
+    application/json:
+      schema: { $ref: '../openapi.yaml#/components/schemas/generateTeacherPayrollReportRequest' }

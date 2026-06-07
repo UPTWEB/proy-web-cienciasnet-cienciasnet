@@ -1,0 +1,175 @@
+listStudentAttendance:
+  get:
+    tags:
+      - StudentAttendance
+    operationId: listStudentAttendance
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+createManualStudentAttendanceEvent:
+  post:
+    tags:
+      - StudentAttendance
+    operationId: createManualStudentAttendanceEvent
+    x-roles:
+      - superadmin
+      - auxiliar
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/createManualStudentAttendanceEventRequest'
+    responses:
+      '201':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+      '422':
+        $ref: '../openapi.yaml#/components/responses/ValidationError'
+closeStudentAttendanceDay:
+  post:
+    tags:
+      - StudentAttendance
+    operationId: closeStudentAttendanceDay
+    x-roles:
+      - superadmin
+      - auxiliar
+    parameters:
+      - $ref: '../openapi.yaml#/components/parameters/IdempotencyKey'
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/closeStudentAttendanceDayRequest'
+    responses:
+      '202':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+listStudentAttendanceAnomalies:
+  get:
+    tags:
+      - StudentAttendance
+    operationId: listStudentAttendanceAnomalies
+    x-roles:
+      - superadmin
+      - auxiliar
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+resolveStudentAttendanceAnomaly:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AnomalyId'
+  post:
+    tags:
+      - StudentAttendance
+    operationId: resolveStudentAttendanceAnomaly
+    x-roles:
+      - superadmin
+      - auxiliar
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+justifyStudentAbsence:
+  parameters:
+    - $ref: '../openapi.yaml#/components/parameters/AttendanceId'
+  post:
+    tags:
+      - StudentAttendance
+    operationId: justifyStudentAbsence
+    x-roles:
+      - superadmin
+      - auxiliar
+      - toe
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/ReasonRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+listRecognitionEventsForReview:
+  get:
+    tags:
+      - StudentAttendance
+    operationId: listRecognitionEventsForReview
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/PaginatedResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+reviewRecognitionEvent:
+  parameters:
+    - name: recognitionEventId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  post:
+    tags:
+      - StudentAttendance
+    operationId: reviewRecognitionEvent
+    requestBody:
+      $ref: '../openapi.yaml#/components/requestBodies/reviewRecognitionEventRequest'
+    responses:
+      '200':
+        $ref: '../openapi.yaml#/components/responses/ResourceResponse'
+      '403':
+        $ref: '../openapi.yaml#/components/responses/ForbiddenError'
+      '404':
+        $ref: '../openapi.yaml#/components/responses/NotFoundError'
+      '409':
+        $ref: '../openapi.yaml#/components/responses/ConflictError'
+getStudentAttendanceSettings:
+  get:
+    tags: [StudentAttendance]
+    operationId: getStudentAttendanceSettings
+    x-roles: [superadmin, coordinador_academico]
+    responses:
+      '200': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+  put:
+    tags: [StudentAttendance]
+    operationId: updateStudentAttendanceSettings
+    x-roles: [superadmin, coordinador_academico]
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/updateStudentAttendanceSettingsRequest' }
+    responses:
+      '200': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }
+listStudentAttendanceAlerts:
+  get:
+    tags: [StudentAttendance]
+    operationId: listStudentAttendanceAlerts
+    x-roles: [superadmin, auxiliar, toe]
+    responses:
+      '200': { $ref: '../openapi.yaml#/components/responses/PaginatedResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+generateStudentAttendanceReport:
+  post:
+    tags: [StudentAttendance]
+    operationId: generateStudentAttendanceReport
+    x-roles: [superadmin, auxiliar, toe]
+    parameters: [ { $ref: '../openapi.yaml#/components/parameters/IdempotencyKey' } ]
+    requestBody: { $ref: '../openapi.yaml#/components/requestBodies/generateStudentAttendanceReportRequest' }
+    responses:
+      '202': { $ref: '../openapi.yaml#/components/responses/ResourceResponse' }
+      '403': { $ref: '../openapi.yaml#/components/responses/ForbiddenError' }
+      '422': { $ref: '../openapi.yaml#/components/responses/ValidationError' }

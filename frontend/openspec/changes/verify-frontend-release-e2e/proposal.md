@@ -26,6 +26,11 @@ Demostrar los flujos completos de todos los roles antes de liberar.
 - Proyecto: `frontend`.
 - Capacidades: E2E por rol y dominio, contrato backend final, build, consola, accesibilidad y responsive.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `verify-frontend-release-e2e` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/product/approved-requirements.md`

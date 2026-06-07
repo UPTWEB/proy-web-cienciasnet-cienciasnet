@@ -18,9 +18,12 @@ changes/<change-name>/
 - Rutas y permisos.
 - Pantallas, componentes y estados.
 - Contratos API aceptados utilizados.
+- Relación `Consume`, `Modifica` o `Verifica`, registrada también en `API_CONTRACTS.md`.
+- Paquetes y archivos concretos de `../../docs/api/` utilizados.
 - Responsive, accesibilidad y animación.
 - Caché e invalidaciones.
 - Pruebas unitarias, componentes y E2E.
 
 No se acepta `specs/README.md` como sustituto de una delta spec. Las specs frontend describen rutas, estados y
-comportamiento observable; no repiten detalles de implementación.
+comportamiento observable usando `## ADDED Requirements`, bloques `### Requirement: <nombre>` y al menos un
+`#### Scenario: <nombre>` por requisito; no repiten detalles de implementación.

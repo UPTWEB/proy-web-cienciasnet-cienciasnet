@@ -169,3 +169,891 @@ paths:
       tags:
         - Endpoints
       security: []
+  /api/v1/accounts:
+    get:
+      summary: ''
+      operationId: getApiV1Accounts
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Accounts
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: validation.max.
+                  example: b
+                email:
+                  type: string
+                  description: 'validation.email validation.max.'
+                  example: zbailey@example.net
+                roles:
+                  type: array
+                  description: 'The <code>name</code> of an existing record in the roles table.'
+                  example:
+                    - architecto
+                  items:
+                    type: string
+              required:
+                - name
+                - email
+      security: []
+  '/api/v1/accounts/{accountId}':
+    get:
+      summary: ''
+      operationId: getApiV1AccountsAccountId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiV1AccountsAccountId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: validation.max.
+                  example: b
+                email:
+                  type: string
+                  description: 'validation.email validation.max.'
+                  example: zbailey@example.net
+      security: []
+    parameters:
+      -
+        in: path
+        name: accountId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  '/api/v1/accounts/{accountId}/activation':
+    put:
+      summary: ''
+      operationId: putApiV1AccountsAccountIdActivation
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                active:
+                  type: boolean
+                  description: ''
+                  example: false
+                reason:
+                  type: string
+                  description: validation.max.
+                  example: b
+              required:
+                - active
+      security: []
+    parameters:
+      -
+        in: path
+        name: accountId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  '/api/v1/accounts/{accountId}/roles':
+    put:
+      summary: ''
+      operationId: putApiV1AccountsAccountIdRoles
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  description: 'The <code>name</code> of an existing record in the roles table.'
+                  example:
+                    - architecto
+                  items:
+                    type: string
+      security: []
+    parameters:
+      -
+        in: path
+        name: accountId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  '/api/v1/accounts/{accountId}/password-reset':
+    post:
+      summary: ''
+      operationId: postApiV1AccountsAccountIdPasswordReset
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: accountId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/v1/family-links:
+    get:
+      summary: ''
+      operationId: getApiV1FamilyLinks
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1FamilyLinks
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                parent_account_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the users table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                student_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the alumnos table.'
+                  example: 6b72fe4a-5b40-307c-bc24-f79acf9a1bb9
+                relationship:
+                  type: string
+                  description: ''
+                  example: madre
+                  enum:
+                    - padre
+                    - madre
+                    - apoderado
+              required:
+                - parent_account_id
+                - student_id
+                - relationship
+      security: []
+  '/api/v1/family-links/{familyLinkId}':
+    delete:
+      summary: ''
+      operationId: deleteApiV1FamilyLinksFamilyLinkId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: familyLinkId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/v1/family/students:
+    get:
+      summary: ''
+      operationId: getApiV1FamilyStudents
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/v1/family/students/{studentId}/summary':
+    get:
+      summary: ''
+      operationId: getApiV1FamilyStudentsStudentIdSummary
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: studentId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/v1/academic-periods:
+    get:
+      summary: ''
+      operationId: getApiV1AcademicPeriods
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1AcademicPeriods
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: validation.max.
+                  example: b
+                start_date:
+                  type: string
+                  description: validation.date.
+                  example: '2026-06-07T07:13:06'
+                end_date:
+                  type: string
+                  description: 'validation.date validation.after_or_equal.'
+                  example: '2052-06-30'
+                status:
+                  type: string
+                  description: ''
+                  example: closed
+                  enum:
+                    - draft
+                    - active
+                    - closed
+              required:
+                - name
+                - start_date
+                - end_date
+      security: []
+  '/api/v1/academic-periods/{academicPeriodId}':
+    get:
+      summary: ''
+      operationId: getApiV1AcademicPeriodsAcademicPeriodId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    patch:
+      summary: ''
+      operationId: patchApiV1AcademicPeriodsAcademicPeriodId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: validation.max.
+                  example: b
+                start_date:
+                  type: string
+                  description: validation.date.
+                  example: '2026-06-07T07:13:06'
+                end_date:
+                  type: string
+                  description: 'validation.date validation.after_or_equal.'
+                  example: '2052-06-30'
+                status:
+                  type: string
+                  description: ''
+                  example: draft
+                  enum:
+                    - draft
+                    - active
+                    - closed
+      security: []
+    parameters:
+      -
+        in: path
+        name: academicPeriodId
+        description: ''
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/v1/grades:
+    get:
+      summary: ''
+      operationId: getApiV1Grades
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Grades
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: validation.max.
+                  example: b
+                level:
+                  type: string
+                  description: ''
+                  example: inicial
+                  enum:
+                    - inicial
+                    - primaria
+                    - secundaria
+                order:
+                  type: integer
+                  description: validation.min.
+                  example: 22
+                academic_period_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the periodos_academicos table.'
+                  example: 6b72fe4a-5b40-307c-bc24-f79acf9a1bb9
+              required:
+                - name
+                - level
+                - academic_period_id
+      security: []
+  /api/v1/sections:
+    get:
+      summary: ''
+      operationId: getApiV1Sections
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Sections
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grade_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the grados table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                name:
+                  type: string
+                  description: validation.max.
+                  example: g
+                capacity:
+                  type: integer
+                  description: validation.min.
+                  example: 66
+              required:
+                - grade_id
+                - name
+                - capacity
+      security: []
+  /api/v1/courses:
+    get:
+      summary: ''
+      operationId: getApiV1Courses
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Courses
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: validation.max.
+                  example: b
+                name:
+                  type: string
+                  description: validation.max.
+                  example: 'n'
+                description:
+                  type: string
+                  description: validation.max.
+                  example: 'Animi quos velit et fugiat.'
+              required:
+                - code
+                - name
+      security: []
+  /api/v1/enrollments:
+    get:
+      summary: ''
+      operationId: getApiV1Enrollments
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Enrollments
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                student_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the alumnos table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                section_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the secciones table.'
+                  example: 6b72fe4a-5b40-307c-bc24-f79acf9a1bb9
+                academic_period_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the periodos_academicos table.'
+                  example: 977e5426-8d13-3824-86aa-b092f8ae52c5
+                enrolled_at:
+                  type: string
+                  description: validation.date.
+                  example: '2026-06-07T07:13:06'
+              required:
+                - student_id
+                - section_id
+                - academic_period_id
+      security: []
+  /api/v1/teaching-assignments:
+    get:
+      summary: ''
+      operationId: getApiV1TeachingAssignments
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1TeachingAssignments
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teacher_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the docentes table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                course_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the cursos table.'
+                  example: 6b72fe4a-5b40-307c-bc24-f79acf9a1bb9
+                section_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the secciones table.'
+                  example: 977e5426-8d13-3824-86aa-b092f8ae52c5
+                academic_period_id:
+                  type: string
+                  description: 'validation.uuid The <code>id</code> of an existing record in the periodos_academicos table.'
+                  example: d6fa562b-acd5-35ff-babb-d11194d3737b
+              required:
+                - teacher_id
+                - course_id
+                - section_id
+                - academic_period_id
+      security: []

@@ -1,0 +1,13 @@
+getHealth:
+  get:
+    tags:
+      - Core
+    operationId: getHealth
+    security: []
+    responses:
+      '200':
+        description: API disponible
+        content:
+          application/json:
+            schema:
+              $ref: '../openapi.yaml#/components/schemas/HealthResponse'

@@ -1,0 +1,20 @@
+createFamilyLinkRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - parent_account_id
+    - student_id
+    - relationship
+  properties:
+    parent_account_id:
+      type: string
+      format: uuid
+    student_id:
+      type: string
+      format: uuid
+    relationship:
+      type: string
+      enum:
+        - padre
+        - madre
+        - apoderado

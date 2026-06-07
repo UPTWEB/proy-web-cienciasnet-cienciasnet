@@ -1,0 +1,145 @@
+Page:
+  name: page
+  in: query
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+PerPage:
+  name: per_page
+  in: query
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 20
+Search:
+  name: search
+  in: query
+  schema:
+    type: string
+    maxLength: 150
+Active:
+  name: active
+  in: query
+  schema:
+    type: boolean
+StudentIdQuery:
+  name: student_id
+  in: query
+  schema:
+    type: string
+    format: uuid
+IdempotencyKey:
+  name: Idempotency-Key
+  in: header
+  required: true
+  schema:
+    type: string
+    minLength: 8
+    maxLength: 191
+AccountId:
+  name: accountId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+FamilyLinkId:
+  name: familyLinkId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+StudentId:
+  name: studentId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+AcademicPeriodId:
+  name: academicPeriodId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+ConsentId:
+  name: consentId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+StationId:
+  name: stationId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+AnomalyId:
+  name: anomalyId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+AttendanceId:
+  name: attendanceId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+LiquidationId:
+  name: liquidationId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+ObligationId:
+  name: obligationId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+AssessmentId:
+  name: assessmentId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+MaterialId:
+  name: materialId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+AnnouncementId:
+  name: announcementId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+IncidentId:
+  name: incidentId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid
+FileId:
+  name: fileId
+  in: path
+  required: true
+  schema:
+    type: string
+    format: uuid

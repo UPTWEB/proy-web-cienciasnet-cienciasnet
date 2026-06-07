@@ -26,6 +26,11 @@ Demostrar que backend cubre todos los dominios y puede salir a producción.
 - Proyecto: `backend`.
 - Capacidades: regresión completa y autorización negativa, rendimiento y OpenAPI, migración, backup y operación.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `verify-backend-release` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/README.md`

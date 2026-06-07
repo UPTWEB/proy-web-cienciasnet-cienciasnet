@@ -26,6 +26,11 @@ Enrolar rostros únicamente con consentimiento y almacenamiento privado.
 - Proyecto: `backend`.
 - Capacidades: otorgar/revocar consentimiento, enrolamiento de 3 a 5 fotos, perfil activo, eliminación programada y R2 privado.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-biometric-enrollment-consent` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/security/data-and-files.md`

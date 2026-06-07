@@ -1,16 +1,16 @@
-# Tasks: add-family-links-management
+﻿# Tasks: add-family-links-management
 
 ## Implementation
-- [ ] 1.1 Implementar casos de uso familiares. Owner: Fátima
-- [ ] 1.2 Crear Policies por vínculo. Owner: Fátima
-- [ ] 1.3 Exponer endpoints y resources. Owner: Fátima
-- [ ] 1.4 Auditar vínculos. Owner: Fátima
+- [x] 1.1 Implementar casos de uso familiares. Owner: FÃ¡tima
+- [x] 1.2 Crear Policies por vÃ­nculo. Owner: FÃ¡tima
+- [x] 1.3 Exponer endpoints y resources. Owner: FÃ¡tima
+- [x] 1.4 Auditar vÃ­nculos. Owner: FÃ¡tima
 
 ## Verification
-- [ ] 2.1 Verificar que N:M probado. Owner: Fátima
-- [ ] 2.2 Verificar que acceso ajeno bloqueado. Owner: Fátima
-- [ ] 2.3 Verificar que desvinculación conserva auditoría. Owner: Fátima
+- [x] 2.1 Verificar que N:M probado. Owner: FÃ¡tima
+- [x] 2.2 Verificar que acceso ajeno bloqueado. Owner: FÃ¡tima
+- [x] 2.3 Verificar que desvinculaciÃ³n conserva auditorÃ­a. Owner: FÃ¡tima
 
 ## Review and Archive
-- [ ] 3.1 Publicar contratos/documentación afectados. Owner: Fátima
-- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: André
+- [x] 3.1 Publicar contratos/documentaciÃ³n afectados. Owner: FÃ¡tima
+- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: AndrÃ©

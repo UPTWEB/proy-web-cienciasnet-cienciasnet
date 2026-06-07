@@ -26,6 +26,11 @@ Administrar la estructura que gobierna horarios, notas y materiales.
 - Proyecto: `backend`.
 - Capacidades: periodos, grados, secciones, matrículas y cursos, carga académica con vigencia, consultas por docente, alumno y periodo.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-academic-structure-management` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/academic.md`

@@ -26,6 +26,11 @@ Integrar Laravel con Python sin delegar reglas de asistencia.
 - Proyecto: `backend`.
 - Capacidades: FastAPI privado de salud, reconocimiento y sincronización, calidad, prueba de vida y umbrales, timeout, autenticación interna y perfiles en memoria.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-facial-service-integration` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/architecture/facial-integration.md`

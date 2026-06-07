@@ -6,7 +6,7 @@ Centralizar archivos privados y evitar storage público accidental.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Un archivo privado SHALL requerir autorización
 
@@ -16,7 +16,7 @@ Un archivo privado SHALL requerir autorización
 - WHEN intenta descargar
 - THEN se rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Evidencia biométrica SHALL expirar
 

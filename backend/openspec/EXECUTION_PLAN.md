@@ -22,9 +22,9 @@
 |---|---|---|---|---|---|
 | DB-001 | `[x]` | `add-identity-academic-schema` | Jefferson | André | BE-001 |
 | BE-003 | `[x]` | `add-human-authentication` | Jefferson | André | BE-002, DB-001 |
-| BE-004 | `[ ]` | `add-roles-permissions-account-management` | Jefferson | André | BE-003 |
-| BE-005 | `[ ]` | `add-family-links-management` | Jefferson | André | BE-004 |
-| BE-006 | `[ ]` | `add-academic-structure-management` | Jefferson | André | DB-001, BE-004 |
+| BE-004 | `[~]` | `add-roles-permissions-account-management` | Jefferson | André | BE-003 |
+| BE-005 | `[~]` | `add-family-links-management` | Jefferson | André | BE-004 |
+| BE-006 | `[~]` | `add-academic-structure-management` | Jefferson | André | DB-001, BE-004 |
 
 ## Fase 2: Facial y asistencia
 
@@ -80,4 +80,5 @@
 
 ## Regla de ejecución
 
-Cada change se detalla desde sus documentos fuente antes de implementarse. No se inicia un change bloqueado ni se archiva sin demostrar todos sus escenarios.
+Cada change se detalla desde sus documentos fuente y su fila en `API_CONTRACTS.md` antes de implementarse. No se inicia
+un change bloqueado, con contrato requerido sin aprobar, ni se archiva sin demostrar todos sus escenarios.

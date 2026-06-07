@@ -1,0 +1,6 @@
+createFamilyLinkRequest:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../openapi.yaml#/components/schemas/createFamilyLinkRequest'

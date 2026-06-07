@@ -26,6 +26,11 @@ Registrar pagos completos y correcciones como movimientos inmutables.
 - Proyecto: `backend`.
 - Capacidades: pago exacto por efectivo, transferencia, Yape, Plin u otro, recibo secuencial y comprobante privado, anulación y devolución sin borrar historial.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-payment-movements-receipts` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/finance.md`

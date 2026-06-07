@@ -6,7 +6,7 @@ Cerrar jornadas y resolver excepciones sin inventar movimientos.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 La falta SHALL generarse al cierre solo si no hubo ingreso
 
@@ -16,7 +16,7 @@ La falta SHALL generarse al cierre solo si no hubo ingreso
 - WHEN corre cierre
 - THEN se crea falta
 
-### Requirement 2
+### Requirement: 2
 
 El sistema SHALL no inventar salida faltante
 

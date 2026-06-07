@@ -1,0 +1,101 @@
+createIncidentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - student_id
+    - incident_type
+    - severity
+    - description
+    - occurred_at
+  properties:
+    student_id:
+      type: string
+      format: uuid
+    incident_type:
+      type: string
+      minLength: 1
+      maxLength: 100
+    severity:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+        - critical
+    description:
+      type: string
+      minLength: 1
+      maxLength: 5000
+    occurred_at:
+      type: string
+      format: date-time
+transitionIncidentRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - target_status
+    - reason
+  properties:
+    target_status:
+      type: string
+      enum:
+        - open
+        - referred_toe
+        - referred_psychology
+        - parent_notified
+        - in_progress
+        - resolved
+        - closed
+    reason:
+      type: string
+      minLength: 1
+      maxLength: 1000
+createIncidentFollowUpRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - note
+  properties:
+    note:
+      type: string
+      minLength: 1
+      maxLength: 5000
+    file:
+      type: string
+      format: binary
+generateIncidentReportRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - from_date
+    - to_date
+    - format
+  properties:
+    from_date:
+      type: string
+      format: date
+    to_date:
+      type: string
+      format: date
+    format:
+      type: string
+      enum:
+        - pdf
+        - xlsx
+    status:
+      type: string
+      enum:
+        - open
+        - referred_toe
+        - referred_psychology
+        - parent_notified
+        - in_progress
+        - resolved
+        - closed
+    severity:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+        - critical

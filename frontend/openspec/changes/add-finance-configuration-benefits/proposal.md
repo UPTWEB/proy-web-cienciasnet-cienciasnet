@@ -26,6 +26,11 @@ Dar a Yanina control de configuración y beneficios futuros.
 - Proyecto: `frontend`.
 - Capacidades: conceptos, montos y fechas, becas/descuentos/exoneraciones, alcance, vigencia y acumulación.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-finance-configuration-benefits` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/finance.md`

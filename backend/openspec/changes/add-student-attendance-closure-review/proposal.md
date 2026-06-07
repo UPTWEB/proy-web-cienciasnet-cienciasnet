@@ -27,6 +27,11 @@ Cerrar jornadas y resolver excepciones sin inventar movimientos.
 - Proyecto: `backend`.
 - Capacidades: generar faltas al cierre completo, anomalía de ingreso sin salida, revisión dudosa, corrección y justificación, alerta por faltas injustificadas.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-student-attendance-closure-review` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

@@ -26,6 +26,11 @@ Persistir consentimiento, estaciones, reconocimientos y asistencia con trazabili
 - Proyecto: `backend`.
 - Capacidades: consentimientos, perfiles y archivos biométricos, cuentas técnicas, estaciones, cámaras y activaciones, eventos, movimientos, asistencias y anomalías.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-biometric-attendance-schema` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/architecture/database-schema.md`

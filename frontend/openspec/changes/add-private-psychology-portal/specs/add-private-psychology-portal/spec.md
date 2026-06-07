@@ -6,7 +6,7 @@ Ofrecer un espacio explícitamente privado para Psicología y superadmin.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Portal privado SHALL ser visible solo a Psicología/superadmin
 
@@ -16,7 +16,7 @@ Portal privado SHALL ser visible solo a Psicología/superadmin
 - WHEN navega
 - THEN muestra sin permiso sin datos
 
-### Requirement 2
+### Requirement: 2
 
 Notas SHALL evitar exposición incidental
 

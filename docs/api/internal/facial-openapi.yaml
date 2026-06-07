@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: CienciasNET Facial Service Internal API
+  version: 1.0.0
+  description: Contrato privado entre Laravel y el servicio facial. Nunca es consumido por el navegador.
+servers:
+  - url: http://facial-api:8001
+security:
+  - serviceToken: []
+paths:
+  /health:
+    get:
+      operationId: getFacialServiceHealth
+      security: []
+      responses:
+        '200':
+          description: Servicio disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties: { status: { type: string, enum: [ok] } }
+  /v1/enrollments:
+    post:
+      operationId: createFacialEmbedding
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [images]
+              properties:
+                images:
+                  type: array
+                  minItems: 3
+                  maxItems: 5
+                  items: { type: string, format: binary }
+      responses:
+        '200':
+          description: Embedding y métricas generadas
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EnrollmentResult' }
+        '422': { $ref: '#/components/responses/ProcessingError' }
+        '429': { $ref: '#/components/responses/RateLimitedError' }
+        '503': { $ref: '#/components/responses/UnavailableError' }
+  /v1/identifications:
+    post:
+      operationId: identifyFace
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema: { type: string, minLength: 8, maxLength: 191 }
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image, candidates]
+              properties:
+                image: { type: string, format: binary }
+                candidates:
+                  type: string
+                  description: JSON con IDs opacos y embeddings cifrados/autorizados enviados por Laravel.
+      responses:
+        '200':
+          description: Resultado de identificación; Laravel decide la asistencia
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/IdentificationResult' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+        '422': { $ref: '#/components/responses/ProcessingError' }
+        '429': { $ref: '#/components/responses/RateLimitedError' }
+        '503': { $ref: '#/components/responses/UnavailableError' }
+components:
+  securitySchemes:
+    serviceToken:
+      type: apiKey
+      in: header
+      name: X-Facial-Service-Token
+  schemas:
+    EnrollmentResult:
+      type: object
+      required: [embedding, quality, liveness, model_version]
+      properties:
+        embedding: { type: string, format: byte, description: Debe cifrarse antes de persistirlo }
+        quality: { type: number, format: float, minimum: 0, maximum: 1 }
+        liveness: { type: number, format: float, minimum: 0, maximum: 1 }
+        model_version: { type: string }
+    IdentificationResult:
+      type: object
+      required: [matched, confidence, quality, liveness, model_version]
+      properties:
+        matched: { type: boolean }
+        candidate_id: { type: string, nullable: true, description: Identificador opaco proporcionado por Laravel }
+        confidence: { type: number, format: float, minimum: 0, maximum: 1 }
+        quality: { type: number, format: float, minimum: 0, maximum: 1 }
+        liveness: { type: number, format: float, minimum: 0, maximum: 1 }
+        model_version: { type: string }
+    Error:
+      type: object
+      required: [code, message]
+      properties: { code: { type: string }, message: { type: string } }
+  responses:
+    ProcessingError: { description: Captura inválida o no procesable, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+    ConflictError: { description: Solicitud duplicada o conflicto, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+    RateLimitedError: { description: Demasiadas solicitudes, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+    UnavailableError: { description: Modelo o servicio no disponible, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }

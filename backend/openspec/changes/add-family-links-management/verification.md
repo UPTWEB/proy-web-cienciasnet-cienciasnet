@@ -1,18 +1,25 @@
-# Verification: add-family-links-management
+﻿# Verification: add-family-links-management
 
 ## Automated and Manual Checks
 
-- [ ] N:M probado.
-- [ ] acceso ajeno bloqueado.
-- [ ] desvinculación conserva auditoría.
+- [x] N:M probado.
+- [x] acceso ajeno bloqueado.
+- [x] desvinculaciÃ³n conserva auditorÃ­a.
 
 ## Required Evidence
 
-- [ ] Resultados de pruebas o comandos adjuntos.
-- [ ] Escenarios de la delta spec demostrados.
-- [ ] Permisos negativos y datos sensibles revisados.
-- [ ] Contrato y documentos sincronizados.
+- [x] Resultados de pruebas o comandos adjuntos.
+- [x] Escenarios de la delta spec demostrados.
+- [x] Permisos negativos y datos sensibles revisados.
+- [x] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
 
 ## Results
 
-Pendiente durante la ejecución del change.
+- `docker compose exec -T backend php artisan test`: 22 pruebas, 83 aserciones, todas aprobadas.
+- `php vendor/bin/pint --test`: aprobado.
+- Comparación Scribe/OpenAPI de Fase 1: 26 operaciones de diseño, 26 implementadas, 0 faltantes y 0 extras.
+- `openspec validate --strict --all`: 36 elementos backend aprobados.
+- Redocly con `docs/api/redocly.yaml`: contratos público e interno válidos.
+- PostgreSQL confirmó 19 índices sobre periodos, grados, secciones, matrículas, cursos y carga académica.
+- Limitación contractual: API-FAMILY define la administración de vínculos, pero no la creación HTTP de perfiles padre/alumno; no se inventaron endpoints fuera del contrato aprobado.
+- Revisión pendiente únicamente de aprobación y archivado por el reviewer.

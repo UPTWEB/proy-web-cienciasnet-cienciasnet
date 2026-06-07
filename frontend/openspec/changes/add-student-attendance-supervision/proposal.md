@@ -26,6 +26,11 @@ Permitir al Auxiliar supervisar jornadas y resolver excepciones.
 - Proyecto: `frontend`.
 - Capacidades: tablero de eventos y anomalías, revisión dudosa y corrección, salida de emergencia, falta y justificación.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-student-attendance-supervision` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

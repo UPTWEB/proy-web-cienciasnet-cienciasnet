@@ -6,7 +6,7 @@ Desplegar y recuperar el sistema completo de forma documentada.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Producción SHALL exponer solo HTTPS necesario
 
@@ -16,7 +16,7 @@ Producción SHALL exponer solo HTTPS necesario
 - WHEN se inspeccionan puertos
 - THEN DB y Python siguen privados
 
-### Requirement 2
+### Requirement: 2
 
 Backup SHALL restaurar datos y archivos
 

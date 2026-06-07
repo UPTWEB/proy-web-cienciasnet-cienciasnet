@@ -26,6 +26,11 @@ Permitir a Yanina revisar asistencia docente y cerrar planilla.
 - Proyecto: `frontend`.
 - Capacidades: asistencia, clases canceladas y sustitutos, tarifas y descuentos, revisión/cierre y reporte mensual.
 
+## API Contract
+
+- Declaracion contractual: consultar la fila `add-teacher-attendance-payroll` de [`../../API_CONTRACTS.md`](../../API_CONTRACTS.md).
+- Aplicar la relacion indicada antes de implementar; si declara `Sin contrato HTTP`, no inventar endpoints.
+
 ## Source Documents
 
 - `../../../../docs/domain/attendance.md`

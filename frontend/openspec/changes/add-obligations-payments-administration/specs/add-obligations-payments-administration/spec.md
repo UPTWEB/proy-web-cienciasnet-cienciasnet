@@ -6,7 +6,7 @@ Gestionar obligaciones, ajustes y pagos manuales sin alterar históricos.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 UI SHALL impedir pago parcial
 
@@ -16,7 +16,7 @@ UI SHALL impedir pago parcial
 - WHEN Yanina registra pago
 - THEN campo exige valor aplicable
 
-### Requirement 2
+### Requirement: 2
 
 Ajuste SHALL exigir motivo y mostrar afectados
 

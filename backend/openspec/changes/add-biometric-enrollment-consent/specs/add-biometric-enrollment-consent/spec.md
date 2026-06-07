@@ -6,7 +6,7 @@ Enrolar rostros únicamente con consentimiento y almacenamiento privado.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 El sistema SHALL impedir enrolar sin consentimiento otorgado
 
@@ -16,7 +16,7 @@ El sistema SHALL impedir enrolar sin consentimiento otorgado
 - WHEN se intenta enrolar
 - THEN la operación se rechaza
 
-### Requirement 2
+### Requirement: 2
 
 Revocar consentimiento SHALL desactivar el perfil
 

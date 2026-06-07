@@ -6,7 +6,7 @@ Dar a Yanina control de configuración y beneficios futuros.
 
 ## ADDED Requirements
 
-### Requirement 1
+### Requirement: 1
 
 Cuenta financiera SHALL configurar valores futuros
 
@@ -16,7 +16,7 @@ Cuenta financiera SHALL configurar valores futuros
 - WHEN confirma
 - THEN muestra nueva versión
 
-### Requirement 2
+### Requirement: 2
 
 Formulario SHALL explicar alcance y acumulación
 

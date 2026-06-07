@@ -1,0 +1,211 @@
+HealthResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+LoginRequest:
+  type: object
+  required:
+    - email
+    - password
+  properties:
+    email:
+      type: string
+      format: email
+    password:
+      type: string
+      format: password
+    remember:
+      type: boolean
+      default: false
+ResetPasswordRequest:
+  type: object
+  required:
+    - token
+    - email
+    - password
+  properties:
+    token:
+      type: string
+    email:
+      type: string
+      format: email
+    password:
+      type: string
+      format: password
+      minLength: 8
+Role:
+  type: string
+  enum:
+    - superadmin
+    - gestor_usuarios
+    - toe
+    - psicologia
+    - auxiliar
+    - coordinador_academico
+    - administrativo
+    - docente
+    - padre
+    - alumno
+AuthUser:
+  type: object
+  required:
+    - id
+    - name
+    - email
+    - active
+    - roles
+    - permissions
+  properties:
+    id:
+      type: string
+      format: uuid
+    name:
+      type: string
+    email:
+      type: string
+      format: email
+    active:
+      type: boolean
+    roles:
+      type: array
+      items:
+        $ref: '../openapi.yaml#/components/schemas/Role'
+    permissions:
+      type: array
+      items:
+        type: string
+AuthUserResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      $ref: '../openapi.yaml#/components/schemas/AuthUser'
+MessageResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+Resource:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+      format: uuid
+  additionalProperties: true
+ResourceResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      $ref: '../openapi.yaml#/components/schemas/Resource'
+CollectionResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '../openapi.yaml#/components/schemas/Resource'
+PaginationMeta:
+  type: object
+  required:
+    - current_page
+    - from
+    - last_page
+    - per_page
+    - to
+    - total
+  properties:
+    current_page:
+      type: integer
+    from:
+      type: integer
+      nullable: true
+    last_page:
+      type: integer
+    per_page:
+      type: integer
+    to:
+      type: integer
+      nullable: true
+    total:
+      type: integer
+PaginationLinks:
+  type: object
+  required:
+    - first
+    - last
+    - prev
+    - next
+  properties:
+    first:
+      type: string
+      nullable: true
+    last:
+      type: string
+      nullable: true
+    prev:
+      type: string
+      nullable: true
+    next:
+      type: string
+      nullable: true
+PaginatedResponse:
+  type: object
+  required:
+    - data
+    - meta
+    - links
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '../openapi.yaml#/components/schemas/Resource'
+    meta:
+      $ref: '../openapi.yaml#/components/schemas/PaginationMeta'
+    links:
+      $ref: '../openapi.yaml#/components/schemas/PaginationLinks'
+ErrorResponse:
+  type: object
+  required:
+    - error
+  properties:
+    error:
+      type: object
+      required:
+        - code
+        - message
+        - fields
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        fields:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
