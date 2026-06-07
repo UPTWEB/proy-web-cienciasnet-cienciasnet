@@ -3,7 +3,7 @@
 **ID:** FE-007  
 **Fase:** Fase 1: Identidad y academia  
 **Owner:** Kiara  
-**Reviewer:** Vincenzo  
+**Reviewer:** Jefferson
 **Dependencias:** FE-002, FE-003, Backend BE-006
 
 ## Why

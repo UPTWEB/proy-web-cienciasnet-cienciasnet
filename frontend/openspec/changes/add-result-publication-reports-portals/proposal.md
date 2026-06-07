@@ -3,7 +3,7 @@
 **ID:** FE-016  
 **Fase:** Fase 4: Evaluación y contenido  
 **Owner:** Vincenzo  
-**Reviewer:** Kiara  
+**Reviewer:** Jefferson
 **Dependencias:** FE-008, Backend BE-020
 
 ## Why

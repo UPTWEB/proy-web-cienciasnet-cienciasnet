@@ -9,13 +9,15 @@
 
 ## Flujo
 
-1. Confirmar que el change está desbloqueado y sus dependencias están aceptadas.
-2. Leer `Rules.md`, `AGENTS.md`, este workflow, todos los artefactos del change, documentos fuente y specs relacionadas.
+1. Confirmar que el change está desbloqueado, sus dependencias están aceptadas y el contrato OpenAPI aplicable está
+   aprobado.
+2. Leer `Rules.md`, `AGENTS.md`, este workflow, todos los artefactos del change, documentos fuente, contrato OpenAPI y
+   specs relacionadas.
 3. Cambiar el estado del change de `[ ]` a `[~]` en `EXECUTION_PLAN.md` al iniciar implementación.
 4. Confirmar que `specs/<capability>/spec.md` contiene requisitos SHALL y escenarios GIVEN/WHEN/THEN.
 5. Actualizar `proposal.md` y `design.md` si cambia el alcance antes de continuar.
 6. Ejecutar tareas pequeñas en orden y marcar cada `[x]` solamente tras comprobarla.
-7. Ejecutar migraciones, pruebas, autorización, rendimiento y OpenAPI aplicables.
+7. Ejecutar migraciones, pruebas, autorización y rendimiento aplicables; comparar Scribe con el contrato OpenAPI.
 8. Marcar las verificaciones cumplidas y registrar resultados reales en `verification.md`.
 9. Solicitar revisión. El reviewer confirma tareas, escenarios, contrato y evidencia.
 10. Fusionar las delta specs aceptadas en `openspec/specs/<capability>/spec.md`.

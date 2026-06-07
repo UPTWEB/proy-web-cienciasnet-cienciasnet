@@ -3,7 +3,7 @@
 **ID:** FE-023  
 **Fase:** Fase 6: Calidad y release  
 **Owner:** Vincenzo  
-**Reviewer:** Kiara  
+**Reviewer:** Jefferson
 **Dependencias:** FE-004, FE-022, Backend BE-028
 
 ## Why

@@ -7,11 +7,12 @@
 - Laravel Sanctum para sesión SPA y credenciales técnicas.
 - Spatie Laravel Permission para roles y permisos.
 - Colas Laravel para correos, notificaciones y tareas diferidas.
-- Pest para pruebas y Scribe/OpenAPI para contrato HTTP.
+- Pest para pruebas, OpenAPI Design-First para contrato HTTP y Scribe para documentación de la implementación.
 
 Laravel ya proporciona rutas API, controladores, Form Requests, API Resources, paginación, manejo de excepciones,
-Sanctum, middleware y Policies. Se utilizarán estas capacidades antes de crear abstracciones propias. Scribe genera y
-publica OpenAPI a partir de endpoints verificados; OpenSpec planifica el cambio, pero no sustituye el contrato HTTP.
+Sanctum, middleware y Policies. Se utilizarán estas capacidades antes de crear abstracciones propias. El contrato
+OpenAPI aprobado en `docs/api/` es autoritativo. Scribe genera documentación navegable desde endpoints implementados y
+ayuda a detectar diferencias; OpenSpec planifica el change, pero ninguno reemplaza el contrato aprobado.
 
 ## Organización
 
@@ -102,7 +103,8 @@ backend/app/Modules/
 - UUID para recursos de dominio.
 - Paginación obligatoria en listados.
 - Operaciones sensibles e integraciones usan idempotencia.
-- El backend OpenSpec define endpoints concretos antes de que frontend dependa de ellos.
+- Los endpoints concretos se aprueban primero en `docs/api/`.
+- El backend OpenSpec planifica cómo implementar y verificar el contrato aprobado.
 
 ## Estructura backend esperada
 

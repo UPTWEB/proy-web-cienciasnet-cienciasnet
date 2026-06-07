@@ -25,7 +25,7 @@ Estaciones web de asistencia
 
 - `backend/` tendrá su propio OpenSpec, reglas, specs y plan.
 - `frontend/` tendrá su propio OpenSpec, reglas, specs y plan.
-- Los contratos estables se publican desde specs backend aceptadas.
+- Los contratos HTTP estables se aprueban y publican desde `docs/api/`.
 - Cambios cross-project declaran dependencias explícitas.
 
 ## Estructura objetivo del repositorio

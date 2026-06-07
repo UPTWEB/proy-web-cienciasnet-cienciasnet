@@ -13,4 +13,4 @@
 
 ## Review and Archive
 - [ ] 3.1 Publicar contratos/documentación afectados. Owner: Jefferson
-- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: Fátima
+- [ ] 3.2 Revisar y archivar la spec aceptada. Reviewer: André

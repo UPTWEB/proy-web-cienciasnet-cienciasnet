@@ -13,11 +13,12 @@ Estas reglas son obligatorias para cualquier cambio backend.
 
 ## API
 
+- El contrato OpenAPI aprobado en `../docs/api/` es la fuente autoritativa.
 - API versionada bajo `/api/v1`.
 - Form Requests para validar entrada y API Resources para salida.
 - Policies para acceso al recurso; middleware para permisos generales.
 - Listados paginados, filtros explícitos y formato de error estable.
-- Scribe/OpenAPI debe actualizarse y verificarse con cambios de contrato.
+- Scribe documenta la implementación y debe revisarse contra OpenAPI; no sobrescribe el contrato aprobado.
 - Operaciones sensibles o reintentables usan idempotencia.
 
 ## Datos
@@ -40,7 +41,7 @@ Estas reglas son obligatorias para cualquier cambio backend.
 
 - Toda tarea backend debe identificar un único change de `openspec/EXECUTION_PLAN.md`.
 - Antes de editar código, leer `Rules.md`, `AGENTS.md`, `openspec/WORKFLOW.md`, todos los artefactos del change, sus
-  documentos fuente y specs aceptadas relacionadas.
+  documentos fuente, contratos OpenAPI aprobados y specs aceptadas relacionadas.
 - Al iniciar trabajo real, cambiar el estado del change de `[ ]` a `[~]` en `openspec/EXECUTION_PLAN.md`.
 - Marcar una casilla de `tasks.md` únicamente después de implementar y comprobar esa tarea. No marcar tareas por
   anticipado ni todas juntas al final.

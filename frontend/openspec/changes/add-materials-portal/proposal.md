@@ -3,7 +3,7 @@
 **ID:** FE-017  
 **Fase:** Fase 4: Evaluación y contenido  
 **Owner:** Kiara  
-**Reviewer:** Vincenzo  
+**Reviewer:** Jefferson
 **Dependencias:** FE-002, Backend BE-021
 
 ## Why

@@ -3,7 +3,7 @@
 **ID:** DB-005  
 **Fase:** Fase 5: Incidencias y Psicología  
 **Owner:** Fátima  
-**Reviewer:** Jefferson  
+**Reviewer:** André
 **Dependencias:** DB-001
 
 ## Why

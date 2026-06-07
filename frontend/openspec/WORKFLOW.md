@@ -2,13 +2,14 @@
 
 ## Flujo
 
-1. Confirmar que el change está desbloqueado y los contratos backend necesarios están aceptados.
+1. Confirmar que el change está desbloqueado y los contratos OpenAPI necesarios están aprobados.
 2. Leer `Rules.md`, `AGENTS.md`, este workflow, todos los artefactos del change y documentos fuente.
 3. Cambiar el estado del change de `[ ]` a `[~]` en `EXECUTION_PLAN.md` al iniciar implementación.
 4. Confirmar requisitos SHALL y escenarios de `specs/<capability>/spec.md`.
-5. Definir o corregir pantallas, rutas, permisos, estados y responsive en `design.md`.
+5. Definir o corregir pantallas, rutas, permisos, estados, mocks y responsive en `design.md`.
 6. Implementar tareas pequeñas y marcar cada `[x]` solamente tras comprobarla.
-7. Verificar componentes, accesibilidad, responsive, rutas y E2E; registrar resultados reales en `verification.md`.
+7. Verificar componentes, mocks de éxito/error/permisos/vacíos/latencia, accesibilidad, responsive, rutas y E2E;
+   registrar resultados reales en `verification.md`.
 8. Solicitar revisión y corregir hallazgos.
 9. Fusionar las delta specs aceptadas en `openspec/specs/<capability>/spec.md`.
 10. Mover el change a `openspec/changes/archive/YYYY-MM-DD-<change-name>/`.

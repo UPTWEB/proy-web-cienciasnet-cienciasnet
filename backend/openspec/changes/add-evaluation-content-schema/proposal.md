@@ -3,7 +3,7 @@
 **ID:** DB-004  
 **Fase:** Fase 4: Evaluación y contenido  
 **Owner:** Fátima  
-**Reviewer:** Jefferson  
+**Reviewer:** André
 **Dependencias:** DB-001
 
 ## Why

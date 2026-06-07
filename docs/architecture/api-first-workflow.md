@@ -1,28 +1,60 @@
-# Flujo de Trabajo: API-First Design
+# Flujo de Trabajo API-First
 
-Para evitar bloqueos entre desarrolladores (y agentes de IA) y asegurar un paralelismo real, el proyecto adopta la metodología **API-First Design (Contract-Driven)**.
+CienciasNET adopta API-First Design para permitir que frontend y backend trabajen en paralelo sobre un contrato HTTP
+aprobado. Este flujo reduce bloqueos, pero no reemplaza la revisión, integración ni pruebas reales.
 
-## 1. Diseño del Contrato (Design-First)
-Antes de escribir lógica de base de datos o componentes visuales, el Arquitecto o el Owner de la feature debe definir el contrato HTTP de la API.
-- Se utiliza el estándar **OpenAPI 3.x**.
-- **Múltiples archivos:** Para mantener el proyecto escalable, el contrato no se escribe en un solo archivo gigante. Se divide en múltiples documentos referenciados (ej. `paths/asistencia.yaml`, `schemas/Alumno.yaml`) dentro del directorio de documentación (ej. `docs/api/`).
-- Una vez que el archivo YAML está definido y aprobado, se considera un "Contrato Firmado".
+## Fuente de verdad
 
-## 2. Desarrollo en Paralelo (Vertical Slicing)
-Con el contrato publicado, el equipo se divide y trabaja sin dependencias bloqueantes:
+- Los contratos HTTP autoritativos viven en `docs/api/` y utilizan OpenAPI 3.x.
+- El contrato se divide progresivamente en un archivo raíz y documentos reutilizables de paths, schemas, responses y
+  parameters.
+- OpenSpec organiza alcance y ejecución; no sustituye el contrato HTTP.
+- Scribe genera documentación navegable desde la implementación backend y sirve como apoyo para detectar diferencias;
+  no reemplaza ni sobrescribe el contrato aprobado.
 
-### Frontend (Mocking)
-- El desarrollador Frontend lee el contrato OpenAPI y configura herramientas de simulación (como **MSW - Mock Service Worker**) para interceptar las llamadas de la aplicación.
-- Construye todas las pantallas, formularios, validaciones y manejo de estado asumiendo que el backend funciona perfectamente y devuelve los datos simulados.
-- **Regla:** El Frontend no debe depender del estado activo del desarrollo Backend. Su única dependencia es el contrato publicado.
+## Gobierno del contrato
 
-### Backend (Implementación)
-- El desarrollador Backend lee el mismo contrato OpenAPI y diseña las migraciones, modelos, controladores y reglas de negocio necesarias para cumplir estrictamente con lo prometido en el YAML.
+Durante la primera etapa, Jefferson diseña y aprueba directamente los contratos para evitar demoras. Más adelante, los
+owners backend podrán proponerlos, pero Jefferson deberá aprobarlos antes de iniciar el desarrollo paralelo.
 
-## 3. Integración (The "Junte")
-Cuando el Backend finaliza y verifica su desarrollo, el Frontend simplemente **apaga los Mocks** temporales.
-Al haberse basado ambos en el mismo contrato estricto desde el día 1, la integración final encaja perfectamente sin errores de formato de datos.
+Un contrato aprobado:
 
----
+- Habilita el inicio de los changes frontend y backend relacionados.
+- No puede cambiarse silenciosamente.
+- Debe describir éxito, autenticación, permisos, validaciones y conflictos de negocio aplicables.
+- Debe mantenerse compatible durante la versión vigente o modificarse mediante una decisión explícita.
 
-> **Nota sobre Asignaciones:** Para potenciar este flujo, el `EXECUTION_PLAN` asigna todas las micro-tareas de una misma feature (desde la migración hasta el último controlador, o desde las rutas hasta las vistas) a una **única persona** (Owner). Esto previene colisiones y asegura que un desarrollador tenga control End-to-End de su funcionalidad asignada.
+## Desarrollo paralelo
+
+### Frontend
+
+- Depende del contrato aprobado, no de un change backend activo.
+- Construye tipos, API client y mocks alineados con OpenAPI.
+- Los mocks deben cubrir éxito, datos vacíos, latencia, error inesperado, `401`, `403`, `404`, `409` y `422` cuando
+  correspondan.
+- Los mocks son una herramienta de desarrollo y prueba; deben retirarse o desactivarse en la integración y release.
+
+### Backend
+
+- Implementa rutas, validaciones, autorización, respuestas y errores conforme al contrato aprobado.
+- Agrega pruebas positivas y negativas que demuestren el comportamiento acordado.
+- Genera documentación Scribe para revisar la implementación y detectar diferencias respecto de OpenAPI.
+
+## Integración y cierre
+
+Antes de cerrar los changes relacionados:
+
+1. Frontend se prueba contra el backend real sin mocks activos.
+2. Backend, tipos frontend y escenarios simulados se comparan con el contrato aprobado.
+3. Se ejecutan pruebas de éxito, validación, autenticación, autorización y conflictos aplicables.
+4. Las diferencias se corrigen en la implementación o se aprueban formalmente como cambio de contrato.
+5. La evidencia se registra en los `verification.md` correspondientes.
+
+La validación automática del contrato se incorporará progresivamente. Hasta entonces, estas comprobaciones son
+responsabilidad explícita de owners y reviewers.
+
+## Vertical slicing
+
+El `EXECUTION_PLAN.md` asigna un owner por change para implementar y verificar una capacidad completa. El contrato
+aprobado es una dependencia previa compartida; no autoriza cerrar un change con pruebas pendientes o integración basada
+únicamente en mocks.

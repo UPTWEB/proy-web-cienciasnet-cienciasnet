@@ -3,7 +3,7 @@
 **ID:** BE-026  
 **Fase:** Fase 6: Operación y release  
 **Owner:** André  
-**Reviewer:** Fátima  
+**Reviewer:** Jefferson
 **Dependencias:** BE-001
 
 ## Why

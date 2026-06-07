@@ -3,7 +3,7 @@
 **ID:** BE-023  
 **Fase:** Fase 4: Evaluación y contenido  
 **Owner:** André  
-**Reviewer:** Jefferson  
+**Reviewer:** André
 **Dependencias:** BE-004, DB-004
 
 ## Why

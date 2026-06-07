@@ -7,7 +7,7 @@ Docker Compose es el entorno oficial de desarrollo y evita depender de versiones
 - Git.
 - Docker Desktop reciente con Docker Compose v2.
 - Al menos 8 GB de RAM disponibles para Docker.
-- Puertos locales `5173` y `8000` libres.
+- Puertos locales `5173`, `8000` y `5432` libres.
 
 PHP, Composer, PostgreSQL, Python y Node.js no son obligatorios en el host. Se ejecutan dentro de contenedores.
 
@@ -26,7 +26,7 @@ docker compose ps
 | `frontend` | SPA React/Vite | `http://localhost:5173` |
 | `backend` | Laravel API | `http://localhost:8000` |
 | `queue` | Worker Laravel | No expuesto |
-| `db` | PostgreSQL 16 | No expuesto |
+| `db` | PostgreSQL 16 para desarrollo/DataGrip | `localhost:5432` |
 | `facial-api` | FastAPI facial privado | No expuesto |
 
 Los valores predeterminados de Compose son exclusivos para desarrollo local. Para personalizarlos:
@@ -34,6 +34,12 @@ Los valores predeterminados de Compose son exclusivos para desarrollo local. Par
 ```bash
 cp .env.docker.example .env
 ```
+
+### Conexión desde DataGrip
+
+Usar `localhost:5432`, base de datos y usuario `cienciasnet`, y contraseña `cienciasnet_local`, salvo que se hayan
+sobrescrito mediante variables de entorno. El puerto se publica únicamente para herramientas locales de desarrollo y
+no debe exponerse en despliegue.
 
 ## Comandos diarios
 

@@ -3,7 +3,7 @@
 **ID:** BE-005  
 **Fase:** Fase 1: Identidad y estructura académica  
 **Owner:** Fátima  
-**Reviewer:** Jefferson  
+**Reviewer:** André
 **Dependencias:** BE-004
 
 ## Why

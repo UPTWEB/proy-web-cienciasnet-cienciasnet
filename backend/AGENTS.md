@@ -9,7 +9,7 @@
 | André | Docker, despliegue, configuración, integración facial e infraestructura | Backend, observabilidad, seguridad |
 
 Los owners del plan son responsables iniciales, no límites rígidos. Jefferson, Fátima y André pueden implementar
-changes backend; cada change debe conservar owner y reviewer diferentes.
+changes backend. El reviewer válido para cada change futuro es el indicado en `openspec/EXECUTION_PLAN.md`.
 
 ## Lectura obligatoria
 
@@ -25,7 +25,7 @@ changes backend; cada change debe conservar owner y reviewer diferentes.
 - No implementar un change bloqueado por una spec pendiente.
 - Al recibir una tarea, confirmar el ID/change y seguir `openspec/TASK_REQUEST.md`.
 - Mantener sincronizados `EXECUTION_PLAN.md`, `tasks.md` y `verification.md` mientras se trabaja.
-- Publicar OpenAPI/spec aceptada antes de desbloquear frontend.
+- Aprobar y publicar OpenAPI en `../docs/api/` antes de desbloquear frontend.
 - André revisa impacto Docker/deploy de nuevas dependencias o servicios.
 - Fátima revisa migraciones, constraints e índices.
 - Jefferson revisa contratos API, límites de módulos y autorización.

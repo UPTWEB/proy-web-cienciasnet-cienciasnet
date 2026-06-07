@@ -3,7 +3,7 @@
 **ID:** BE-010  
 **Fase:** Fase 2: Facial y asistencia  
 **Owner:** Jefferson  
-**Reviewer:** Fátima  
+**Reviewer:** Jefferson
 **Dependencias:** BE-008, BE-009
 
 ## Why

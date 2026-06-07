@@ -3,7 +3,7 @@
 **ID:** BE-016  
 **Fase:** Fase 3: Finanzas  
 **Owner:** Jefferson  
-**Reviewer:** Fátima  
+**Reviewer:** Jefferson
 **Dependencias:** BE-015
 
 ## Why

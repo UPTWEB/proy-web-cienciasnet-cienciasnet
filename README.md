@@ -69,6 +69,8 @@ Documentos principales:
 - [Roles y permisos](docs/product/roles-and-permissions.md)
 - [Reglas y casos de uso por dominio](docs/domain/)
 - [Arquitectura general](docs/architecture/system.md)
+- [Flujo API-First](docs/architecture/api-first-workflow.md)
+- [Contratos API](docs/api/)
 - [Diseño técnico detallado](docs/architecture/detailed-system-design.md)
 - [Arquitectura frontend](docs/architecture/frontend.md)
 - [Arquitectura y optimización PostgreSQL](docs/architecture/database.md)
@@ -115,7 +117,7 @@ frontend/
 ```
 
 Cada proyecto planificará y archivará sus propias capacidades. El frontend dependerá de documentación compartida,
-contratos API publicados y specs backend aceptadas, nunca de changes backend activos.
+contratos API aprobados y publicados, nunca de changes backend activos.
 
 - [Plan backend](backend/openspec/EXECUTION_PLAN.md)
 - [Plan frontend](frontend/openspec/EXECUTION_PLAN.md)

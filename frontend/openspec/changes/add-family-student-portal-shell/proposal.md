@@ -3,7 +3,7 @@
 **ID:** FE-008  
 **Fase:** Fase 1: Identidad y academia  
 **Owner:** Vincenzo  
-**Reviewer:** Kiara  
+**Reviewer:** Jefferson
 **Dependencias:** FE-003, Backend BE-005/BE-006/BE-007
 
 ## Why

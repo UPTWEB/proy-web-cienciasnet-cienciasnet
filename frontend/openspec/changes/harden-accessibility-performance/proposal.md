@@ -3,7 +3,7 @@
 **ID:** FE-022  
 **Fase:** Fase 6: Calidad y release  
 **Owner:** Kiara  
-**Reviewer:** Vincenzo  
+**Reviewer:** Jefferson
 **Dependencias:** FE-005..FE-021
 
 ## Why

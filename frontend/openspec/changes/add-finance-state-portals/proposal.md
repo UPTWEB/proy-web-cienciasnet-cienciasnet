@@ -3,7 +3,7 @@
 **ID:** FE-014  
 **Fase:** Fase 3: Finanzas  
 **Owner:** Vincenzo  
-**Reviewer:** Kiara  
+**Reviewer:** Jefferson
 **Dependencias:** FE-008, Backend BE-017
 
 ## Why

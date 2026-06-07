@@ -3,7 +3,7 @@
 **ID:** FE-010  
 **Fase:** Fase 2: Facial y asistencia  
 **Owner:** Kiara  
-**Reviewer:** Vincenzo  
+**Reviewer:** Jefferson
 **Dependencias:** FE-002, FE-003, Backend BE-011
 
 ## Why

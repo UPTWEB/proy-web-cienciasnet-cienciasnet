@@ -11,8 +11,9 @@ frontend y backend deben respetar.
 2. [`product/roles-and-permissions.md`](product/roles-and-permissions.md)
 3. Documento del dominio relacionado en [`domain/`](domain/)
 4. Documento técnico relacionado en [`architecture/`](architecture/)
-5. Controles aplicables en [`security/`](security/)
-6. Decisiones aceptadas en [`decisions/`](decisions/)
+5. Contrato HTTP aprobado relacionado en [`api/`](api/)
+6. Controles aplicables en [`security/`](security/)
+7. Decisiones aceptadas en [`decisions/`](decisions/)
 
 ## Organización
 
@@ -21,6 +22,7 @@ frontend y backend deben respetar.
 | `product/` | Objetivos, alcance, módulos, actores y permisos |
 | `domain/` | Reglas de negocio y casos de uso compartidos |
 | `architecture/` | Límites técnicos, contratos y decisiones de plataforma |
+| `api/` | Contratos HTTP OpenAPI aprobados y autoritativos |
 | `security/` | Autenticación, autorización, privacidad, biometría y operación |
 | `decisions/` | ADRs que explican decisiones relevantes |
 | `legacy/` | Documentos históricos; no son fuente autoritativa |
@@ -59,9 +61,10 @@ Los archivos de `legacy/` permanecen únicamente para comprobar procedencia. El 
 ## Relación con OpenSpec
 
 - `docs/` define reglas compartidas e independientes de implementación.
+- `docs/api/` define los contratos HTTP aprobados que comparten frontend y backend.
 - `backend/openspec/` planificará migraciones, API, casos de uso e integraciones backend.
 - `frontend/openspec/` planificará pantallas, navegación, API client y pruebas frontend.
-- El frontend depende de specs backend aceptadas y contratos API publicados, nunca de changes backend activos.
+- El frontend depende de contratos API aprobados y publicados, nunca de changes backend activos.
 
 Los casos de uso compartidos viven en `docs/domain/`. Los detalles de cómo implementarlos viven en el OpenSpec del
 proyecto correspondiente.

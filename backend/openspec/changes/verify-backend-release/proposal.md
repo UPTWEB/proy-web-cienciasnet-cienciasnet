@@ -3,7 +3,7 @@
 **ID:** BE-028  
 **Fase:** Fase 6: Operación y release  
 **Owner:** Jefferson  
-**Reviewer:** André  
+**Reviewer:** Jefferson
 **Dependencias:** BE-013, BE-017, BE-020, BE-023, BE-025, BE-027, OPS-003
 
 ## Why
