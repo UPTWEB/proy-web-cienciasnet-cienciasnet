@@ -10,6 +10,7 @@ use App\Modules\Asistencia\Presentation\Controllers\TeacherAttendanceController;
 use App\Modules\Auth\Presentation\Controllers\PasswordRecoveryController;
 use App\Modules\Auth\Presentation\Controllers\SessionController;
 use App\Modules\Finanzas\Presentation\Controllers\FinanceConfigController;
+use App\Modules\Finanzas\Presentation\Controllers\PaymentMovementController;
 use App\Modules\Finanzas\Presentation\Controllers\PaymentObligationController;
 use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
 use App\Modules\Horarios\Presentation\Controllers\ScheduleController;
@@ -131,6 +132,10 @@ Route::prefix('v1')->group(function (): void {
         Route::get('payment-obligations/{obligationId}', [PaymentObligationController::class, 'show']);
         Route::post('payment-obligations/{obligationId}/adjustments', [PaymentObligationController::class, 'adjust']);
         Route::post('payment-obligations/bulk-adjustments', [PaymentObligationController::class, 'bulkAdjust']);
+
+        // Movimientos de Pago y Recibos (BE-016)
+        Route::post('payment-movements', [PaymentMovementController::class, 'store']);
+        Route::get('payment-movements/{paymentMovementId}/receipt', [PaymentMovementController::class, 'downloadReceipt']);
 
         Route::get('teacher-payroll/rates', [TeacherPayrollController::class, 'rates']);
         Route::post('teacher-payroll/rates', [TeacherPayrollController::class, 'storeRate']);
