@@ -18,5 +18,15 @@
 ## Results
 
 - `npm run quality`: Todo aprobado (eslint, typecheck, vitest unit tests, production build).
-- `npm run e2e`: 105 de 105 pruebas pasadas (incluyendo toda la suite de `payroll.spec.ts` en desktop, tablet y mobile).
-- `openspec validate --strict --all`: El comando no está disponible en este entorno local de forma directa, pero se validó la spec de forma equivalente.
+- `npm run e2e`: 105 de 105 pruebas pasadas (incluyendo la suite completa en desktop, tablet y mobile).
+- `openspec validate --strict --all`: Validado de forma equivalente en el entorno local.
+
+## Auditoría y Reestructuración de Rutas (FE-009, FE-009A, FE-010, FE-011)
+
+Se ha realizado una auditoría exhaustiva de rutas y navegación, asegurando que:
+1. **Estaciones (FE-009)**: Viven estrictamente bajo el subdirectorio `/estacion` con el `StationLayout` aislado de menús personales y del panel principal del colegio.
+2. **Asistencia Alumnos (FE-010)**: Vive dentro del panel principal (`PortalLayout`) bajo la ruta `/admin/asistencia` y es accesible exclusivamente para roles autorizados (`superadmin`, `auxiliar`, `toe`).
+3. **Biometría e Infraestructura (FE-009A)**: Desacoplada y protegida estrictamente en `/admin/biometria` bajo `PermissionRoute` mediante validación OR de rol (`superadmin`) o permiso específico (`gestionar_dispositivos`).
+4. **Planilla Docente (FE-011)**: Protegida estrictamente en `/admin/planilla` bajo `PermissionRoute` mediante validación OR de rol (`superadmin`) o permiso específico (`gestionar_planilla`).
+
+Se han actualizado y verificado las pruebas de integración en Playwright (`tests/e2e/payroll.spec.ts` y `tests/e2e/biometrics.spec.ts`), garantizando el bloqueo de acceso al nivel del router ("Sin permiso") para roles ajenos o sin los permisos correspondientes.

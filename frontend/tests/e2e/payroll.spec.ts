@@ -200,7 +200,7 @@ test.describe('Asistencia Docente y Planilla - FE-011', () => {
 
     await mockPayrollApis(page, adminNoPerms)
     await page.goto('/admin/planilla')
-    await expect(page.getByText('Acceso Denegado')).toBeVisible()
+    await expect(page.getByText('Sin permiso')).toBeVisible()
   })
 
   test('debe permitir a superadmin visualizar planilla, configurar tarifas e interactuar', async ({ page }) => {
