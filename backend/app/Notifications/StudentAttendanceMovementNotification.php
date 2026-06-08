@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Alumno;
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 use App\Modules\Asistencia\Domain\Models\MovimientoAsistencia;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

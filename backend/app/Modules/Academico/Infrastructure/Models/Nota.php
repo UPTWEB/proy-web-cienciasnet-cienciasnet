@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Academico\Infrastructure\Models;
+
+use App\Modules\Usuarios\Infrastructure\Models\User;
+
+use App\Modules\Academico\Infrastructure\Models\Matricula;
 
 use App\Modules\Academico\Infrastructure\Models\Examen;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

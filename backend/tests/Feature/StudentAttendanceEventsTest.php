@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Alumno;
-use App\Models\Padre;
-use App\Models\User;
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
+use App\Modules\Usuarios\Infrastructure\Models\Padre;
+use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Modules\Asistencia\Domain\Models\AsistenciaAlumno;
 use App\Modules\Asistencia\Domain\Models\CamaraEstacion;
 use App\Modules\Asistencia\Domain\Models\EstacionBiometrica;

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Family;
+namespace App\Modules\Usuarios\Presentation\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Family\CreateFamilyLinkRequest;
 use App\Http\Resources\FamilyLinkResource;
-use App\Models\Alumno;
-use App\Models\Padre;
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
+use App\Modules\Usuarios\Infrastructure\Models\Padre;
+use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Support\AuditLogger;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

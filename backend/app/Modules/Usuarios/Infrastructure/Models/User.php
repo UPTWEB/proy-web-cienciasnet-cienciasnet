@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Usuarios\Infrastructure\Models;
+
+use App\Modules\Usuarios\Infrastructure\Models\Padre;
+
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;

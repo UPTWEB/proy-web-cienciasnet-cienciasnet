@@ -3,8 +3,8 @@
 use App\Http\Controllers\Api\V1\Academic\AcademicController;
 use App\Http\Controllers\Api\V1\Auth\PasswordRecoveryController;
 use App\Http\Controllers\Api\V1\Auth\SessionController;
-use App\Http\Controllers\Api\V1\Family\FamilyLinkController;
-use App\Http\Controllers\Api\V1\IdentityAccess\AccountController;
+use App\Modules\Usuarios\Presentation\Controllers\FamilyLinkController;
+use App\Modules\Usuarios\Presentation\Controllers\AccountController;
 use App\Modules\Academico\Presentation\Controllers\AssessmentController;
 use App\Modules\Asistencia\Presentation\Controllers\StationController;
 use App\Modules\Asistencia\Presentation\Controllers\StudentAttendanceController;

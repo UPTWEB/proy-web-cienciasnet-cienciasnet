@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Alumno;
-use App\Models\User;
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
+use App\Modules\Usuarios\Infrastructure\Models\User;
 
 class AlumnoPolicy
 {

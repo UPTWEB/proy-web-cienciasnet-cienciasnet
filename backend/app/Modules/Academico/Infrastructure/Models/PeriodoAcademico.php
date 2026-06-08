@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Academico\Infrastructure\Models;
+
+use App\Modules\Usuarios\Infrastructure\Models\User;
+
+use App\Modules\Academico\Infrastructure\Models\Grado;
 
 use App\Modules\Finanzas\Infrastructure\Models\ConceptoPago;
 use App\Modules\Finanzas\Infrastructure\Models\ConfiguracionFinanciera;

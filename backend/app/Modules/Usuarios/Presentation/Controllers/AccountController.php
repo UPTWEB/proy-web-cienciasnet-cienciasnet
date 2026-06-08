@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\IdentityAccess;
+namespace App\Modules\Usuarios\Presentation\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IdentityAccess\ActivationRequest;
@@ -8,7 +8,7 @@ use App\Http\Requests\IdentityAccess\CreateAccountRequest;
 use App\Http\Requests\IdentityAccess\RolesRequest;
 use App\Http\Requests\IdentityAccess\UpdateAccountRequest;
 use App\Http\Resources\AccountResource;
-use App\Models\User;
+use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Support\AuditLogger;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\JsonResponse;

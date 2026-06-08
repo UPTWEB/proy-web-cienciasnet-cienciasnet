@@ -2,8 +2,8 @@
 
 namespace App\Modules\Asistencia\Domain\Services;
 
-use App\Models\Alumno;
-use App\Models\User;
+use App\Modules\Usuarios\Infrastructure\Models\Alumno;
+use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Modules\Asistencia\Domain\Models\AsistenciaAlumno;
 use App\Modules\Asistencia\Domain\Models\CamaraEstacion;
 use App\Modules\Asistencia\Domain\Models\ConfiguracionJornada;

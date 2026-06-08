@@ -1,6 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Academico\Infrastructure\Models;
+
+use App\Modules\Usuarios\Infrastructure\Models\Docente;
+
+use App\Modules\Academico\Infrastructure\Models\Seccion;
+
+use App\Modules\Academico\Infrastructure\Models\Curso;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

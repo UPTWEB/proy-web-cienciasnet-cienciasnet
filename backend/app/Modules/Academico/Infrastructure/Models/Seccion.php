@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Academico\Infrastructure\Models;
+
+use App\Modules\Academico\Infrastructure\Models\Matricula;
+
+use App\Modules\Academico\Infrastructure\Models\Grado;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
