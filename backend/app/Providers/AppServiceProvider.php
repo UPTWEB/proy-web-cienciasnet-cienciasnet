@@ -8,6 +8,8 @@ use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
 use App\Modules\Academico\Presentation\Policies\ExamenPolicy;
 use App\Modules\Academico\Presentation\Policies\NotaPolicy;
 use App\Modules\Academico\Presentation\Policies\PeriodoAcademicoPolicy;
+use App\Modules\Materiales\Infrastructure\Models\Material;
+use App\Modules\Materiales\Presentation\Policies\MaterialPolicy;
 use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Modules\Usuarios\Presentation\Policies\AlumnoPolicy;
@@ -65,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(PeriodoAcademico::class, PeriodoAcademicoPolicy::class);
         Gate::policy(Nota::class, NotaPolicy::class);
+        Gate::policy(\App\Modules\Materiales\Infrastructure\Models\Material::class, \App\Modules\Materiales\Presentation\Policies\MaterialPolicy::class);
 
         RateLimiter::for('human-login', fn (Request $request) => [
             Limit::perMinute(5)->by(mb_strtolower((string) $request->input('email')).'|'.$request->ip()),

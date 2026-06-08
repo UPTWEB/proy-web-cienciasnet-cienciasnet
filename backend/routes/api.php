@@ -70,6 +70,16 @@ Route::prefix('v1')->group(function (): void {
         Route::get('teaching-assignments', [AcademicController::class, 'assignments']);
         Route::post('teaching-assignments', [AcademicController::class, 'storeAssignment'])->name('api.v1.teaching-assignments.store');
 
+        // Materiales
+        Route::get('/materials', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'listMaterials']);
+        Route::post('/materials', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'createMaterial']);
+        Route::get('/materials/{material}/download', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'downloadMaterial']);
+        Route::patch('/materials/{material}', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'updateMaterial']);
+        Route::delete('/materials/{material}', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'archiveMaterial']);
+        Route::post('/material-links', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'createExternalMaterial']);
+        Route::put('/materials/{material}/file', [\App\Modules\Materiales\Presentation\Controllers\MaterialController::class, 'replaceMaterialFile']);
+
+        // Comunicados y Notificaciones
         // Estaciones
         Route::get('stations', [StationController::class, 'index']);
         Route::post('stations', [StationController::class, 'store']);
