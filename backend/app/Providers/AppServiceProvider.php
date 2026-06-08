@@ -57,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Alumno::class, AlumnoPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(PeriodoAcademico::class, PeriodoAcademicoPolicy::class);
+        Gate::policy(\App\Modules\Academico\Infrastructure\Models\Nota::class, \App\Modules\Academico\Presentation\Policies\NotaPolicy::class);
 
         RateLimiter::for('human-login', fn (Request $request) => [
             Limit::perMinute(5)->by(mb_strtolower((string) $request->input('email')).'|'.$request->ip()),
