@@ -126,7 +126,7 @@ paths:
                 captured_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
               required:
                 - image
                 - camera_id
@@ -1152,6 +1152,253 @@ paths:
                 - section_id
                 - academic_period_id
       security: []
+  /api/v1/materials:
+    get:
+      summary: ''
+      operationId: getApiV1Materials
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiV1Materials
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                carga_academica_id:
+                  type: string
+                  description: 'Must be a valid UUID. The <code>id</code> of an existing record in the carga_academica table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                titulo:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: g
+                descripcion:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: z
+                  nullable: true
+                semana:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 52.'
+                  example: 17
+                  nullable: true
+                file:
+                  type: string
+                  format: binary
+                  description: 'Must be a file. Must not be greater than 51200 kilobytes.'
+              required:
+                - carga_academica_id
+                - titulo
+                - file
+      security: []
+  '/api/v1/materials/{material_id}/download':
+    get:
+      summary: ''
+      operationId: getApiV1MaterialsMaterial_idDownload
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error:
+                    code: unauthenticated
+                    message: 'Debes iniciar sesión.'
+                    fields: {  }
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: unauthenticated
+                      message:
+                        type: string
+                        example: 'Debes iniciar sesión.'
+                      fields:
+                        type: object
+                        properties: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: material_id
+        description: 'The ID of the material.'
+        example: architecto
+        required: true
+        schema:
+          type: string
+  '/api/v1/materials/{material_id}':
+    patch:
+      summary: ''
+      operationId: patchApiV1MaterialsMaterial_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: b
+                descripcion:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: 'n'
+                  nullable: true
+                semana:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 52.'
+                  example: 7
+                  nullable: true
+                activo:
+                  type: boolean
+                  description: ''
+                  example: true
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiV1MaterialsMaterial_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: material_id
+        description: 'The ID of the material.'
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/v1/material-links:
+    post:
+      summary: ''
+      operationId: postApiV1MaterialLinks
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                carga_academica_id:
+                  type: string
+                  description: 'Must be a valid UUID. The <code>id</code> of an existing record in the carga_academica table.'
+                  example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+                titulo:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: g
+                descripcion:
+                  type: string
+                  description: 'Must not be greater than 500 characters.'
+                  example: z
+                  nullable: true
+                semana:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 52.'
+                  example: 17
+                  nullable: true
+                url:
+                  type: string
+                  description: 'Must be a valid URL. Must not be greater than 500 characters.'
+                  example: 'https://www.gulgowski.com/nihil-accusantium-harum-mollitia-modi-deserunt'
+              required:
+                - carga_academica_id
+                - titulo
+                - url
+      security: []
+  '/api/v1/materials/{material_id}/file':
+    put:
+      summary: ''
+      operationId: putApiV1MaterialsMaterial_idFile
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 'Must be a file. Must not be greater than 51200 kilobytes.'
+              required:
+                - file
+      security: []
+    parameters:
+      -
+        in: path
+        name: material_id
+        description: 'The ID of the material.'
+        example: architecto
+        required: true
+        schema:
+          type: string
   /api/v1/schedules:
     get:
       summary: ''
@@ -1284,7 +1531,7 @@ paths:
                 starts_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 ends_at:
                   type: string
                   description: 'Must be a valid date. Must be a date after <code>starts_at</code>.'
@@ -1292,7 +1539,7 @@ paths:
                 event_type:
                   type: string
                   description: ''
-                  example: holiday
+                  example: academic
                   enum:
                     - academic
                     - holiday
@@ -1369,7 +1616,7 @@ paths:
                 mode:
                   type: string
                   description: ''
-                  example: mixed
+                  example: exit
                   enum:
                     - entry
                     - exit
@@ -1406,7 +1653,7 @@ paths:
                 mode:
                   type: string
                   description: ''
-                  example: exit
+                  example: mixed
                   enum:
                     - entry
                     - exit
@@ -1414,7 +1661,7 @@ paths:
                 active:
                   type: boolean
                   description: ''
-                  example: true
+                  example: false
       security: []
     parameters:
       -
@@ -1536,7 +1783,7 @@ paths:
                 active:
                   type: boolean
                   description: ''
-                  example: true
+                  example: false
               required:
                 - label
                 - device_identifier
@@ -1607,7 +1854,7 @@ paths:
                 event_type:
                   type: string
                   description: ''
-                  example: late
+                  example: absence
                   enum:
                     - entry
                     - exit
@@ -1616,7 +1863,7 @@ paths:
                 occurred_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 reason:
                   type: string
                   description: 'Must not be greater than 1000 characters.'
@@ -1646,7 +1893,7 @@ paths:
                 date:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
               required:
                 - date
       security: []
@@ -1918,7 +2165,7 @@ paths:
                 date:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 adjustment_type:
                   type: string
                   description: ''
@@ -2097,7 +2344,7 @@ paths:
                 recurrence:
                   type: string
                   description: ''
-                  example: monthly
+                  example: single
                   enum:
                     - single
                     - monthly
@@ -2111,7 +2358,7 @@ paths:
                 early_payment_deadline:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                   nullable: true
               required:
                 - code
@@ -2147,7 +2394,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: mensualidad
+                  example: matricula
                   enum:
                     - cuota_ingreso
                     - matricula
@@ -2170,7 +2417,7 @@ paths:
                 recurrence:
                   type: string
                   description: ''
-                  example: single
+                  example: annual
                   enum:
                     - single
                     - monthly
@@ -2184,7 +2431,7 @@ paths:
                 early_payment_deadline:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                   nullable: true
       security: []
     parameters:
@@ -2272,11 +2519,11 @@ paths:
                 stackable_with_early_payment:
                   type: boolean
                   description: ''
-                  example: true
+                  example: false
                 starts_on:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 ends_on:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>starts_on</code>.'
@@ -2384,7 +2631,7 @@ paths:
                 effective_from:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 effective_until:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>effective_from</code>.'
@@ -2447,7 +2694,7 @@ paths:
                 period_start:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 period_end:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>period_start</code>.'
@@ -2502,7 +2749,7 @@ paths:
                 period_start:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2026-06-08T22:28:50'
+                  example: '2026-06-08T22:32:41'
                 period_end:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>period_start</code>.'
@@ -2510,7 +2757,7 @@ paths:
                 format:
                   type: string
                   description: ''
-                  example: pdf
+                  example: xlsx
                   enum:
                     - pdf
                     - xlsx
@@ -2794,7 +3041,7 @@ paths:
                 closed:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
               required:
                 - closed
       security: []
@@ -2867,7 +3114,7 @@ paths:
                 report_type:
                   type: string
                   description: ''
-                  example: report_card
+                  example: ranking
                   enum:
                     - report_card
                     - grade_summary
@@ -2951,7 +3198,7 @@ paths:
                 estado:
                   type: string
                   description: ''
-                  example: pendiente
+                  example: registrada
                   enum:
                     - registrada
                     - ausente
@@ -2999,7 +3246,7 @@ paths:
                 preview:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                 notas:
                   type: array
                   description: 'Must have at least 1 items.'
@@ -3015,7 +3262,7 @@ paths:
                       estado:
                         type: string
                         description: ''
-                        example: registrada
+                        example: exonerado
                         enum:
                           - registrada
                           - ausente
@@ -3069,7 +3316,7 @@ paths:
                 estado:
                   type: string
                   description: ''
-                  example: registrada
+                  example: pendiente
                   enum:
                     - registrada
                     - ausente
