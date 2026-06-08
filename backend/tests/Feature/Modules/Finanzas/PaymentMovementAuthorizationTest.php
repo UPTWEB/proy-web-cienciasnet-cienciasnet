@@ -33,6 +33,9 @@ class PaymentMovementAuthorizationTest extends TestCase
 
         $this->obligation = ObligacionPago::factory()->create([
             'estado' => 'pendiente',
+            'monto_base_snapshot' => 500,
+            'monto_ordinario_snapshot' => 500,
+            'monto_pronto_pago_snapshot' => 500,
         ]);
     }
 

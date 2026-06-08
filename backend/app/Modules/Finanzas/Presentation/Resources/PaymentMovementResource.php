@@ -14,7 +14,7 @@ class PaymentMovementResource extends JsonResource
             'obligation_id' => $this->obligacion_pago_id,
             'movement_type' => $this->tipo,
             'amount' => (float) $this->monto,
-            'method' => $this->when($this->tipo === 'pago', $this->mapMethod($this->medio_pago)),
+            'method' => $this->when($this->tipo === 'pago', fn () => $this->mapMethod($this->medio_pago)),
             'reference' => $this->referencia,
             'receipt_number' => $this->numero_recibo,
             'receipt_url' => $this->when(

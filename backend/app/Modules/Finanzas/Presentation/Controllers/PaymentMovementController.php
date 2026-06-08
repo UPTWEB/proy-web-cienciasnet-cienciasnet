@@ -60,6 +60,8 @@ class PaymentMovementController extends Controller
 
     public function downloadReceipt(string $paymentMovementId, Request $request): JsonResponse
     {
+        $request->user()->can('gestionar_finanzas') || abort(403);
+
         $movement = $this->repository->findOrFail($paymentMovementId);
 
         if ($movement->tipo !== 'pago') {

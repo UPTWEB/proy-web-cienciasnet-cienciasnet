@@ -3,6 +3,7 @@
 namespace App\Modules\Finanzas\Presentation\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class CreatePaymentMovementRequest extends FormRequest
 {
@@ -29,7 +30,6 @@ class CreatePaymentMovementRequest extends FormRequest
                 'string',
                 'min:1',
                 'max:150',
-                'required_if:movement_type,payment',
                 'prohibited_if:movement_type,reversal,refund',
             ],
             'reason' => [
@@ -37,10 +37,34 @@ class CreatePaymentMovementRequest extends FormRequest
                 'string',
                 'min:1',
                 'max:1000',
-                'required_if:movement_type,reversal,refund',
                 'prohibited_if:movement_type,payment',
             ],
         ];
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator) {
+            $data = $validator->getData();
+            $movementType = $data['movement_type'] ?? null;
+            $method = $data['method'] ?? null;
+            $reference = $data['reference'] ?? null;
+            $reason = $data['reason'] ?? null;
+
+            if ($movementType === 'payment' && $method !== 'cash' && empty($reference)) {
+                $validator->errors()->add(
+                    'reference',
+                    'La referencia es requerida para transferencias, Yape, Plin o tarjeta.'
+                );
+            }
+
+            if (in_array($movementType, ['reversal', 'refund'], true) && empty($reason)) {
+                $validator->errors()->add(
+                    'reason',
+                    'El motivo es requerido para anulaciones y devoluciones.'
+                );
+            }
+        });
     }
 
     public function messages(): array
@@ -57,8 +81,6 @@ class CreatePaymentMovementRequest extends FormRequest
             'occurred_at.date_format' => 'La fecha debe tener formato ISO 8601 (Y-m-d\TH:i:s).',
             'method.required_if' => 'El método de pago es requerido para pagos.',
             'method.in' => 'El método debe ser: cash, transfer, yape, plin, card u other.',
-            'reference.required_if' => 'La referencia es requerida para transferencias, Yape, Plin o tarjeta.',
-            'reason.required_if' => 'El motivo es requerido para anulaciones y devoluciones.',
         ];
     }
 }

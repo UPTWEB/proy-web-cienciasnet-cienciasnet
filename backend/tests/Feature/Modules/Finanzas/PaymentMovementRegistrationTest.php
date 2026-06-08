@@ -21,6 +21,12 @@ class PaymentMovementRegistrationTest extends TestCase
 
     protected User $yanina;
 
+    protected PeriodoAcademico $period;
+
+    protected ConceptoPago $concept;
+
+    protected Alumno $student;
+
     protected ObligacionPago $obligation;
 
     protected function setUp(): void
@@ -33,9 +39,9 @@ class PaymentMovementRegistrationTest extends TestCase
         $this->yanina->assignRole('administrativo');
         $this->yanina->givePermissionTo('gestionar_finanzas');
 
-        $period = PeriodoAcademico::factory()->create(['estado' => 'activo']);
-        $concept = ConceptoPago::factory()->create([
-            'periodo_academico_id' => $period->id,
+        $this->period = PeriodoAcademico::factory()->create(['estado' => 'activo']);
+        $this->concept = ConceptoPago::factory()->create([
+            'periodo_academico_id' => $this->period->id,
             'estado' => 'vigente',
             'monto_base' => 500,
             'descuento_pronto_pago' => 50,
@@ -43,12 +49,12 @@ class PaymentMovementRegistrationTest extends TestCase
             'creado_por' => $this->yanina->id,
         ]);
 
-        $student = Alumno::factory()
+        $this->student = Alumno::factory()
             ->has(User::factory())
             ->create();
 
         $grade = Grado::create([
-            'periodo_academico_id' => $period->id,
+            'periodo_academico_id' => $this->period->id,
             'nombre' => 'Primer Grado',
             'nivel' => 'primaria',
             'orden' => 1,
@@ -63,7 +69,7 @@ class PaymentMovementRegistrationTest extends TestCase
             'activo' => true,
         ]);
         Matricula::create([
-            'alumno_id' => $student->id,
+            'alumno_id' => $this->student->id,
             'seccion_id' => $section->id,
             'codigo' => 'MAT-'.fake()->unique()->numerify('######'),
             'fecha' => now()->toDateString(),
@@ -72,8 +78,8 @@ class PaymentMovementRegistrationTest extends TestCase
         ]);
 
         $this->obligation = ObligacionPago::factory()->create([
-            'alumno_id' => $student->id,
-            'concepto_id' => $concept->id,
+            'alumno_id' => $this->student->id,
+            'concepto_id' => $this->concept->id,
             'monto_base_snapshot' => 500,
             'monto_ordinario_snapshot' => 500,
             'monto_pronto_pago_snapshot' => 450,
@@ -96,7 +102,7 @@ class PaymentMovementRegistrationTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJsonPath('data.movement_type', 'pago');
-        $response->assertJsonPath('data.amount', 450.00);
+        $response->assertJsonPath('data.amount', 450);
 
         $this->assertDatabaseHas('movimientos_pago', [
             'obligacion_pago_id' => $this->obligation->id,
@@ -141,7 +147,7 @@ class PaymentMovementRegistrationTest extends TestCase
             ]);
 
         $response->assertStatus(201);
-        $response->assertJsonPath('data.amount', 500.00);
+        $response->assertJsonPath('data.amount', 500);
     }
 
     public function test_rejects_payment_for_already_paid_obligation(): void
@@ -182,19 +188,9 @@ class PaymentMovementRegistrationTest extends TestCase
             'fecha_pago' => now(),
         ]);
 
-        $period = PeriodoAcademico::factory()->create(['estado' => 'activo']);
-        $concept = ConceptoPago::factory()->create([
-            'periodo_academico_id' => $period->id,
-            'creado_por' => $this->yanina->id,
-        ]);
-
-        $student = Alumno::factory()
-            ->has(User::factory())
-            ->create();
-
         $anotherObligation = ObligacionPago::factory()->create([
-            'alumno_id' => $student->id,
-            'concepto_id' => $concept->id,
+            'alumno_id' => $this->student->id,
+            'concepto_id' => $this->concept->id,
             'monto_base_snapshot' => 500,
             'monto_ordinario_snapshot' => 500,
             'monto_pronto_pago_snapshot' => 450,
@@ -212,7 +208,7 @@ class PaymentMovementRegistrationTest extends TestCase
                 'reference' => 'TXN-99999',
             ]);
 
-        $response->assertUnprocessable();
+        $response->assertStatus(409);
     }
 
     public function test_generates_sequential_receipt_numbers(): void
@@ -229,43 +225,9 @@ class PaymentMovementRegistrationTest extends TestCase
         $first->assertStatus(201);
         $firstReceipt = $first->json('data.receipt_number');
 
-        $period = PeriodoAcademico::factory()->create(['estado' => 'activo']);
-        $concept = ConceptoPago::factory()->create([
-            'periodo_academico_id' => $period->id,
-            'creado_por' => $this->yanina->id,
-        ]);
-
-        $student = Alumno::factory()
-            ->has(User::factory())
-            ->create();
-
-        $grade = Grado::create([
-            'periodo_academico_id' => $period->id,
-            'nombre' => 'Segundo Grado',
-            'nivel' => 'primaria',
-            'orden' => 2,
-            'activo' => true,
-        ]);
-        $section = Seccion::create([
-            'grado_id' => $grade->id,
-            'nombre' => 'B',
-            'turno' => 'tarde',
-            'aula' => '102',
-            'capacidad' => 30,
-            'activo' => true,
-        ]);
-        Matricula::create([
-            'alumno_id' => $student->id,
-            'seccion_id' => $section->id,
-            'codigo' => 'MAT-'.fake()->unique()->numerify('######'),
-            'fecha' => now()->toDateString(),
-            'estado' => 'activo',
-            'registrado_por' => $this->yanina->id,
-        ]);
-
         $anotherObligation = ObligacionPago::factory()->create([
-            'alumno_id' => $student->id,
-            'concepto_id' => $concept->id,
+            'alumno_id' => $this->student->id,
+            'concepto_id' => $this->concept->id,
             'monto_base_snapshot' => 500,
             'monto_ordinario_snapshot' => 500,
             'monto_pronto_pago_snapshot' => 450,

@@ -23,7 +23,7 @@ class CreatePaymentMovementDTO
             movementType: $data['movement_type'],
             amount: (float) $data['amount'],
             occurredAt: Carbon::parse($data['occurred_at']),
-            method: $data['method'],
+            method: $data['method'] ?? '',
             reference: $data['reference'] ?? null,
             reason: $data['reason'] ?? null,
         );

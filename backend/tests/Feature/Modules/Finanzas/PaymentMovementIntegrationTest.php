@@ -145,7 +145,7 @@ class PaymentMovementIntegrationTest extends TestCase
 
         $receiptResponse->assertOk();
         $receiptResponse->assertJsonPath('data.receipt_number', $payResponse->json('data.receipt_number'));
-        $receiptResponse->assertJsonPath('data.amount', 450.00);
+        $receiptResponse->assertJsonPath('data.amount', 450);
     }
 
     public function test_snapshots_remain_frozen_after_payment(): void

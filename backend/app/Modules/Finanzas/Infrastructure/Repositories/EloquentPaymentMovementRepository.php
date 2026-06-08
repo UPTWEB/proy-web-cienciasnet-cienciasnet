@@ -5,7 +5,6 @@ namespace App\Modules\Finanzas\Infrastructure\Repositories;
 use App\Modules\Finanzas\Domain\Repositories\PaymentMovementRepositoryInterface;
 use App\Modules\Finanzas\Infrastructure\Models\MovimientoPago;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class EloquentPaymentMovementRepository implements PaymentMovementRepositoryInterface
 {
