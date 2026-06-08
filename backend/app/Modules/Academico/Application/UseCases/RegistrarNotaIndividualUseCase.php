@@ -5,7 +5,6 @@ namespace App\Modules\Academico\Application\UseCases;
 use App\Modules\Academico\Infrastructure\Models\Examen;
 use App\Modules\Academico\Infrastructure\Models\Nota;
 use Illuminate\Validation\ValidationException;
-use InvalidArgumentException;
 
 class RegistrarNotaIndividualUseCase
 {
@@ -16,7 +15,7 @@ class RegistrarNotaIndividualUseCase
         // Prepare data
         $estado = $data['estado'];
         $puntaje = null;
-        
+
         if ($estado === 'registrada') {
             $puntaje = $data['puntaje'] ?? 0;
         }

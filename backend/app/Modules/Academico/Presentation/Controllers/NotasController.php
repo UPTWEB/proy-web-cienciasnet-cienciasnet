@@ -3,13 +3,13 @@
 namespace App\Modules\Academico\Presentation\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Academico\Application\Requests\ImportarNotasRequest;
+use App\Modules\Academico\Application\Requests\RegistrarNotaRequest;
+use App\Modules\Academico\Application\UseCases\ActualizarNotaUseCase;
+use App\Modules\Academico\Application\UseCases\ImportarNotasMasivoUseCase;
+use App\Modules\Academico\Application\UseCases\RegistrarNotaIndividualUseCase;
 use App\Modules\Academico\Infrastructure\Models\Examen;
 use App\Modules\Academico\Infrastructure\Models\Nota;
-use App\Modules\Academico\Application\Requests\RegistrarNotaRequest;
-use App\Modules\Academico\Application\Requests\ImportarNotasRequest;
-use App\Modules\Academico\Application\UseCases\RegistrarNotaIndividualUseCase;
-use App\Modules\Academico\Application\UseCases\ImportarNotasMasivoUseCase;
-use App\Modules\Academico\Application\UseCases\ActualizarNotaUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 
@@ -23,7 +23,7 @@ class NotasController extends Controller
 
         return response()->json([
             'message' => 'Nota registrada correctamente.',
-            'data' => $nota
+            'data' => $nota,
         ], 201);
     }
 
@@ -33,7 +33,7 @@ class NotasController extends Controller
 
         $data = $request->validated();
         $preview = $data['preview'] ?? false;
-        
+
         $result = $useCase->execute($examen, $data['notas'], $request->user()->id, $preview);
 
         return response()->json($result, $preview ? 200 : 201);
@@ -48,7 +48,7 @@ class NotasController extends Controller
 
         return response()->json([
             'message' => 'Nota actualizada correctamente.',
-            'data' => $notaActualizada
+            'data' => $notaActualizada,
         ]);
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Modules\Academico\Application\UseCases;
 
 use App\Modules\Academico\Infrastructure\Models\Nota;
-use Illuminate\Support\Facades\DB;
 use App\Modules\Usuarios\Infrastructure\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class ActualizarNotaUseCase
@@ -16,7 +16,7 @@ class ActualizarNotaUseCase
         return DB::transaction(function () use ($nota, $data, $user) {
             $estado = $data['estado'] ?? $nota->estado;
             $nuevoPuntaje = null;
-            
+
             if ($estado === 'registrada') {
                 $nuevoPuntaje = $data['puntaje'] ?? $nota->puntaje;
             }

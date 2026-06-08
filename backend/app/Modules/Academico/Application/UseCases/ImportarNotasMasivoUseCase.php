@@ -4,7 +4,6 @@ namespace App\Modules\Academico\Application\UseCases;
 
 use App\Modules\Academico\Infrastructure\Models\Examen;
 use Illuminate\Support\Facades\DB;
-use App\Modules\Academico\Application\UseCases\RegistrarNotaIndividualUseCase;
 use Illuminate\Validation\ValidationException;
 
 class ImportarNotasMasivoUseCase
@@ -23,7 +22,7 @@ class ImportarNotasMasivoUseCase
         try {
             DB::transaction(function () use ($examen, $notasData, $userId, $preview, &$result) {
                 $processed = 0;
-                
+
                 foreach ($notasData as $index => $notaData) {
                     try {
                         $nota = $this->registrarIndividualUseCase->execute($examen, $notaData, $userId);

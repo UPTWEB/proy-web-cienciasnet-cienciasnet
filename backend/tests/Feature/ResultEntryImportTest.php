@@ -11,9 +11,10 @@ use App\Modules\Academico\Infrastructure\Models\Nota;
 use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
 use App\Modules\Academico\Infrastructure\Models\Seccion;
 use App\Modules\Usuarios\Infrastructure\Models\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ResultEntryImportTest extends TestCase
@@ -21,10 +22,15 @@ class ResultEntryImportTest extends TestCase
     use RefreshDatabase;
 
     private User $docente;
+
     private User $otroDocente;
+
     private User $coordinador;
+
     private Examen $examen;
+
     private Matricula $matricula1;
+
     private Matricula $matricula2;
 
     protected function setUp(): void
@@ -37,12 +43,12 @@ class ResultEntryImportTest extends TestCase
 
         $this->docente = User::factory()->create();
         $this->docente->assignRole('docente');
-        $docenteId = \Illuminate\Support\Str::uuid();
+        $docenteId = Str::uuid();
         DB::table('docentes')->insert(['id' => $docenteId, 'user_id' => $this->docente->id, 'dni' => '12345678', 'nombres' => 'D', 'apellidos' => '1']);
 
         $this->otroDocente = User::factory()->create();
         $this->otroDocente->assignRole('docente');
-        $otroDocenteId = \Illuminate\Support\Str::uuid();
+        $otroDocenteId = Str::uuid();
         DB::table('docentes')->insert(['id' => $otroDocenteId, 'user_id' => $this->otroDocente->id, 'dni' => '87654321', 'nombres' => 'D', 'apellidos' => '2']);
 
         $this->coordinador = User::factory()->create();
@@ -52,7 +58,7 @@ class ResultEntryImportTest extends TestCase
             'nombre' => '2026', 'tipo' => 'regular', 'estado' => 'activo', 'fecha_inicio' => now(), 'fecha_fin' => now()->addMonths(10),
             'creado_por' => $this->coordinador->id,
         ]);
-        
+
         $grado = Grado::create(['periodo_academico_id' => $periodo->id, 'nombre' => '1ro Secundaria', 'nivel' => 'secundaria', 'orden' => 1]);
         $seccion = Seccion::create(['grado_id' => $grado->id, 'nombre' => 'A', 'turno' => 'mañana']);
         $curso = Curso::create(['codigo' => 'MAT1', 'nombre' => 'Matemáticas', 'area' => 'ciencias', 'grado_id' => $grado->id]);
@@ -66,24 +72,26 @@ class ResultEntryImportTest extends TestCase
             'vigente_desde' => now(),
         ]);
 
-        $alumno1 = User::factory()->create(); $alumno1->assignRole('alumno');
-        $alumno1Id = \Illuminate\Support\Str::uuid();
+        $alumno1 = User::factory()->create();
+        $alumno1->assignRole('alumno');
+        $alumno1Id = Str::uuid();
         DB::table('alumnos')->insert(['id' => $alumno1Id, 'user_id' => $alumno1->id, 'dni' => '11111111', 'nombres' => 'A', 'apellidos' => '1']);
-        
-        $alumno2 = User::factory()->create(); $alumno2->assignRole('alumno');
-        $alumno2Id = \Illuminate\Support\Str::uuid();
+
+        $alumno2 = User::factory()->create();
+        $alumno2->assignRole('alumno');
+        $alumno2Id = Str::uuid();
         DB::table('alumnos')->insert(['id' => $alumno2Id, 'user_id' => $alumno2->id, 'dni' => '22222222', 'nombres' => 'A', 'apellidos' => '2']);
 
         $this->matricula1 = Matricula::create([
             'periodo_academico_id' => $periodo->id, 'seccion_id' => $seccion->id, 'alumno_id' => $alumno1Id,
             'codigo' => 'MAT001', 'fecha' => now(),
-            'registrado_por' => $this->coordinador->id, 'estado' => 'activa'
+            'registrado_por' => $this->coordinador->id, 'estado' => 'activa',
         ]);
-        
+
         $this->matricula2 = Matricula::create([
             'periodo_academico_id' => $periodo->id, 'seccion_id' => $seccion->id, 'alumno_id' => $alumno2Id,
             'codigo' => 'MAT002', 'fecha' => now(),
-            'registrado_por' => $this->coordinador->id, 'estado' => 'activa'
+            'registrado_por' => $this->coordinador->id, 'estado' => 'activa',
         ]);
 
         $this->examen = Examen::create([
@@ -103,7 +111,7 @@ class ResultEntryImportTest extends TestCase
         $response = $this->actingAs($this->docente)->postJson("/api/v1/assessments/{$this->examen->id}/grades", [
             'matricula_id' => $this->matricula1->id,
             'estado' => 'registrada',
-            'puntaje' => 15.5
+            'puntaje' => 15.5,
         ]);
 
         $response->assertStatus(201);
@@ -119,7 +127,7 @@ class ResultEntryImportTest extends TestCase
         $response = $this->actingAs($this->otroDocente)->postJson("/api/v1/assessments/{$this->examen->id}/grades", [
             'matricula_id' => $this->matricula1->id,
             'estado' => 'registrada',
-            'puntaje' => 15.5
+            'puntaje' => 15.5,
         ]);
 
         $response->assertStatus(403);
@@ -131,7 +139,7 @@ class ResultEntryImportTest extends TestCase
             'notas' => [
                 ['matricula_id' => $this->matricula1->id, 'estado' => 'registrada', 'puntaje' => 18],
                 ['matricula_id' => $this->matricula2->id, 'estado' => 'ausente'],
-            ]
+            ],
         ]);
 
         $response->assertStatus(201);
@@ -145,11 +153,11 @@ class ResultEntryImportTest extends TestCase
             'notas' => [
                 ['matricula_id' => $this->matricula1->id, 'estado' => 'registrada', 'puntaje' => 18],
                 ['matricula_id' => $this->matricula2->id, 'estado' => 'registrada', 'puntaje' => 25], // Mayor a 20!
-            ]
+            ],
         ]);
 
         $response->assertStatus(422);
-        
+
         // Verifica que la nota 1 tampoco se guardó por el rollback
         $this->assertDatabaseMissing('notas', ['matricula_id' => $this->matricula1->id]);
     }
@@ -161,29 +169,29 @@ class ResultEntryImportTest extends TestCase
             'matricula_id' => $this->matricula1->id,
             'puntaje' => 12,
             'estado' => 'registrada',
-            'registrado_por' => $this->docente->id
+            'registrado_por' => $this->docente->id,
         ]);
 
         $response = $this->actingAs($this->docente)->putJson("/api/v1/grades/{$nota->id}", [
             'matricula_id' => $this->matricula1->id, // request rule requires it
             'estado' => 'registrada',
-            'puntaje' => 16 // Cambio
+            'puntaje' => 16, // Cambio
         ]);
 
         $response->assertStatus(200);
-        
+
         // Verifica la tabla de auditoría
         $this->assertDatabaseHas('audit_logs', [
             'user_id' => $this->docente->id,
             'model' => 'Nota',
             'model_id' => $nota->id,
-            'action' => 'UPDATE_NOTA'
+            'action' => 'UPDATE_NOTA',
         ]);
 
         $log = DB::table('audit_logs')->where('model_id', $nota->id)->first();
         $oldValues = json_decode($log->old_values, true);
         $newValues = json_decode($log->new_values, true);
-        
+
         $this->assertEquals(12, $oldValues['puntaje']);
         $this->assertEquals(16, $newValues['puntaje']);
     }

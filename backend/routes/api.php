@@ -1,17 +1,17 @@
 <?php
 
 use App\Modules\Academico\Presentation\Controllers\AcademicController;
-use App\Modules\Auth\Presentation\Controllers\PasswordRecoveryController;
-use App\Modules\Auth\Presentation\Controllers\SessionController;
-use App\Modules\Usuarios\Presentation\Controllers\FamilyLinkController;
-use App\Modules\Usuarios\Presentation\Controllers\AccountController;
 use App\Modules\Academico\Presentation\Controllers\AssessmentController;
+use App\Modules\Academico\Presentation\Controllers\NotasController;
 use App\Modules\Asistencia\Presentation\Controllers\StationController;
 use App\Modules\Asistencia\Presentation\Controllers\StudentAttendanceController;
 use App\Modules\Asistencia\Presentation\Controllers\TeacherAttendanceController;
+use App\Modules\Auth\Presentation\Controllers\PasswordRecoveryController;
+use App\Modules\Auth\Presentation\Controllers\SessionController;
 use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
+use App\Modules\Usuarios\Presentation\Controllers\AccountController;
 use App\Modules\Usuarios\Presentation\Controllers\BiometricController;
-use App\Modules\Academico\Presentation\Controllers\NotasController;
+use App\Modules\Usuarios\Presentation\Controllers\FamilyLinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
