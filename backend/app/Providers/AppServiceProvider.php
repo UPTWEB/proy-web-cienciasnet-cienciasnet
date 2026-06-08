@@ -10,6 +10,8 @@ use App\Modules\Academico\Presentation\Policies\AcademicReportPolicy;
 use App\Modules\Academico\Presentation\Policies\ExamenPolicy;
 use App\Modules\Academico\Presentation\Policies\NotaPolicy;
 use App\Modules\Academico\Presentation\Policies\PeriodoAcademicoPolicy;
+use App\Modules\Comunicados\Infrastructure\Models\Comunicado;
+use App\Modules\Comunicados\Presentation\Policies\ComunicadoPolicy;
 use App\Modules\Finanzas\Domain\Repositories\ObligationRepositoryInterface;
 use App\Modules\Finanzas\Infrastructure\Repositories\EloquentObligationRepository;
 use App\Modules\Horarios\Infrastructure\Models\EventoCalendario;
@@ -82,6 +84,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(EventoCalendario::class, EventoCalendarioPolicy::class);
         Gate::policy(Horario::class, HorarioPolicy::class);
         Gate::policy(Material::class, MaterialPolicy::class);
+        Gate::policy(Comunicado::class, ComunicadoPolicy::class);
         Gate::policy(ReporteAcademico::class, AcademicReportPolicy::class);
 
         RateLimiter::for('human-login', fn (Request $request) => [
