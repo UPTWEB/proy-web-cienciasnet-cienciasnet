@@ -25,8 +25,7 @@ class PaymentObligationController extends Controller
         private ObligationAdjustmentService $adjustmentService,
         private EloquentObligationRepository $repository,
         private AuditLogger $auditLogger
-    ) {
-    }
+    ) {}
 
     public function index(ListPaymentObligationsRequest $request): ResourceCollection
     {

@@ -20,9 +20,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
  */
 class ObligationAdjustmentService
 {
-    public function __construct(private AuditLogger $auditLogger)
-    {
-    }
+    public function __construct(private AuditLogger $auditLogger) {}
 
     /**
      * @throws ConflictHttpException If obligation is not pending
