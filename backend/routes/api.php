@@ -99,6 +99,7 @@ Route::prefix('v1')->group(function (): void {
         Route::post('/incidents/{incident}/follow-ups', [IncidentController::class, 'createIncidentFollowUp']);
         Route::post('/incidents/reports', [IncidentController::class, 'generateIncidentReport']);
 
+        Route::post('/announcements', [CommunicationController::class, 'createAnnouncement']);
         Route::get('/announcements', [CommunicationController::class, 'listAnnouncements']);
         Route::put('/announcements/{announcement}/read', [CommunicationController::class, 'markAnnouncementRead']);
         Route::put('/announcements/{announcement}/archive', [CommunicationController::class, 'archiveAnnouncement']);
