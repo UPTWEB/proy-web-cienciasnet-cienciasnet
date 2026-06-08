@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Academico\Presentation\Controllers\AcademicController;
+use App\Modules\Academico\Presentation\Controllers\AcademicReportController;
 use App\Modules\Academico\Presentation\Controllers\AssessmentController;
 use App\Modules\Academico\Presentation\Controllers\NotasController;
 use App\Modules\Asistencia\Presentation\Controllers\StationController;
@@ -11,6 +12,7 @@ use App\Modules\Auth\Presentation\Controllers\SessionController;
 use App\Modules\Finanzas\Presentation\Controllers\FinanceConfigController;
 use App\Modules\Finanzas\Presentation\Controllers\PaymentObligationController;
 use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
+use App\Modules\Horarios\Presentation\Controllers\ScheduleController;
 use App\Modules\Usuarios\Presentation\Controllers\AccountController;
 use App\Modules\Usuarios\Presentation\Controllers\BiometricController;
 use App\Modules\Usuarios\Presentation\Controllers\FamilyLinkController;
@@ -71,6 +73,13 @@ Route::prefix('v1')->group(function (): void {
         Route::get('teaching-assignments', [AcademicController::class, 'assignments']);
         Route::post('teaching-assignments', [AcademicController::class, 'storeAssignment'])->name('api.v1.teaching-assignments.store');
 
+        // Comunicados y Notificaciones
+        // Horarios y Calendario
+        Route::get('/schedules', [ScheduleController::class, 'listSchedules']);
+        Route::post('/schedules', [ScheduleController::class, 'createSchedule']);
+        Route::get('/calendar-events', [ScheduleController::class, 'listCalendarEvents']);
+        Route::post('/calendar-events', [ScheduleController::class, 'createCalendarEvent']);
+
         // Estaciones
         Route::get('stations', [StationController::class, 'index']);
         Route::post('stations', [StationController::class, 'store']);
@@ -129,6 +138,13 @@ Route::prefix('v1')->group(function (): void {
         // Assessments
         Route::get('assessments', [AssessmentController::class, 'index']);
         Route::post('assessments', [AssessmentController::class, 'store'])->name('api.v1.assessments.store');
+        Route::post('assessments/{examen}/publication', [AcademicReportController::class, 'publishAssessment']);
+        Route::put('assessments/{examen}/closure', [AcademicReportController::class, 'setAssessmentClosure']);
+
+        // Academic Reports & Rankings
+        Route::get('rankings', [AcademicReportController::class, 'listRankings']);
+        Route::post('academic-reports', [AcademicReportController::class, 'generateAcademicReport']);
+        Route::post('assessment-results/{nota}/corrections', [AcademicReportController::class, 'correctPublishedAssessmentResult']);
 
         // Notas (Result Entry Import)
         Route::post('assessments/{examen}/grades', [NotasController::class, 'store']);
