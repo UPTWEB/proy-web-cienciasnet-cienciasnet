@@ -14,6 +14,7 @@ use App\Modules\Finanzas\Presentation\Controllers\FinanceConfigController;
 use App\Modules\Finanzas\Presentation\Controllers\PaymentObligationController;
 use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
 use App\Modules\Horarios\Presentation\Controllers\ScheduleController;
+use App\Modules\Incidencias\Presentation\Controllers\IncidentController;
 use App\Modules\Materiales\Presentation\Controllers\MaterialController;
 use App\Modules\Notificaciones\Presentation\Controllers\NotificationController;
 use App\Modules\Usuarios\Presentation\Controllers\AccountController;
@@ -91,9 +92,14 @@ Route::prefix('v1')->group(function (): void {
         Route::get('/calendar-events', [ScheduleController::class, 'listCalendarEvents']);
         Route::post('/calendar-events', [ScheduleController::class, 'createCalendarEvent']);
 
-        // Comunicados y Notificaciones
+        // Incidencias
+        Route::get('/incidents', [IncidentController::class, 'listIncidents']);
+        Route::post('/incidents', [IncidentController::class, 'createIncident']);
+        Route::post('/incidents/{incident}/transitions', [IncidentController::class, 'transitionIncident']);
+        Route::post('/incidents/{incident}/follow-ups', [IncidentController::class, 'createIncidentFollowUp']);
+        Route::post('/incidents/reports', [IncidentController::class, 'generateIncidentReport']);
+
         Route::get('/announcements', [CommunicationController::class, 'listAnnouncements']);
-        Route::post('/announcements', [CommunicationController::class, 'createAnnouncement']);
         Route::put('/announcements/{announcement}/read', [CommunicationController::class, 'markAnnouncementRead']);
         Route::put('/announcements/{announcement}/archive', [CommunicationController::class, 'archiveAnnouncement']);
         Route::get('/notifications', [NotificationController::class, 'listNotifications']);
