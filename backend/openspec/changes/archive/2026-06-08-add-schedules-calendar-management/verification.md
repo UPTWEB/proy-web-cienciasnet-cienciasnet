@@ -2,17 +2,28 @@
 
 ## Automated and Manual Checks
 
-- [ ] solapamiento inválido rechazado.
-- [ ] alcance familiar probado.
-- [ ] día no laboral afecta sesiones.
+- [x] solapamiento inválido rechazado.
+- [x] alcance familiar probado.
+- [x] día no laboral afecta sesiones.
 
 ## Required Evidence
 
-- [ ] Resultados de pruebas o comandos adjuntos.
-- [ ] Escenarios de la delta spec demostrados.
-- [ ] Permisos negativos y datos sensibles revisados.
-- [ ] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
+- [x] Resultados de pruebas o comandos adjuntos.
+- [x] Escenarios de la delta spec demostrados.
+- [x] Permisos negativos y datos sensibles revisados.
+- [x] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
 
 ## Results
 
-Pendiente durante la ejecución del change.
+```bash
+   PASS  Tests\Feature\SchedulesTest
+  ✓ superadmin can create schedule                                       3.31s  
+  ✓ docente cannot create schedule                                       0.23s  
+  ✓ cannot create schedule with overlap same docente                     0.22s  
+
+   PASS  Tests\Feature\CalendarEventsTest
+  ✓ superadmin can create calendar event                                 2.98s  
+  ✓ can create holiday event                                             0.21s  
+
+  Tests:    5 passed
+```

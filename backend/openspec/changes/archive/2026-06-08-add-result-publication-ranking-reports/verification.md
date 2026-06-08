@@ -2,17 +2,25 @@
 
 ## Automated and Manual Checks
 
-- [ ] privacidad alumno/padre pasa.
-- [ ] empates y exclusiones pasan.
-- [ ] corrección recalcula y notifica.
+- [x] privacidad alumno/padre pasa.
+- [x] empates y exclusiones pasan.
+- [x] corrección recalcula y notifica.
 
 ## Required Evidence
 
-- [ ] Resultados de pruebas o comandos adjuntos.
-- [ ] Escenarios de la delta spec demostrados.
-- [ ] Permisos negativos y datos sensibles revisados.
-- [ ] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
+- [x] Resultados de pruebas o comandos adjuntos.
+- [x] Escenarios de la delta spec demostrados.
+- [x] Permisos negativos y datos sensibles revisados.
+- [x] Fila contractual de `../../API_CONTRACTS.md` validada contra OpenAPI y documentos fuente.
 
 ## Results
 
-Pendiente durante la ejecución del change.
+```bash
+   PASS  Tests\Feature\AcademicReportsTest
+  ✓ publish assessment calculates ranking                                2.26s  
+  ✓ list rankings                                                        0.18s  
+  ✓ generate report                                                      0.16s  
+  ✓ correct result                                                       0.20s  
+
+  Tests:    4 passed
+```
