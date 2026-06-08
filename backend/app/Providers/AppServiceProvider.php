@@ -8,6 +8,8 @@ use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
 use App\Modules\Academico\Presentation\Policies\ExamenPolicy;
 use App\Modules\Academico\Presentation\Policies\NotaPolicy;
 use App\Modules\Academico\Presentation\Policies\PeriodoAcademicoPolicy;
+use App\Modules\Finanzas\Domain\Repositories\ObligationRepositoryInterface;
+use App\Modules\Finanzas\Infrastructure\Repositories\EloquentObligationRepository;
 use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 use App\Modules\Usuarios\Infrastructure\Models\User;
 use App\Modules\Usuarios\Presentation\Policies\AlumnoPolicy;
@@ -26,7 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Finance module bindings
+        $this->app->bind(
+            ObligationRepositoryInterface::class,
+            EloquentObligationRepository::class
+        );
     }
 
     /**
