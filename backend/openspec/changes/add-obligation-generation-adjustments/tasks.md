@@ -12,19 +12,19 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
 
 ### Phase 1: Domain Layer & Services
 
-- [ ] 1.1 Create `ObligationSnapshot` value object
+- [x] 1.1 Create `ObligationSnapshot` value object
   - Fields: montos congelados (base, ordinario, pronto_pago, beneficio, descuento)
   - Immutable by design
   - Owner: Fátima
 
-- [ ] 1.2 Create `ObligationGenerationService`
+- [x] 1.2 Create `ObligationGenerationService`
   - Method: `generate(concept, studentIds, dueDate): Collection<ObligacionPago>`
   - Resolve single benefit per student
   - Calculate all snapshots per rule
   - Handle transactional integrity
   - Owner: Fátima
 
-- [ ] 1.3 Create `ObligationAdjustmentService`
+- [x] 1.3 Create `ObligationAdjustmentService`
   - Method: `adjust(obligation, adjustmentData, user): ObligacionPago`
   - Validate estado='pendiente'
   - Update only: monto_ordinario, monto_pronto_pago, fecha_limite, beneficio
@@ -32,26 +32,26 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
   - Dispatch notification event
   - Owner: Fátima
 
-- [ ] 1.4 Create `ObligationRepositoryInterface`
+- [x] 1.4 Create `ObligationRepositoryInterface`
   - Methods: getByStudent, getByPeriod, getPendingByStudent, getBulkFiltered
   - Owner: Fátima
 
 ### Phase 2: Infrastructure & Data Access
 
-- [ ] 2.1 Implement `EloquentObligationRepository`
+- [x] 2.1 Implement `EloquentObligationRepository`
   - Query optimizations (indexing aware)
   - Lazy loading: avoid N+1
   - Bulk operations support
   - Owner: Fátima
 
-- [ ] 2.2 Create idempotency tracking (if needed)
+- [x] 2.2 Create idempotency tracking (if needed)
   - Table or cache-based `Idempotency-Key` storage
   - Prevent duplicate obligation generation
   - Owner: Fátima
 
 ### Phase 3: Presentation Layer
 
-- [ ] 3.1 Create Form Requests (Validation)
+- [x] 3.1 Create Form Requests (Validation)
   - `GeneratePaymentObligationsRequest`
     - Validate: academic_period_id, concept_id, due_date required
     - Validate: student_ids (if provided) are valid UUIDs
@@ -72,7 +72,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
     - Validate: Idempotency-Key present
   - Owner: Fátima
 
-- [ ] 3.2 Create API Resources (Serialization)
+- [x] 3.2 Create API Resources (Serialization)
   - `PaymentObligationResource`
     - Include: id, alumno (name, email), concepto, estado, montos, fechas
     - Follow OpenAPI schema for finance-operations
@@ -80,7 +80,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
     - Include: count affected, status, errors (if any)
   - Owner: Fátima
 
-- [ ] 3.3 Create `PaymentObligationController`
+- [x] 3.3 Create `PaymentObligationController`
   - `index(ListPaymentObligationsRequest)` → GET /payment-obligations
     - Paginated list with filters
     - Response: 200 with collection
@@ -95,7 +95,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
     - Response: 202 Accepted
   - Owner: Fátima
 
-- [ ] 3.4 Register routes in `backend/routes/api.php`
+- [x] 3.4 Register routes in `backend/routes/api.php`
   - Group under `middleware(['auth:sanctum', 'active.account'])`
   - Routes:
     - `GET /payment-obligations` → `index`
@@ -106,7 +106,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
 
 ### Phase 4: Testing & Verification
 
-- [ ] 4.1 Feature Tests: Obligation Generation
+- [x] 4.1 Feature Tests: Obligation Generation
   - ✅ Generate obligations for period creates correct counts
   - ✅ Snapshots are frozen (not modifiable after creation)
   - ✅ All-or-nothing: rollback if any failure mid-generation
@@ -115,7 +115,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
   - ✅ Response is 202 Accepted
   - Owner: Fátima
 
-- [ ] 4.2 Feature Tests: Obligation Adjustment
+- [x] 4.2 Feature Tests: Obligation Adjustment
   - ✅ Adjust pending obligation updates correctly
   - ✅ Attempt to adjust paid obligation returns 409 Conflict
   - ✅ Attempt to adjust voided obligation returns 409 Conflict
@@ -125,7 +125,7 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
   - ✅ User without `gestionar_finanzas` receives 403
   - Owner: Fátima
 
-- [ ] 4.3 Feature Tests: Bulk Adjustment
+- [x] 4.3 Feature Tests: Bulk Adjustment
   - ✅ Apply adjustment to multiple obligations by filters
   - ✅ Concept_id filter works
   - ✅ Grade_id filter works
@@ -135,12 +135,12 @@ All code placed under `backend/app/Modules/Finanzas/` with proper layering (Doma
   - ✅ Response is 202 Accepted
   - Owner: Fátima
 
-- [ ] 4.4 Authorization Tests
+- [x] 4.4 Authorization Tests
   - ✅ User without permission receives 403 on all endpoints
   - ✅ User with permission can access all endpoints
   - Owner: Fátima
 
-- [ ] 4.5 Integration Tests
+- [x] 4.5 Integration Tests
   - ✅ Full flow: generate → list → adjust → verify audit
   - ✅ Snapshots prevent retroactive changes (BE-014 concepts don't affect existing obligations)
   - ✅ Notifications queued correctly
