@@ -29,7 +29,7 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-009 | `[ ]` | `add-web-station-activation-capture` | Vincenzo | Kiara | FE-003, Backend BE-009/BE-010 |
+| FE-009 | `[x]` | `add-web-station-activation-capture` | Vincenzo | Kiara | FE-003, Backend BE-009/BE-010 |
 | FE-009A | `[ ]` | `add-biometric-station-administration` | Kiara | Vincenzo | FE-003, Backend BE-007/BE-009 |
 | FE-010 | `[ ]` | `add-student-attendance-supervision` | Kiara | Vincenzo | FE-002, FE-003, Backend BE-011 |
 | FE-011 | `[ ]` | `add-teacher-attendance-payroll` | Kiara | Vincenzo | FE-003, Backend BE-012/BE-013 |
