@@ -39,3 +39,9 @@ export async function listAcademic(path: AcademicPath): Promise<Page<AcademicIte
 export async function createAcademic(path: AcademicPath, input: Record<string, unknown>): Promise<AcademicItem> {
   return data(await apiClient.post(`/api/v1/${path}`, input))
 }
+export async function updateAcademic(path: AcademicPath, id: string, input: Record<string, unknown>): Promise<AcademicItem> {
+  return data(await apiClient.patch(`/api/v1/${path}/${id}`, input))
+}
+export async function deleteAcademic(path: AcademicPath, id: string): Promise<void> {
+  await apiClient.delete(`/api/v1/${path}/${id}`)
+}

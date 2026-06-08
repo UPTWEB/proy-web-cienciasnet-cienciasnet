@@ -59,14 +59,28 @@ Route::prefix('v1')->group(function (): void {
         Route::patch('academic-periods/{academicPeriodId}', [AcademicController::class, 'updatePeriod'])->name('api.v1.academic-periods.update');
         Route::get('grades', [AcademicController::class, 'grades']);
         Route::post('grades', [AcademicController::class, 'storeGrade'])->name('api.v1.grades.store');
+        Route::patch('grades/{id}', [AcademicController::class, 'updateGrade']);
+        Route::delete('grades/{id}', [AcademicController::class, 'destroyGrade']);
+        
         Route::get('sections', [AcademicController::class, 'sections']);
         Route::post('sections', [AcademicController::class, 'storeSection'])->name('api.v1.sections.store');
+        Route::patch('sections/{id}', [AcademicController::class, 'updateSection']);
+        Route::delete('sections/{id}', [AcademicController::class, 'destroySection']);
+        
         Route::get('courses', [AcademicController::class, 'courses']);
         Route::post('courses', [AcademicController::class, 'storeCourse'])->name('api.v1.courses.store');
+        Route::patch('courses/{id}', [AcademicController::class, 'updateCourse']);
+        Route::delete('courses/{id}', [AcademicController::class, 'destroyCourse']);
+        
         Route::get('enrollments', [AcademicController::class, 'enrollments']);
         Route::post('enrollments', [AcademicController::class, 'storeEnrollment'])->name('api.v1.enrollments.store');
+        Route::patch('enrollments/{id}', [AcademicController::class, 'updateEnrollment']);
+        Route::delete('enrollments/{id}', [AcademicController::class, 'destroyEnrollment']);
+        
         Route::get('teaching-assignments', [AcademicController::class, 'assignments']);
         Route::post('teaching-assignments', [AcademicController::class, 'storeAssignment'])->name('api.v1.teaching-assignments.store');
+        Route::patch('teaching-assignments/{id}', [AcademicController::class, 'updateAssignment']);
+        Route::delete('teaching-assignments/{id}', [AcademicController::class, 'destroyAssignment']);
 
         // Estaciones
         Route::get('stations', [StationController::class, 'index']);

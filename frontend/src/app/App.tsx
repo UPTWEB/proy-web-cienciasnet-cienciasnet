@@ -13,6 +13,7 @@ import { AcademicAdminPage } from '@/features/phase-one/AcademicAdminPage'
 import { AccountsAdminPage } from '@/features/phase-one/AccountsAdminPage'
 import { FamilyAdminPage } from '@/features/phase-one/FamilyAdminPage'
 import { FamilyPortalPage } from '@/features/phase-one/FamilyPortalPage'
+import { PaymentConceptsPage, StudentBenefitsPage } from '@/features/finance-config'
 
 export function App() {
   return (
@@ -34,6 +35,10 @@ export function App() {
             </Route>
             <Route element={<PermissionRoute roles={['superadmin', 'coordinador_academico']} />}>
               <Route path="academia" element={<AcademicAdminPage />} />
+            </Route>
+            <Route element={<PermissionRoute roles={['superadmin', 'gestionar_finanzas']} />}>
+              <Route path="finanzas/configuracion" element={<PaymentConceptsPage />} />
+              <Route path="finanzas/beneficios" element={<StudentBenefitsPage />} />
             </Route>
           </Route>
         </Route>
