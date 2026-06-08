@@ -17,6 +17,7 @@ import { FamilyPortalPage } from '@/features/phase-one/FamilyPortalPage'
 import { BiometricAdminPage } from '@/features/biometrics/BiometricAdminPage'
 import { StudentAttendancePage } from '@/features/attendance/StudentAttendancePage'
 import { PayrollAdminPage } from '@/features/payroll/PayrollAdminPage'
+import { AssessmentsPage } from '@/features/assessments/AssessmentsPage'
 
 export function App() {
   return (
@@ -29,7 +30,7 @@ export function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/seleccionar-contexto" element={<PortalLayout />}><Route index element={<ContextPage />} /></Route>
         <Route path="/portal" element={<PortalLayout />}><Route index element={<FamilyPortalPage />} /></Route>
-        <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
+        <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar', 'docente']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
           <Route path="/admin" element={<PortalLayout />}>
             <Route index element={<FoundationsPage context="Administración" />} />
             <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios']} />}>
@@ -47,6 +48,9 @@ export function App() {
             </Route>
             <Route element={<PermissionRoute roles={['superadmin']} permissions={['gestionar_planilla']} />}>
               <Route path="planilla" element={<PayrollAdminPage />} />
+            </Route>
+            <Route element={<PermissionRoute roles={['superadmin', 'coordinador_academico', 'docente']} />}>
+              <Route path="evaluaciones" element={<AssessmentsPage />} />
             </Route>
           </Route>
         </Route>

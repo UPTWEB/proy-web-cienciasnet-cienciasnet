@@ -32,8 +32,8 @@
 | FE-009 | `[x]` | `add-web-station-activation-capture` | Vincenzo | Jefferson | FE-003 |
 | FE-009A | `[x]` | `add-biometric-station-administration` | Vincenzo | Jefferson | FE-003 |
 | FE-010 | `[x]` | `add-student-attendance-supervision` | Vincenzo | Jefferson | FE-002, FE-003 |
-| FE-011 | `[~]` | `add-teacher-attendance-payroll` | Vincenzo | Jefferson | FE-003 |
-
+| FE-011 | `[x]` | `add-teacher-attendance-payroll` | Vincenzo | Jefferson | FE-003 |
+|
 ## Fase 3: Finanzas
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
@@ -46,7 +46,7 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-015 | `[ ]` | `add-assessment-result-entry` | Vincenzo | Jefferson | FE-003 |
+| FE-015 | `[x]` | `add-assessment-result-entry` | Vincenzo | Jefferson | FE-003 |
 | FE-016 | `[ ]` | `add-result-publication-reports-portals` | Vincenzo | Jefferson | FE-008 |
 | FE-017 | `[ ]` | `add-materials-portal` | Vincenzo | Jefferson | FE-002 |
 | FE-018 | `[ ]` | `add-schedules-calendar-portals` | Vincenzo | Jefferson | FE-002 |
