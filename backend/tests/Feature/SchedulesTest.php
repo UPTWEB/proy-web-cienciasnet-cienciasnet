@@ -19,8 +19,11 @@ class SchedulesTest extends TestCase
     use RefreshDatabase;
 
     private User $superadmin;
+
     private User $docenteUser;
+
     private CargaAcademica $carga1;
+
     private CargaAcademica $carga2;
 
     protected function setUp(): void
@@ -40,7 +43,7 @@ class SchedulesTest extends TestCase
         $docente2 = Docente::factory()->create();
 
         $periodo = PeriodoAcademico::create([
-            'nombre' => '2026', 'tipo' => 'colegio', 'fecha_inicio' => '2026-03-01', 'fecha_fin' => '2026-12-15', 'estado' => 'activo', 'creado_por' => $this->superadmin->id
+            'nombre' => '2026', 'tipo' => 'colegio', 'fecha_inicio' => '2026-03-01', 'fecha_fin' => '2026-12-15', 'estado' => 'activo', 'creado_por' => $this->superadmin->id,
         ]);
         $grado = Grado::create(['periodo_academico_id' => $periodo->id, 'nombre' => '3ro', 'nivel' => 'Secundaria', 'orden' => 3]);
         $seccion1 = Seccion::create(['grado_id' => $grado->id, 'nombre' => 'A', 'turno' => 'manana']);
@@ -48,11 +51,11 @@ class SchedulesTest extends TestCase
         $curso = Curso::create(['codigo' => 'MAT1', 'nombre' => 'Matemáticas']);
 
         $this->carga1 = CargaAcademica::create([
-            'seccion_id' => $seccion1->id, 'curso_id' => $curso->id, 'docente_id' => $docente->id, 'vigente_desde' => '2026-03-01', 'asignado_por' => $this->superadmin->id
+            'seccion_id' => $seccion1->id, 'curso_id' => $curso->id, 'docente_id' => $docente->id, 'vigente_desde' => '2026-03-01', 'asignado_por' => $this->superadmin->id,
         ]);
 
         $this->carga2 = CargaAcademica::create([
-            'seccion_id' => $seccion2->id, 'curso_id' => $curso->id, 'docente_id' => $docente->id, 'vigente_desde' => '2026-03-01', 'asignado_por' => $this->superadmin->id
+            'seccion_id' => $seccion2->id, 'curso_id' => $curso->id, 'docente_id' => $docente->id, 'vigente_desde' => '2026-03-01', 'asignado_por' => $this->superadmin->id,
         ]);
     }
 
@@ -67,9 +70,9 @@ class SchedulesTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonPath('data.dia_semana', 1)
-                 ->assertJsonPath('data.hora_inicio', '08:00')
-                 ->assertJsonPath('data.hora_fin', '09:30');
+            ->assertJsonPath('data.dia_semana', 1)
+            ->assertJsonPath('data.hora_inicio', '08:00')
+            ->assertJsonPath('data.hora_fin', '09:30');
 
         $this->assertDatabaseHas('horarios', [
             'carga_academica_id' => $this->carga1->id,

@@ -24,7 +24,7 @@ class CalendarEventsTest extends TestCase
         $this->superadmin->assignRole('superadmin');
 
         PeriodoAcademico::create([
-            'nombre' => '2026', 'tipo' => 'colegio', 'fecha_inicio' => '2026-03-01', 'fecha_fin' => '2026-12-15', 'estado' => 'activo', 'creado_por' => $this->superadmin->id
+            'nombre' => '2026', 'tipo' => 'colegio', 'fecha_inicio' => '2026-03-01', 'fecha_fin' => '2026-12-15', 'estado' => 'activo', 'creado_por' => $this->superadmin->id,
         ]);
     }
 
@@ -36,17 +36,17 @@ class CalendarEventsTest extends TestCase
             'starts_at' => '2026-05-15 10:00:00',
             'ends_at' => '2026-05-15 12:00:00',
             'event_type' => 'meeting',
-            'description' => 'Reunión obligatoria'
+            'description' => 'Reunión obligatoria',
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonPath('data.titulo', 'Reunión de Padres')
-                 ->assertJsonPath('data.tipo', 'evento'); // Mapeado de meeting a evento
+            ->assertJsonPath('data.titulo', 'Reunión de Padres')
+            ->assertJsonPath('data.tipo', 'evento'); // Mapeado de meeting a evento
 
         $this->assertDatabaseHas('eventos_calendario', [
             'titulo' => 'Reunión de Padres',
             'tipo' => 'evento',
-            'descripcion' => 'Reunión obligatoria'
+            'descripcion' => 'Reunión obligatoria',
         ]);
     }
 
@@ -60,7 +60,7 @@ class CalendarEventsTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonPath('data.tipo', 'no_laboral');
+            ->assertJsonPath('data.tipo', 'no_laboral');
 
         $this->assertDatabaseHas('eventos_calendario', [
             'titulo' => 'Feriado Nacional',

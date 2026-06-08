@@ -2,13 +2,14 @@
 
 namespace App\Modules\Horarios\Presentation\Requests;
 
+use App\Modules\Horarios\Infrastructure\Models\EventoCalendario;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCalendarEventRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('create', \App\Modules\Horarios\Infrastructure\Models\EventoCalendario::class);
+        return $this->user()->can('create', EventoCalendario::class);
     }
 
     public function rules(): array

@@ -2,13 +2,14 @@
 
 namespace App\Modules\Horarios\Presentation\Requests;
 
+use App\Modules\Horarios\Infrastructure\Models\Horario;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateScheduleRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('create', \App\Modules\Horarios\Infrastructure\Models\Horario::class);
+        return $this->user()->can('create', Horario::class);
     }
 
     public function rules(): array

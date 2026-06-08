@@ -14,6 +14,7 @@ class EventoCalendario extends Model
     use HasUuids;
 
     protected $table = 'eventos_calendario';
+
     public $timestamps = false;
 
     protected $fillable = [

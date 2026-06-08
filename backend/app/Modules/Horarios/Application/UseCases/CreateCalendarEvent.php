@@ -2,8 +2,8 @@
 
 namespace App\Modules\Horarios\Application\UseCases;
 
-use App\Modules\Horarios\Infrastructure\Models\EventoCalendario;
 use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
+use App\Modules\Horarios\Infrastructure\Models\EventoCalendario;
 use Illuminate\Support\Facades\Auth;
 
 class CreateCalendarEvent
@@ -23,7 +23,7 @@ class CreateCalendarEvent
         // Determinar el periodo activo (en este caso asumiremos que se crea en el último periodo activo para simplificar,
         // o si es a nivel institucional, el periodo activo tipo colegio. Para CienciasNet buscaremos el primero activo)
         $periodo = PeriodoAcademico::where('estado', 'activo')->first();
-        if (!$periodo) {
+        if (! $periodo) {
             throw new \RuntimeException('No active academic period found.');
         }
 

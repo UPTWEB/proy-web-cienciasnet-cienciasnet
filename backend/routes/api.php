@@ -11,6 +11,7 @@ use App\Modules\Auth\Presentation\Controllers\PasswordRecoveryController;
 use App\Modules\Auth\Presentation\Controllers\SessionController;
 use App\Modules\Finanzas\Presentation\Controllers\FinanceConfigController;
 use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
+use App\Modules\Horarios\Presentation\Controllers\ScheduleController;
 use App\Modules\Usuarios\Presentation\Controllers\AccountController;
 use App\Modules\Usuarios\Presentation\Controllers\BiometricController;
 use App\Modules\Usuarios\Presentation\Controllers\FamilyLinkController;
@@ -73,10 +74,10 @@ Route::prefix('v1')->group(function (): void {
 
         // Comunicados y Notificaciones
         // Horarios y Calendario
-        Route::get('/schedules', [\App\Modules\Horarios\Presentation\Controllers\ScheduleController::class, 'listSchedules']);
-        Route::post('/schedules', [\App\Modules\Horarios\Presentation\Controllers\ScheduleController::class, 'createSchedule']);
-        Route::get('/calendar-events', [\App\Modules\Horarios\Presentation\Controllers\ScheduleController::class, 'listCalendarEvents']);
-        Route::post('/calendar-events', [\App\Modules\Horarios\Presentation\Controllers\ScheduleController::class, 'createCalendarEvent']);
+        Route::get('/schedules', [ScheduleController::class, 'listSchedules']);
+        Route::post('/schedules', [ScheduleController::class, 'createSchedule']);
+        Route::get('/calendar-events', [ScheduleController::class, 'listCalendarEvents']);
+        Route::post('/calendar-events', [ScheduleController::class, 'createCalendarEvent']);
 
         // Estaciones
         Route::get('stations', [StationController::class, 'index']);
