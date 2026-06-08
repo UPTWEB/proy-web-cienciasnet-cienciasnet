@@ -9,6 +9,7 @@ use App\Modules\Academico\Presentation\Controllers\AssessmentController;
 use App\Modules\Usuarios\Presentation\Controllers\BiometricController;
 use App\Modules\Asistencia\Presentation\Controllers\StationController;
 use App\Modules\Asistencia\Presentation\Controllers\StudentAttendanceController;
+use App\Modules\Asistencia\Presentation\Controllers\TeacherAttendanceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
@@ -85,6 +86,12 @@ Route::prefix('v1')->group(function (): void {
         Route::get('student-attendance/alerts', [StudentAttendanceController::class, 'alerts']);
         Route::get('recognition-events', [StudentAttendanceController::class, 'recognitionEvents']);
         Route::post('recognition-events/{recognitionEventId}/review', [StudentAttendanceController::class, 'reviewRecognition']);
+
+        // Asistencia Docentes
+        Route::get('teacher-attendance', [TeacherAttendanceController::class, 'index']);
+        Route::post('teacher-attendance/adjustments', [TeacherAttendanceController::class, 'adjustment']);
+        Route::post('class-sessions/{classSessionId}/cancellation', [TeacherAttendanceController::class, 'cancel']);
+        Route::put('class-sessions/{classSessionId}/substitute', [TeacherAttendanceController::class, 'substitute']);
 
         // Biometría
         Route::get('biometric-consents', [BiometricController::class, 'index']);
