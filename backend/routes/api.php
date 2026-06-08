@@ -10,6 +10,7 @@ use App\Modules\Usuarios\Presentation\Controllers\BiometricController;
 use App\Modules\Asistencia\Presentation\Controllers\StationController;
 use App\Modules\Asistencia\Presentation\Controllers\StudentAttendanceController;
 use App\Modules\Asistencia\Presentation\Controllers\TeacherAttendanceController;
+use App\Modules\Finanzas\Presentation\Controllers\TeacherPayrollController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
@@ -92,6 +93,14 @@ Route::prefix('v1')->group(function (): void {
         Route::post('teacher-attendance/adjustments', [TeacherAttendanceController::class, 'adjustment']);
         Route::post('class-sessions/{classSessionId}/cancellation', [TeacherAttendanceController::class, 'cancel']);
         Route::put('class-sessions/{classSessionId}/substitute', [TeacherAttendanceController::class, 'substitute']);
+
+        // Nómina Docente (Finanzas)
+        Route::get('teacher-payroll/rates', [TeacherPayrollController::class, 'rates']);
+        Route::post('teacher-payroll/rates', [TeacherPayrollController::class, 'storeRate']);
+        Route::get('teacher-payroll/liquidations', [TeacherPayrollController::class, 'liquidations']);
+        Route::post('teacher-payroll/liquidations', [TeacherPayrollController::class, 'storeLiquidation']);
+        Route::post('teacher-payroll/liquidations/{liquidationId}/closure', [TeacherPayrollController::class, 'closeLiquidation']);
+        Route::post('teacher-payroll/reports', [TeacherPayrollController::class, 'report']);
 
         // Biometría
         Route::get('biometric-consents', [BiometricController::class, 'index']);
