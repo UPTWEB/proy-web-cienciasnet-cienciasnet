@@ -553,7 +553,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 191 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>device_name</code></b>&nbsp;&nbsp;
@@ -565,7 +565,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 150 characters. Example: <code>n</code></p>
         </div>
         </form>
 
@@ -701,8 +701,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "camera_id=6ff8f7f6-1eb3-3525-be4a-3932c805afed"\
-    --form "captured_at=2026-06-08T20:19:18"\
-    --form "image=@/tmp/phpCKcAHE" </code></pre></div>
+    --form "captured_at=2026-06-08T20:33:21"\
+    --form "image=@/tmp/phpmxLSPm" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -717,7 +717,7 @@ const headers = {
 
 const body = new FormData();
 body.append('camera_id', '6ff8f7f6-1eb3-3525-be4a-3932c805afed');
-body.append('captured_at', '2026-06-08T20:19:18');
+body.append('captured_at', '2026-06-08T20:33:21');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -795,7 +795,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. validation.image validation.max. Example: <code>/tmp/phpCKcAHE</code></p>
+<p>Must be a file. Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpmxLSPm</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>camera_id</code></b>&nbsp;&nbsp;
@@ -807,7 +807,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the camaras_estacion table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the camaras_estacion table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>captured_at</code></b>&nbsp;&nbsp;
@@ -816,10 +816,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="captured_at"                data-endpoint="POSTapi-v1-station-captures"
-               value="2026-06-08T20:19:18"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:18</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
         </form>
 
@@ -938,7 +938,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="usuario@example.test"
                data-component="body">
     <br>
-<p>Correo único de la cuenta humana. validation.email validation.max. Example: <code>usuario@example.test</code></p>
+<p>Correo único de la cuenta humana. Must be a valid email address. Must not be greater than 191 characters. Example: <code>usuario@example.test</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -1087,7 +1087,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="usuario@example.test"
                data-component="body">
     <br>
-<p>Correo al que se enviarán instrucciones si existe. validation.email validation.max. Example: <code>usuario@example.test</code></p>
+<p>Correo al que se enviarán instrucciones si existe. Must be a valid email address. Must not be greater than 191 characters. Example: <code>usuario@example.test</code></p>
         </div>
         </form>
 
@@ -1218,7 +1218,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="usuario@example.test"
                data-component="body">
     <br>
-<p>Correo asociado al token. validation.email validation.max. Example: <code>usuario@example.test</code></p>
+<p>Correo asociado al token. Must be a valid email address. Must not be greater than 191 characters. Example: <code>usuario@example.test</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -1677,7 +1677,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 150 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -1689,7 +1689,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="zbailey@example.net"
                data-component="body">
     <br>
-<p>validation.email validation.max. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Must not be greater than 191 characters. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>roles</code></b>&nbsp;&nbsp;
@@ -1961,7 +1961,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 150 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -1973,7 +1973,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="zbailey@example.net"
                data-component="body">
     <br>
-<p>validation.email validation.max. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Must not be greater than 191 characters. Example: <code>zbailey@example.net</code></p>
         </div>
         </form>
 
@@ -2125,7 +2125,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Revisión administrativa completada."
                data-component="body">
     <br>
-<p>Motivo administrativo del cambio. validation.max. Example: <code>Revisión administrativa completada.</code></p>
+<p>Motivo administrativo del cambio. Must not be greater than 500 characters. Example: <code>Revisión administrativa completada.</code></p>
         </div>
         </form>
 
@@ -2600,7 +2600,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="11111111-1111-4111-8111-111111111111"
                data-component="body">
     <br>
-<p>Identificador de la cuenta familiar. validation.uuid The <code>id</code> of an existing record in the users table. Example: <code>11111111-1111-4111-8111-111111111111</code></p>
+<p>Identificador de la cuenta familiar. Must be a valid UUID. The <code>id</code> of an existing record in the users table. Example: <code>11111111-1111-4111-8111-111111111111</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>student_id</code></b>&nbsp;&nbsp;
@@ -2612,7 +2612,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="22222222-2222-4222-8222-222222222222"
                data-component="body">
     <br>
-<p>Identificador del alumno vinculado. validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>22222222-2222-4222-8222-222222222222</code></p>
+<p>Identificador del alumno vinculado. Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>22222222-2222-4222-8222-222222222222</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>relationship</code></b>&nbsp;&nbsp;
@@ -3212,7 +3212,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Año académico 2026"
                data-component="body">
     <br>
-<p>Nombre del periodo académico. validation.max. Example: <code>Año académico 2026</code></p>
+<p>Nombre del periodo académico. Must not be greater than 100 characters. Example: <code>Año académico 2026</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -3224,7 +3224,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2026-03-01"
                data-component="body">
     <br>
-<p>Fecha de inicio del periodo. validation.date. Example: <code>2026-03-01</code></p>
+<p>Fecha de inicio del periodo. Must be a valid date. Example: <code>2026-03-01</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -3236,7 +3236,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2026-12-20"
                data-component="body">
     <br>
-<p>Fecha de cierre del periodo. validation.date validation.after_or_equal. Example: <code>2026-12-20</code></p>
+<p>Fecha de cierre del periodo. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2026-12-20</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
@@ -3512,7 +3512,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Año académico 2026"
                data-component="body">
     <br>
-<p>Nombre del periodo académico. validation.max. Example: <code>Año académico 2026</code></p>
+<p>Nombre del periodo académico. Must not be greater than 100 characters. Example: <code>Año académico 2026</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -3524,7 +3524,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2026-03-01"
                data-component="body">
     <br>
-<p>Fecha de inicio del periodo. validation.date. Example: <code>2026-03-01</code></p>
+<p>Fecha de inicio del periodo. Must be a valid date. Example: <code>2026-03-01</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -3536,7 +3536,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2026-12-20"
                data-component="body">
     <br>
-<p>Fecha de cierre del periodo. validation.date validation.after_or_equal. Example: <code>2026-12-20</code></p>
+<p>Fecha de cierre del periodo. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2026-12-20</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
@@ -3786,7 +3786,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Quinto de secundaria"
                data-component="body">
     <br>
-<p>Nombre del grado. validation.max. Example: <code>Quinto de secundaria</code></p>
+<p>Nombre del grado. Must not be greater than 100 characters. Example: <code>Quinto de secundaria</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>level</code></b>&nbsp;&nbsp;
@@ -3812,7 +3812,7 @@ Must be one of:
                value="5"
                data-component="body">
     <br>
-<p>Orden del grado dentro del nivel. validation.min. Example: <code>5</code></p>
+<p>Orden del grado dentro del nivel. Must be at least 1. Example: <code>5</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>academic_period_id</code></b>&nbsp;&nbsp;
@@ -3824,7 +3824,7 @@ Must be one of:
                value="33333333-3333-4333-8333-333333333333"
                data-component="body">
     <br>
-<p>Identificador del periodo académico. validation.uuid The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
+<p>Identificador del periodo académico. Must be a valid UUID. The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
         </div>
         </form>
 
@@ -4058,7 +4058,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="44444444-4444-4444-8444-444444444444"
                data-component="body">
     <br>
-<p>Identificador del grado. validation.uuid The <code>id</code> of an existing record in the grados table. Example: <code>44444444-4444-4444-8444-444444444444</code></p>
+<p>Identificador del grado. Must be a valid UUID. The <code>id</code> of an existing record in the grados table. Example: <code>44444444-4444-4444-8444-444444444444</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -4070,7 +4070,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="A"
                data-component="body">
     <br>
-<p>Nombre de la sección. validation.max. Example: <code>A</code></p>
+<p>Nombre de la sección. Must not be greater than 50 characters. Example: <code>A</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>capacity</code></b>&nbsp;&nbsp;
@@ -4082,7 +4082,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="30"
                data-component="body">
     <br>
-<p>Capacidad máxima de alumnos. validation.min. Example: <code>30</code></p>
+<p>Capacidad máxima de alumnos. Must be at least 1. Example: <code>30</code></p>
         </div>
         </form>
 
@@ -4316,7 +4316,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="MAT-5S"
                data-component="body">
     <br>
-<p>Código único del curso. validation.max. Example: <code>MAT-5S</code></p>
+<p>Código único del curso. Must not be greater than 30 characters. Example: <code>MAT-5S</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -4328,7 +4328,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Matemática"
                data-component="body">
     <br>
-<p>Nombre del curso. validation.max. Example: <code>Matemática</code></p>
+<p>Nombre del curso. Must not be greater than 150 characters. Example: <code>Matemática</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -4340,7 +4340,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Curso anual de matemática para quinto de secundaria."
                data-component="body">
     <br>
-<p>Descripción breve del curso. validation.max. Example: <code>Curso anual de matemática para quinto de secundaria.</code></p>
+<p>Descripción breve del curso. Must not be greater than 1000 characters. Example: <code>Curso anual de matemática para quinto de secundaria.</code></p>
         </div>
         </form>
 
@@ -4576,7 +4576,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="55555555-5555-4555-8555-555555555555"
                data-component="body">
     <br>
-<p>Identificador del alumno. validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>55555555-5555-4555-8555-555555555555</code></p>
+<p>Identificador del alumno. Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>55555555-5555-4555-8555-555555555555</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
@@ -4588,7 +4588,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="66666666-6666-4666-8666-666666666666"
                data-component="body">
     <br>
-<p>Identificador de la sección. validation.uuid The <code>id</code> of an existing record in the secciones table. Example: <code>66666666-6666-4666-8666-666666666666</code></p>
+<p>Identificador de la sección. Must be a valid UUID. The <code>id</code> of an existing record in the secciones table. Example: <code>66666666-6666-4666-8666-666666666666</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>academic_period_id</code></b>&nbsp;&nbsp;
@@ -4600,7 +4600,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="33333333-3333-4333-8333-333333333333"
                data-component="body">
     <br>
-<p>Identificador del periodo académico. validation.uuid The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
+<p>Identificador del periodo académico. Must be a valid UUID. The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>enrolled_at</code></b>&nbsp;&nbsp;
@@ -4612,7 +4612,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2026-03-05"
                data-component="body">
     <br>
-<p>Fecha de matrícula. validation.date. Example: <code>2026-03-05</code></p>
+<p>Fecha de matrícula. Must be a valid date. Example: <code>2026-03-05</code></p>
         </div>
         </form>
 
@@ -4848,7 +4848,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="77777777-7777-4777-8777-777777777777"
                data-component="body">
     <br>
-<p>Identificador del docente. validation.uuid The <code>id</code> of an existing record in the docentes table. Example: <code>77777777-7777-4777-8777-777777777777</code></p>
+<p>Identificador del docente. Must be a valid UUID. The <code>id</code> of an existing record in the docentes table. Example: <code>77777777-7777-4777-8777-777777777777</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>course_id</code></b>&nbsp;&nbsp;
@@ -4860,7 +4860,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="88888888-8888-4888-8888-888888888888"
                data-component="body">
     <br>
-<p>Identificador del curso. validation.uuid The <code>id</code> of an existing record in the cursos table. Example: <code>88888888-8888-4888-8888-888888888888</code></p>
+<p>Identificador del curso. Must be a valid UUID. The <code>id</code> of an existing record in the cursos table. Example: <code>88888888-8888-4888-8888-888888888888</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
@@ -4872,7 +4872,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="66666666-6666-4666-8666-666666666666"
                data-component="body">
     <br>
-<p>Identificador de la sección. validation.uuid The <code>id</code> of an existing record in the secciones table. Example: <code>66666666-6666-4666-8666-666666666666</code></p>
+<p>Identificador de la sección. Must be a valid UUID. The <code>id</code> of an existing record in the secciones table. Example: <code>66666666-6666-4666-8666-666666666666</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>academic_period_id</code></b>&nbsp;&nbsp;
@@ -4884,7 +4884,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="33333333-3333-4333-8333-333333333333"
                data-component="body">
     <br>
-<p>Identificador del periodo académico. validation.uuid The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
+<p>Identificador del periodo académico. Must be a valid UUID. The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>33333333-3333-4333-8333-333333333333</code></p>
         </div>
         </form>
 
@@ -5022,7 +5022,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"name\": \"b\",
     \"location\": \"n\",
-    \"mode\": \"exit\"
+    \"mode\": \"mixed\"
 }"
 </code></pre></div>
 
@@ -5040,7 +5040,7 @@ const headers = {
 let body = {
     "name": "b",
     "location": "n",
-    "mode": "exit"
+    "mode": "mixed"
 };
 
 fetch(url, {
@@ -5118,7 +5118,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 100 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
@@ -5130,7 +5130,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>mode</code></b>&nbsp;&nbsp;
@@ -5139,10 +5139,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="mode"                data-endpoint="POSTapi-v1-stations"
-               value="exit"
+               value="mixed"
                data-component="body">
     <br>
-<p>Example: <code>exit</code></p>
+<p>Example: <code>mixed</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>entry</code></li> <li><code>exit</code></li> <li><code>mixed</code></li></ul>
         </div>
@@ -5167,7 +5167,7 @@ Must be one of:
     --data "{
     \"name\": \"b\",
     \"location\": \"n\",
-    \"mode\": \"exit\",
+    \"mode\": \"mixed\",
     \"active\": false
 }"
 </code></pre></div>
@@ -5186,7 +5186,7 @@ const headers = {
 let body = {
     "name": "b",
     "location": "n",
-    "mode": "exit",
+    "mode": "mixed",
     "active": false
 };
 
@@ -5278,7 +5278,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 100 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
@@ -5290,7 +5290,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>mode</code></b>&nbsp;&nbsp;
@@ -5299,10 +5299,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="mode"                data-endpoint="PATCHapi-v1-stations--stationId-"
-               value="exit"
+               value="mixed"
                data-component="body">
     <br>
-<p>Example: <code>exit</code></p>
+<p>Example: <code>mixed</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>entry</code></li> <li><code>exit</code></li> <li><code>mixed</code></li></ul>
         </div>
@@ -5561,7 +5561,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -5712,7 +5712,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"label\": \"b\",
     \"device_identifier\": \"n\",
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -5730,7 +5730,7 @@ const headers = {
 let body = {
     "label": "b",
     "device_identifier": "n",
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -5821,7 +5821,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 100 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>device_identifier</code></b>&nbsp;&nbsp;
@@ -5833,7 +5833,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 191 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
@@ -5855,7 +5855,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -5992,8 +5992,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"event_type\": \"absence\",
-    \"occurred_at\": \"2026-06-08T20:19:21\",
+    \"event_type\": \"late\",
+    \"occurred_at\": \"2026-06-08T20:33:21\",
     \"reason\": \"g\"
 }"
 </code></pre></div>
@@ -6011,8 +6011,8 @@ const headers = {
 
 let body = {
     "student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "event_type": "absence",
-    "occurred_at": "2026-06-08T20:19:21",
+    "event_type": "late",
+    "occurred_at": "2026-06-08T20:33:21",
     "reason": "g"
 };
 
@@ -6091,7 +6091,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>event_type</code></b>&nbsp;&nbsp;
@@ -6100,10 +6100,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="event_type"                data-endpoint="POSTapi-v1-student-attendance-manual-events"
-               value="absence"
+               value="late"
                data-component="body">
     <br>
-<p>Example: <code>absence</code></p>
+<p>Example: <code>late</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>entry</code></li> <li><code>exit</code></li> <li><code>absence</code></li> <li><code>late</code></li></ul>
         </div>
@@ -6114,10 +6114,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="occurred_at"                data-endpoint="POSTapi-v1-student-attendance-manual-events"
-               value="2026-06-08T20:19:21"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:21</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -6129,7 +6129,7 @@ Must be one of:
                value="g"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>g</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>g</code></p>
         </div>
         </form>
 
@@ -6150,7 +6150,7 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"date\": \"2026-06-08T20:19:21\"
+    \"date\": \"2026-06-08T20:33:21\"
 }"
 </code></pre></div>
 
@@ -6166,7 +6166,7 @@ const headers = {
 };
 
 let body = {
-    "date": "2026-06-08T20:19:21"
+    "date": "2026-06-08T20:33:21"
 };
 
 fetch(url, {
@@ -6241,10 +6241,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="date"                data-endpoint="POSTapi-v1-student-attendance-day-closures"
-               value="2026-06-08T20:19:21"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:21</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
         </form>
 
@@ -6487,7 +6487,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -6615,7 +6615,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -6866,7 +6866,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"outcome\": \"confirmed\",
+    \"outcome\": \"reassigned\",
     \"matched_student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"reason\": \"g\"
 }"
@@ -6884,7 +6884,7 @@ const headers = {
 };
 
 let body = {
-    "outcome": "confirmed",
+    "outcome": "reassigned",
     "matched_student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "reason": "g"
 };
@@ -6974,10 +6974,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="outcome"                data-endpoint="POSTapi-v1-recognition-events--recognitionEventId--review"
-               value="confirmed"
+               value="reassigned"
                data-component="body">
     <br>
-<p>Example: <code>confirmed</code></p>
+<p>Example: <code>reassigned</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>confirmed</code></li> <li><code>rejected</code></li> <li><code>reassigned</code></li></ul>
         </div>
@@ -6991,7 +6991,7 @@ Must be one of:
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>This field is required when <code>outcome</code> is <code>reassigned</code>. validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>This field is required when <code>outcome</code> is <code>reassigned</code>. Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -7003,7 +7003,7 @@ Must be one of:
                value="g"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>g</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>g</code></p>
         </div>
         </form>
 
@@ -7140,8 +7140,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"teacher_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"date\": \"2026-06-08T20:19:22\",
-    \"adjustment_type\": \"subtract\",
+    \"date\": \"2026-06-08T20:33:21\",
+    \"adjustment_type\": \"add\",
     \"minutes\": 67,
     \"reason\": \"z\"
 }"
@@ -7160,8 +7160,8 @@ const headers = {
 
 let body = {
     "teacher_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "date": "2026-06-08T20:19:22",
-    "adjustment_type": "subtract",
+    "date": "2026-06-08T20:33:21",
+    "adjustment_type": "add",
     "minutes": 67,
     "reason": "z"
 };
@@ -7241,7 +7241,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>date</code></b>&nbsp;&nbsp;
@@ -7250,10 +7250,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="date"                data-endpoint="POSTapi-v1-teacher-attendance-adjustments"
-               value="2026-06-08T20:19:22"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:22</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>adjustment_type</code></b>&nbsp;&nbsp;
@@ -7262,10 +7262,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="adjustment_type"                data-endpoint="POSTapi-v1-teacher-attendance-adjustments"
-               value="subtract"
+               value="add"
                data-component="body">
     <br>
-<p>Example: <code>subtract</code></p>
+<p>Example: <code>add</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>add</code></li> <li><code>subtract</code></li></ul>
         </div>
@@ -7279,7 +7279,7 @@ Must be one of:
                value="67"
                data-component="body">
     <br>
-<p>validation.min. Example: <code>67</code></p>
+<p>Must be at least 1. Example: <code>67</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -7291,7 +7291,7 @@ Must be one of:
                value="z"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>z</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>z</code></p>
         </div>
         </form>
 
@@ -7419,7 +7419,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -7547,7 +7547,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
         </form>
 
@@ -7687,13 +7687,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"n\",
     \"amount\": \"642559\",
     \"academic_period_id\": \"947170af-7488-3f30-a16d-723355a9502f\",
-    \"type\": \"cuota_ingreso\",
+    \"type\": \"otro\",
     \"year\": 2000,
     \"month\": 1,
     \"due_day\": 2,
     \"recurrence\": \"annual\",
     \"early_payment_discount\": \"642559\",
-    \"early_payment_deadline\": \"2026-06-08T20:19:23\"
+    \"early_payment_deadline\": \"2026-06-08T20:33:21\"
 }"
 </code></pre></div>
 
@@ -7713,13 +7713,13 @@ let body = {
     "name": "n",
     "amount": "642559",
     "academic_period_id": "947170af-7488-3f30-a16d-723355a9502f",
-    "type": "cuota_ingreso",
+    "type": "otro",
     "year": 2000,
     "month": 1,
     "due_day": 2,
     "recurrence": "annual",
     "early_payment_discount": "642559",
-    "early_payment_deadline": "2026-06-08T20:19:23"
+    "early_payment_deadline": "2026-06-08T20:33:21"
 };
 
 fetch(url, {
@@ -7797,7 +7797,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 30 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -7809,7 +7809,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 150 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -7833,7 +7833,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="947170af-7488-3f30-a16d-723355a9502f"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>947170af-7488-3f30-a16d-723355a9502f</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the periodos_academicos table. Example: <code>947170af-7488-3f30-a16d-723355a9502f</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
@@ -7842,10 +7842,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-payment-concepts"
-               value="cuota_ingreso"
+               value="otro"
                data-component="body">
     <br>
-<p>Example: <code>cuota_ingreso</code></p>
+<p>Example: <code>otro</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>cuota_ingreso</code></li> <li><code>matricula</code></li> <li><code>mensualidad</code></li> <li><code>otro</code></li></ul>
         </div>
@@ -7859,7 +7859,7 @@ Must be one of:
                value="2000"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>2000</code></p>
+<p>Must be between 2000 and 2100. Example: <code>2000</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>month</code></b>&nbsp;&nbsp;
@@ -7871,7 +7871,7 @@ Must be one of:
                value="1"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>1</code></p>
+<p>Must be between 1 and 12. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>due_day</code></b>&nbsp;&nbsp;
@@ -7883,7 +7883,7 @@ Must be one of:
                value="2"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>2</code></p>
+<p>Must be between 1 and 31. Example: <code>2</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>recurrence</code></b>&nbsp;&nbsp;
@@ -7918,10 +7918,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="early_payment_deadline"                data-endpoint="POSTapi-v1-payment-concepts"
-               value="2026-06-08T20:19:23"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:23</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
         </form>
 
@@ -7944,13 +7944,13 @@ Must be one of:
     --data "{
     \"name\": \"b\",
     \"amount\": \"642559\",
-    \"type\": \"cuota_ingreso\",
+    \"type\": \"otro\",
     \"year\": 2001,
     \"month\": 2,
     \"due_day\": 1,
-    \"recurrence\": \"annual\",
+    \"recurrence\": \"single\",
     \"early_payment_discount\": \"642559\",
-    \"early_payment_deadline\": \"2026-06-08T20:19:23\"
+    \"early_payment_deadline\": \"2026-06-08T20:33:21\"
 }"
 </code></pre></div>
 
@@ -7968,13 +7968,13 @@ const headers = {
 let body = {
     "name": "b",
     "amount": "642559",
-    "type": "cuota_ingreso",
+    "type": "otro",
     "year": 2001,
     "month": 2,
     "due_day": 1,
-    "recurrence": "annual",
+    "recurrence": "single",
     "early_payment_discount": "642559",
-    "early_payment_deadline": "2026-06-08T20:19:23"
+    "early_payment_deadline": "2026-06-08T20:33:21"
 };
 
 fetch(url, {
@@ -8065,7 +8065,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 150 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
@@ -8086,10 +8086,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="cuota_ingreso"
+               value="otro"
                data-component="body">
     <br>
-<p>Example: <code>cuota_ingreso</code></p>
+<p>Example: <code>otro</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>cuota_ingreso</code></li> <li><code>matricula</code></li> <li><code>mensualidad</code></li> <li><code>otro</code></li></ul>
         </div>
@@ -8103,7 +8103,7 @@ Must be one of:
                value="2001"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>2001</code></p>
+<p>Must be between 2000 and 2100. Example: <code>2001</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>month</code></b>&nbsp;&nbsp;
@@ -8115,7 +8115,7 @@ Must be one of:
                value="2"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>2</code></p>
+<p>Must be between 1 and 12. Example: <code>2</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>due_day</code></b>&nbsp;&nbsp;
@@ -8127,7 +8127,7 @@ Must be one of:
                value="1"
                data-component="body">
     <br>
-<p>validation.between. Example: <code>1</code></p>
+<p>Must be between 1 and 31. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>recurrence</code></b>&nbsp;&nbsp;
@@ -8136,10 +8136,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="recurrence"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="annual"
+               value="single"
                data-component="body">
     <br>
-<p>Example: <code>annual</code></p>
+<p>Example: <code>single</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>single</code></li> <li><code>monthly</code></li> <li><code>annual</code></li></ul>
         </div>
@@ -8162,10 +8162,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="early_payment_deadline"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="2026-06-08T20:19:23"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:23</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
         </form>
 
@@ -8308,7 +8308,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         \"947170af-7488-3f30-a16d-723355a9502f\"
     ],
     \"stackable_with_early_payment\": true,
-    \"starts_on\": \"2026-06-08T20:19:23\",
+    \"starts_on\": \"2026-06-08T20:33:21\",
     \"ends_on\": \"2052-07-01\",
     \"reason\": \"n\"
 }"
@@ -8333,7 +8333,7 @@ let body = {
         "947170af-7488-3f30-a16d-723355a9502f"
     ],
     "stackable_with_early_payment": true,
-    "starts_on": "2026-06-08T20:19:23",
+    "starts_on": "2026-06-08T20:33:21",
     "ends_on": "2052-07-01",
     "reason": "n"
 };
@@ -8413,7 +8413,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>benefit_type</code></b>&nbsp;&nbsp;
@@ -8453,7 +8453,7 @@ Must be one of:
                name="concept_ids[1]"                data-endpoint="POSTapi-v1-student-benefits"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the conceptos_pago table.</p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the conceptos_pago table.</p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>stackable_with_early_payment</code></b>&nbsp;&nbsp;
@@ -8484,10 +8484,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="starts_on"                data-endpoint="POSTapi-v1-student-benefits"
-               value="2026-06-08T20:19:23"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:23</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>ends_on</code></b>&nbsp;&nbsp;
@@ -8499,7 +8499,7 @@ Must be one of:
                value="2052-07-01"
                data-component="body">
     <br>
-<p>validation.date validation.after_or_equal. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>starts_on</code>. Example: <code>2052-07-01</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -8511,7 +8511,7 @@ Must be one of:
                value="n"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>n</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>n</code></p>
         </div>
         </form>
 
@@ -8639,7 +8639,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -8777,7 +8777,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"teacher_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"hourly_rate\": \"642559\",
-    \"effective_from\": \"2026-06-08T20:19:24\",
+    \"effective_from\": \"2026-06-08T20:33:21\",
     \"effective_until\": \"2052-07-01\"
 }"
 </code></pre></div>
@@ -8796,7 +8796,7 @@ const headers = {
 let body = {
     "teacher_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "hourly_rate": "642559",
-    "effective_from": "2026-06-08T20:19:24",
+    "effective_from": "2026-06-08T20:33:21",
     "effective_until": "2052-07-01"
 };
 
@@ -8875,7 +8875,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the docentes table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>hourly_rate</code></b>&nbsp;&nbsp;
@@ -8896,10 +8896,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="effective_from"                data-endpoint="POSTapi-v1-teacher-payroll-rates"
-               value="2026-06-08T20:19:24"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:24</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>effective_until</code></b>&nbsp;&nbsp;
@@ -8911,7 +8911,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2052-07-01"
                data-component="body">
     <br>
-<p>validation.date validation.after_or_equal. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>effective_from</code>. Example: <code>2052-07-01</code></p>
         </div>
         </form>
 
@@ -9047,7 +9047,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"period_start\": \"2026-06-08T20:19:24\",
+    \"period_start\": \"2026-06-08T20:33:21\",
     \"period_end\": \"2052-07-01\",
     \"teacher_ids\": [
         \"a4855dc5-0acb-33c3-b921-f4291f719ca0\"
@@ -9067,7 +9067,7 @@ const headers = {
 };
 
 let body = {
-    "period_start": "2026-06-08T20:19:24",
+    "period_start": "2026-06-08T20:33:21",
     "period_end": "2052-07-01",
     "teacher_ids": [
         "a4855dc5-0acb-33c3-b921-f4291f719ca0"
@@ -9146,10 +9146,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_start"                data-endpoint="POSTapi-v1-teacher-payroll-liquidations"
-               value="2026-06-08T20:19:24"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:24</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>period_end</code></b>&nbsp;&nbsp;
@@ -9161,7 +9161,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2052-07-01"
                data-component="body">
     <br>
-<p>validation.date validation.after_or_equal. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-01</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>teacher_ids</code></b>&nbsp;&nbsp;
@@ -9175,7 +9175,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                name="teacher_ids[1]"                data-endpoint="POSTapi-v1-teacher-payroll-liquidations"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the docentes table.</p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the docentes table.</p>
         </div>
         </form>
 
@@ -9303,7 +9303,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"period_start\": \"2026-06-08T20:19:24\",
+    \"period_start\": \"2026-06-08T20:33:21\",
     \"period_end\": \"2052-07-01\",
     \"format\": \"pdf\",
     \"teacher_ids\": [
@@ -9324,7 +9324,7 @@ const headers = {
 };
 
 let body = {
-    "period_start": "2026-06-08T20:19:24",
+    "period_start": "2026-06-08T20:33:21",
     "period_end": "2052-07-01",
     "format": "pdf",
     "teacher_ids": [
@@ -9404,10 +9404,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_start"                data-endpoint="POSTapi-v1-teacher-payroll-reports"
-               value="2026-06-08T20:19:24"
+               value="2026-06-08T20:33:21"
                data-component="body">
     <br>
-<p>validation.date. Example: <code>2026-06-08T20:19:24</code></p>
+<p>Must be a valid date. Example: <code>2026-06-08T20:33:21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>period_end</code></b>&nbsp;&nbsp;
@@ -9419,7 +9419,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2052-07-01"
                data-component="body">
     <br>
-<p>validation.date validation.after_or_equal. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-01</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>format</code></b>&nbsp;&nbsp;
@@ -9447,7 +9447,7 @@ Must be one of:
                name="teacher_ids[1]"                data-endpoint="POSTapi-v1-teacher-payroll-reports"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the docentes table.</p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the docentes table.</p>
         </div>
         </form>
 
@@ -9681,7 +9681,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>legal_basis</code></b>&nbsp;&nbsp;
@@ -9693,7 +9693,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="g"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>g</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>g</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>expires_at</code></b>&nbsp;&nbsp;
@@ -9705,7 +9705,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="2052-07-02"
                data-component="body">
     <br>
-<p>validation.date validation.after. Example: <code>2052-07-02</code></p>
+<p>Must be a valid date. Must be a date after <code>now</code>. Example: <code>2052-07-02</code></p>
         </div>
         </form>
 
@@ -9833,7 +9833,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="b"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>b</code></p>
+<p>Must not be greater than 1000 characters. Example: <code>b</code></p>
         </div>
         </form>
 
@@ -9855,7 +9855,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "student_id=6ff8f7f6-1eb3-3525-be4a-3932c805afed"\
     --form "consent_id=6b72fe4a-5b40-307c-bc24-f79acf9a1bb9"\
-    --form "images[]=@/tmp/phpcOolkJ" </code></pre></div>
+    --form "images[]=@/tmp/phpUzhFiH" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -9948,7 +9948,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the alumnos table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>consent_id</code></b>&nbsp;&nbsp;
@@ -9960,7 +9960,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6b72fe4a-5b40-307c-bc24-f79acf9a1bb9"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the consentimientos_biometricos table. Example: <code>6b72fe4a-5b40-307c-bc24-f79acf9a1bb9</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the consentimientos_biometricos table. Example: <code>6b72fe4a-5b40-307c-bc24-f79acf9a1bb9</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>images</code></b>&nbsp;&nbsp;
@@ -9974,7 +9974,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                name="images[1]"                data-endpoint="POSTapi-v1-biometric-enrollments"
                data-component="body">
     <br>
-<p>Must be a file. validation.image validation.max.</p>
+<p>Must be a file. Must be an image. Must not be greater than 5120 kilobytes.</p>
         </div>
         </form>
 
@@ -10216,7 +10216,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="99999999-9999-4999-8999-999999999999"
                data-component="body">
     <br>
-<p>Identificador de la carga académica. validation.uuid The <code>id</code> of an existing record in the carga_academica table. Example: <code>99999999-9999-4999-8999-999999999999</code></p>
+<p>Identificador de la carga académica. Must be a valid UUID. The <code>id</code> of an existing record in the carga_academica table. Example: <code>99999999-9999-4999-8999-999999999999</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
@@ -10228,7 +10228,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="Semanal 1 - I Bimestre"
                data-component="body">
     <br>
-<p>Título de la evaluación. validation.min validation.max. Example: <code>Semanal 1 - I Bimestre</code></p>
+<p>Título de la evaluación. Must be at least 1 character. Must not be greater than 150 characters. Example: <code>Semanal 1 - I Bimestre</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>assessment_type</code></b>&nbsp;&nbsp;
@@ -10266,7 +10266,7 @@ Must be one of:
                value="2026-04-15"
                data-component="body">
     <br>
-<p>Fecha programada de la evaluación. validation.date. Example: <code>2026-04-15</code></p>
+<p>Fecha programada de la evaluación. Must be a valid date. Example: <code>2026-04-15</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>channel</code></b>&nbsp;&nbsp;
@@ -10292,7 +10292,7 @@ Must be one of:
                value="40"
                data-component="body">
     <br>
-<p>Cantidad total de preguntas. validation.min. Example: <code>40</code></p>
+<p>Cantidad total de preguntas. Must be at least 1. Example: <code>40</code></p>
         </div>
         </form>
 
@@ -10314,7 +10314,7 @@ Must be one of:
     --header "Accept: application/json" \
     --data "{
     \"matricula_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"estado\": \"registrada\",
+    \"estado\": \"ausente\",
     \"puntaje\": 84,
     \"observacion\": \"z\"
 }"
@@ -10333,7 +10333,7 @@ const headers = {
 
 let body = {
     "matricula_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "estado": "registrada",
+    "estado": "ausente",
     "puntaje": 84,
     "observacion": "z"
 };
@@ -10426,7 +10426,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estado</code></b>&nbsp;&nbsp;
@@ -10435,10 +10435,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="estado"                data-endpoint="POSTapi-v1-assessments--examen_id--grades"
-               value="registrada"
+               value="ausente"
                data-component="body">
     <br>
-<p>Example: <code>registrada</code></p>
+<p>Example: <code>ausente</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>registrada</code></li> <li><code>ausente</code></li> <li><code>exonerado</code></li> <li><code>pendiente</code></li></ul>
         </div>
@@ -10452,7 +10452,7 @@ Must be one of:
                value="84"
                data-component="body">
     <br>
-<p>validation.min. Example: <code>84</code></p>
+<p>Must be at least 0. Example: <code>84</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>observacion</code></b>&nbsp;&nbsp;
@@ -10464,7 +10464,7 @@ Must be one of:
                value="z"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>z</code></p>
+<p>Must not be greater than 500 characters. Example: <code>z</code></p>
         </div>
         </form>
 
@@ -10485,11 +10485,11 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"preview\": false,
+    \"preview\": true,
     \"notas\": [
         {
             \"matricula_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-            \"estado\": \"registrada\",
+            \"estado\": \"ausente\",
             \"puntaje\": 84,
             \"observacion\": \"z\"
         }
@@ -10509,11 +10509,11 @@ const headers = {
 };
 
 let body = {
-    "preview": false,
+    "preview": true,
     "notas": [
         {
             "matricula_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-            "estado": "registrada",
+            "estado": "ausente",
             "puntaje": 84,
             "observacion": "z"
         }
@@ -10618,7 +10618,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -10628,7 +10628,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
 <br>
-<p>validation.min.</p>
+<p>Must have at least 1 items.</p>
             </summary>
                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>matricula_id</code></b>&nbsp;&nbsp;
@@ -10640,7 +10640,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>estado</code></b>&nbsp;&nbsp;
@@ -10649,10 +10649,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="notas.0.estado"                data-endpoint="POSTapi-v1-assessments--examen_id--grades-import"
-               value="registrada"
+               value="ausente"
                data-component="body">
     <br>
-<p>Example: <code>registrada</code></p>
+<p>Example: <code>ausente</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>registrada</code></li> <li><code>ausente</code></li> <li><code>exonerado</code></li> <li><code>pendiente</code></li></ul>
                     </div>
@@ -10666,7 +10666,7 @@ Must be one of:
                value="84"
                data-component="body">
     <br>
-<p>validation.min. Example: <code>84</code></p>
+<p>Must be at least 0. Example: <code>84</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>observacion</code></b>&nbsp;&nbsp;
@@ -10678,7 +10678,7 @@ Must be one of:
                value="z"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>z</code></p>
+<p>Must not be greater than 500 characters. Example: <code>z</code></p>
                     </div>
                                     </details>
         </div>
@@ -10814,7 +10814,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
                data-component="body">
     <br>
-<p>validation.uuid The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the matriculas table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estado</code></b>&nbsp;&nbsp;
@@ -10840,7 +10840,7 @@ Must be one of:
                value="84"
                data-component="body">
     <br>
-<p>validation.min. Example: <code>84</code></p>
+<p>Must be at least 0. Example: <code>84</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>observacion</code></b>&nbsp;&nbsp;
@@ -10852,7 +10852,7 @@ Must be one of:
                value="z"
                data-component="body">
     <br>
-<p>validation.max. Example: <code>z</code></p>
+<p>Must not be greater than 500 characters. Example: <code>z</code></p>
         </div>
         </form>
 
