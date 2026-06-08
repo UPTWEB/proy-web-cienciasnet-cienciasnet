@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
 use App\Modules\Comunicados\Infrastructure\Models\Comunicado;
 use App\Modules\Comunicados\Infrastructure\Models\ComunicadoLectura;
 use App\Modules\Notificaciones\Application\Jobs\DistributeAnnouncementNotifications;
 use App\Modules\Usuarios\Infrastructure\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
@@ -16,14 +16,16 @@ class CommunicationsTest extends TestCase
     use RefreshDatabase;
 
     private User $superadmin;
+
     private User $student;
+
     private User $parent;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
-        $this->seed(\Database\Seeders\RolesAndPermissionsSeeder::class);
+
+        $this->seed(RolesAndPermissionsSeeder::class);
 
         $this->superadmin = User::factory()->create();
         $this->superadmin->assignRole('superadmin');
@@ -43,7 +45,7 @@ class CommunicationsTest extends TestCase
             'title' => 'Reunion de padres',
             'body' => 'El viernes tendremos reunion general',
             'audience_type' => 'roles',
-            'audience_ids' => ['padre']
+            'audience_ids' => ['padre'],
         ]);
 
         $response->assertStatus(201);
@@ -107,7 +109,7 @@ class CommunicationsTest extends TestCase
             'fecha_publicacion' => now(),
             'importante' => false,
         ]);
-        
+
         $job2 = new DistributeAnnouncementNotifications($comunicado2);
         $job2->handle();
 
@@ -118,7 +120,7 @@ class CommunicationsTest extends TestCase
         // THEN no aparece el de otra seccion
         $response->assertStatus(200);
         $data = $response->json('data');
-        
+
         $this->assertCount(1, $data);
         $this->assertEquals('Aviso General', $data[0]['titulo']);
     }

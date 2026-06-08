@@ -23,17 +23,17 @@ class CommunicationController extends Controller
         $comunicados = Comunicado::whereHas('lecturas', function ($q) use ($userId) {
             $q->where('user_id', $userId)->whereNull('archivado_en');
         })
-        ->orWhere(function ($query) use ($userId) {
-            $query->whereIn('id', function ($sub) use ($userId) {
-                $sub->selectRaw("CAST(datos->>'comunicado_id' AS UUID)")
-                    ->from('notificaciones')
-                    ->where('user_id', $userId)
-                    ->where('tipo', 'comunicado');
-            });
-        })
-        ->with('publicadoPor:id,name')
-        ->orderByDesc('fecha_publicacion')
-        ->paginate(15);
+            ->orWhere(function ($query) use ($userId) {
+                $query->whereIn('id', function ($sub) use ($userId) {
+                    $sub->selectRaw("CAST(datos->>'comunicado_id' AS UUID)")
+                        ->from('notificaciones')
+                        ->where('user_id', $userId)
+                        ->where('tipo', 'comunicado');
+                });
+            })
+            ->with('publicadoPor:id,name')
+            ->orderByDesc('fecha_publicacion')
+            ->paginate(15);
 
         return response()->json($comunicados);
     }
@@ -50,7 +50,7 @@ class CommunicationController extends Controller
     public function markAnnouncementRead(string $id, Request $request, MarkAnnouncementRead $useCase): JsonResponse
     {
         $comunicado = Comunicado::findOrFail($id);
-        
+
         $useCase->execute($comunicado->id, $request->user()->id);
 
         return response()->json(null, 204);

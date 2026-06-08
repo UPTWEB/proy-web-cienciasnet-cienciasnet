@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 class DistributeAnnouncementNotifications implements ShouldQueue
 {
@@ -28,11 +29,11 @@ class DistributeAnnouncementNotifications implements ShouldQueue
 
         foreach ($userIds as $userId) {
             $notifications[] = [
-                'id' => (string) \Illuminate\Support\Str::uuid(),
+                'id' => (string) Str::uuid(),
                 'user_id' => $userId,
                 'tipo' => 'comunicado',
                 'titulo' => $this->comunicado->titulo,
-                'contenido' => \Illuminate\Support\Str::limit($this->comunicado->contenido, 100),
+                'contenido' => Str::limit($this->comunicado->contenido, 100),
                 'datos' => json_encode(['comunicado_id' => $this->comunicado->id]),
                 'canal' => 'panel',
                 'estado' => 'pendiente',
@@ -62,7 +63,7 @@ class DistributeAnnouncementNotifications implements ShouldQueue
 
         if (isset($destinatarios['sections'])) {
             $sectionIds = $destinatarios['sections'];
-            
+
             // Estudiantes de la seccion
             $studentUserIds = User::whereHas('alumno.matriculas', function ($q) use ($sectionIds) {
                 $q->whereIn('seccion_id', $sectionIds)->where('estado', 'activo');
