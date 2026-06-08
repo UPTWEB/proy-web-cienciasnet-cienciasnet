@@ -7,6 +7,7 @@ use App\Modules\Finanzas\Infrastructure\Models\ConceptoPago;
 use App\Modules\Finanzas\Infrastructure\Models\ObligacionPago;
 use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 use App\Modules\Usuarios\Infrastructure\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -27,6 +28,8 @@ class PaymentObligationGenerationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->seed(RolesAndPermissionsSeeder::class);
 
         // Create Yanina user with gestionar_finanzas permission
         $this->yanina = User::factory()->create();

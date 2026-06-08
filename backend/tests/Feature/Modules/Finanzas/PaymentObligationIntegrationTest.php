@@ -8,6 +8,7 @@ use App\Modules\Finanzas\Infrastructure\Models\ConceptoPago;
 use App\Modules\Finanzas\Infrastructure\Models\ObligacionPago;
 use App\Modules\Usuarios\Infrastructure\Models\Alumno;
 use App\Modules\Usuarios\Infrastructure\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -26,6 +27,8 @@ class PaymentObligationIntegrationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->seed(RolesAndPermissionsSeeder::class);
 
         $this->admin = User::factory()->create();
         $this->admin->assignRole('administrativo');
