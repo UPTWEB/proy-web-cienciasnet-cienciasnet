@@ -16,7 +16,7 @@ class BeneficioAlumnoFactory extends Factory
     {
         return [
             'alumno_id' => Alumno::factory(),
-            'tipo' => fake()->randomElement(['beca', 'descuento', 'exoneracion']),
+            'tipo' => fake()->randomElement(['beca', 'descuento']),
             'modalidad' => fake()->randomElement(['porcentaje', 'monto_fijo']),
             'valor' => fake()->randomFloat(2, 10, 500),
             'aplica_mensualidad' => true,
@@ -24,6 +24,7 @@ class BeneficioAlumnoFactory extends Factory
             'aplica_cuota_ingreso' => false,
             'acumulable_pronto_pago' => true,
             'vigente_desde' => fake()->dateTimeBetween('-1 year', 'now'),
+            'motivo' => fake()->sentence(),
             'activo' => true,
             'registrado_por' => User::factory(),
         ];

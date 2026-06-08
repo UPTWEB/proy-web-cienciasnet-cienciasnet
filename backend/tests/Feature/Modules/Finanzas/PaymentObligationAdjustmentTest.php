@@ -63,8 +63,11 @@ class PaymentObligationAdjustmentTest extends TestCase
             'alumno_id' => $student->id,
             'concepto_id' => $concept->id,
             'estado' => 'pagado',
+            'monto_base_snapshot' => 500,
             'monto_ordinario_snapshot' => 500,
+            'monto_pronto_pago_snapshot' => 500,
             'monto_cobrado' => 500,
+            'fecha_pago' => now(),
             'registrado_por' => $this->yanina->id,
         ]);
     }
@@ -163,7 +166,7 @@ class PaymentObligationAdjustmentTest extends TestCase
             );
 
         $response->assertUnprocessable();
-        $response->assertJsonValidationErrors('reason');
+        $response->assertJsonStructure(['error' => ['fields' => ['reason']]]);
     }
 
     public function test_adjust_records_audit_trail(): void
@@ -179,7 +182,7 @@ class PaymentObligationAdjustmentTest extends TestCase
             );
 
         $this->assertDatabaseHas('audit_logs', [
-            'event' => 'finance.obligation_adjusted',
+            'action' => 'finance.obligation_adjusted',
             'user_id' => $this->yanina->id,
         ]);
     }

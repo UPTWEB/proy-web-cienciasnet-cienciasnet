@@ -16,6 +16,7 @@ use App\Modules\Finanzas\Presentation\Requests\ListPaymentObligationsRequest;
 use App\Modules\Finanzas\Presentation\Resources\PaymentObligationResource;
 use App\Support\AuditLogger;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PaymentObligationController extends Controller
@@ -56,7 +57,7 @@ class PaymentObligationController extends Controller
                 $request,
                 'finance.obligations_generated',
                 $request->user(),
-                [
+                newValues: [
                     'concept_id' => $dto->conceptId,
                     'count' => $obligations->count(),
                     'student_ids' => $dto->studentIds,
@@ -77,8 +78,10 @@ class PaymentObligationController extends Controller
         }
     }
 
-    public function show(string $obligationId): PaymentObligationResource
+    public function show(string $obligationId, Request $request): PaymentObligationResource
     {
+        $request->user()->can('gestionar_finanzas') || abort(403);
+
         $obligation = $this->repository->findOrFail($obligationId);
 
         return new PaymentObligationResource($obligation);
@@ -136,7 +139,7 @@ class PaymentObligationController extends Controller
                 $request,
                 'finance.obligations_bulk_adjusted',
                 $request->user(),
-                [
+                newValues: [
                     'filters' => $dto->filters,
                     'count_affected' => $count,
                     'adjustment_type' => $dto->adjustmentType,

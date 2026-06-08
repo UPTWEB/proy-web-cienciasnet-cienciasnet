@@ -2,7 +2,10 @@
 
 namespace Tests\Feature\Modules\Finanzas;
 
+use App\Modules\Academico\Infrastructure\Models\Grado;
+use App\Modules\Academico\Infrastructure\Models\Matricula;
 use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
+use App\Modules\Academico\Infrastructure\Models\Seccion;
 use App\Modules\Finanzas\Infrastructure\Models\ConceptoPago;
 use App\Modules\Finanzas\Infrastructure\Models\ObligacionPago;
 use App\Modules\Usuarios\Infrastructure\Models\Alumno;
@@ -55,6 +58,31 @@ class PaymentObligationGenerationTest extends TestCase
         $this->student = Alumno::factory()
             ->has(User::factory())
             ->create();
+
+        // Create enrollment data so student is found by resolveStudents
+        $grade = Grado::create([
+            'periodo_academico_id' => $this->period->id,
+            'nombre' => 'Primer Grado',
+            'nivel' => 'primaria',
+            'orden' => 1,
+            'activo' => true,
+        ]);
+        $section = Seccion::create([
+            'grado_id' => $grade->id,
+            'nombre' => 'A',
+            'turno' => 'manana',
+            'aula' => '101',
+            'capacidad' => 30,
+            'activo' => true,
+        ]);
+        Matricula::create([
+            'alumno_id' => $this->student->id,
+            'seccion_id' => $section->id,
+            'codigo' => 'MAT-'.fake()->unique()->numerify('######'),
+            'fecha' => now()->toDateString(),
+            'estado' => 'activo',
+            'registrado_por' => $this->yanina->id,
+        ]);
     }
 
     public function test_generate_obligation_creates_with_frozen_snapshots(): void
@@ -143,6 +171,8 @@ class PaymentObligationGenerationTest extends TestCase
             'alumno_id' => $this->student->id,
             'concepto_id' => $this->concept->id,
             'estado' => 'pagado',
+            'monto_cobrado' => 500,
+            'fecha_pago' => now(),
         ]);
 
         $response = $this->actingAs($this->yanina)

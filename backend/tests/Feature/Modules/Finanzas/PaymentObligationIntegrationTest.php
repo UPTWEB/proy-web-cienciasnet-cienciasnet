@@ -2,7 +2,10 @@
 
 namespace Tests\Feature\Modules\Finanzas;
 
+use App\Modules\Academico\Infrastructure\Models\Grado;
+use App\Modules\Academico\Infrastructure\Models\Matricula;
 use App\Modules\Academico\Infrastructure\Models\PeriodoAcademico;
+use App\Modules\Academico\Infrastructure\Models\Seccion;
 use App\Modules\Finanzas\Infrastructure\Models\BeneficioAlumno;
 use App\Modules\Finanzas\Infrastructure\Models\ConceptoPago;
 use App\Modules\Finanzas\Infrastructure\Models\ObligacionPago;
@@ -39,6 +42,7 @@ class PaymentObligationIntegrationTest extends TestCase
         $this->concept = ConceptoPago::factory()->create([
             'periodo_academico_id' => $this->period->id,
             'estado' => 'vigente',
+            'tipo' => 'mensualidad',
             'monto_base' => 1000,
             'descuento_pronto_pago' => 100,
         ]);
@@ -46,6 +50,31 @@ class PaymentObligationIntegrationTest extends TestCase
         $this->student = Alumno::factory()
             ->has(User::factory())
             ->create();
+
+        // Create enrollment data
+        $grade = Grado::create([
+            'periodo_academico_id' => $this->period->id,
+            'nombre' => 'Primer Grado',
+            'nivel' => 'primaria',
+            'orden' => 1,
+            'activo' => true,
+        ]);
+        $section = Seccion::create([
+            'grado_id' => $grade->id,
+            'nombre' => 'A',
+            'turno' => 'manana',
+            'aula' => '101',
+            'capacidad' => 30,
+            'activo' => true,
+        ]);
+        Matricula::create([
+            'alumno_id' => $this->student->id,
+            'seccion_id' => $section->id,
+            'codigo' => 'MAT-'.fake()->unique()->numerify('######'),
+            'fecha' => now()->toDateString(),
+            'estado' => 'activo',
+            'registrado_por' => $this->admin->id,
+        ]);
     }
 
     public function test_end_to_end_generate_and_adjust_obligation(): void
@@ -108,8 +137,11 @@ class PaymentObligationIntegrationTest extends TestCase
         // Create a benefit for the student
         $benefit = BeneficioAlumno::factory()->create([
             'alumno_id' => $this->student->id,
-            'monto_descuento' => 200,
-            'estado' => 'activo',
+            'tipo' => 'descuento',
+            'modalidad' => 'monto_fijo',
+            'valor' => 200,
+            'motivo' => 'Descuento por beca',
+            'activo' => true,
         ]);
 
         // Generate obligation (should apply benefit)
@@ -136,6 +168,33 @@ class PaymentObligationIntegrationTest extends TestCase
     {
         $student2 = Alumno::factory()->has(User::factory())->create();
         $student3 = Alumno::factory()->has(User::factory())->create();
+
+        // Create enrollment data for additional students
+        $g2 = Grado::create([
+            'periodo_academico_id' => $this->period->id,
+            'nombre' => 'Segundo Grado',
+            'nivel' => 'primaria',
+            'orden' => 2,
+            'activo' => true,
+        ]);
+        $s2 = Seccion::create([
+            'grado_id' => $g2->id,
+            'nombre' => 'A',
+            'turno' => 'manana',
+            'aula' => '102',
+            'capacidad' => 30,
+            'activo' => true,
+        ]);
+        foreach ([$student2, $student3] as $s) {
+            Matricula::create([
+                'alumno_id' => $s->id,
+                'seccion_id' => $s2->id,
+                'codigo' => 'MAT-'.fake()->unique()->numerify('######'),
+                'fecha' => now()->toDateString(),
+                'estado' => 'activo',
+                'registrado_por' => $this->admin->id,
+            ]);
+        }
 
         $response = $this->actingAs($this->admin)
             ->postJson('/api/v1/payment-obligations', [
@@ -177,6 +236,8 @@ class PaymentObligationIntegrationTest extends TestCase
             'alumno_id' => $this->student->id,
             'concepto_id' => $this->concept->id,
             'estado' => 'pagado',
+            'monto_cobrado' => 500,
+            'fecha_pago' => now(),
         ]);
 
         // List pending obligations
