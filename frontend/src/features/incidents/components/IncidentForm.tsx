@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { CreateIncidentRequest } from '../types'
 
 export function IncidentForm({ onSubmit, isSubmitting, studentId }: { onSubmit: (data: CreateIncidentRequest) => void, isSubmitting: boolean, studentId?: string }) {

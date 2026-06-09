@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { listIncidents } from './api'
 import type { Incident } from './types'
 

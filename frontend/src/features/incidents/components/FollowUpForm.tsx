@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { CreateIncidentFollowUpRequest } from '../types'
 
 export function FollowUpForm({ onSubmit, isSubmitting }: { onSubmit: (data: CreateIncidentFollowUpRequest) => void, isSubmitting: boolean }) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { TransitionIncidentRequest } from '../types'
 
 export function TransitionForm({ onSubmit, isSubmitting }: { onSubmit: (data: TransitionIncidentRequest) => void, isSubmitting: boolean }) {
