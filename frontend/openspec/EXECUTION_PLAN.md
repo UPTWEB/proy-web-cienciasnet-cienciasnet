@@ -33,14 +33,14 @@
 | FE-009A | `[x]` | `add-biometric-station-administration` | Vincenzo | Jefferson | FE-003 |
 | FE-010 | `[x]` | `add-student-attendance-supervision` | Vincenzo | Jefferson | FE-002, FE-003 |
 | FE-011 | `[x]` | `add-teacher-attendance-payroll` | Vincenzo | Jefferson | FE-003 |
-|
+
 ## Fase 3: Finanzas
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-012 | `[ ]` | `add-finance-configuration-benefits` | Kiara | Jefferson | FE-003 |
-| FE-013 | `[ ]` | `add-obligations-payments-administration` | Kiara | Jefferson | FE-003 |
-| FE-014 | `[ ]` | `add-finance-state-portals` | Kiara | Jefferson | FE-008 |
+| FE-012 | `[x]` | `add-finance-configuration-benefits` | Kiara | Jefferson | FE-003 |
+| FE-013 | `[x]` | `add-obligations-payments-administration` | Kiara | Jefferson | FE-003 |
+| FE-014 | `[x]` | `add-finance-state-portals` | Kiara | Jefferson | FE-008 |
 
 ## Fase 4: Evaluación y contenido
 
@@ -56,8 +56,8 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-020 | `[ ]` | `add-incidents-workflow` | Kiara | Jefferson | FE-003 |
-| FE-021 | `[ ]` | `add-private-psychology-portal` | Kiara | Jefferson | FE-003 |
+| FE-020 | `[x]` | `add-incidents-workflow` | Kiara | Jefferson | FE-003 |
+| FE-021 | `[x]` | `add-private-psychology-portal` | Kiara | Jefferson | FE-003 |
 
 ## Fase 6: Calidad y release
 

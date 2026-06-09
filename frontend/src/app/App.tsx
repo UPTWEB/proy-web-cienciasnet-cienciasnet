@@ -14,10 +14,19 @@ import { AcademicAdminPage } from '@/features/phase-one/AcademicAdminPage'
 import { AccountsAdminPage } from '@/features/phase-one/AccountsAdminPage'
 import { FamilyAdminPage } from '@/features/phase-one/FamilyAdminPage'
 import { FamilyPortalPage } from '@/features/phase-one/FamilyPortalPage'
+import { PaymentConceptsPage, StudentBenefitsPage } from '@/features/finance-config'
+import { ObligationsPage, PaymentsPage } from '@/features/finance-operations'
+import { FamilyAccountStatementPage } from '@/features/finance-queries/FamilyAccountStatementPage'
+import { DebtorsReportPage } from '@/features/finance-queries/DebtorsReportPage'
+import { CashReportPage } from '@/features/finance-queries/CashReportPage'
 import { BiometricAdminPage } from '@/features/biometrics/BiometricAdminPage'
 import { StudentAttendancePage } from '@/features/attendance/StudentAttendancePage'
 import { PayrollAdminPage } from '@/features/payroll/PayrollAdminPage'
 import { AssessmentsPage } from '@/features/assessments/AssessmentsPage'
+import { IncidentsAdminPage } from '@/features/incidents/IncidentsAdminPage'
+import { IncidentDetailPage } from '@/features/incidents/IncidentDetailPage'
+import { FamilyIncidentsPage } from '@/features/incidents/FamilyIncidentsPage'
+import { PsychologyAdminPage } from '@/features/psychology/PsychologyAdminPage'
 
 export function App() {
   return (
@@ -29,7 +38,11 @@ export function App() {
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path="/seleccionar-contexto" element={<PortalLayout />}><Route index element={<ContextPage />} /></Route>
-        <Route path="/portal" element={<PortalLayout />}><Route index element={<FamilyPortalPage />} /></Route>
+        <Route path="/portal" element={<PortalLayout />}>
+          <Route index element={<FamilyPortalPage />} />
+          <Route path="finanzas/estado-cuenta" element={<FamilyAccountStatementPage />} />
+          <Route path="incidencias" element={<FamilyIncidentsPage />} />
+        </Route>
         <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar', 'docente']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
           <Route path="/admin" element={<PortalLayout />}>
             <Route index element={<FoundationsPage context="Administración" />} />
@@ -43,14 +56,27 @@ export function App() {
             <Route element={<PermissionRoute roles={['superadmin', 'coordinador_academico']} />}>
               <Route path="academia" element={<AcademicAdminPage />} />
             </Route>
+            <Route element={<PermissionRoute roles={['superadmin', 'gestionar_finanzas']} />}>
+              <Route path="finanzas/configuracion" element={<PaymentConceptsPage />} />
+              <Route path="finanzas/beneficios" element={<StudentBenefitsPage />} />
+              <Route path="finanzas/obligaciones" element={<ObligationsPage />} />
+              <Route path="finanzas/pagos" element={<PaymentsPage />} />
+              <Route path="finanzas/morosos" element={<DebtorsReportPage />} />
+              <Route path="finanzas/caja" element={<CashReportPage />} />
+            </Route>
             <Route element={<PermissionRoute roles={['superadmin', 'auxiliar', 'toe']} />}>
               <Route path="asistencia" element={<StudentAttendancePage />} />
+              <Route path="incidencias" element={<IncidentsAdminPage />} />
+              <Route path="incidencias/:id" element={<IncidentDetailPage />} />
             </Route>
             <Route element={<PermissionRoute roles={['superadmin']} permissions={['gestionar_planilla']} />}>
               <Route path="planilla" element={<PayrollAdminPage />} />
             </Route>
             <Route element={<PermissionRoute roles={['superadmin', 'coordinador_academico', 'docente']} />}>
               <Route path="evaluaciones" element={<AssessmentsPage />} />
+            </Route>
+            <Route element={<PermissionRoute roles={['superadmin', 'psicologia']} />}>
+              <Route path="psicologia" element={<PsychologyAdminPage />} />
             </Route>
           </Route>
         </Route>

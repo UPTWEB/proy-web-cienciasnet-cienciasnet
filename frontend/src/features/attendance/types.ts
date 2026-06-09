@@ -5,7 +5,7 @@ export interface StudentAttendance {
   grade: string
   section: string
   date: string // YYYY-MM-DD
-  status: 'present' | 'late' | 'absent' | 'excused'
+  status: 'present' | 'late' | 'absent' | 'excused' | 'anulada'
   entry_time: string | null // ISO Date-Time string
   exit_time: string | null // ISO Date-Time string
   justified: boolean
