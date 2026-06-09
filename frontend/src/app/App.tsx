@@ -29,6 +29,10 @@ import { SchedulesAdminPage } from '@/features/schedules/SchedulesAdminPage'
 import { SchedulesPortalPage } from '@/features/schedules/SchedulesPortalPage'
 import { CommunicationsAdminPage } from '@/features/communications/CommunicationsAdminPage'
 import { CommunicationsPortalPage } from '@/features/communications/CommunicationsPortalPage'
+import { IncidentsAdminPage } from '@/features/incidents/IncidentsAdminPage'
+import { IncidentDetailPage } from '@/features/incidents/IncidentDetailPage'
+import { FamilyIncidentsPage } from '@/features/incidents/FamilyIncidentsPage'
+import { PsychologyAdminPage } from '@/features/psychology/PsychologyAdminPage'
 
 export function App() {
   return (
@@ -46,6 +50,7 @@ export function App() {
           <Route path="materiales" element={<MaterialsPortalPage />} />
           <Route path="horarios" element={<SchedulesPortalPage />} />
           <Route path="comunicaciones" element={<CommunicationsPortalPage />} />
+          <Route path="incidencias" element={<FamilyIncidentsPage />} />
         </Route>
         <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar', 'docente']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
           <Route path="/admin" element={<PortalLayout />}>
@@ -70,6 +75,8 @@ export function App() {
             </Route>
             <Route element={<PermissionRoute roles={['superadmin', 'auxiliar', 'toe']} />}>
               <Route path="asistencia" element={<StudentAttendancePage />} />
+              <Route path="incidencias" element={<IncidentsAdminPage />} />
+              <Route path="incidencias/:id" element={<IncidentDetailPage />} />
             </Route>
             <Route element={<PermissionRoute roles={['superadmin']} permissions={['gestionar_planilla']} />}>
               <Route path="planilla" element={<PayrollAdminPage />} />
@@ -81,6 +88,9 @@ export function App() {
              </Route>
              <Route element={<PermissionRoute roles={['superadmin', 'toe', 'coordinador_academico']} />}>
                <Route path="comunicaciones" element={<CommunicationsAdminPage />} />
+             </Route>
+             <Route element={<PermissionRoute roles={['superadmin', 'psicologia']} />}>
+               <Route path="psicologia" element={<PsychologyAdminPage />} />
              </Route>
           </Route>
         </Route>
