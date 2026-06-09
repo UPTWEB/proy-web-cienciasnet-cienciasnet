@@ -88,6 +88,35 @@ class AcademicController extends Controller
         ]));
     }
 
+    public function updateGrade(AcademicEntityRequest $request, string $id): JsonResponse
+    {
+        $grade = Grado::findOrFail($id);
+        $data = [];
+        if ($request->has('name')) {
+            $data['nombre'] = $request->string('name');
+        }
+        if ($request->has('level')) {
+            $data['nivel'] = $request->string('level');
+        }
+        if ($request->has('order')) {
+            $data['orden'] = $request->integer('order');
+        }
+        if ($request->has('academic_period_id')) {
+            $data['periodo_academico_id'] = $request->string('academic_period_id');
+        }
+        $grade->update($data);
+
+        return $this->resource($grade);
+    }
+
+    public function destroyGrade(string $id): JsonResponse
+    {
+        $grade = Grado::findOrFail($id);
+        $grade->delete();
+
+        return response()->json([], 204);
+    }
+
     public function sections(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
@@ -105,6 +134,32 @@ class AcademicController extends Controller
         ]));
     }
 
+    public function updateSection(AcademicEntityRequest $request, string $id): JsonResponse
+    {
+        $section = Seccion::findOrFail($id);
+        $data = [];
+        if ($request->has('name')) {
+            $data['nombre'] = $request->string('name');
+        }
+        if ($request->has('grade_id')) {
+            $data['grado_id'] = $request->string('grade_id');
+        }
+        if ($request->has('capacity')) {
+            $data['capacidad'] = $request->integer('capacity');
+        }
+        $section->update($data);
+
+        return $this->resource($section);
+    }
+
+    public function destroySection(string $id): JsonResponse
+    {
+        $section = Seccion::findOrFail($id);
+        $section->delete();
+
+        return response()->json([], 204);
+    }
+
     public function courses(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
@@ -120,6 +175,32 @@ class AcademicController extends Controller
             'codigo' => $request->string('code'), 'nombre' => $request->string('name'),
             'descripcion' => $request->input('description'), 'activo' => true,
         ]));
+    }
+
+    public function updateCourse(AcademicEntityRequest $request, string $id): JsonResponse
+    {
+        $course = Curso::findOrFail($id);
+        $data = [];
+        if ($request->has('code')) {
+            $data['codigo'] = $request->string('code');
+        }
+        if ($request->has('name')) {
+            $data['nombre'] = $request->string('name');
+        }
+        if ($request->has('description')) {
+            $data['descripcion'] = $request->input('description');
+        }
+        $course->update($data);
+
+        return $this->resource($course);
+    }
+
+    public function destroyCourse(string $id): JsonResponse
+    {
+        $course = Curso::findOrFail($id);
+        $course->delete();
+
+        return response()->json([], 204);
     }
 
     public function enrollments(Request $request)
@@ -143,6 +224,30 @@ class AcademicController extends Controller
             'codigo' => 'MAT-'.now()->format('Y').'-'.Str::upper(Str::random(8)),
             'fecha' => $request->date('enrolled_at', now()), 'estado' => 'activo', 'registrado_por' => $request->user()->id,
         ]))->load(['seccion.grado.periodoAcademico', 'alumno']));
+    }
+
+    public function updateEnrollment(AcademicEntityRequest $request, string $id): JsonResponse
+    {
+        $enrollment = Matricula::with('seccion.grado.periodoAcademico')->findOrFail($id);
+        $data = [];
+        if ($request->has('section_id')) {
+            $section = Seccion::with('grado')->findOrFail($request->string('section_id'));
+            if ($request->has('academic_period_id') && $section->grado->periodo_academico_id !== $request->string('academic_period_id')->toString()) {
+                throw ValidationException::withMessages(['academic_period_id' => ['No corresponde a la sección seleccionada.']]);
+            }
+            $data['seccion_id'] = $section->id;
+        }
+        $enrollment->update($data);
+
+        return $this->resource($enrollment);
+    }
+
+    public function destroyEnrollment(string $id): JsonResponse
+    {
+        $enrollment = Matricula::findOrFail($id);
+        $enrollment->delete();
+
+        return response()->json([], 204);
     }
 
     public function assignments(Request $request)
@@ -173,6 +278,26 @@ class AcademicController extends Controller
         $audit->record($request, 'teaching_assignment.created', $request->user(), $assignment);
 
         return $this->created($assignment);
+    }
+
+    public function updateAssignment(AcademicEntityRequest $request, string $id): JsonResponse
+    {
+        $assignment = CargaAcademica::with('seccion.grado.periodoAcademico')->findOrFail($id);
+        $data = [];
+        if ($request->has('teacher_id')) {
+            $data['docente_id'] = $request->string('teacher_id');
+        }
+        $assignment->update($data);
+
+        return $this->resource($assignment);
+    }
+
+    public function destroyAssignment(string $id): JsonResponse
+    {
+        $assignment = CargaAcademica::findOrFail($id);
+        $assignment->delete();
+
+        return response()->json([], 204);
     }
 
     private function perPage(Request $request): int

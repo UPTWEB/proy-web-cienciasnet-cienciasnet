@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { DataTable } from '@/components/shared/DataTable'
 import { getApiError } from '@/lib/api/client'
-import { createAcademic, listAcademic, searchDni, type AcademicPath } from './api'
+import { createAcademic, listAcademic, deleteAcademic, searchDni, type AcademicPath } from './api'
 
 const entities: Array<{ path: AcademicPath; label: string }> = [
   { path: 'academic-periods', label: 'Periodos' }, { path: 'grades', label: 'Grados' },
@@ -99,6 +99,10 @@ export function AcademicAdminPage() {
       await client.invalidateQueries({ queryKey: ['academic'] }) 
     },
   })
+  const destroy = useMutation({
+    mutationFn: ({ path, id }: { path: AcademicPath, id: string }) => deleteAcademic(path, id),
+    onSuccess: async () => { await client.invalidateQueries({ queryKey: ['academic'] }) },
+  })
 
   return (
     <section className="page-stack">
@@ -152,6 +156,7 @@ export function AcademicAdminPage() {
         <DataTable rows={queries[index].data?.data} isLoading={queries[index].isLoading} error={queries[index].error} columns={[
           { label: 'Registro', render: (row) => row.name ?? row.code ?? row.id },
           { label: 'Estado / vigencia', render: (row) => row.status ?? (row.active === false ? `Histórica hasta ${row.valid_until}` : row.valid_from ?? 'Vigente') },
+          { label: 'Acciones', render: (row) => <button type="button" onClick={() => { if(confirm('¿Eliminar registro?')) destroy.mutate({ path: item.path, id: row.id }) }} className="button text-red-500" disabled={destroy.isPending}>Eliminar</button> }
         ]} />
       </article>)}</div>
     </section>
