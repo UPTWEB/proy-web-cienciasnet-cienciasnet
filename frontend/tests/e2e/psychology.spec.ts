@@ -54,7 +54,7 @@ test.describe('Psychology Workflow', () => {
     await page.goto('/admin/psicologia')
 
     // Expect to be blocked by permission route
-    await expect(page.getByText('Acceso denegado')).toBeVisible()
+    await expect(page.getByText('Sin permiso')).toBeVisible()
   })
 
   test('Psychologist can view and create confidential care records', async ({ page }) => {
@@ -77,7 +77,7 @@ test.describe('Psychology Workflow', () => {
     await page.locator('textarea').fill('El alumno indicó problemas familiares...')
     
     // Submit
-    await page.getByRole('button', { name: 'Registrar Atención' }).click()
+    await page.locator('form').getByRole('button', { name: 'Registrar Atención' }).click()
     await expect(page.getByRole('heading', { name: 'Nueva Atención Psicológica' })).not.toBeVisible()
   })
 })
