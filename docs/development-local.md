@@ -21,6 +21,26 @@ docker compose exec backend php artisan migrate:fresh --seed
 docker compose ps
 ```
 
+El comando `migrate:fresh --seed` realiza tres pasos en orden:
+
+1. **Elimina y recrea todas las tablas** (`migrate:fresh`)
+2. **Crea roles y permisos** — `RolesAndPermissionsSeeder`
+3. **Carga datos de prueba completos** — `DemoCompleteSeeder`, que genera:
+   - 7 usuarios staff (superadmin, coordinador, TOE, psicología, auxiliar, administrativo, gestor)
+   - 6 docentes con DNI y teléfono
+   - ~60 alumnos y sus padres/apoderados enlazados
+   - 1 período académico 2026 · 6 grados · 12 secciones · cursos y carga académica
+   - Horarios semanales, exámenes y notas por bimestre
+   - 10 días de asistencias (alumnos y docentes)
+   - Eventos de calendario, comunicados institucionales
+   - Conceptos de pago, obligaciones y movimientos de caja
+   - Incidencias con historial y atenciones psicológicas
+
+> 📄 Las credenciales de acceso (DNI, email, contraseña) están documentadas en
+> [`docs/credenciales-prueba.md`](./credenciales-prueba.md).
+>
+> **Contraseña universal de todos los usuarios de prueba:** `password`
+
 | Servicio | Uso | Acceso host |
 |---|---|---|
 | `frontend` | SPA React/Vite | `http://localhost:5173` |
