@@ -15,6 +15,7 @@ export function PortalLayout() {
   const canSuperviseAttendance = auth.user?.roles?.some((role) => ['superadmin', 'auxiliar', 'toe'].includes(role))
   const canManagePayroll = auth.user?.roles?.includes('superadmin') || auth.user?.permissions?.includes('gestionar_planilla')
 
+
   async function closeSession() {
     await logout()
     auth.clearSession()
