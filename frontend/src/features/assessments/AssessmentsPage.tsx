@@ -23,6 +23,11 @@ import {
   importAssessmentResults
 } from './api'
 import type { AssessmentResult, ReplaceAssessmentResultsInput } from './types'
+import {
+  publishAssessment,
+  setAssessmentClosure,
+  correctPublishedResult
+} from '@/features/academic-reports/api'
 
 export function AssessmentsPage() {
   const { user } = useAuth()
@@ -172,6 +177,78 @@ export function AssessmentsPage() {
       setSaveError(getApiError(err).message)
     }
   })
+
+  // Coordinator action mutations
+  const publishMutation = useMutation({
+    mutationFn: (id: string) => publishAssessment(id, `publish-${id}-${Date.now()}`),
+    onSuccess: async () => {
+      setSaveSuccess('Evaluación publicada exitosamente.')
+      setSaveError('')
+      await client.invalidateQueries({ queryKey: ['assessments', selectedLoadId] })
+      setTimeout(() => setSaveSuccess(''), 4000)
+    },
+    onError: (err) => {
+      setSaveSuccess('')
+      setSaveError(getApiError(err).message)
+    }
+  })
+
+  const closureMutation = useMutation({
+    mutationFn: ({ id, closed }: { id: string; closed: boolean }) =>
+      setAssessmentClosure(id, { closed }),
+    onSuccess: async (_, variables) => {
+      setSaveSuccess(variables.closed ? 'Evaluación cerrada exitosamente.' : 'Evaluación reabierta exitosamente.')
+      setSaveError('')
+      await client.invalidateQueries({ queryKey: ['assessments', selectedLoadId] })
+      setTimeout(() => setSaveSuccess(''), 4000)
+    },
+    onError: (err) => {
+      setSaveSuccess('')
+      setSaveError(getApiError(err).message)
+    }
+  })
+
+  const correctResultMutation = useMutation({
+    mutationFn: ({ resultId, score, reason }: { resultId: string; score: string; reason: string }) =>
+      correctPublishedResult(resultId, { score, reason }),
+    onSuccess: async () => {
+      setSaveSuccess('Nota corregida y auditada exitosamente.')
+      setSaveError('')
+      setShowCorrectModal(false)
+      setCorrectionScore('')
+      setCorrectionReason('')
+      setCorrectionTarget(null)
+      await client.invalidateQueries({ queryKey: ['assessment-results', selectedAssessmentId] })
+      setTimeout(() => setSaveSuccess(''), 4000)
+    },
+    onError: (err) => {
+      setCorrectionError(getApiError(err).message)
+    }
+  })
+
+  // Modal states for Audited Correction
+  const [showCorrectModal, setShowCorrectModal] = useState(false)
+  const [correctionTarget, setCorrectionTarget] = useState<AssessmentResult | null>(null)
+  const [correctionScore, setCorrectionScore] = useState('')
+  const [correctionReason, setCorrectionReason] = useState('')
+  const [correctionError, setCorrectionError] = useState('')
+
+  const validateCorrectionScore = (scoreStr: string, maxScore: number) => {
+    if (!scoreStr || scoreStr.trim() === '') {
+      return 'Puntaje requerido'
+    }
+    const scoreNum = Number(scoreStr)
+    if (isNaN(scoreNum) || scoreNum < 0) {
+      return 'Número inválido'
+    }
+    if (scoreNum > maxScore) {
+      return `Máximo ${maxScore}`
+    }
+    if (!/^\d{1,10}(\.\d{1,2})?$/.test(scoreStr)) {
+      return 'Máx 2 decimales'
+    }
+    return ''
+  }
 
   // Keyboard Navigation handler
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({})
@@ -474,6 +551,19 @@ export function AssessmentsPage() {
               <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <FileText className="text-blue-600" size={22} weight="bold" />
                 Registro: {selectedAssessment?.title}
+                <span className={`text-xs px-2.5 py-0.5 rounded-full font-black uppercase ${
+                  selectedAssessment?.status === 'closed'
+                    ? 'bg-red-100 text-red-800'
+                    : selectedAssessment?.status === 'published'
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {selectedAssessment?.status === 'closed'
+                    ? 'Cerrado'
+                    : selectedAssessment?.status === 'published'
+                    ? 'Publicado'
+                    : 'Borrador'}
+                </span>
               </h2>
               <p className="text-xs text-slate-500 mt-1">
                 Tipo: <strong>{selectedAssessment?.assessment_type}</strong> |
@@ -486,41 +576,76 @@ export function AssessmentsPage() {
             </div>
 
             <div className="flex gap-2">
-              <button
-                className="button button-secondary text-xs px-3.5 py-2.5 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer hover:bg-slate-50"
-                onClick={() => {
-                  setSelectedFile(null)
-                  setCsvErrors([])
-                  setCsvPreview([])
-                  setImportError('')
-                  setImportSuccess('')
-                  setShowImportModal(true)
-                }}
-              >
-                <FileCsv size={16} className="text-emerald-600" /> Importar CSV
-              </button>
-              <button
-                className="button button-primary bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2.5 rounded-xl font-bold cursor-pointer disabled:opacity-50"
-                disabled={saveResultsMutation.isPending || Object.keys(rowErrors).length > 0 || localResults.length === 0}
-                onClick={() =>
-                  saveResultsMutation.mutate({
-                    results: localResults.map((r) => ({
-                      student_id: r.student_id,
-                      score: r.score,
-                      status: r.status,
-                      observations: r.observations || ''
-                    }))
-                  })
-                }
-              >
-                {saveResultsMutation.isPending ? (
-                  <>
-                    <SpinnerGap className="spin" size={14} /> Guardando...
-                  </>
-                ) : (
-                  'Guardar Notas'
-                )}
-              </button>
+              {/* Coordinator controls: Publicar / Cerrar / Reabrir */}
+              {isCoordinator && selectedAssessment?.status === 'draft' && (
+                <button
+                  className="button button-secondary bg-blue-50 text-blue-700 border border-blue-200 text-xs px-3.5 py-2.5 rounded-xl font-black flex items-center gap-1.5 cursor-pointer hover:bg-blue-100"
+                  disabled={publishMutation.isPending}
+                  onClick={() => publishMutation.mutate(selectedAssessment.id)}
+                >
+                  {publishMutation.isPending ? 'Publicando...' : 'Publicar'}
+                </button>
+              )}
+
+              {isCoordinator && selectedAssessment?.status === 'published' && (
+                <button
+                  className="button button-secondary bg-red-50 text-red-700 border border-red-200 text-xs px-3.5 py-2.5 rounded-xl font-black flex items-center gap-1.5 cursor-pointer hover:bg-red-100"
+                  disabled={closureMutation.isPending}
+                  onClick={() => closureMutation.mutate({ id: selectedAssessment.id, closed: true })}
+                >
+                  {closureMutation.isPending ? 'Cerrando...' : 'Cerrar Evaluación'}
+                </button>
+              )}
+
+              {isCoordinator && selectedAssessment?.status === 'closed' && (
+                <button
+                  className="button button-secondary bg-yellow-50 text-yellow-700 border border-yellow-200 text-xs px-3.5 py-2.5 rounded-xl font-black flex items-center gap-1.5 cursor-pointer hover:bg-yellow-100"
+                  disabled={closureMutation.isPending}
+                  onClick={() => closureMutation.mutate({ id: selectedAssessment.id, closed: false })}
+                >
+                  {closureMutation.isPending ? 'Reabriendo...' : 'Reabrir Evaluación'}
+                </button>
+              )}
+
+              {selectedAssessment?.status === 'draft' && (
+                <>
+                  <button
+                    className="button button-secondary text-xs px-3.5 py-2.5 rounded-xl font-bold flex items-center gap-1.5 cursor-pointer hover:bg-slate-50"
+                    onClick={() => {
+                      setSelectedFile(null)
+                      setCsvErrors([])
+                      setCsvPreview([])
+                      setImportError('')
+                      setImportSuccess('')
+                      setShowImportModal(true)
+                    }}
+                  >
+                    <FileCsv size={16} className="text-emerald-600" /> Importar CSV
+                  </button>
+                  <button
+                    className="button button-primary bg-blue-600 hover:bg-blue-700 text-white text-xs px-5 py-2.5 rounded-xl font-bold cursor-pointer disabled:opacity-50"
+                    disabled={saveResultsMutation.isPending || Object.keys(rowErrors).length > 0 || localResults.length === 0}
+                    onClick={() =>
+                      saveResultsMutation.mutate({
+                        results: localResults.map((r) => ({
+                          student_id: r.student_id,
+                          score: r.score,
+                          status: r.status,
+                          observations: r.observations || ''
+                        }))
+                      })
+                    }
+                  >
+                    {saveResultsMutation.isPending ? (
+                      <>
+                        <SpinnerGap className="spin" size={14} /> Guardando...
+                      </>
+                    ) : (
+                      'Guardar Notas'
+                    )}
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
@@ -552,12 +677,17 @@ export function AssessmentsPage() {
                       <th className="p-3 w-40">Estado</th>
                       <th className="p-3 w-40">Puntaje</th>
                       <th className="p-3">Observaciones</th>
+                      {(selectedAssessment?.status === 'published' || selectedAssessment?.status === 'closed') && isCoordinator && (
+                        <th className="p-3 w-28">Acción</th>
+                      )}
                     </tr>
                   </thead>
                   <tbody>
                     {localResults.map((res, index) => {
                       const hasError = rowErrors[res.student_id]
                       const maxScoreNum = Number(selectedAssessment?.max_score || 20)
+
+                      const isReadOnly = selectedAssessment?.status === 'published' || selectedAssessment?.status === 'closed'
 
                       return (
                         <tr key={res.student_id} className="border-b border-slate-100/60 text-sm hover:bg-white transition-colors">
@@ -567,8 +697,9 @@ export function AssessmentsPage() {
                           </td>
                           <td className="p-3">
                             <select
-                              className="glass-input-light p-2 rounded-lg text-xs w-full cursor-pointer font-bold"
+                              className="glass-input-light p-2 rounded-lg text-xs w-full cursor-pointer font-bold disabled:opacity-75"
                               value={res.status}
+                              disabled={isReadOnly}
                               onChange={(e) =>
                                 handleStatusChange(
                                   index,
@@ -595,7 +726,7 @@ export function AssessmentsPage() {
                               }`}
                               placeholder="--"
                               value={res.score || ''}
-                              disabled={res.status !== 'recorded'}
+                              disabled={res.status !== 'recorded' || isReadOnly}
                               onChange={(e) =>
                                 handleScoreChange(index, res.student_id, e.target.value, maxScoreNum)
                               }
@@ -609,9 +740,27 @@ export function AssessmentsPage() {
                               className="glass-input-light p-2 rounded-lg text-xs w-full font-normal"
                               placeholder="Ej. Justificó inasistencia..."
                               value={res.observations || ''}
+                              disabled={isReadOnly}
                               onChange={(e) => handleObservationsChange(index, e.target.value)}
                             />
                           </td>
+                          {isReadOnly && isCoordinator && (
+                            <td className="p-3 text-center">
+                              <button
+                                type="button"
+                                className="button button-secondary text-xs px-2.5 py-1.5 rounded-lg font-bold hover:bg-slate-100 text-blue-600 border border-slate-200 cursor-pointer"
+                                onClick={() => {
+                                  setCorrectionTarget(res)
+                                  setCorrectionScore(res.score || '')
+                                  setCorrectionReason('')
+                                  setCorrectionError('')
+                                  setShowCorrectModal(true)
+                                }}
+                              >
+                                Corregir
+                              </button>
+                            </td>
+                          )}
                         </tr>
                       )
                     })}
@@ -872,6 +1021,105 @@ export function AssessmentsPage() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* --- AUDITED CORRECTION MODAL --- */}
+      {showCorrectModal && correctionTarget && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in" role="dialog" aria-modal="true">
+          <form
+            className="bg-white border border-slate-100 p-6 rounded-3xl max-w-md w-full shadow-2xl space-y-4 text-slate-800"
+            onSubmit={(e) => {
+              e.preventDefault()
+              const err = validateCorrectionScore(correctionScore, Number(selectedAssessment?.max_score || 20))
+              if (err) {
+                setCorrectionError(err)
+                return
+              }
+              if (!correctionReason.trim()) {
+                setCorrectionError('La razón de corrección es obligatoria')
+                return
+              }
+              correctResultMutation.mutate({
+                resultId: correctionTarget.id,
+                score: correctionScore,
+                reason: correctionReason
+              })
+            }}
+          >
+            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <Warning className="text-yellow-600 animate-float" size={24} weight="bold" />
+              Diálogo de Corrección Auditada
+            </h3>
+            
+            {/* Warning Banner */}
+            <div className="p-4 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-xl text-xs space-y-1">
+              <strong className="font-bold block flex items-center gap-1">
+                <Warning size={14} weight="fill" className="text-yellow-600" />
+                ¡Advertencia de Impacto Académico!
+              </strong>
+              <p>Esta evaluación ya está publicada. Cualquier cambio recalculará el ranking y volverá a notificar al alumno/familia.</p>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-slate-500 font-bold">Estudiante</p>
+                <p className="text-sm font-bold text-slate-950">{correctionTarget.student_name}</p>
+                <small className="block text-slate-400 font-mono text-[10px]">ID: {correctionTarget.student_id}</small>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs text-slate-500 font-bold">Nota Actual</p>
+                  <p className="text-sm font-mono font-black text-slate-800">{correctionTarget.score || 'Ausente/Exento'}</p>
+                </div>
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wide flex flex-col gap-1">
+                  Nueva Nota
+                  <input
+                    type="text"
+                    className="glass-input-light p-2 rounded-lg text-sm font-mono font-bold"
+                    placeholder="20.00"
+                    value={correctionScore}
+                    onChange={(e) => setCorrectionScore(e.target.value)}
+                  />
+                </label>
+              </div>
+
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wide flex flex-col gap-1.5">
+                Razón de la Corrección
+                <textarea
+                  className="glass-input-light p-3 rounded-xl text-sm min-h-[80px]"
+                  placeholder="Escriba la justificación detallada de este cambio de nota..."
+                  value={correctionReason}
+                  onChange={(e) => setCorrectionReason(e.target.value)}
+                  maxLength={1000}
+                />
+              </label>
+            </div>
+
+            {correctionError && <p className="form-error bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl">{correctionError}</p>}
+            {correctResultMutation.isError && <p className="form-error bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl">{getApiError(correctResultMutation.error).message}</p>}
+
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+              <button
+                type="button"
+                className="button button-secondary rounded-xl text-slate-650 text-sm px-4 py-2 border-slate-200 hover:bg-slate-50 font-bold"
+                onClick={() => {
+                  setShowCorrectModal(false)
+                  setCorrectionTarget(null)
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="button button-primary bg-yellow-600 hover:bg-yellow-700 text-white rounded-xl text-sm px-4 py-2 font-bold shadow-md disabled:opacity-50"
+                disabled={correctResultMutation.isPending}
+              >
+                {correctResultMutation.isPending ? 'Guardando...' : 'Guardar y Recalcular'}
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </section>

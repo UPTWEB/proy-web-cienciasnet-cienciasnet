@@ -18,6 +18,7 @@ export function PortalLayout() {
   const canManageAssessments = auth.user?.roles?.some((role) => ['superadmin', 'coordinador_academico', 'docente'].includes(role))
   const canManagePsychology = auth.user?.roles?.some((role) => ['superadmin', 'psicologia'].includes(role))
 
+
   async function closeSession() {
     await logout()
     auth.clearSession()
