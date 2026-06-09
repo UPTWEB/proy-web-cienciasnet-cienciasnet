@@ -40,6 +40,8 @@ export function PortalLayout() {
           {isAdmin && canManageIncidents && <Link className="nav-link" to="/admin/incidencias"><ClipboardText aria-hidden /> Incidencias</Link>}
           {isAdmin && canManagePayroll && <Link className="nav-link" to="/admin/planilla"><Coins aria-hidden /> Planilla</Link>}
           {isAdmin && canManageAssessments && <Link className="nav-link" to="/admin/evaluaciones"><FileText aria-hidden /> Evaluaciones</Link>}
+          {isAdmin && canManageAssessments && <Link className="nav-link" to="/admin/materiales"><FileText aria-hidden /> Materiales de Estudio</Link>}
+          {!isAdmin && <Link className="nav-link" to="/portal/materiales"><Books aria-hidden /> Materiales</Link>}
           {isAdmin && canManagePsychology && <Link className="nav-link" to="/admin/psicologia"><Brain aria-hidden /> Psicología</Link>}
         </nav>
         <button className="nav-link nav-button" type="button" onClick={closeSession}><SignOut aria-hidden /> Salir</button>
