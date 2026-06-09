@@ -24,9 +24,10 @@ export function PortalLayout() {
         <Link className="brand brand-light" to={isAdmin ? '/admin' : '/portal'}><UserCircle size={30} weight="duotone" /> {isAdmin ? 'Administración' : 'Portal'}</Link>
         <nav aria-label="Navegación principal">
           <Link className="nav-link nav-link-active" to={isAdmin ? '/admin' : '/portal'}><House aria-hidden /> Inicio</Link>
+          {!isAdmin && <Link className="nav-link" to="/portal/finanzas/estado-cuenta"><Money aria-hidden /> Estado de Cuenta</Link>}
           {isAdmin && canManageUsers && <><Link className="nav-link" to="/admin/cuentas"><UserCircle aria-hidden /> Cuentas</Link><Link className="nav-link" to="/admin/familias"><UsersThree aria-hidden /> Familias</Link></>}
           {isAdmin && canManageAcademic && <Link className="nav-link" to="/admin/academia"><Books aria-hidden /> Academia</Link>}
-          {isAdmin && canManageFinance && <><Link className="nav-link" to="/admin/finanzas/configuracion"><Money aria-hidden /> Conceptos de Pago</Link><Link className="nav-link" to="/admin/finanzas/beneficios"><Money aria-hidden /> Beneficios</Link><Link className="nav-link" to="/admin/finanzas/obligaciones"><Money aria-hidden /> Obligaciones</Link><Link className="nav-link" to="/admin/finanzas/pagos"><Money aria-hidden /> Pagos</Link></>}
+          {isAdmin && canManageFinance && <><Link className="nav-link" to="/admin/finanzas/configuracion"><Money aria-hidden /> Conceptos de Pago</Link><Link className="nav-link" to="/admin/finanzas/beneficios"><Money aria-hidden /> Beneficios</Link><Link className="nav-link" to="/admin/finanzas/obligaciones"><Money aria-hidden /> Obligaciones</Link><Link className="nav-link" to="/admin/finanzas/pagos"><Money aria-hidden /> Pagos</Link><Link className="nav-link" to="/admin/finanzas/morosos"><Money aria-hidden /> Reporte de Morosos</Link><Link className="nav-link" to="/admin/finanzas/caja"><Money aria-hidden /> Cierre de Caja</Link></>}
         </nav>
         <button className="nav-link nav-button" type="button" onClick={closeSession}><SignOut aria-hidden /> Salir</button>
       </aside>
