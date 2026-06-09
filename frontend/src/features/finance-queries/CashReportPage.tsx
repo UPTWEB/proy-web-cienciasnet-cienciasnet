@@ -103,7 +103,7 @@ export function CashReportPage() {
                 <Tooltip 
                   cursor={{ fill: '#f1f5f9' }}
                   contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  formatter={(value: any) => [`S/ ${Number(value).toFixed(2)}`, 'Ingresos']}
+                  formatter={(value: unknown) => [`S/ ${Number(value).toFixed(2)}`, 'Ingresos']}
                 />
                 <Bar dataKey="amount" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={40} />
               </BarChart>
@@ -130,7 +130,7 @@ export function CashReportPage() {
                   ))}
                 </Pie>
                 <Tooltip 
-                  formatter={(value: any) => `S/ ${Number(value).toFixed(2)}`}
+                  formatter={(value: unknown) => `S/ ${Number(value).toFixed(2)}`}
                   contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0' }}
                 />
                 <Legend verticalAlign="bottom" height={36} iconType="circle" />
