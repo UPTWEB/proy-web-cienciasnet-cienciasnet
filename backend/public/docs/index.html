@@ -326,6 +326,24 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-payment-obligations-bulk-adjustments">
                                 <a href="#endpoints-POSTapi-v1-payment-obligations-bulk-adjustments">Bulk adjust multiple obligations. Returns 202 Accepted.</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-payment-movements">
+                                <a href="#endpoints-POSTapi-v1-payment-movements">POST api/v1/payment-movements</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-payment-movements--paymentMovementId--receipt">
+                                <a href="#endpoints-GETapi-v1-payment-movements--paymentMovementId--receipt">GET api/v1/payment-movements/{paymentMovementId}/receipt</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-account-statements">
+                                <a href="#endpoints-GETapi-v1-account-statements">GET api/v1/account-statements</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-finance-debtors">
+                                <a href="#endpoints-GETapi-v1-finance-debtors">GET api/v1/finance/debtors</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-finance-cash-reports">
+                                <a href="#endpoints-GETapi-v1-finance-cash-reports">GET api/v1/finance/cash-reports</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-payment-reminders">
+                                <a href="#endpoints-POSTapi-v1-payment-reminders">POST api/v1/payment-reminders</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-teacher-payroll-rates">
                                 <a href="#endpoints-GETapi-v1-teacher-payroll-rates">GET api/v1/teacher-payroll/rates</a>
                             </li>
@@ -396,7 +414,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 8, 2026</li>
+        <li>Last updated: June 9, 2026</li>
     </ul>
 </div>
 
@@ -794,8 +812,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "camera_id=6ff8f7f6-1eb3-3525-be4a-3932c805afed"\
-    --form "captured_at=2026-06-08T23:51:26"\
-    --form "image=@/tmp/phpbplxbE" </code></pre></div>
+    --form "captured_at=2026-06-09T00:00:34"\
+    --form "image=@/tmp/phpUaBeBN" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -810,7 +828,7 @@ const headers = {
 
 const body = new FormData();
 body.append('camera_id', '6ff8f7f6-1eb3-3525-be4a-3932c805afed');
-body.append('captured_at', '2026-06-08T23:51:26');
+body.append('captured_at', '2026-06-09T00:00:34');
 body.append('image', document.querySelector('input[name="image"]').files[0]);
 
 fetch(url, {
@@ -888,7 +906,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpbplxbE</code></p>
+<p>Must be a file. Must be an image. Must not be greater than 5120 kilobytes. Example: <code>/tmp/phpUaBeBN</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>camera_id</code></b>&nbsp;&nbsp;
@@ -909,10 +927,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="captured_at"                data-endpoint="POSTapi-v1-station-captures"
-               value="2026-06-08T23:51:26"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:26</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -5116,7 +5134,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "titulo=g"\
     --form "descripcion=z"\
     --form "semana=17"\
-    --form "file=@/tmp/phppakrrH" </code></pre></div>
+    --form "file=@/tmp/phpsAtDeP" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -5259,7 +5277,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 51200 kilobytes. Example: <code>/tmp/phppakrrH</code></p>
+<p>Must be a file. Must not be greater than 51200 kilobytes. Example: <code>/tmp/phpsAtDeP</code></p>
         </div>
         </form>
 
@@ -5411,7 +5429,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"titulo\": \"b\",
     \"descripcion\": \"n\",
     \"semana\": 7,
-    \"activo\": false
+    \"activo\": true
 }"
 </code></pre></div>
 
@@ -5430,7 +5448,7 @@ let body = {
     "titulo": "b",
     "descripcion": "n",
     "semana": 7,
-    "activo": false
+    "activo": true
 };
 
 fetch(url, {
@@ -5567,7 +5585,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -5865,7 +5883,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost/api/v1/materials/architecto/file" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "file=@/tmp/phpHqzLO0" </code></pre></div>
+    --form "file=@/tmp/phpvoBIte" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -5969,7 +5987,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 51200 kilobytes. Example: <code>/tmp/phpHqzLO0</code></p>
+<p>Must be a file. Must not be greater than 51200 kilobytes. Example: <code>/tmp/phpvoBIte</code></p>
         </div>
         </form>
 
@@ -6392,9 +6410,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"starts_at\": \"2026-06-08T23:51:27\",
-    \"ends_at\": \"2052-07-01\",
-    \"event_type\": \"other\",
+    \"starts_at\": \"2026-06-09T00:00:34\",
+    \"ends_at\": \"2052-07-02\",
+    \"event_type\": \"academic\",
     \"description\": \"Et animi quos velit et fugiat.\"
 }"
 </code></pre></div>
@@ -6412,9 +6430,9 @@ const headers = {
 
 let body = {
     "title": "b",
-    "starts_at": "2026-06-08T23:51:27",
-    "ends_at": "2052-07-01",
-    "event_type": "other",
+    "starts_at": "2026-06-09T00:00:34",
+    "ends_at": "2052-07-02",
+    "event_type": "academic",
     "description": "Et animi quos velit et fugiat."
 };
 
@@ -6502,10 +6520,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="starts_at"                data-endpoint="POSTapi-v1-calendar-events"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>ends_at</code></b>&nbsp;&nbsp;
@@ -6514,10 +6532,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="ends_at"                data-endpoint="POSTapi-v1-calendar-events"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>starts_at</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after <code>starts_at</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>event_type</code></b>&nbsp;&nbsp;
@@ -6526,10 +6544,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="event_type"                data-endpoint="POSTapi-v1-calendar-events"
-               value="other"
+               value="academic"
                data-component="body">
     <br>
-<p>Example: <code>other</code></p>
+<p>Example: <code>academic</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>academic</code></li> <li><code>holiday</code></li> <li><code>meeting</code></li> <li><code>other</code></li></ul>
         </div>
@@ -6681,9 +6699,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"incident_type\": \"g\",
-    \"severity\": \"critical\",
+    \"severity\": \"medium\",
     \"description\": \"Quos velit et fugiat sunt nihil accusantium harum.\",
-    \"occurred_at\": \"2026-06-08T23:51:27\"
+    \"occurred_at\": \"2026-06-09T00:00:34\"
 }"
 </code></pre></div>
 
@@ -6701,9 +6719,9 @@ const headers = {
 let body = {
     "student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "incident_type": "g",
-    "severity": "critical",
+    "severity": "medium",
     "description": "Quos velit et fugiat sunt nihil accusantium harum.",
-    "occurred_at": "2026-06-08T23:51:27"
+    "occurred_at": "2026-06-09T00:00:34"
 };
 
 fetch(url, {
@@ -6802,10 +6820,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="POSTapi-v1-incidents"
-               value="critical"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>critical</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li> <li><code>critical</code></li></ul>
         </div>
@@ -6828,10 +6846,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="occurred_at"                data-endpoint="POSTapi-v1-incidents"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -6996,7 +7014,7 @@ Must be one of:
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "note=b"\
-    --form "file=@/tmp/phppDsfNA" </code></pre></div>
+    --form "file=@/tmp/phpB2J9Vm" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -7113,7 +7131,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Example: <code>/tmp/phppDsfNA</code></p>
+<p>Must be a file. Example: <code>/tmp/phpB2J9Vm</code></p>
         </div>
         </form>
 
@@ -7134,11 +7152,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"from_date\": \"2026-06-08T23:51:27\",
-    \"to_date\": \"2052-07-01\",
+    \"from_date\": \"2026-06-09T00:00:34\",
+    \"to_date\": \"2052-07-02\",
     \"format\": \"pdf\",
     \"status\": \"referred_toe\",
-    \"severity\": \"low\"
+    \"severity\": \"medium\"
 }"
 </code></pre></div>
 
@@ -7154,11 +7172,11 @@ const headers = {
 };
 
 let body = {
-    "from_date": "2026-06-08T23:51:27",
-    "to_date": "2052-07-01",
+    "from_date": "2026-06-09T00:00:34",
+    "to_date": "2052-07-02",
     "format": "pdf",
     "status": "referred_toe",
-    "severity": "low"
+    "severity": "medium"
 };
 
 fetch(url, {
@@ -7233,10 +7251,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="from_date"                data-endpoint="POSTapi-v1-incidents-reports"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>to_date</code></b>&nbsp;&nbsp;
@@ -7245,10 +7263,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="to_date"                data-endpoint="POSTapi-v1-incidents-reports"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>from_date</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>from_date</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>format</code></b>&nbsp;&nbsp;
@@ -7285,10 +7303,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="severity"                data-endpoint="POSTapi-v1-incidents-reports"
-               value="low"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>low</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li> <li><code>critical</code></li></ul>
         </div>
@@ -7313,11 +7331,11 @@ Must be one of:
     --data "{
     \"title\": \"b\",
     \"body\": \"n\",
-    \"audience_type\": \"sections\",
+    \"audience_type\": \"roles\",
     \"audience_ids\": [
         \"architecto\"
     ],
-    \"publish_at\": \"2026-06-08T23:51:27\"
+    \"publish_at\": \"2026-06-09T00:00:34\"
 }"
 </code></pre></div>
 
@@ -7335,11 +7353,11 @@ const headers = {
 let body = {
     "title": "b",
     "body": "n",
-    "audience_type": "sections",
+    "audience_type": "roles",
     "audience_ids": [
         "architecto"
     ],
-    "publish_at": "2026-06-08T23:51:27"
+    "publish_at": "2026-06-09T00:00:34"
 };
 
 fetch(url, {
@@ -7438,10 +7456,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="audience_type"                data-endpoint="POSTapi-v1-announcements"
-               value="sections"
+               value="roles"
                data-component="body">
     <br>
-<p>Example: <code>sections</code></p>
+<p>Example: <code>roles</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>all</code></li> <li><code>roles</code></li> <li><code>sections</code></li> <li><code>accounts</code></li></ul>
         </div>
@@ -7466,10 +7484,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="publish_at"                data-endpoint="POSTapi-v1-announcements"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -8051,7 +8069,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"name\": \"b\",
     \"location\": \"n\",
-    \"mode\": \"entry\"
+    \"mode\": \"exit\"
 }"
 </code></pre></div>
 
@@ -8069,7 +8087,7 @@ const headers = {
 let body = {
     "name": "b",
     "location": "n",
-    "mode": "entry"
+    "mode": "exit"
 };
 
 fetch(url, {
@@ -8168,10 +8186,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="mode"                data-endpoint="POSTapi-v1-stations"
-               value="entry"
+               value="exit"
                data-component="body">
     <br>
-<p>Example: <code>entry</code></p>
+<p>Example: <code>exit</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>entry</code></li> <li><code>exit</code></li> <li><code>mixed</code></li></ul>
         </div>
@@ -8197,7 +8215,7 @@ Must be one of:
     \"name\": \"b\",
     \"location\": \"n\",
     \"mode\": \"exit\",
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -8216,7 +8234,7 @@ let body = {
     "name": "b",
     "location": "n",
     "mode": "exit",
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -8355,7 +8373,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -8741,7 +8759,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"label\": \"b\",
     \"device_identifier\": \"n\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -8759,7 +8777,7 @@ const headers = {
 let body = {
     "label": "b",
     "device_identifier": "n",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -8884,7 +8902,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -9021,8 +9039,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"event_type\": \"absence\",
-    \"occurred_at\": \"2026-06-08T23:51:27\",
+    \"event_type\": \"late\",
+    \"occurred_at\": \"2026-06-09T00:00:34\",
     \"reason\": \"g\"
 }"
 </code></pre></div>
@@ -9040,8 +9058,8 @@ const headers = {
 
 let body = {
     "student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "event_type": "absence",
-    "occurred_at": "2026-06-08T23:51:27",
+    "event_type": "late",
+    "occurred_at": "2026-06-09T00:00:34",
     "reason": "g"
 };
 
@@ -9129,10 +9147,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="event_type"                data-endpoint="POSTapi-v1-student-attendance-manual-events"
-               value="absence"
+               value="late"
                data-component="body">
     <br>
-<p>Example: <code>absence</code></p>
+<p>Example: <code>late</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>entry</code></li> <li><code>exit</code></li> <li><code>absence</code></li> <li><code>late</code></li></ul>
         </div>
@@ -9143,10 +9161,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="occurred_at"                data-endpoint="POSTapi-v1-student-attendance-manual-events"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -9179,7 +9197,7 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"date\": \"2026-06-08T23:51:27\"
+    \"date\": \"2026-06-09T00:00:34\"
 }"
 </code></pre></div>
 
@@ -9195,7 +9213,7 @@ const headers = {
 };
 
 let body = {
-    "date": "2026-06-08T23:51:27"
+    "date": "2026-06-09T00:00:34"
 };
 
 fetch(url, {
@@ -9270,10 +9288,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="date"                data-endpoint="POSTapi-v1-student-attendance-day-closures"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -9895,7 +9913,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"outcome\": \"confirmed\",
+    \"outcome\": \"rejected\",
     \"matched_student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"reason\": \"g\"
 }"
@@ -9913,7 +9931,7 @@ const headers = {
 };
 
 let body = {
-    "outcome": "confirmed",
+    "outcome": "rejected",
     "matched_student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "reason": "g"
 };
@@ -10003,10 +10021,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="outcome"                data-endpoint="POSTapi-v1-recognition-events--recognitionEventId--review"
-               value="confirmed"
+               value="rejected"
                data-component="body">
     <br>
-<p>Example: <code>confirmed</code></p>
+<p>Example: <code>rejected</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>confirmed</code></li> <li><code>rejected</code></li> <li><code>reassigned</code></li></ul>
         </div>
@@ -10169,8 +10187,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"teacher_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"date\": \"2026-06-08T23:51:27\",
-    \"adjustment_type\": \"subtract\",
+    \"date\": \"2026-06-09T00:00:34\",
+    \"adjustment_type\": \"add\",
     \"minutes\": 67,
     \"reason\": \"z\"
 }"
@@ -10189,8 +10207,8 @@ const headers = {
 
 let body = {
     "teacher_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "date": "2026-06-08T23:51:27",
-    "adjustment_type": "subtract",
+    "date": "2026-06-09T00:00:34",
+    "adjustment_type": "add",
     "minutes": 67,
     "reason": "z"
 };
@@ -10279,10 +10297,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="date"                data-endpoint="POSTapi-v1-teacher-attendance-adjustments"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>adjustment_type</code></b>&nbsp;&nbsp;
@@ -10291,10 +10309,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="adjustment_type"                data-endpoint="POSTapi-v1-teacher-attendance-adjustments"
-               value="subtract"
+               value="add"
                data-component="body">
     <br>
-<p>Example: <code>subtract</code></p>
+<p>Example: <code>add</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>add</code></li> <li><code>subtract</code></li></ul>
         </div>
@@ -10716,13 +10734,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"n\",
     \"amount\": \"642559\",
     \"academic_period_id\": \"947170af-7488-3f30-a16d-723355a9502f\",
-    \"type\": \"matricula\",
+    \"type\": \"mensualidad\",
     \"year\": 2000,
     \"month\": 1,
     \"due_day\": 2,
     \"recurrence\": \"annual\",
     \"early_payment_discount\": \"642559\",
-    \"early_payment_deadline\": \"2026-06-08T23:51:27\"
+    \"early_payment_deadline\": \"2026-06-09T00:00:34\"
 }"
 </code></pre></div>
 
@@ -10742,13 +10760,13 @@ let body = {
     "name": "n",
     "amount": "642559",
     "academic_period_id": "947170af-7488-3f30-a16d-723355a9502f",
-    "type": "matricula",
+    "type": "mensualidad",
     "year": 2000,
     "month": 1,
     "due_day": 2,
     "recurrence": "annual",
     "early_payment_discount": "642559",
-    "early_payment_deadline": "2026-06-08T23:51:27"
+    "early_payment_deadline": "2026-06-09T00:00:34"
 };
 
 fetch(url, {
@@ -10871,10 +10889,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-payment-concepts"
-               value="matricula"
+               value="mensualidad"
                data-component="body">
     <br>
-<p>Example: <code>matricula</code></p>
+<p>Example: <code>mensualidad</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>cuota_ingreso</code></li> <li><code>matricula</code></li> <li><code>mensualidad</code></li> <li><code>otro</code></li></ul>
         </div>
@@ -10947,10 +10965,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="early_payment_deadline"                data-endpoint="POSTapi-v1-payment-concepts"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -10973,13 +10991,13 @@ Must be one of:
     --data "{
     \"name\": \"b\",
     \"amount\": \"642559\",
-    \"type\": \"matricula\",
+    \"type\": \"cuota_ingreso\",
     \"year\": 2001,
     \"month\": 2,
     \"due_day\": 1,
-    \"recurrence\": \"annual\",
+    \"recurrence\": \"monthly\",
     \"early_payment_discount\": \"642559\",
-    \"early_payment_deadline\": \"2026-06-08T23:51:27\"
+    \"early_payment_deadline\": \"2026-06-09T00:00:34\"
 }"
 </code></pre></div>
 
@@ -10997,13 +11015,13 @@ const headers = {
 let body = {
     "name": "b",
     "amount": "642559",
-    "type": "matricula",
+    "type": "cuota_ingreso",
     "year": 2001,
     "month": 2,
     "due_day": 1,
-    "recurrence": "annual",
+    "recurrence": "monthly",
     "early_payment_discount": "642559",
-    "early_payment_deadline": "2026-06-08T23:51:27"
+    "early_payment_deadline": "2026-06-09T00:00:34"
 };
 
 fetch(url, {
@@ -11115,10 +11133,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="matricula"
+               value="cuota_ingreso"
                data-component="body">
     <br>
-<p>Example: <code>matricula</code></p>
+<p>Example: <code>cuota_ingreso</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>cuota_ingreso</code></li> <li><code>matricula</code></li> <li><code>mensualidad</code></li> <li><code>otro</code></li></ul>
         </div>
@@ -11165,10 +11183,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="recurrence"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="annual"
+               value="monthly"
                data-component="body">
     <br>
-<p>Example: <code>annual</code></p>
+<p>Example: <code>monthly</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>single</code></li> <li><code>monthly</code></li> <li><code>annual</code></li></ul>
         </div>
@@ -11191,10 +11209,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="early_payment_deadline"                data-endpoint="PATCHapi-v1-payment-concepts--conceptId-"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
         </form>
 
@@ -11331,14 +11349,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"benefit_type\": \"fixed\",
+    \"benefit_type\": \"waiver\",
     \"value\": \"642559\",
     \"concept_ids\": [
         \"947170af-7488-3f30-a16d-723355a9502f\"
     ],
-    \"stackable_with_early_payment\": true,
-    \"starts_on\": \"2026-06-08T23:51:27\",
-    \"ends_on\": \"2052-07-01\",
+    \"stackable_with_early_payment\": false,
+    \"starts_on\": \"2026-06-09T00:00:34\",
+    \"ends_on\": \"2052-07-02\",
     \"reason\": \"n\"
 }"
 </code></pre></div>
@@ -11356,14 +11374,14 @@ const headers = {
 
 let body = {
     "student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "benefit_type": "fixed",
+    "benefit_type": "waiver",
     "value": "642559",
     "concept_ids": [
         "947170af-7488-3f30-a16d-723355a9502f"
     ],
-    "stackable_with_early_payment": true,
-    "starts_on": "2026-06-08T23:51:27",
-    "ends_on": "2052-07-01",
+    "stackable_with_early_payment": false,
+    "starts_on": "2026-06-09T00:00:34",
+    "ends_on": "2052-07-02",
     "reason": "n"
 };
 
@@ -11451,10 +11469,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="benefit_type"                data-endpoint="POSTapi-v1-student-benefits"
-               value="fixed"
+               value="waiver"
                data-component="body">
     <br>
-<p>Example: <code>fixed</code></p>
+<p>Example: <code>waiver</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>percentage</code></li> <li><code>fixed</code></li> <li><code>waiver</code></li></ul>
         </div>
@@ -11504,7 +11522,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>starts_on</code></b>&nbsp;&nbsp;
@@ -11513,10 +11531,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="starts_on"                data-endpoint="POSTapi-v1-student-benefits"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>ends_on</code></b>&nbsp;&nbsp;
@@ -11525,10 +11543,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="ends_on"                data-endpoint="POSTapi-v1-student-benefits"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>starts_on</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>starts_on</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
@@ -11691,9 +11709,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"student_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"concept_id\": \"6b72fe4a-5b40-307c-bc24-f79acf9a1bb9\",
-    \"estado\": \"pagado\",
-    \"due_date_from\": \"2026-06-08T23:51:27\",
-    \"due_date_to\": \"2052-07-01\",
+    \"estado\": \"pendiente\",
+    \"due_date_from\": \"2026-06-09T00:00:34\",
+    \"due_date_to\": \"2052-07-02\",
     \"per_page\": 22
 }"
 </code></pre></div>
@@ -11712,9 +11730,9 @@ const headers = {
 let body = {
     "student_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "concept_id": "6b72fe4a-5b40-307c-bc24-f79acf9a1bb9",
-    "estado": "pagado",
-    "due_date_from": "2026-06-08T23:51:27",
-    "due_date_to": "2052-07-01",
+    "estado": "pendiente",
+    "due_date_from": "2026-06-09T00:00:34",
+    "due_date_to": "2052-07-02",
     "per_page": 22
 };
 
@@ -11835,10 +11853,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="estado"                data-endpoint="GETapi-v1-payment-obligations"
-               value="pagado"
+               value="pendiente"
                data-component="body">
     <br>
-<p>Example: <code>pagado</code></p>
+<p>Example: <code>pendiente</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pendiente</code></li> <li><code>pagado</code></li> <li><code>vencido</code></li></ul>
         </div>
@@ -11849,10 +11867,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date_from"                data-endpoint="GETapi-v1-payment-obligations"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>due_date_to</code></b>&nbsp;&nbsp;
@@ -11861,10 +11879,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date_to"                data-endpoint="GETapi-v1-payment-obligations"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>due_date_from</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>due_date_from</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
@@ -11899,7 +11917,7 @@ Must be one of:
     --data "{
     \"academic_period_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"concept_id\": \"6b72fe4a-5b40-307c-bc24-f79acf9a1bb9\",
-    \"due_date\": \"2052-07-01\",
+    \"due_date\": \"2052-07-02\",
     \"student_ids\": [
         \"a4855dc5-0acb-33c3-b921-f4291f719ca0\"
     ]
@@ -11920,7 +11938,7 @@ const headers = {
 let body = {
     "academic_period_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "concept_id": "6b72fe4a-5b40-307c-bc24-f79acf9a1bb9",
-    "due_date": "2052-07-01",
+    "due_date": "2052-07-02",
     "student_ids": [
         "a4855dc5-0acb-33c3-b921-f4291f719ca0"
     ]
@@ -12022,10 +12040,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date"                data-endpoint="POSTapi-v1-payment-obligations"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>student_ids</code></b>&nbsp;&nbsp;
@@ -12188,7 +12206,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"adjustment_type\": \"charge\",
+    \"adjustment_type\": \"discount\",
     \"amount\": 27,
     \"reason\": \"n\"
 }"
@@ -12206,7 +12224,7 @@ const headers = {
 };
 
 let body = {
-    "adjustment_type": "charge",
+    "adjustment_type": "discount",
     "amount": 27,
     "reason": "n"
 };
@@ -12296,10 +12314,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="adjustment_type"                data-endpoint="POSTapi-v1-payment-obligations--obligationId--adjustments"
-               value="charge"
+               value="discount"
                data-component="body">
     <br>
-<p>Example: <code>charge</code></p>
+<p>Example: <code>discount</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>charge</code></li> <li><code>discount</code></li> <li><code>waiver</code></li></ul>
         </div>
@@ -12354,7 +12372,7 @@ Must be one of:
         \"grade_id\": \"977e5426-8d13-3824-86aa-b092f8ae52c5\",
         \"section_id\": \"d6fa562b-acd5-35ff-babb-d11194d3737b\"
     },
-    \"adjustment_type\": \"charge\",
+    \"adjustment_type\": \"waiver\",
     \"amount\": 42,
     \"reason\": \"l\"
 }"
@@ -12380,7 +12398,7 @@ let body = {
         "grade_id": "977e5426-8d13-3824-86aa-b092f8ae52c5",
         "section_id": "d6fa562b-acd5-35ff-babb-d11194d3737b"
     },
-    "adjustment_type": "charge",
+    "adjustment_type": "waiver",
     "amount": 42,
     "reason": "l"
 };
@@ -12519,10 +12537,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="adjustment_type"                data-endpoint="POSTapi-v1-payment-obligations-bulk-adjustments"
-               value="charge"
+               value="waiver"
                data-component="body">
     <br>
-<p>Example: <code>charge</code></p>
+<p>Example: <code>waiver</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>charge</code></li> <li><code>discount</code></li> <li><code>waiver</code></li></ul>
         </div>
@@ -12549,6 +12567,819 @@ Must be one of:
                data-component="body">
     <br>
 <p>Must be at least 3 characters. Must not be greater than 1000 characters. Example: <code>l</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-payment-movements">POST api/v1/payment-movements</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-payment-movements">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/payment-movements" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"obligation_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
+    \"movement_type\": \"reversal\",
+    \"amount\": \"642559\",
+    \"occurred_at\": \"2026-06-09T00:00:34\",
+    \"method\": \"plin\",
+    \"reference\": \"j\",
+    \"reason\": \"n\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/payment-movements"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "obligation_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
+    "movement_type": "reversal",
+    "amount": "642559",
+    "occurred_at": "2026-06-09T00:00:34",
+    "method": "plin",
+    "reference": "j",
+    "reason": "n"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-payment-movements">
+</span>
+<span id="execution-results-POSTapi-v1-payment-movements" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-payment-movements"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-payment-movements"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-payment-movements" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-payment-movements">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-payment-movements" data-method="POST"
+      data-path="api/v1/payment-movements"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-payment-movements', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/payment-movements</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-payment-movements"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-payment-movements"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>obligation_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="obligation_id"                data-endpoint="POSTapi-v1-payment-movements"
+               value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the obligaciones_pago table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>movement_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="movement_type"                data-endpoint="POSTapi-v1-payment-movements"
+               value="reversal"
+               data-component="body">
+    <br>
+<p>Example: <code>reversal</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>payment</code></li> <li><code>reversal</code></li> <li><code>refund</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="amount"                data-endpoint="POSTapi-v1-payment-movements"
+               value="642559"
+               data-component="body">
+    <br>
+<p>Must match the regex /^\d{1,10}(.\d{1,2})?$/. Example: <code>642559</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>occurred_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="occurred_at"                data-endpoint="POSTapi-v1-payment-movements"
+               value="2026-06-09T00:00:34"
+               data-component="body">
+    <br>
+<p>Must be a valid date in the format <code>Y-m-d\TH:i:s</code>. Example: <code>2026-06-09T00:00:34</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>method</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="method"                data-endpoint="POSTapi-v1-payment-movements"
+               value="plin"
+               data-component="body">
+    <br>
+<p>This field is required when <code>movement_type</code> is <code>payment</code>. Example: <code>plin</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>cash</code></li> <li><code>transfer</code></li> <li><code>card</code></li> <li><code>yape</code></li> <li><code>plin</code></li> <li><code>other</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>reference</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="reference"                data-endpoint="POSTapi-v1-payment-movements"
+               value="j"
+               data-component="body">
+    <br>
+<p>Must be at least 1 character. Must not be greater than 150 characters. Example: <code>j</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>reason</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="reason"                data-endpoint="POSTapi-v1-payment-movements"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must be at least 1 character. Must not be greater than 1000 characters. Example: <code>n</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-payment-movements--paymentMovementId--receipt">GET api/v1/payment-movements/{paymentMovementId}/receipt</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-payment-movements--paymentMovementId--receipt">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/payment-movements/architecto/receipt" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/payment-movements/architecto/receipt"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-payment-movements--paymentMovementId--receipt">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:5173
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;unauthenticated&quot;,
+        &quot;message&quot;: &quot;Debes iniciar sesi&oacute;n.&quot;,
+        &quot;fields&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-payment-movements--paymentMovementId--receipt" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-payment-movements--paymentMovementId--receipt"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-payment-movements--paymentMovementId--receipt"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-payment-movements--paymentMovementId--receipt" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-payment-movements--paymentMovementId--receipt">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-payment-movements--paymentMovementId--receipt" data-method="GET"
+      data-path="api/v1/payment-movements/{paymentMovementId}/receipt"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-payment-movements--paymentMovementId--receipt', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/payment-movements/{paymentMovementId}/receipt</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-payment-movements--paymentMovementId--receipt"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-payment-movements--paymentMovementId--receipt"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>paymentMovementId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="paymentMovementId"                data-endpoint="GETapi-v1-payment-movements--paymentMovementId--receipt"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-account-statements">GET api/v1/account-statements</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-account-statements">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/account-statements" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/account-statements"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-account-statements">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:5173
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;unauthenticated&quot;,
+        &quot;message&quot;: &quot;Debes iniciar sesi&oacute;n.&quot;,
+        &quot;fields&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-account-statements" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-account-statements"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-account-statements"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-account-statements" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-account-statements">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-account-statements" data-method="GET"
+      data-path="api/v1/account-statements"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-account-statements', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/account-statements</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-account-statements"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-account-statements"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-v1-finance-debtors">GET api/v1/finance/debtors</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-finance-debtors">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/finance/debtors" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/finance/debtors"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-finance-debtors">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:5173
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;unauthenticated&quot;,
+        &quot;message&quot;: &quot;Debes iniciar sesi&oacute;n.&quot;,
+        &quot;fields&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-finance-debtors" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-finance-debtors"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-finance-debtors"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-finance-debtors" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-finance-debtors">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-finance-debtors" data-method="GET"
+      data-path="api/v1/finance/debtors"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-finance-debtors', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/finance/debtors</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-finance-debtors"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-finance-debtors"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-v1-finance-cash-reports">GET api/v1/finance/cash-reports</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-finance-cash-reports">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/finance/cash-reports" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/finance/cash-reports"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-finance-cash-reports">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:5173
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;unauthenticated&quot;,
+        &quot;message&quot;: &quot;Debes iniciar sesi&oacute;n.&quot;,
+        &quot;fields&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-finance-cash-reports" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-finance-cash-reports"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-finance-cash-reports"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-finance-cash-reports" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-finance-cash-reports">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-finance-cash-reports" data-method="GET"
+      data-path="api/v1/finance/cash-reports"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-finance-cash-reports', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/finance/cash-reports</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-finance-cash-reports"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-finance-cash-reports"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-payment-reminders">POST api/v1/payment-reminders</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-payment-reminders">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/v1/payment-reminders" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"obligation_ids\": [
+        \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\"
+    ],
+    \"channel\": \"in_app\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/payment-reminders"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "obligation_ids": [
+        "6ff8f7f6-1eb3-3525-be4a-3932c805afed"
+    ],
+    "channel": "in_app"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-payment-reminders">
+</span>
+<span id="execution-results-POSTapi-v1-payment-reminders" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-payment-reminders"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-payment-reminders"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-payment-reminders" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-payment-reminders">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-payment-reminders" data-method="POST"
+      data-path="api/v1/payment-reminders"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-payment-reminders', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/payment-reminders</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-payment-reminders"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-payment-reminders"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>obligation_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="obligation_ids[0]"                data-endpoint="POSTapi-v1-payment-reminders"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="obligation_ids[1]"                data-endpoint="POSTapi-v1-payment-reminders"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>channel</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="channel"                data-endpoint="POSTapi-v1-payment-reminders"
+               value="in_app"
+               data-component="body">
+    <br>
+<p>Example: <code>in_app</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>email</code></li> <li><code>in_app</code></li> <li><code>both</code></li></ul>
         </div>
         </form>
 
@@ -12686,8 +13517,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"teacher_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"hourly_rate\": \"642559\",
-    \"effective_from\": \"2026-06-08T23:51:27\",
-    \"effective_until\": \"2052-07-01\"
+    \"effective_from\": \"2026-06-09T00:00:34\",
+    \"effective_until\": \"2052-07-02\"
 }"
 </code></pre></div>
 
@@ -12705,8 +13536,8 @@ const headers = {
 let body = {
     "teacher_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "hourly_rate": "642559",
-    "effective_from": "2026-06-08T23:51:27",
-    "effective_until": "2052-07-01"
+    "effective_from": "2026-06-09T00:00:34",
+    "effective_until": "2052-07-02"
 };
 
 fetch(url, {
@@ -12805,10 +13636,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="effective_from"                data-endpoint="POSTapi-v1-teacher-payroll-rates"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>effective_until</code></b>&nbsp;&nbsp;
@@ -12817,10 +13648,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="effective_until"                data-endpoint="POSTapi-v1-teacher-payroll-rates"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>effective_from</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>effective_from</code>. Example: <code>2052-07-02</code></p>
         </div>
         </form>
 
@@ -12956,8 +13787,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"period_start\": \"2026-06-08T23:51:27\",
-    \"period_end\": \"2052-07-01\",
+    \"period_start\": \"2026-06-09T00:00:34\",
+    \"period_end\": \"2052-07-02\",
     \"teacher_ids\": [
         \"a4855dc5-0acb-33c3-b921-f4291f719ca0\"
     ]
@@ -12976,8 +13807,8 @@ const headers = {
 };
 
 let body = {
-    "period_start": "2026-06-08T23:51:27",
-    "period_end": "2052-07-01",
+    "period_start": "2026-06-09T00:00:34",
+    "period_end": "2052-07-02",
     "teacher_ids": [
         "a4855dc5-0acb-33c3-b921-f4291f719ca0"
     ]
@@ -13055,10 +13886,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_start"                data-endpoint="POSTapi-v1-teacher-payroll-liquidations"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>period_end</code></b>&nbsp;&nbsp;
@@ -13067,10 +13898,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_end"                data-endpoint="POSTapi-v1-teacher-payroll-liquidations"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>teacher_ids</code></b>&nbsp;&nbsp;
@@ -13212,9 +14043,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"period_start\": \"2026-06-08T23:51:27\",
-    \"period_end\": \"2052-07-01\",
-    \"format\": \"pdf\",
+    \"period_start\": \"2026-06-09T00:00:34\",
+    \"period_end\": \"2052-07-02\",
+    \"format\": \"xlsx\",
     \"teacher_ids\": [
         \"a4855dc5-0acb-33c3-b921-f4291f719ca0\"
     ]
@@ -13233,9 +14064,9 @@ const headers = {
 };
 
 let body = {
-    "period_start": "2026-06-08T23:51:27",
-    "period_end": "2052-07-01",
-    "format": "pdf",
+    "period_start": "2026-06-09T00:00:34",
+    "period_end": "2052-07-02",
+    "format": "xlsx",
     "teacher_ids": [
         "a4855dc5-0acb-33c3-b921-f4291f719ca0"
     ]
@@ -13313,10 +14144,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_start"                data-endpoint="POSTapi-v1-teacher-payroll-reports"
-               value="2026-06-08T23:51:27"
+               value="2026-06-09T00:00:34"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-06-08T23:51:27</code></p>
+<p>Must be a valid date. Example: <code>2026-06-09T00:00:34</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>period_end</code></b>&nbsp;&nbsp;
@@ -13325,10 +14156,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="period_end"                data-endpoint="POSTapi-v1-teacher-payroll-reports"
-               value="2052-07-01"
+               value="2052-07-02"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-01</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>period_start</code>. Example: <code>2052-07-02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>format</code></b>&nbsp;&nbsp;
@@ -13337,10 +14168,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="format"                data-endpoint="POSTapi-v1-teacher-payroll-reports"
-               value="pdf"
+               value="xlsx"
                data-component="body">
     <br>
-<p>Example: <code>pdf</code></p>
+<p>Example: <code>xlsx</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pdf</code></li> <li><code>xlsx</code></li></ul>
         </div>
@@ -13764,7 +14595,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "student_id=6ff8f7f6-1eb3-3525-be4a-3932c805afed"\
     --form "consent_id=6b72fe4a-5b40-307c-bc24-f79acf9a1bb9"\
-    --form "images[]=@/tmp/phprMF1Oc" </code></pre></div>
+    --form "images[]=@/tmp/phpsO2zQM" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -14329,7 +15160,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"closed\": true
+    \"closed\": false
 }"
 </code></pre></div>
 
@@ -14345,7 +15176,7 @@ const headers = {
 };
 
 let body = {
-    "closed": true
+    "closed": false
 };
 
 fetch(url, {
@@ -14446,7 +15277,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -14582,8 +15413,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"format\": \"xlsx\",
-    \"report_type\": \"report_card\",
+    \"format\": \"pdf\",
+    \"report_type\": \"grade_summary\",
     \"academic_period_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"section_id\": \"6b72fe4a-5b40-307c-bc24-f79acf9a1bb9\",
     \"student_id\": \"977e5426-8d13-3824-86aa-b092f8ae52c5\"
@@ -14602,8 +15433,8 @@ const headers = {
 };
 
 let body = {
-    "format": "xlsx",
-    "report_type": "report_card",
+    "format": "pdf",
+    "report_type": "grade_summary",
     "academic_period_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "section_id": "6b72fe4a-5b40-307c-bc24-f79acf9a1bb9",
     "student_id": "977e5426-8d13-3824-86aa-b092f8ae52c5"
@@ -14681,10 +15512,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="format"                data-endpoint="POSTapi-v1-academic-reports"
-               value="xlsx"
+               value="pdf"
                data-component="body">
     <br>
-<p>Example: <code>xlsx</code></p>
+<p>Example: <code>pdf</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pdf</code></li> <li><code>xlsx</code></li></ul>
         </div>
@@ -14695,10 +15526,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="report_type"                data-endpoint="POSTapi-v1-academic-reports"
-               value="report_card"
+               value="grade_summary"
                data-component="body">
     <br>
-<p>Example: <code>report_card</code></p>
+<p>Example: <code>grade_summary</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>report_card</code></li> <li><code>grade_summary</code></li> <li><code>ranking</code></li></ul>
         </div>
@@ -15071,11 +15902,11 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"preview\": true,
+    \"preview\": false,
     \"notas\": [
         {
             \"matricula_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-            \"estado\": \"registrada\",
+            \"estado\": \"pendiente\",
             \"puntaje\": 84,
             \"observacion\": \"z\"
         }
@@ -15095,11 +15926,11 @@ const headers = {
 };
 
 let body = {
-    "preview": true,
+    "preview": false,
     "notas": [
         {
             "matricula_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-            "estado": "registrada",
+            "estado": "pendiente",
             "puntaje": 84,
             "observacion": "z"
         }
@@ -15204,7 +16035,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -15235,10 +16066,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="notas.0.estado"                data-endpoint="POSTapi-v1-assessments--examen_id--grades-import"
-               value="registrada"
+               value="pendiente"
                data-component="body">
     <br>
-<p>Example: <code>registrada</code></p>
+<p>Example: <code>pendiente</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>registrada</code></li> <li><code>ausente</code></li> <li><code>exonerado</code></li> <li><code>pendiente</code></li></ul>
                     </div>
