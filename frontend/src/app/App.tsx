@@ -22,6 +22,9 @@ import { CashReportPage } from '@/features/finance-queries/CashReportPage'
 import { BiometricAdminPage } from '@/features/biometrics/BiometricAdminPage'
 import { StudentAttendancePage } from '@/features/attendance/StudentAttendancePage'
 import { PayrollAdminPage } from '@/features/payroll/PayrollAdminPage'
+import { IncidentsAdminPage } from '@/features/incidents/IncidentsAdminPage'
+import { IncidentDetailPage } from '@/features/incidents/IncidentDetailPage'
+import { FamilyIncidentsPage } from '@/features/incidents/FamilyIncidentsPage'
 
 export function App() {
   return (
@@ -36,6 +39,7 @@ export function App() {
         <Route path="/portal" element={<PortalLayout />}>
           <Route index element={<FamilyPortalPage />} />
           <Route path="finanzas/estado-cuenta" element={<FamilyAccountStatementPage />} />
+          <Route path="incidencias" element={<FamilyIncidentsPage />} />
         </Route>
         <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
           <Route path="/admin" element={<PortalLayout />}>
@@ -60,6 +64,8 @@ export function App() {
             </Route>
             <Route element={<PermissionRoute roles={['superadmin', 'auxiliar', 'toe']} />}>
               <Route path="asistencia" element={<StudentAttendancePage />} />
+              <Route path="incidencias" element={<IncidentsAdminPage />} />
+              <Route path="incidencias/:id" element={<IncidentDetailPage />} />
             </Route>
             <Route element={<PermissionRoute roles={['superadmin']} permissions={['gestionar_planilla']} />}>
               <Route path="planilla" element={<PayrollAdminPage />} />
