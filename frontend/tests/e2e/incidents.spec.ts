@@ -55,7 +55,7 @@ test.describe('Incidents Workflow', () => {
     await expect(page.getByRole('heading', { name: 'Cuaderno de Incidencias' })).toBeVisible()
 
     // Open Modal
-    await page.getByRole('button', { name: 'Registrar Incidencia' }).click()
+    await page.getByRole('button', { name: 'Registrar Incidencia' }).first().click()
     await expect(page.getByRole('heading', { name: 'Nueva Incidencia' })).toBeVisible()
 
     // Fill Form - since there are no ids on inputs, we can use locators
@@ -65,7 +65,7 @@ test.describe('Incidents Workflow', () => {
     await page.locator('textarea').fill('El estudiante generó un problema en el patio principal.')
     
     // Simulate submission
-    await page.getByRole('button', { name: 'Registrar Incidencia' }).click()
+    await page.locator('form').getByRole('button', { name: 'Registrar Incidencia' }).click()
     await expect(page.getByRole('heading', { name: 'Nueva Incidencia' })).not.toBeVisible()
   })
 
