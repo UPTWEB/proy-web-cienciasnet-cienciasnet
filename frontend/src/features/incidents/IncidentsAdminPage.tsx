@@ -23,10 +23,11 @@ export function IncidentsAdminPage() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchIncidents()
   }, [])
 
-  const handleCreate = async (data: any) => {
+  const handleCreate = async (data: import('./types').CreateIncidentRequest) => {
     setSubmitting(true)
     try {
       await createIncident(data)

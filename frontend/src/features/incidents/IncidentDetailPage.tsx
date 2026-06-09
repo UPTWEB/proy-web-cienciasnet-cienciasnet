@@ -8,7 +8,7 @@ import { FollowUpForm } from './components/FollowUpForm'
 export function IncidentDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [incident, setIncident] = useState<Incident | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
   // Nota: En un entorno real, habria un endpoint `getIncident(id)`.
@@ -19,7 +19,6 @@ export function IncidentDetailPage() {
   useEffect(() => {
     // Simulando busqueda en la lista general
     // const fetchDetail = async () => { ... }
-    setLoading(false)
     setIncident({
       id: id || 'test',
       student_id: 'alumno-1',
@@ -36,7 +35,7 @@ export function IncidentDetailPage() {
   if (loading) return <p>Cargando detalle...</p>
   if (!incident) return <p>No se encontró la incidencia.</p>
 
-  const handleTransition = async (data: any) => {
+  const handleTransition = async (data: import('./types').TransitionIncidentRequest) => {
     setSubmitting(true)
     try {
       await transitionIncident(incident.id, data)
@@ -48,7 +47,7 @@ export function IncidentDetailPage() {
     }
   }
 
-  const handleFollowUp = async (data: any) => {
+  const handleFollowUp = async (data: import('./types').CreateIncidentFollowUpRequest) => {
     setSubmitting(true)
     try {
       await createIncidentFollowUp(incident.id, data)
@@ -72,7 +71,7 @@ export function IncidentDetailPage() {
 
       <div className="grid col-2 gap-4 mt-4">
         <div className="card">
-          <TransitionForm incident={incident} onSubmit={handleTransition} isSubmitting={submitting} />
+          <TransitionForm onSubmit={handleTransition} isSubmitting={submitting} />
         </div>
         <div className="card">
           <FollowUpForm onSubmit={handleFollowUp} isSubmitting={submitting} />

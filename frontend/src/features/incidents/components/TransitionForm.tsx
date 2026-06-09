@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import type { TransitionIncidentRequest, Incident } from '../types'
 
-export function TransitionForm({ incident, onSubmit, isSubmitting }: { incident: Incident, onSubmit: (data: TransitionIncidentRequest) => void, isSubmitting: boolean }) {
+export function TransitionForm({ onSubmit, isSubmitting }: { onSubmit: (data: TransitionIncidentRequest) => void, isSubmitting: boolean }) {
   const [formData, setFormData] = useState<TransitionIncidentRequest>({
     target_status: 'in_progress',
     reason: ''
@@ -17,7 +17,7 @@ export function TransitionForm({ incident, onSubmit, isSubmitting }: { incident:
       <h4>Actualizar Estado</h4>
       <div className="form-group">
         <label>Nuevo Estado</label>
-        <select value={formData.target_status} onChange={(e) => setFormData({ ...formData, target_status: e.target.value as any })}>
+        <select value={formData.target_status} onChange={(e) => setFormData({ ...formData, target_status: e.target.value as TransitionIncidentRequest['target_status'] })}>
           <option value="in_progress">En proceso</option>
           <option value="referred_toe">Derivar a TOE</option>
           <option value="referred_psychology">Derivar a Psicología</option>

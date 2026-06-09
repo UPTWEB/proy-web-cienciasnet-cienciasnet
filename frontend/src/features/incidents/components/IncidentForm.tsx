@@ -27,7 +27,7 @@ export function IncidentForm({ onSubmit, isSubmitting, studentId }: { onSubmit: 
       </div>
       <div className="form-group">
         <label>Severidad</label>
-        <select value={formData.severity} onChange={(e) => setFormData({ ...formData, severity: e.target.value as any })}>
+        <select value={formData.severity} onChange={(e) => setFormData({ ...formData, severity: e.target.value as import('../types').CreateIncidentRequest['severity'] })}>
           <option value="low">Leve</option>
           <option value="medium">Moderado</option>
           <option value="high">Grave</option>
