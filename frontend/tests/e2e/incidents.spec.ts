@@ -1,47 +1,80 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
+
+const auxiliarUser = {
+  id: '019e9eff-b5a8-71b3-9014-dea076d57d40',
+  name: 'Auxiliar Prueba',
+  email: 'auxiliar@example.test',
+  active: true,
+  roles: ['auxiliar'],
+  permissions: []
+}
+
+const parentUser = {
+  id: '019e9eff-b5a8-71b3-9014-dea076d57d41',
+  name: 'Padre Prueba',
+  email: 'padre@example.test',
+  active: true,
+  roles: ['padre'],
+  permissions: []
+}
+
+async function mockIncidentsApis(page: Page, userSession = auxiliarUser) {
+  await page.route('**/sanctum/csrf-cookie', (route) => route.fulfill({ status: 204 }))
+  await page.route('**/api/v1/auth/session', (route) => route.fulfill({ json: { data: userSession } }))
+
+  await page.route(/\/api\/v1\/incidents(\?|$)/, (route) => {
+    if (route.request().method() === 'POST') {
+      return route.fulfill({ status: 201, json: { data: { id: 'new-inc' } } })
+    }
+    return route.fulfill({
+      json: {
+        data: [
+          {
+            id: 'inc-123',
+            student_id: 'alumno-1',
+            incident_type: 'Faltamiento',
+            severity: 'medium',
+            description: 'Problema en el patio',
+            status: 'open',
+            occurred_at: '2026-06-08T10:00:00Z',
+            created_at: '2026-06-08T10:05:00Z',
+            updated_at: '2026-06-08T10:05:00Z'
+          }
+        ],
+        meta: { current_page: 1, last_page: 1, total: 1 }
+      }
+    })
+  })
+}
 
 test.describe('Incidents Workflow', () => {
   test('Auxiliar can create an incident', async ({ page }) => {
-    // Login
-    await page.goto('/login')
-    await page.fill('input[type="email"]', 'auxiliar@example.test')
-    await page.fill('input[type="password"]', 'password')
-    await page.click('button[type="submit"]')
-    await page.waitForURL('/admin')
+    await mockIncidentsApis(page, auxiliarUser)
+    await page.goto('/admin/incidencias')
 
-    // Navigate to Incidents
-    await page.click('a[href="/admin/incidencias"]')
-    await expect(page.locator('h1')).toHaveText('Cuaderno de Incidencias')
+    await expect(page.getByRole('heading', { name: 'Cuaderno de Incidencias' })).toBeVisible()
 
     // Open Modal
-    await page.click('text=Registrar Incidencia')
-    await expect(page.locator('h3')).toHaveText('Nueva Incidencia')
+    await page.getByRole('button', { name: 'Registrar Incidencia' }).click()
+    await expect(page.getByRole('heading', { name: 'Nueva Incidencia' })).toBeVisible()
 
-    // Fill Form
-    await page.fill('input[placeholder="Ej. Tardanza, Faltamiento..."]', 'Faltamiento')
-    await page.selectOption('select', 'high')
-    await page.fill('textarea', 'El estudiante generó un problema en el patio principal.')
-    await page.fill('input[type="text"]:near(label:has-text("ID del Alumno"))', 'alumno-123')
+    // Fill Form - since there are no ids on inputs, we can use locators
+    await page.locator('input').nth(0).fill('alumno-123')
+    await page.locator('input').nth(1).fill('Faltamiento')
+    await page.locator('select').selectOption('high')
+    await page.locator('textarea').fill('El estudiante generó un problema en el patio principal.')
     
-    // As in mock environment it might not actually send to a real DB, we just verify the form works
-    // and doesn't crash
-    await page.click('button[type="submit"]')
+    // Simulate submission
+    await page.getByRole('button', { name: 'Registrar Incidencia' }).click()
+    await expect(page.getByRole('heading', { name: 'Nueva Incidencia' })).not.toBeVisible()
   })
 
   test('Family can view incidents', async ({ page }) => {
-    // Login
-    await page.goto('/login')
-    await page.fill('input[type="email"]', 'padre@example.test')
-    await page.fill('input[type="password"]', 'password')
-    await page.click('button[type="submit"]')
-    
-    // Select context and go to portal
-    await page.waitForURL('**/seleccionar-contexto')
-    await page.click('text=Continuar')
-    await page.waitForURL('/portal')
+    await mockIncidentsApis(page, parentUser)
+    await page.goto('/portal/incidencias')
 
-    // Navigate to Incidents
-    await page.click('a[href="/portal/incidencias"]')
-    await expect(page.locator('h1')).toHaveText('Historial de Incidencias')
+    await expect(page.getByRole('heading', { name: 'Historial de Incidencias' })).toBeVisible()
+    await expect(page.getByText('Faltamiento')).toBeVisible()
+    await expect(page.getByText('open')).toBeVisible()
   })
 })
