@@ -2,7 +2,7 @@ import { ArrowRight, UserCircle } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/features/auth/AuthContext'
 
-const adminRoles = ['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar']
+const adminRoles = ['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar', 'docente']
 
 export function ContextPage() {
   const { user } = useAuth()

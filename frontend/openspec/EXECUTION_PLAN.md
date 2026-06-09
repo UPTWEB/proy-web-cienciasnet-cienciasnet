@@ -46,7 +46,7 @@
 
 | ID | Status | Change | Owner | Reviewer | Dependencies |
 |---|---|---|---|---|---|
-| FE-015 | `[ ]` | `add-assessment-result-entry` | Vincenzo | Jefferson | FE-003 |
+| FE-015 | `[x]` | `add-assessment-result-entry` | Vincenzo | Jefferson | FE-003 |
 | FE-016 | `[ ]` | `add-result-publication-reports-portals` | Vincenzo | Jefferson | FE-008 |
 | FE-017 | `[ ]` | `add-materials-portal` | Vincenzo | Jefferson | FE-002 |
 | FE-018 | `[ ]` | `add-schedules-calendar-portals` | Vincenzo | Jefferson | FE-002 |
