@@ -59,6 +59,10 @@ Route::prefix('v1')->group(function (): void {
         Route::put('accounts/{accountId}/roles', [AccountController::class, 'roles']);
         Route::post('accounts/{accountId}/password-reset', [AccountController::class, 'passwordReset']);
 
+        Route::get('search/students', [\App\Modules\Usuarios\Presentation\Controllers\DniSearchController::class, 'searchStudents']);
+        Route::get('search/parents', [\App\Modules\Usuarios\Presentation\Controllers\DniSearchController::class, 'searchParents']);
+        Route::get('search/teachers', [\App\Modules\Usuarios\Presentation\Controllers\DniSearchController::class, 'searchTeachers']);
+
         Route::get('family-links', [FamilyLinkController::class, 'index']);
         Route::post('family-links', [FamilyLinkController::class, 'store']);
         Route::delete('family-links/{familyLinkId}', [FamilyLinkController::class, 'destroy']);
@@ -128,6 +132,7 @@ Route::prefix('v1')->group(function (): void {
         Route::post('student-attendance/anomalies/{anomalyId}/resolution', [StudentAttendanceController::class, 'resolveAnomaly']);
         Route::post('student-attendance/absences/{attendanceId}/justification', [StudentAttendanceController::class, 'justifyAbsence']);
         Route::get('student-attendance/alerts', [StudentAttendanceController::class, 'alerts']);
+        Route::delete('student-attendance/{attendanceId}', [StudentAttendanceController::class, 'destroy']);
         Route::get('recognition-events', [StudentAttendanceController::class, 'recognitionEvents']);
         Route::post('recognition-events/{recognitionEventId}/review', [StudentAttendanceController::class, 'reviewRecognition']);
 

@@ -30,6 +30,11 @@ class AccountController extends Controller
         ));
         $query->when($request->has('active'), fn ($q) => $q->where('activo', $request->boolean('active')));
 
+        $query->when($request->filled('exclude_roles'), function ($q) use ($request) {
+            $roles = explode(',', $request->string('exclude_roles'));
+            $q->whereDoesntHave('roles', fn ($r) => $r->whereIn('name', $roles));
+        });
+
         return AccountResource::collection($query->paginate(min($request->integer('per_page', 20), 100)));
     }
 

@@ -26,7 +26,8 @@ import {
   resolveStudentAttendanceAnomaly,
   justifyStudentAbsence,
   listRecognitionEventsForReview,
-  reviewRecognitionEvent
+  reviewRecognitionEvent,
+  deleteStudentAttendance
 } from './api'
 import type { StudentAttendance, StudentAttendanceAnomaly, RecognitionEvent } from './types'
 
@@ -243,6 +244,25 @@ export function StudentAttendancePage() {
     onError: (err) => {
       setClosureMessage('')
       setClosureError(getApiError(err).message)
+    }
+  })
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteReason, setDeleteReason] = useState('')
+  const [deleteError, setDeleteError] = useState('')
+
+  const deleteAttendanceMutation = useMutation({
+    mutationFn: ({ attendanceId, reason }: { attendanceId: string; reason: string }) =>
+      deleteStudentAttendance(attendanceId, reason),
+    onSuccess: async () => {
+      setShowDeleteModal(false)
+      setSelectedRecord(null)
+      setDeleteReason('')
+      setDeleteError('')
+      await invalidateAttendance()
+    },
+    onError: (err) => {
+      setDeleteError(getApiError(err).message)
     }
   })
 
@@ -548,7 +568,7 @@ export function StudentAttendancePage() {
                         <button
                           className="button button-secondary text-amber-700 border-amber-200 hover:bg-amber-50 text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-sm"
                           onClick={() => {
-                            // Convert standard record to anomaly format to resolve exit
+                            // Convert standard record to anomaly format to resolve
                             const mockAnomaly: StudentAttendanceAnomaly = {
                               id: record.id,
                               student_id: record.student_id,
@@ -563,11 +583,25 @@ export function StudentAttendancePage() {
                             setSelectedAnomaly(mockAnomaly)
                             setAnomalyExitTime('')
                             setAnomalyReason('')
-                            setAnomalyError('')
                             setShowResolveAnomalyModal(true)
                           }}
                         >
-                          Registrar Salida
+                          Forzar Salida
+                        </button>
+                      )}
+                      {/* Delete button (Soft delete) */}
+                      {!isToeOnly && record.status !== 'anulada' && (
+                        <button
+                          className="button button-secondary text-rose-600 border-rose-200 hover:bg-rose-50 text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-sm flex items-center gap-1"
+                          onClick={() => {
+                            setSelectedRecord(record)
+                            setDeleteReason('')
+                            setDeleteError('')
+                            setShowDeleteModal(true)
+                          }}
+                        >
+                          <X size={14} />
+                          Anular
                         </button>
                       )}
                       {!record.exit_time && record.status !== 'absent' && record.status !== 'excused' && (
@@ -1154,7 +1188,72 @@ export function StudentAttendancePage() {
                   className="button button-primary bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm px-4 py-2 font-semibold shadow-md shadow-blue-500/20 transition-all"
                   disabled={reviewRecognitionMutation.isPending}
                 >
-                  {reviewRecognitionMutation.isPending ? 'Guardando...' : 'Aplicar Decisión'}
+                  {reviewRecognitionMutation.isPending ? 'Guardando...' : 'Confirmar Decisión'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 5: Anular Asistencia Modal */}
+      {showDeleteModal && selectedRecord && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white border border-slate-100 p-6 rounded-2xl max-w-md w-full shadow-2xl space-y-4 text-slate-800">
+            <h3 className="text-lg font-bold text-slate-950 flex items-center gap-2">
+              <X className="text-rose-500" size={24} weight="bold" />
+              Anular Asistencia
+            </h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Estás a punto de anular la asistencia de <strong className="text-slate-900">{selectedRecord.student_name}</strong>. Esta acción quedará registrada.
+            </p>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                deleteAttendanceMutation.mutate({
+                  attendanceId: selectedRecord.id,
+                  reason: deleteReason
+                })
+              }}
+              className="space-y-4"
+            >
+              <label htmlFor="delete-reason" className="block text-xs font-bold text-slate-700 uppercase tracking-wide cursor-pointer space-y-1.5">
+                Motivo de Anulación (Auditable - min 5 caract.)
+                <textarea
+                  id="delete-reason"
+                  className="glass-input-light w-full mt-1 p-3 rounded-xl text-sm font-normal normal-case tracking-normal border border-slate-200 min-h-[80px]"
+                  placeholder="Ej. Registro duplicado, error de marcación..."
+                  value={deleteReason}
+                  onChange={(e) => setDeleteReason(e.target.value)}
+                  required
+                  minLength={5}
+                />
+              </label>
+
+              {deleteError && (
+                <p className="form-error bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-xl">
+                  {deleteError}
+                </p>
+              )}
+
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  className="button button-secondary rounded-xl text-slate-600 text-sm px-4 py-2 border-slate-200 hover:bg-slate-50 font-semibold shadow-sm"
+                  onClick={() => {
+                    setShowDeleteModal(false)
+                    setSelectedRecord(null)
+                  }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="button button-primary bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm px-4 py-2 font-semibold shadow-md shadow-rose-500/20 transition-all"
+                  disabled={deleteAttendanceMutation.isPending}
+                >
+                  {deleteAttendanceMutation.isPending ? 'Anulando...' : 'Anular Asistencia'}
                 </button>
               </div>
             </form>

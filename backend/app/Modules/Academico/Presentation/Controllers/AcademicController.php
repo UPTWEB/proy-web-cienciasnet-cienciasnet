@@ -125,7 +125,7 @@ class AcademicController extends Controller
     public function enrollments(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
-        $query = Matricula::query()->with('seccion.grado.periodoAcademico');
+        $query = Matricula::query()->with(['seccion.grado.periodoAcademico', 'alumno']);
         $query->when($request->filled('student_id'), fn ($q) => $q->where('alumno_id', $request->string('student_id')));
 
         return AcademicResource::collection($query->paginate($this->perPage($request)));
@@ -142,13 +142,13 @@ class AcademicController extends Controller
             'alumno_id' => $request->string('student_id'), 'seccion_id' => $section->id,
             'codigo' => 'MAT-'.now()->format('Y').'-'.Str::upper(Str::random(8)),
             'fecha' => $request->date('enrolled_at', now()), 'estado' => 'activo', 'registrado_por' => $request->user()->id,
-        ]))->load('seccion.grado.periodoAcademico'));
+        ]))->load(['seccion.grado.periodoAcademico', 'alumno']));
     }
 
     public function assignments(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
-        $query = CargaAcademica::query()->with('seccion.grado.periodoAcademico');
+        $query = CargaAcademica::query()->with(['seccion.grado.periodoAcademico', 'docente', 'curso']);
         $query->when($request->filled('teacher_id'), fn ($q) => $q->where('docente_id', $request->string('teacher_id')));
 
         return AcademicResource::collection($query->latest('vigente_desde')->paginate($this->perPage($request)));
@@ -169,7 +169,7 @@ class AcademicController extends Controller
                 'seccion_id' => $section->id, 'vigente_desde' => now()->toDateString(), 'activo' => true,
                 'asignado_por' => $request->user()->id,
             ]);
-        })->load('seccion.grado.periodoAcademico');
+        })->load(['seccion.grado.periodoAcademico', 'docente', 'curso']);
         $audit->record($request, 'teaching_assignment.created', $request->user(), $assignment);
 
         return $this->created($assignment);

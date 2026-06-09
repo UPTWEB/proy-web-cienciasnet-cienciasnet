@@ -121,6 +121,22 @@ class StudentAttendanceController extends Controller
         return response()->json(['data' => new StudentAttendanceResource($attendance)]);
     }
 
+    public function destroy(ReasonRequest $request, string $attendanceId, AuditLogger $audit): JsonResponse
+    {
+        abort_unless($request->user()?->hasAnyRole(['superadmin', 'auxiliar']) === true, 403);
+
+        $attendance = AsistenciaAlumno::findOrFail($attendanceId);
+        if ($attendance->estado === 'anulada') {
+            throw new ConflictHttpException('La asistencia ya está anulada.');
+        }
+
+        $old = $attendance->toArray();
+        $attendance->update(['estado' => 'anulada']);
+        $audit->record($request, 'student_attendance.deleted', $request->user(), $attendance, $old, newValues: ['reason' => $request->string('reason')->toString()]);
+
+        return response()->json(null, 204);
+    }
+
     public function recognitionEvents(Request $request)
     {
         abort_unless($request->user()?->hasAnyRole(['superadmin', 'auxiliar']) === true, 403);

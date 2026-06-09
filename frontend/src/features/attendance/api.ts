@@ -84,6 +84,15 @@ export async function justifyStudentAbsence(
   )
 }
 
+export async function deleteStudentAttendance(
+  attendanceId: string,
+  reason: string
+): Promise<void> {
+  await apiClient.delete(`/api/v1/student-attendance/${attendanceId}`, {
+    data: { reason },
+  })
+}
+
 export async function listRecognitionEventsForReview(): Promise<Page<RecognitionEvent>> {
   const response = await apiClient.get<Page<RecognitionEvent>>('/api/v1/recognition-events')
   return response.data
