@@ -27,6 +27,8 @@ import { MaterialsAdminPage } from '@/features/materials/MaterialsAdminPage'
 import { MaterialsPortalPage } from '@/features/materials/MaterialsPortalPage'
 import { SchedulesAdminPage } from '@/features/schedules/SchedulesAdminPage'
 import { SchedulesPortalPage } from '@/features/schedules/SchedulesPortalPage'
+import { CommunicationsAdminPage } from '@/features/communications/CommunicationsAdminPage'
+import { CommunicationsPortalPage } from '@/features/communications/CommunicationsPortalPage'
 
 export function App() {
   return (
@@ -43,6 +45,7 @@ export function App() {
           <Route path="finanzas/estado-cuenta" element={<FamilyAccountStatementPage />} />
           <Route path="materiales" element={<MaterialsPortalPage />} />
           <Route path="horarios" element={<SchedulesPortalPage />} />
+          <Route path="comunicaciones" element={<CommunicationsPortalPage />} />
         </Route>
         <Route element={<PermissionRoute roles={['superadmin', 'gestor_usuarios', 'administrativo', 'coordinador_academico', 'toe', 'psicologia', 'auxiliar', 'docente']} permissions={['gestionar_dispositivos', 'gestionar_planilla']} />}>
           <Route path="/admin" element={<PortalLayout />}>
@@ -75,6 +78,9 @@ export function App() {
               <Route path="evaluaciones" element={<AssessmentsPage />} />
                <Route path="materiales" element={<MaterialsAdminPage />} />
                <Route path="horarios" element={<SchedulesAdminPage />} />
+             </Route>
+             <Route element={<PermissionRoute roles={['superadmin', 'toe', 'coordinador_academico']} />}>
+               <Route path="comunicaciones" element={<CommunicationsAdminPage />} />
              </Route>
           </Route>
         </Route>
