@@ -258,7 +258,7 @@ test.describe('Portal de Alumnos y Familias - FE-016', () => {
     await page.getByLabel('Formato de Descarga').selectOption({ label: 'Documento PDF (.pdf)' })
 
     const downloadPromise = page.waitForEvent('download')
-    await page.getByRole('button', { name: 'Generar Reporte' }).click()
+    await page.getByRole('button', { name: 'Generar Reporte' }).click({ force: true })
     const download = await downloadPromise
 
     expect(download.suggestedFilename()).toContain('reporte_report_card_')

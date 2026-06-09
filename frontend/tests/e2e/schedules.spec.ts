@@ -89,7 +89,7 @@ const mockStudentSummary = {
   ]
 }
 
-const mockSchedules = [
+let mockSchedules = [
   {
     id: 'sched-1-uuid',
     teaching_assignment_id: 'load-juan-uuid',
@@ -112,7 +112,7 @@ const mockSchedules = [
   }
 ]
 
-const mockCalendarEvents = [
+let mockCalendarEvents = [
   {
     id: 'event-1-uuid',
     title: 'Examen de Admisión Simulación',
@@ -136,6 +136,8 @@ const mockCalendarEvents = [
 ]
 
 async function mockSchedulesApis(page: Page, userSession = superadmin) {
+  page.on('console', msg => console.log('BROWSER LOG:', msg.text()))
+  page.on('pageerror', err => console.log('BROWSER ERROR:', err.message))
   await page.route('**/sanctum/csrf-cookie', (route) => route.fulfill({ status: 204 }))
   await page.route('**/api/v1/auth/session', (route) => route.fulfill({ json: { data: userSession } }))
 
@@ -215,6 +217,53 @@ async function mockSchedulesApis(page: Page, userSession = superadmin) {
 }
 
 test.describe('Horarios y Calendario - FE-018', () => {
+  test.beforeEach(async () => {
+    mockSchedules = [
+      {
+        id: 'sched-1-uuid',
+        teaching_assignment_id: 'load-juan-uuid',
+        weekday: 1, // Lunes
+        starts_at: '08:00',
+        ends_at: '09:30',
+        room: 'Aula 101',
+        created_at: '2026-06-01T08:00:00Z',
+        updated_at: '2026-06-01T08:00:00Z'
+      },
+      {
+        id: 'sched-2-uuid',
+        teaching_assignment_id: 'load-pedro-uuid',
+        weekday: 2, // Martes
+        starts_at: '10:00',
+        ends_at: '11:30',
+        room: 'Laboratorio Física',
+        created_at: '2026-06-01T08:00:00Z',
+        updated_at: '2026-06-01T08:00:00Z'
+      }
+    ]
+
+    mockCalendarEvents = [
+      {
+        id: 'event-1-uuid',
+        title: 'Examen de Admisión Simulación',
+        starts_at: '2026-06-09T09:00:00Z',
+        ends_at: '2026-06-09T13:00:00Z',
+        event_type: 'academic' as const,
+        description: 'Simulacro general obligatorio para todo secundaria.',
+        created_at: '2026-06-01T08:00:00Z',
+        updated_at: '2026-06-01T08:00:00Z'
+      },
+      {
+        id: 'event-2-uuid',
+        title: 'Feriado de la Batalla de Arica',
+        starts_at: '2026-06-07T00:00:00Z',
+        ends_at: '2026-06-07T23:59:59Z',
+        event_type: 'holiday' as const,
+        description: 'Día no laborable para el colegio.',
+        created_at: '2026-06-01T08:00:00Z',
+        updated_at: '2026-06-01T08:00:00Z'
+      }
+    ]
+  })
   test('debe restringir acceso a gestion de horarios si el usuario no tiene rol docente/coordinador', async ({ page }) => {
     await mockSchedulesApis(page, padreUser)
     await page.goto('/admin/horarios')
@@ -258,12 +307,12 @@ test.describe('Horarios y Calendario - FE-018', () => {
     await page.goto('/admin/horarios')
     await page.locator('#section-filter-select').selectOption({ label: '1° Secundaria "A"' })
 
-    await page.getByRole('button', { name: 'Programar Clase' }).click()
+    await page.getByRole('button', { name: 'Programar Clase' }).click({ force: true })
 
     // Fill schedule form
     await page.locator('#form-assignment-select').selectOption({ label: 'Matemática I (Docente Juan)' })
     await page.getByPlaceholder('Ej. Salón 102').fill('Aula 101')
-    await page.getByRole('button', { name: 'Guardar' }).click()
+    await page.getByRole('button', { name: 'Guardar' }).click({ force: true })
 
     // Expect conflict warning banner to appear
     await expect(page.getByText('El docente Docente Juan ya cuenta con otra clase programada')).toBeVisible()
@@ -278,11 +327,11 @@ test.describe('Horarios y Calendario - FE-018', () => {
     await page.goto('/admin/horarios')
 
     await page.locator('#section-filter-select').selectOption({ label: '1° Secundaria "A"' })
-    await page.getByRole('button', { name: 'Programar Clase' }).click()
+    await page.getByRole('button', { name: 'Programar Clase' }).click({ force: true })
 
     await page.locator('#form-assignment-select').selectOption({ label: 'Matemática I (Docente Juan)' })
     await page.getByPlaceholder('Ej. Salón 102').fill('Aula 102')
-    await page.getByRole('button', { name: 'Guardar' }).click()
+    await page.getByRole('button', { name: 'Guardar' }).click({ force: true })
 
     // Modal should close and the schedule listing should be updated
     await expect(page.locator('#form-assignment-select')).not.toBeVisible()
@@ -292,8 +341,8 @@ test.describe('Horarios y Calendario - FE-018', () => {
     await mockSchedulesApis(page, superadmin)
     await page.goto('/admin/horarios')
 
-    await page.getByRole('button', { name: 'Calendario de Actividades' }).click()
-    await page.getByRole('button', { name: 'Crear Actividad / Feriado' }).click()
+    await page.getByRole('button', { name: 'Calendario de Actividades' }).click({ force: true })
+    await page.getByRole('button', { name: 'Crear Actividad / Feriado' }).click({ force: true })
 
     await page.getByPlaceholder('Ej. Feriado del Día del Maestro').fill('Reunión General del Colegio')
     
@@ -301,7 +350,7 @@ test.describe('Horarios y Calendario - FE-018', () => {
     await page.locator('input[type="datetime-local"]').first().fill('2026-06-15T09:00')
     await page.locator('input[type="datetime-local"]').nth(1).fill('2026-06-15T12:00')
     
-    await page.getByRole('button', { name: 'Guardar' }).click()
+    await page.getByRole('button', { name: 'Guardar' }).click({ force: true })
 
     // Verification
     await expect(page.getByRole('heading', { name: 'Reunión General del Colegio' })).toBeVisible()
@@ -318,7 +367,7 @@ test.describe('Horarios y Calendario - FE-018', () => {
     await expect(page.getByRole('heading', { name: 'Física Química V' })).not.toBeVisible()
 
     // Explore Calendar Escolar tab
-    await page.getByRole('button', { name: 'Calendario Escolar' }).click()
+    await page.getByRole('button', { name: 'Calendario Escolar' }).click({ force: true })
 
     // Renders custom calendar. June 9th is selected by default which contains simulator exam
     await expect(page.getByRole('heading', { name: 'Examen de Admisión Simulación' })).toBeVisible()

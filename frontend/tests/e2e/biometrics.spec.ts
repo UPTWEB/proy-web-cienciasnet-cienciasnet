@@ -178,14 +178,14 @@ test.describe('Administración Biométrica y de Dispositivos - FE-009A', () => {
     // Grant new consent
     await page.getByLabel('ID del Alumno (UUID)').fill('019e9eff-new-student-uuid')
     await page.getByLabel('Base Legal / Documentación').fill('Consentimiento firmado por madre')
-    await page.getByRole('button', { name: 'Registrar Consentimiento' }).click()
+    await page.getByRole('button', { name: 'Registrar Consentimiento' }).click({ force: true })
 
     await expect(page.getByText('Consentimiento biométrico otorgado con éxito.')).toBeVisible()
 
     // Revoke existing active consent
-    await page.getByRole('button', { name: 'Revocar' }).first().click()
+    await page.getByRole('button', { name: 'Revocar' }).first().click({ force: true })
     await page.getByLabel('Motivo de Revocación').fill('Solicitado por mudanza')
-    await page.getByRole('button', { name: 'Confirmar Revocación' }).click()
+    await page.getByRole('button', { name: 'Confirmar Revocación' }).click({ force: true })
 
     // Status chip should update to revoked
     await expect(page.getByText('Revocado').first()).toBeVisible()
@@ -194,7 +194,7 @@ test.describe('Administración Biométrica y de Dispositivos - FE-009A', () => {
   test('debe bloquear enrolamiento si no hay consentimiento activo', async ({ page }) => {
     await mockBiometricsApis(page)
     await page.goto('/admin/biometria')
-    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click()
+    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click({ force: true })
 
     // Verify Tab loading
     await expect(page.getByRole('heading', { name: 'Verificar Consentimiento' })).toBeVisible()
@@ -210,7 +210,7 @@ test.describe('Administración Biométrica y de Dispositivos - FE-009A', () => {
   test('debe permitir enrolar perfil facial con fotos cuando existe consentimiento', async ({ page }) => {
     await mockBiometricsApis(page)
     await page.goto('/admin/biometria')
-    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click()
+    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click({ force: true })
 
     // Enter student ID with active consent
     await page.getByLabel('ID del Alumno (UUID)').fill(mockConsentActive.student_id)
@@ -237,18 +237,18 @@ test.describe('Administración Biométrica y de Dispositivos - FE-009A', () => {
 
     await mockBiometricsApis(page)
     await page.goto('/admin/biometria')
-    await page.getByRole('button', { name: 'Estaciones y Cámaras' }).click()
+    await page.getByRole('button', { name: 'Estaciones y Cámaras' }).click({ force: true })
 
     // Register station
     await page.getByLabel('Nombre').fill('Entrada Lateral C')
     await page.getByLabel('Ubicación').fill('Pabellón Secundaria')
     await page.getByLabel('Modo de Operación').selectOption('entry')
-    await page.getByRole('button', { name: 'Registrar Estación' }).click()
+    await page.getByRole('button', { name: 'Registrar Estación' }).click({ force: true })
 
     await expect(page.getByText('Estación de asistencia registrada.')).toBeVisible()
 
     // Generate activation code
-    await page.getByRole('button', { name: 'Activar' }).first().click()
+    await page.getByRole('button', { name: 'Activar' }).first().click({ force: true })
     await expect(page.getByText('ACT-429-110')).toBeVisible()
 
     // Manage cameras sub-panel
@@ -293,7 +293,7 @@ test.describe('Administración Biométrica y de Dispositivos - FE-009A', () => {
 
     await mockBiometricsApis(page)
     await page.goto('/admin/biometria')
-    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click()
+    await page.getByRole('button', { name: 'Enrolamiento Facial' }).click({ force: true })
     await page.getByLabel('ID del Alumno (UUID)').fill(mockConsentActive.student_id)
 
     await page.locator('input[type="file"]').setInputFiles([

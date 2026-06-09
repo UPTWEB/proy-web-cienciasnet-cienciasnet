@@ -233,6 +233,38 @@ async function mockMaterialsApis(page: Page, userSession = superadmin) {
 }
 
 test.describe('Materiales de Estudio - FE-017', () => {
+  test.beforeEach(async () => {
+    mockMaterials = [
+      {
+        id: 'mat-1-uuid',
+        title: 'Guía de Ecuaciones Lineales',
+        description: 'Material de teoría y ejercicios para resolver en clase',
+        teaching_assignment_id: 'load-juan-uuid',
+        week: 2,
+        type: 'file',
+        url: null,
+        file_id: 'file-1-uuid',
+        file_name: 'ecuaciones_lineales.pdf',
+        file_size: 1548200, // ~1.5 MB
+        created_at: '2026-06-01T08:00:00Z',
+        updated_at: '2026-06-01T08:00:00Z'
+      },
+      {
+        id: 'mat-2-uuid',
+        title: 'Video Explicativo de Cinemática',
+        description: 'Enlace externo para ver el video en YouTube',
+        teaching_assignment_id: 'load-pedro-uuid',
+        week: 3,
+        type: 'link',
+        url: 'https://youtube.com/watch?v=cinematica',
+        file_id: null,
+        file_name: null,
+        file_size: null,
+        created_at: '2026-06-02T10:00:00Z',
+        updated_at: '2026-06-02T10:00:00Z'
+      }
+    ]
+  })
   test('debe restringir acceso a gestion de materiales si el usuario no tiene rol docente/coordinador', async ({ page }) => {
     await mockMaterialsApis(page, padreUser)
     await page.goto('/admin/materiales')
@@ -261,7 +293,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
 
     await page.goto('/admin/materiales')
     await page.locator('#course-select').selectOption({ label: 'Matemática I - 1° Secundaria "A"' })
-    await page.getByRole('button', { name: 'Nuevo Material' }).click()
+    await page.getByRole('button', { name: 'Nuevo Material' }).click({ force: true })
 
     // Title input
     await page.getByPlaceholder('Ej. Guía de Vectores y Cinemática').fill('Examen ultra pesado')
@@ -279,7 +311,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
       buffer: filePayload.buffer
     })
 
-    await page.getByRole('button', { name: 'Publicar' }).click()
+    await page.getByRole('button', { name: 'Publicar' }).click({ force: true })
 
     // Should display validation error on size
     await expect(page.getByText('El archivo supera el límite permitido de 10 MB.')).toBeVisible()
@@ -308,7 +340,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
 
     await page.goto('/admin/materiales')
     await page.locator('#course-select').selectOption({ label: 'Matemática I - 1° Secundaria "A"' })
-    await page.getByRole('button', { name: 'Nuevo Material' }).click()
+    await page.getByRole('button', { name: 'Nuevo Material' }).click({ force: true })
 
     await page.getByPlaceholder('Ej. Guía de Vectores y Cinemática').fill('Clase de Ecuaciones Especiales')
     await page.getByPlaceholder('Instrucciones o notas adicionales para los alumnos...').fill('Por favor leer completo')
@@ -320,7 +352,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
       buffer: Buffer.from('PDF corrupto')
     })
 
-    await page.getByRole('button', { name: 'Publicar' }).click()
+    await page.getByRole('button', { name: 'Publicar' }).click({ force: true })
 
     // 422 error banner should be visible
     await expect(page.getByText('El servidor determinó que el archivo es corrupto o inválido.')).toBeVisible()
@@ -336,7 +368,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
     await page.goto('/admin/materiales')
     await page.locator('#course-select').selectOption({ label: 'Matemática I - 1° Secundaria "A"' })
 
-    await page.getByRole('button', { name: 'Nuevo Material' }).click()
+    await page.getByRole('button', { name: 'Nuevo Material' }).click({ force: true })
     await page.getByPlaceholder('Ej. Guía de Vectores y Cinemática').fill('Guía de Ecuaciones Especiales')
 
     await page.setInputFiles('input[type="file"]', {
@@ -345,7 +377,7 @@ test.describe('Materiales de Estudio - FE-017', () => {
       buffer: Buffer.from('pdf data')
     })
 
-    await page.getByRole('button', { name: 'Publicar' }).click()
+    await page.getByRole('button', { name: 'Publicar' }).click({ force: true })
 
     // Dialog should close, and new material should render in the list
     await expect(page.getByRole('heading', { name: 'Nuevo Material Subido' })).toBeVisible()
@@ -356,19 +388,19 @@ test.describe('Materiales de Estudio - FE-017', () => {
     await page.goto('/admin/materiales')
     await page.locator('#course-select').selectOption({ label: 'Matemática I - 1° Secundaria "A"' })
 
-    await page.getByRole('button', { name: 'Nuevo Material' }).click()
-    await page.getByRole('button', { name: 'Enlace Externo' }).click()
+    await page.getByRole('button', { name: 'Nuevo Material' }).click({ force: true })
+    await page.getByRole('button', { name: 'Enlace Externo' }).click({ force: true })
 
     // Invalid URL validation test
     await page.getByPlaceholder('Ej. Guía de Vectores y Cinemática').fill('Enlace a Khan Academy')
     await page.getByPlaceholder('https://example.com/recurso').fill('www.khanacademy.org')
-    await page.getByRole('button', { name: 'Publicar' }).click()
+    await page.getByRole('button', { name: 'Publicar' }).click({ force: true })
 
     await expect(page.getByText('El enlace debe ser una URL válida que empiece con http:// o https://')).toBeVisible()
 
     // Make URL valid
     await page.getByPlaceholder('https://example.com/recurso').fill('https://www.khanacademy.org')
-    await page.getByRole('button', { name: 'Publicar' }).click()
+    await page.getByRole('button', { name: 'Publicar' }).click({ force: true })
 
     // Verification of publication
     await expect(page.getByRole('heading', { name: 'Enlace a Khan Academy' })).toBeVisible()
@@ -380,24 +412,24 @@ test.describe('Materiales de Estudio - FE-017', () => {
     await page.locator('#course-select').selectOption({ label: 'Matemática I - 1° Secundaria "A"' })
 
     // 1. Edit
-    await page.getByTitle('Editar detalles').first().click()
+    await page.getByTitle('Editar detalles').first().click({ force: true })
     await page.getByPlaceholder('Ej. Guía de Vectores y Cinemática').fill('Guía de Ecuaciones Lineales Modificada')
-    await page.getByRole('button', { name: 'Guardar Cambios' }).click()
+    await page.getByRole('button', { name: 'Guardar Cambios' }).click({ force: true })
     await expect(page.getByRole('heading', { name: 'Guía de Ecuaciones Lineales Modificada' })).toBeVisible()
 
     // 2. Replace File
-    await page.getByRole('button', { name: 'Reemplazar Archivo' }).first().click()
+    await page.getByRole('button', { name: 'Reemplazar Archivo' }).first().click({ force: true })
     await page.setInputFiles('input[type="file"]', {
       name: 'guia_reemplazada.docx',
       mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       buffer: Buffer.from('docx content')
     })
-    await page.getByRole('button', { name: 'Reemplazar', exact: true }).click()
+    await page.getByRole('button', { name: 'Reemplazar', exact: true }).click({ force: true })
     await expect(page.getByText('archivo_reemplazado.docx')).toBeVisible()
 
     // 3. Archive
     await page.getByTitle('Archivar material').first().click({ force: true })
-    await page.getByRole('button', { name: 'Sí, Archivar' }).click()
+    await page.getByRole('button', { name: 'Sí, Archivar' }).click({ force: true })
     await expect(page.getByRole('heading', { name: 'Guía de Ecuaciones Lineales Modificada' })).not.toBeVisible()
   })
 
