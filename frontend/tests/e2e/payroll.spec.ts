@@ -274,7 +274,7 @@ test.describe('Asistencia Docente y Planilla - FE-011', () => {
     await expect(closeBtn).toBeDisabled()
 
     // Check confirm checkbox
-    await page.getByRole('checkbox').check()
+    await page.getByRole('checkbox').check({ force: true })
     await expect(closeBtn).toBeEnabled()
 
     // Intercept closure and complete it
