@@ -137,13 +137,21 @@ class DemoCompleteSeeder extends Seeder
     {
         $gradosPrim = [];
         $gradosSec  = [];
+        $primaryGrades = Grado::where('periodo_academico_id', $period->id)->where('nivel', 'Primaria')->get();
+        foreach ($primaryGrades as $primaryGrade) {
+            $sectionIds = $primaryGrade->secciones()->pluck('id');
+            Matricula::whereIn('seccion_id', $sectionIds)->delete();
+            CargaAcademica::whereIn('seccion_id', $sectionIds)->delete();
+            Seccion::whereIn('id', $sectionIds)->delete();
+            $primaryGrade->delete();
+        }
+        Curso::where('codigo', 'like', '%Primaria')->delete();
 
         $gradosData = [
-            ['nombre' => '1ro Primaria',   'nivel' => 'Primaria',   'orden' => 1],
-            ['nombre' => '3ro Primaria',   'nivel' => 'Primaria',   'orden' => 3],
-            ['nombre' => '5to Primaria',   'nivel' => 'Primaria',   'orden' => 5],
             ['nombre' => '1ro Secundaria', 'nivel' => 'Secundaria', 'orden' => 1],
+            ['nombre' => '2do Secundaria', 'nivel' => 'Secundaria', 'orden' => 2],
             ['nombre' => '3ro Secundaria', 'nivel' => 'Secundaria', 'orden' => 3],
+            ['nombre' => '4to Secundaria', 'nivel' => 'Secundaria', 'orden' => 4],
             ['nombre' => '5to Secundaria', 'nivel' => 'Secundaria', 'orden' => 5],
         ];
 
@@ -164,11 +172,7 @@ class DemoCompleteSeeder extends Seeder
                 );
             }
 
-            if ($gd['nivel'] === 'Primaria') {
-                $gradosPrim[] = $grado;
-            } else {
-                $gradosSec[] = $grado;
-            }
+            $gradosSec[] = $grado;
         }
 
         return [$gradosPrim, $gradosSec];
@@ -203,13 +207,6 @@ class DemoCompleteSeeder extends Seeder
     // =========================================================================
     private function seedCursosYCarga(array $gradosPrim, array $gradosSec): void
     {
-        $cursosPrim = [
-            ['MAT-P', 'Matemática',          'Ciencias'],
-            ['COM-P', 'Comunicación',         'Letras'],
-            ['CTA-P', 'Ciencia y Tecnología', 'Ciencias'],
-            ['ART-P', 'Arte y Cultura',       'Humanidades'],
-        ];
-
         $cursosSec = [
             ['MAT-S', 'Matemática',    'Ciencias'],
             ['COM-S', 'Comunicación',  'Letras'],
@@ -221,34 +218,12 @@ class DemoCompleteSeeder extends Seeder
 
         $docenteIdx = 0;
 
-        foreach ($gradosPrim as $grado) {
-            foreach ($grado->secciones as $seccion) {
-                foreach ($cursosPrim as [$cod, $nom, $area]) {
-                    $curso = Curso::updateOrCreate(
-                        ['codigo' => $cod . '-' . str_replace(' ', '', $grado->nombre)],
-                        ['nombre' => $nom, 'area' => $area, 'activo' => true]
-                    );
-                    $docente = $this->docentes[$docenteIdx % count($this->docentes)];
-                    $carga   = CargaAcademica::updateOrCreate(
-                        ['seccion_id' => $seccion->id, 'curso_id' => $curso->id, 'docente_id' => $docente->id],
-                        [
-                            'vigente_desde' => '2026-03-09',
-                            'activo'        => true,
-                            'asignado_por'  => $this->coordinadorUserId,
-                        ]
-                    );
-                    $this->cargas[] = $carga;
-                    $docenteIdx++;
-                }
-            }
-        }
-
         foreach ($gradosSec as $grado) {
             foreach ($grado->secciones as $seccion) {
                 foreach ($cursosSec as [$cod, $nom, $area]) {
                     $curso = Curso::updateOrCreate(
                         ['codigo' => $cod . '-' . str_replace(' ', '', $grado->nombre)],
-                        ['nombre' => $nom, 'area' => $area, 'activo' => true]
+                        ['grado_id' => $grado->id, 'nombre' => $nom, 'area' => $area, 'activo' => true]
                     );
                     $docente = $this->docentes[$docenteIdx % count($this->docentes)];
                     $carga   = CargaAcademica::updateOrCreate(
@@ -276,9 +251,6 @@ class DemoCompleteSeeder extends Seeder
         $nombresM = ['Alejandra', 'Brenda', 'Camila', 'Diana', 'Elena', 'Fernanda', 'Gabriela', 'Heidi', 'Iris', 'Juana'];
         $apellidos = ['Mamani', 'Quispe', 'Huanca', 'Condori', 'Flores', 'García', 'López', 'Torres', 'Pérez', 'Chávez'];
 
-        $dniBases    = [70200001, 70200030, 70200060, 70200090, 70200120, 70200150];
-        $padresDni   = [70300001, 70300030, 70300060, 70300090, 70300120, 70300150];
-
         $allSecciones = [];
         foreach (array_merge($gradosPrim, $gradosSec) as $grado) {
             foreach ($grado->secciones as $sec) {
@@ -291,14 +263,8 @@ class DemoCompleteSeeder extends Seeder
         foreach ($allSecciones as $secIdx => $seccion) {
             // 5 alumnos por sección
             for ($i = 0; $i < 5; $i++) {
-                $dniAlumno = str_pad($dniBases[$secIdx % count($dniBases)] + $i, 8, '0', STR_PAD_LEFT);
-                $dniPadre  = str_pad($padresDni[$secIdx % count($padresDni)] + $i, 8, '0', STR_PAD_LEFT);
-
-                // Evitar duplicados
-                if (Alumno::where('dni', $dniAlumno)->exists()) {
-                    $alumnoCounter++;
-                    continue;
-                }
+                $dniAlumno = str_pad(70200001 + $alumnoCounter, 8, '0', STR_PAD_LEFT);
+                $dniPadre  = str_pad(70300001 + $alumnoCounter, 8, '0', STR_PAD_LEFT);
 
                 $esVaron    = ($i % 2 === 0);
                 $nombre     = $esVaron ? $nombresV[$i % count($nombresV)] : $nombresM[$i % count($nombresM)];
@@ -308,17 +274,37 @@ class DemoCompleteSeeder extends Seeder
                 $emailAlumno = 'alumno' . str_pad($alumnoCounter + 1, 3, '0', STR_PAD_LEFT) . '@ciencias.test';
                 $userAlumno  = $this->demoUser($emailAlumno, "$nombre $apellido1 $apellido2", 'alumno');
 
-                $alumno = Alumno::create([
-                    'user_id'   => $userAlumno->id,
-                    'dni'       => $dniAlumno,
-                    'nombres'   => $nombre,
-                    'apellidos' => "$apellido1 $apellido2",
-                ]);
+                $alumno = Alumno::where('dni', $dniAlumno)->orWhere('user_id', $userAlumno->id)->first();
+                if ($alumno) {
+                    $alumno->update([
+                        'user_id'   => $userAlumno->id,
+                        'dni'       => $dniAlumno,
+                        'nombres'   => $nombre,
+                        'apellidos' => "$apellido1 $apellido2",
+                    ]);
+                } else {
+                    $alumno = Alumno::create([
+                        'user_id'   => $userAlumno->id,
+                        'dni'       => $dniAlumno,
+                        'nombres'   => $nombre,
+                        'apellidos' => "$apellido1 $apellido2",
+                    ]);
+                }
 
                 // Padre/madre
-                if (!Padre::where('dni', $dniPadre)->exists()) {
-                    $emailPadre = 'padre' . str_pad($alumnoCounter + 1, 3, '0', STR_PAD_LEFT) . '@ciencias.test';
-                    $userPadre  = $this->demoUser($emailPadre, "Padre de $nombre $apellido1", 'padre');
+                $emailPadre = 'padre' . str_pad($alumnoCounter + 1, 3, '0', STR_PAD_LEFT) . '@ciencias.test';
+                $userPadre  = $this->demoUser($emailPadre, "Padre de $nombre $apellido1", 'padre');
+                $padre = Padre::where('dni', $dniPadre)->orWhere('user_id', $userPadre->id)->first();
+                if ($padre) {
+                    $padre->update([
+                        'user_id'               => $userPadre->id,
+                        'dni'                   => $dniPadre,
+                        'nombres'               => 'Juan',
+                        'apellidos'             => $apellido1,
+                        'celular'               => '9' . str_pad($alumnoCounter + 1, 8, '0', STR_PAD_LEFT),
+                        'correo_notificaciones' => $emailPadre,
+                    ]);
+                } else {
                     $padre = Padre::create([
                         'user_id'               => $userPadre->id,
                         'dni'                   => $dniPadre,
@@ -327,7 +313,9 @@ class DemoCompleteSeeder extends Seeder
                         'celular'               => '9' . str_pad($alumnoCounter + 1, 8, '0', STR_PAD_LEFT),
                         'correo_notificaciones' => $emailPadre,
                     ]);
+                }
 
+                if (!DB::table('alumno_padre')->where('alumno_id', $alumno->id)->where('padre_id', $padre->id)->exists()) {
                     DB::table('alumno_padre')->insert([
                         'id'                   => (string) Str::uuid(),
                         'alumno_id'            => $alumno->id,
@@ -336,12 +324,11 @@ class DemoCompleteSeeder extends Seeder
                         'es_contacto_principal' => true,
                         'recibe_notificaciones' => true,
                     ]);
-
-                    $this->padres[] = $padre;
                 }
+                $this->padres[] = $padre;
 
                 // Matrícula
-                $codigoMat = 'MAT-2026-' . str_pad($alumnoCounter + 1, 5, '0', STR_PAD_LEFT);
+                $codigoMat = 'MAT-2026-' . substr(str_replace('-', '', $seccion->id), -8) . '-' . str_pad($i + 1, 2, '0', STR_PAD_LEFT);
                 $matricula = Matricula::updateOrCreate(
                     ['alumno_id' => $alumno->id, 'seccion_id' => $seccion->id],
                     [
@@ -350,6 +337,12 @@ class DemoCompleteSeeder extends Seeder
                         'estado'         => 'activo',
                         'registrado_por' => $this->coordinadorUserId,
                     ]
+                );
+                $matricula->cargasAcademicas()->sync(
+                    CargaAcademica::where('seccion_id', $seccion->id)
+                        ->where('activo', true)
+                        ->pluck('id')
+                        ->all()
                 );
 
                 $this->alumnos[]    = $alumno;
@@ -529,7 +522,7 @@ class DemoCompleteSeeder extends Seeder
             ['evento',      'Día del Maestro',                    '2026-07-06 08:00:00', '2026-07-06 17:00:00'],
             ['no_laboral',  'Fiestas Patrias',                    '2026-07-28 00:00:00', '2026-07-29 23:59:00'],
             ['examen',      'Examen Bimestral I',                  '2026-05-15 08:00:00', '2026-05-15 12:00:00'],
-            ['simulacro',   'Simulacro ECE Primaria',              '2026-09-05 08:00:00', '2026-09-05 13:00:00'],
+            ['simulacro',   'Simulacro ECE Secundaria',            '2026-09-05 08:00:00', '2026-09-05 13:00:00'],
             ['evento',      'Día de la Familia',                   '2026-08-20 09:00:00', '2026-08-20 16:00:00'],
             ['examen',      'Examen Bimestral II',                 '2026-07-10 08:00:00', '2026-07-10 12:00:00'],
             ['no_laboral',  'Navidad',                             '2026-12-25 00:00:00', '2026-12-25 23:59:00'],

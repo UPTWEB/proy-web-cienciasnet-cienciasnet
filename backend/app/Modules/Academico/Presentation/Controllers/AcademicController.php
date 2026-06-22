@@ -70,6 +70,14 @@ class AcademicController extends Controller
         return $this->resource($academicPeriod);
     }
 
+    public function destroyPeriod(string $academicPeriodId): JsonResponse
+    {
+        $academicPeriod = PeriodoAcademico::findOrFail($academicPeriodId);
+        $academicPeriod->delete();
+
+        return response()->json([], 204);
+    }
+
     public function grades(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
@@ -81,6 +89,10 @@ class AcademicController extends Controller
     {
         $periodId = $request->input('academic_period_id') ?? PeriodoAcademico::query()->latest('fecha_inicio')->value('id');
         throw_if(! $periodId, ValidationException::withMessages(['academic_period_id' => ['Debe existir un periodo académico.']]));
+
+        if (Grado::where('periodo_academico_id', $periodId)->where('nombre', $request->string('name'))->exists()) {
+            throw ValidationException::withMessages(['name' => ['Ya existe un grado con ese nombre en el periodo seleccionado.']]);
+        }
 
         return $this->created(Grado::create([
             'periodo_academico_id' => $periodId, 'nombre' => $request->string('name'),
@@ -103,6 +115,11 @@ class AcademicController extends Controller
         }
         if ($request->has('academic_period_id')) {
             $data['periodo_academico_id'] = $request->string('academic_period_id');
+        }
+        $periodId = $data['periodo_academico_id'] ?? $grade->periodo_academico_id;
+        $name = $data['nombre'] ?? $grade->nombre;
+        if (Grado::where('periodo_academico_id', $periodId)->where('nombre', $name)->whereKeyNot($grade->id)->exists()) {
+            throw ValidationException::withMessages(['name' => ['Ya existe un grado con ese nombre en el periodo seleccionado.']]);
         }
         $grade->update($data);
 
@@ -128,6 +145,10 @@ class AcademicController extends Controller
 
     public function storeSection(AcademicEntityRequest $request): JsonResponse
     {
+        if (Seccion::where('grado_id', $request->string('grade_id'))->where('nombre', $request->string('name'))->exists()) {
+            throw ValidationException::withMessages(['name' => ['Ya existe una seccion con ese nombre para el grado seleccionado.']]);
+        }
+
         return $this->created(Seccion::create([
             'grado_id' => $request->string('grade_id'), 'nombre' => $request->string('name'),
             'capacidad' => $request->integer('capacity'), 'turno' => 'manana', 'activo' => true,
@@ -147,6 +168,11 @@ class AcademicController extends Controller
         if ($request->has('capacity')) {
             $data['capacidad'] = $request->integer('capacity');
         }
+        $gradeId = $data['grado_id'] ?? $section->grado_id;
+        $name = $data['nombre'] ?? $section->nombre;
+        if (Seccion::where('grado_id', $gradeId)->where('nombre', $name)->whereKeyNot($section->id)->exists()) {
+            throw ValidationException::withMessages(['name' => ['Ya existe una seccion con ese nombre para el grado seleccionado.']]);
+        }
         $section->update($data);
 
         return $this->resource($section);
@@ -165,6 +191,7 @@ class AcademicController extends Controller
         Gate::authorize('viewAny', PeriodoAcademico::class);
         $query = Curso::query()->orderBy('nombre');
         $query->when($request->filled('search'), fn ($q) => $q->where('nombre', 'like', '%'.$request->string('search').'%'));
+        $query->when($request->filled('grade_id'), fn ($q) => $q->where('grado_id', $request->string('grade_id')));
 
         return AcademicResource::collection($query->paginate($this->perPage($request)));
     }
@@ -172,7 +199,7 @@ class AcademicController extends Controller
     public function storeCourse(AcademicEntityRequest $request): JsonResponse
     {
         return $this->created(Curso::create([
-            'codigo' => $request->string('code'), 'nombre' => $request->string('name'),
+            'grado_id' => $request->input('grade_id'), 'codigo' => $request->string('code'), 'nombre' => $request->string('name'),
             'descripcion' => $request->input('description'), 'activo' => true,
         ]));
     }
@@ -186,6 +213,9 @@ class AcademicController extends Controller
         }
         if ($request->has('name')) {
             $data['nombre'] = $request->string('name');
+        }
+        if ($request->has('grade_id')) {
+            $data['grado_id'] = $request->string('grade_id');
         }
         if ($request->has('description')) {
             $data['descripcion'] = $request->input('description');
@@ -206,8 +236,10 @@ class AcademicController extends Controller
     public function enrollments(Request $request)
     {
         Gate::authorize('viewAny', PeriodoAcademico::class);
-        $query = Matricula::query()->with(['seccion.grado.periodoAcademico', 'alumno']);
+        $query = Matricula::query()->with(['seccion.grado.periodoAcademico', 'alumno', 'cargasAcademicas.curso', 'cargasAcademicas.docente']);
         $query->when($request->filled('student_id'), fn ($q) => $q->where('alumno_id', $request->string('student_id')));
+        $query->when($request->filled('section_id'), fn ($q) => $q->where('seccion_id', $request->string('section_id')));
+        $query->when($request->filled('grade_id'), fn ($q) => $q->whereHas('seccion', fn ($section) => $section->where('grado_id', $request->string('grade_id'))));
 
         return AcademicResource::collection($query->paginate($this->perPage($request)));
     }
@@ -219,11 +251,22 @@ class AcademicController extends Controller
             throw ValidationException::withMessages(['academic_period_id' => ['No corresponde a la sección seleccionada.']]);
         }
 
-        return $this->created(DB::transaction(fn () => Matricula::create([
-            'alumno_id' => $request->string('student_id'), 'seccion_id' => $section->id,
-            'codigo' => 'MAT-'.now()->format('Y').'-'.Str::upper(Str::random(8)),
-            'fecha' => $request->date('enrolled_at', now()), 'estado' => 'activo', 'registrado_por' => $request->user()->id,
-        ]))->load(['seccion.grado.periodoAcademico', 'alumno']));
+        if (Matricula::where('alumno_id', $request->string('student_id'))->where('seccion_id', $section->id)->where('estado', 'activo')->exists()) {
+            throw ValidationException::withMessages(['student_id' => ['El alumno ya tiene una matricula activa en esta seccion. Usa Ver detalles para ajustar sus cursos.']]);
+        }
+
+        $enrollment = DB::transaction(function () use ($request, $section) {
+            $enrollment = Matricula::create([
+                'alumno_id' => $request->string('student_id'), 'seccion_id' => $section->id,
+                'codigo' => 'MAT-'.now()->format('Y').'-'.Str::upper(Str::random(8)),
+                'fecha' => $request->date('enrolled_at', now()), 'estado' => 'activo', 'registrado_por' => $request->user()->id,
+            ]);
+            $this->syncEnrollmentLoads($enrollment, $section, $request->input('course_ids', []));
+
+            return $enrollment;
+        });
+
+        return $this->created($enrollment->load(['seccion.grado.periodoAcademico', 'alumno', 'cargasAcademicas.curso', 'cargasAcademicas.docente']));
     }
 
     public function updateEnrollment(AcademicEntityRequest $request, string $id): JsonResponse
@@ -237,9 +280,20 @@ class AcademicController extends Controller
             }
             $data['seccion_id'] = $section->id;
         }
-        $enrollment->update($data);
+        DB::transaction(function () use ($request, $enrollment, $data): void {
+            if ($data !== []) {
+                if (Matricula::where('alumno_id', $enrollment->alumno_id)->where('seccion_id', $data['seccion_id'])->where('estado', 'activo')->whereKeyNot($enrollment->id)->exists()) {
+                    throw ValidationException::withMessages(['section_id' => ['El alumno ya tiene una matricula activa en esta seccion.']]);
+                }
+                $enrollment->update($data);
+            }
+            if ($request->has('course_ids')) {
+                $enrollment->refresh()->load('seccion.grado');
+                $this->syncEnrollmentLoads($enrollment, $enrollment->seccion, $request->input('course_ids', []));
+            }
+        });
 
-        return $this->resource($enrollment);
+        return $this->resource($enrollment->load(['seccion.grado.periodoAcademico', 'alumno', 'cargasAcademicas.curso', 'cargasAcademicas.docente']));
     }
 
     public function destroyEnrollment(string $id): JsonResponse
@@ -313,6 +367,25 @@ class AcademicController extends Controller
     private function created(object $model): JsonResponse
     {
         return response()->json(['data' => new AcademicResource($model)], 201);
+    }
+
+    /**
+     * @param  array<int, string>  $courseIds
+     */
+    private function syncEnrollmentLoads(Matricula $enrollment, Seccion $section, array $courseIds): void
+    {
+        $loadIds = CargaAcademica::query()
+            ->where('seccion_id', $section->id)
+            ->where('activo', true)
+            ->when($courseIds !== [], fn ($query) => $query->whereIn('curso_id', $courseIds))
+            ->pluck('id')
+            ->all();
+
+        if ($courseIds !== [] && count($loadIds) !== count(array_unique($courseIds))) {
+            throw ValidationException::withMessages(['course_ids' => ['Uno o mas cursos no pertenecen a la seccion seleccionada.']]);
+        }
+
+        $enrollment->cargasAcademicas()->sync($loadIds);
     }
 
     private function statusToDatabase(string $status): string

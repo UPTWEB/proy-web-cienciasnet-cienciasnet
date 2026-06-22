@@ -40,6 +40,7 @@ class AcademicEntityRequest extends FormRequest
                 'capacity' => ['required', 'integer', 'min:1'],
             ],
             'api.v1.courses.store' => [
+                'grade_id' => ['required', 'uuid', 'exists:grados,id'],
                 'code' => ['required', 'string', 'max:30', 'unique:cursos,codigo'],
                 'name' => ['required', 'string', 'max:150'],
                 'description' => ['sometimes', 'string', 'max:1000'],
@@ -49,6 +50,8 @@ class AcademicEntityRequest extends FormRequest
                 'section_id' => ['required', 'uuid', 'exists:secciones,id'],
                 'academic_period_id' => ['required', 'uuid', 'exists:periodos_academicos,id'],
                 'enrolled_at' => ['sometimes', 'date'],
+                'course_ids' => ['sometimes', 'array'],
+                'course_ids.*' => ['uuid', 'exists:cursos,id'],
             ],
             'api.v1.teaching-assignments.store' => [
                 'teacher_id' => ['required', 'uuid', 'exists:docentes,id'],
