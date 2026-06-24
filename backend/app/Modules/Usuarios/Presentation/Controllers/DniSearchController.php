@@ -15,39 +15,25 @@ class DniSearchController extends Controller
 {
     public function searchStudents(Request $request): JsonResponse
     {
-        Gate::authorize('manage', User::class);
+        Gate::authorize('lookupAcademic', User::class);
         $request->validate([
             'dni' => ['nullable', 'string'],
             'search' => ['nullable', 'string', 'min:3'],
         ]);
 
-        if ($request->filled('search')) {
-            $term = trim($request->string('search')->toString());
-            $students = Alumno::query()
-                ->with('user')
-                ->where(function ($query) use ($term): void {
-                    $query->where('dni', 'like', '%'.$term.'%')
-                        ->orWhere('nombres', 'like', '%'.$term.'%')
-                        ->orWhere('apellidos', 'like', '%'.$term.'%')
-                        ->orWhereHas('user', fn ($inner) => $inner->where('name', 'like', '%'.$term.'%'));
-                })
-                ->orderBy('apellidos')
-                ->limit(10)
-                ->get()
-                ->map(fn (Alumno $alumno): array => [
-                    'id' => $alumno->id,
-                    'user_id' => $alumno->user_id,
-                    'dni' => $alumno->dni,
-                    'name' => trim($alumno->nombres.' '.$alumno->apellidos),
-                ])
-                ->values();
+        $query = Alumno::query()->with('user');
+        $query->when($request->filled('dni'), fn ($q) => $q->where('dni', $request->query('dni')));
+        $query->when($request->filled('search'), function ($q) use ($request): void {
+            $term = '%'.trim($request->string('search')->toString()).'%';
+            $q->where(function ($inner) use ($term): void {
+                $inner->where('dni', 'like', $term)
+                    ->orWhere('nombres', 'like', $term)
+                    ->orWhere('apellidos', 'like', $term)
+                    ->orWhereHas('user', fn ($userQuery) => $userQuery->where('name', 'like', $term));
+            });
+        });
 
-            return response()->json(['data' => $students]);
-        }
-
-        $request->validate(['dni' => 'required|string']);
-
-        $students = $query->limit(20)->get();
+        $students = $query->orderBy('apellidos')->limit(20)->get();
         if ($request->filled('dni') && $students->isEmpty()) {
             return response()->json(['data' => null], 404);
         }

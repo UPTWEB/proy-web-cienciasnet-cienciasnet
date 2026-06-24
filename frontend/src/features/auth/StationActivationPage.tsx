@@ -9,7 +9,7 @@ import { getApiError } from '@/lib/api/client'
 
 const schema = z.object({
   device_name: z.string().min(1, 'Ingresa el nombre de este dispositivo.'),
-  activation_code: z.string().min(1, 'Ingresa el codigo de activacion de un solo uso.'),
+  activation_code: z.string().min(1, 'Ingresa el código de activación de un solo uso.'),
 })
 
 type ActivationValues = z.infer<typeof schema>
@@ -44,15 +44,15 @@ export function StationActivationPage() {
       </div>
 
       <p className="eyebrow text-[10px] tracking-widest font-bold text-indigo-400 uppercase">
-        Contexto Tecnico Seguro
+        Contexto Técnico Seguro
       </p>
 
       <h1 id="activation-title" className="text-2xl font-extrabold text-white tracking-tight mt-2.5 mb-1.5">
-        Activar Estacion
+        Activar Estación
       </h1>
 
       <p className="text-xs text-slate-400 mb-6 max-w-sm leading-relaxed">
-        Ingresa el codigo temporal generado desde Biometria y Dispositivos. Esta pantalla no usa codigos simulados.
+        Ingresa el código temporal generado desde Biometría y Dispositivos. Esta pantalla no usa códigos simulados.
       </p>
 
       <form onSubmit={submit} className="auth-form w-full text-left relative z-10 space-y-4">
@@ -72,10 +72,10 @@ export function StationActivationPage() {
         )}
 
         <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-300 mt-3">
-          <span className="flex items-center gap-1.5"><Key size={14} className="text-indigo-400" /> Codigo de activacion</span>
+          <span className="flex items-center gap-1.5"><Key size={14} className="text-indigo-400" /> Código de activación</span>
           <input
             type="text"
-            placeholder="Ingresa el codigo generado por el administrador"
+            placeholder="Ingresa el código generado por el administrador"
             className="glass-input w-full px-3.5 py-2.5 rounded-xl text-sm text-white focus:outline-none"
             {...form.register('activation_code')}
           />
