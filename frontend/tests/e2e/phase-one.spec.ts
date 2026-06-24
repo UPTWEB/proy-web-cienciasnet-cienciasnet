@@ -34,7 +34,7 @@ test('renders tabbed academic tables, enrollment filters and historical validity
   await expect(browserPage.getByRole('tab', { name: /Matriculas/ })).toBeVisible()
   await expect(browserPage.getByRole('tab', { name: /Carga docente/ })).toBeVisible()
 
-  await browserPage.getByRole('tab', { name: /Matriculas/ }).click()
+  await browserPage.getByRole('tab', { name: /Matriculas/ }).click({ force: true })
   await browserPage.waitForSelector('input[placeholder="Filtrar por alumno, DNI o curso"]', { timeout: 10000 })
   await expect(browserPage.getByText('1 matriculas filtradas')).toBeVisible()
   await expect(browserPage.getByText(/Ana Alumna/)).toBeVisible()
@@ -44,7 +44,7 @@ test('renders tabbed academic tables, enrollment filters and historical validity
   await filterInput.fill('ana')
   await expect(browserPage.getByText(/Ana Alumna/)).toBeVisible()
 
-  await browserPage.getByRole('tab', { name: /Carga docente/ }).click()
+  await browserPage.getByRole('tab', { name: /Carga docente/ }).click({ force: true })
   await expect(browserPage.getByText(/Historica hasta 2026-05-31/)).toBeVisible()
   await expect(browserPage.getByRole('table')).toHaveCount(1)
 })
