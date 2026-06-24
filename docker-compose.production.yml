@@ -121,6 +121,16 @@ services:
       api:
         condition: service_healthy
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    depends_on:
+      - frontend
+    env_file: .env
+    command: tunnel run
+    restart: always
+    networks: [private, public]
+
   backup:
     image: postgres:16-alpine
     profiles: [operations]
