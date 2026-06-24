@@ -14,7 +14,7 @@ async function mockPhaseOne(pageInstance: Page, user = superadmin) {
   await pageInstance.route('**/api/v1/grades**', route => route.fulfill({ json: page([{ id: 'grade-1', name: 'Tercero', level: 'secundaria' }]) }))
   await pageInstance.route('**/api/v1/sections**', route => route.fulfill({ json: page([{ id: 'section-1', name: 'A', grade_id: 'grade-1' }]) }))
   await pageInstance.route('**/api/v1/courses**', route => route.fulfill({ json: page([{ id: 'course-1', name: 'Matematica', code: 'MAT', grade_id: 'grade-1' }]) }))
-  await pageInstance.route('**/api/v1/enrollments**', route => route.fulfill({ json: page([{ id: 'enrollment-1', student_id: 'student-1', section_id: 'section-1', academic_period_id: 'period-1' }]) }))
+  await pageInstance.route('**/api/v1/enrollments**', route => route.fulfill({ json: page([{ id: 'enrollment-1', student_id: 'student-1', student_name: 'Ana Alumna', section_id: 'section-1', section_name: 'A', academic_period_id: 'period-1', grade_name: 'Tercero', grade_id: 'grade-1' }]) }))
   await pageInstance.route('**/api/v1/teaching-assignments**', route => route.fulfill({ json: page([{ id: 'assignment-1', teacher_id: 'teacher-1', course_id: 'course-1', section_id: 'section-1', active: false, valid_until: '2026-05-31' }]) }))
 }
 
@@ -36,9 +36,9 @@ test('renders tabbed academic tables, enrollment filters and historical validity
 
   await browserPage.getByRole('tab', { name: /Matriculas/ }).click()
   await expect(browserPage.getByText('1 matriculas filtradas')).toBeVisible()
-  await expect(browserPage.getByText(/Alumno: Ana Alumna/)).toBeVisible()
+  await expect(browserPage.getByText(/Ana Alumna/)).toBeVisible()
   await browserPage.getByPlaceholder('Filtrar por nombre, DNI, correo o codigo').fill('ana')
-  await expect(browserPage.getByText(/Alumno: Ana Alumna/)).toBeVisible()
+  await expect(browserPage.getByText(/Ana Alumna/)).toBeVisible()
 
   await browserPage.getByRole('tab', { name: /Carga docente/ }).click()
   await expect(browserPage.getByText(/Historica hasta 2026-05-31/)).toBeVisible()
