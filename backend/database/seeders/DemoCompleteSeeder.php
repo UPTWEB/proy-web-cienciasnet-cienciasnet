@@ -107,17 +107,17 @@ class DemoCompleteSeeder extends Seeder
         $coordinator = $this->demoUser('coordinador@ciencias.test', 'María Elena Torres Vásquez', 'coordinador_academico');
         $this->coordinadorUserId = $coordinator->id;
 
-        $this->demoUser('superadmin@ciencias.test',    'Carlos Ramos Herrera',         'superadmin');
-        $this->demoUser('gestor@ciencias.test',         'Ana Lucía Mendoza Paredes',    'gestor_usuarios');
+        $this->demoUser('superadmin@ciencias.test', 'Carlos Ramos Herrera', 'superadmin');
+        $this->demoUser('gestor@ciencias.test', 'Ana Lucía Mendoza Paredes', 'gestor_usuarios');
 
-        $toe = $this->demoUser('toe@ciencias.test',    'Rosa Isabel Flores Quispe',    'toe');
-        $this->demoUser('psicologia@ciencias.test',    'Silvia Patricia Rojas Llanos', 'psicologia');
+        $toe = $this->demoUser('toe@ciencias.test', 'Rosa Isabel Flores Quispe', 'toe');
+        $this->demoUser('psicologia@ciencias.test', 'Silvia Patricia Rojas Llanos', 'psicologia');
         $this->psicologiaUserId = User::where('email', 'psicologia@ciencias.test')->first()->id;
 
         $aux = $this->demoUser('auxiliar@ciencias.test', 'Pedro Antonio Salinas Cruz', 'auxiliar');
         $this->auxiliarUserId = $aux->id;
 
-        $this->demoUser('administrativo@ciencias.test', 'Jorge Luis Huanca Mamani',    'administrativo');
+        $this->demoUser('administrativo@ciencias.test', 'Jorge Luis Huanca Mamani', 'administrativo');
     }
 
     // =========================================================================
@@ -191,12 +191,12 @@ class DemoCompleteSeeder extends Seeder
     private function seedDocentes(): void
     {
         $docentesData = [
-            ['70100001', 'Roberto',  'Quispe Mamani',   '987654321', 'docente1@ciencias.test'],
-            ['70100002', 'Carmen',   'Reyes Atahuaman', '987654322', 'docente2@ciencias.test'],
-            ['70100003', 'Luis',     'Ccori Huanca',    '987654323', 'docente3@ciencias.test'],
-            ['70100004', 'Patricia', 'Vargas Condori',  '987654324', 'docente4@ciencias.test'],
-            ['70100005', 'Miguel',   'Apaza Huayta',    '987654325', 'docente5@ciencias.test'],
-            ['70100006', 'Sandra',   'Lazo Cutipa',     '987654326', 'docente6@ciencias.test'],
+            ['70100001', 'Roberto', 'Quispe Mamani', '987654321', 'docente1@ciencias.test'],
+            ['70100002', 'Carmen', 'Reyes Atahuaman', '987654322', 'docente2@ciencias.test'],
+            ['70100003', 'Luis', 'Ccori Huanca', '987654323', 'docente3@ciencias.test'],
+            ['70100004', 'Patricia', 'Vargas Condori', '987654324', 'docente4@ciencias.test'],
+            ['70100005', 'Miguel', 'Apaza Huayta', '987654325', 'docente5@ciencias.test'],
+            ['70100006', 'Sandra', 'Lazo Cutipa', '987654326', 'docente6@ciencias.test'],
         ];
 
         foreach ($docentesData as [$dni, $nombres, $apellidos, $tel, $email]) {
@@ -215,11 +215,11 @@ class DemoCompleteSeeder extends Seeder
     private function seedCursosYCarga(array $gradosPrim, array $gradosSec): void
     {
         $cursosSec = [
-            ['MAT-S', 'Matemática',    'Ciencias'],
-            ['COM-S', 'Comunicación',  'Letras'],
-            ['CTA-S', 'CTA',           'Ciencias'],
+            ['MAT-S', 'Matemática', 'Ciencias'],
+            ['COM-S', 'Comunicación', 'Letras'],
+            ['CTA-S', 'CTA', 'Ciencias'],
             ['HGE-S', 'Historia, Geografía y Economía', 'Letras'],
-            ['ING-S', 'Inglés',        'Idiomas'],
+            ['ING-S', 'Inglés', 'Idiomas'],
             ['FCC-S', 'Formación Ciudadana', 'Humanidades'],
         ];
 
@@ -526,14 +526,14 @@ class DemoCompleteSeeder extends Seeder
     private function seedEventosCalendario(PeriodoAcademico $period): void
     {
         $eventos = [
-            ['evento',      'Día del Maestro',                    '2026-07-06 08:00:00', '2026-07-06 17:00:00'],
-            ['no_laboral',  'Fiestas Patrias',                    '2026-07-28 00:00:00', '2026-07-29 23:59:00'],
-            ['examen',      'Examen Bimestral I',                  '2026-05-15 08:00:00', '2026-05-15 12:00:00'],
-            ['simulacro',   'Simulacro ECE Secundaria',            '2026-09-05 08:00:00', '2026-09-05 13:00:00'],
-            ['evento',      'Día de la Familia',                   '2026-08-20 09:00:00', '2026-08-20 16:00:00'],
-            ['examen',      'Examen Bimestral II',                 '2026-07-10 08:00:00', '2026-07-10 12:00:00'],
-            ['no_laboral',  'Navidad',                             '2026-12-25 00:00:00', '2026-12-25 23:59:00'],
-            ['evento',      'Ceremonia de Clausura 2026',          '2026-12-18 09:00:00', '2026-12-18 13:00:00'],
+            ['evento', 'Día del Maestro', '2026-07-06 08:00:00', '2026-07-06 17:00:00'],
+            ['no_laboral', 'Fiestas Patrias', '2026-07-28 00:00:00', '2026-07-29 23:59:00'],
+            ['examen', 'Examen Bimestral I', '2026-05-15 08:00:00', '2026-05-15 12:00:00'],
+            ['simulacro', 'Simulacro ECE Secundaria', '2026-09-05 08:00:00', '2026-09-05 13:00:00'],
+            ['evento', 'Día de la Familia', '2026-08-20 09:00:00', '2026-08-20 16:00:00'],
+            ['examen', 'Examen Bimestral II', '2026-07-10 08:00:00', '2026-07-10 12:00:00'],
+            ['no_laboral', 'Navidad', '2026-12-25 00:00:00', '2026-12-25 23:59:00'],
+            ['evento', 'Ceremonia de Clausura 2026', '2026-12-18 09:00:00', '2026-12-18 13:00:00'],
         ];
 
         foreach ($eventos as [$tipo, $titulo, $inicio, $fin]) {
@@ -635,12 +635,12 @@ class DemoCompleteSeeder extends Seeder
 
         // Conceptos de pago
         $conceptos = [
-            ['Matrícula 2026',              'matricula',   400.00, null,  2026, null],
-            ['Mensualidad Marzo 2026',       'mensualidad', 350.00, 20.00, 2026, 3],
-            ['Mensualidad Abril 2026',       'mensualidad', 350.00, 20.00, 2026, 4],
-            ['Mensualidad Mayo 2026',        'mensualidad', 350.00, 20.00, 2026, 5],
-            ['Mensualidad Junio 2026',       'mensualidad', 350.00, 20.00, 2026, 6],
-            ['Mensualidad Julio 2026',       'mensualidad', 350.00, 20.00, 2026, 7],
+            ['Matrícula 2026', 'matricula', 400.00, null, 2026, null],
+            ['Mensualidad Marzo 2026', 'mensualidad', 350.00, 20.00, 2026, 3],
+            ['Mensualidad Abril 2026', 'mensualidad', 350.00, 20.00, 2026, 4],
+            ['Mensualidad Mayo 2026', 'mensualidad', 350.00, 20.00, 2026, 5],
+            ['Mensualidad Junio 2026', 'mensualidad', 350.00, 20.00, 2026, 6],
+            ['Mensualidad Julio 2026', 'mensualidad', 350.00, 20.00, 2026, 7],
         ];
 
         $conceptoIds = [];
