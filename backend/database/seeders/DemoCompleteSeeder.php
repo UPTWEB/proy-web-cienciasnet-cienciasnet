@@ -278,7 +278,7 @@ class DemoCompleteSeeder extends Seeder
                 $apellido1  = $apellidos[($secIdx + $i) % count($apellidos)];
                 $apellido2  = $apellidos[($secIdx + $i + 1) % count($apellidos)];
 
-                $emailAlumno = 'alumno' . str_pad($alumnoCounter + 1, 3, '0', STR_PAD_LEFT) . '@ciencias.test';
+                $emailAlumno = sprintf('alumno%03d@ciencias.test', $alumnoCounter + 1);
                 $userAlumno  = $this->demoUser($emailAlumno, "$nombre $apellido1 $apellido2", 'alumno');
 
                 $alumno = Alumno::where('dni', $dniAlumno)->orWhere('user_id', $userAlumno->id)->first();
@@ -299,7 +299,7 @@ class DemoCompleteSeeder extends Seeder
                 }
 
                 // Padre/madre
-                $emailPadre = 'padre' . str_pad($alumnoCounter + 1, 3, '0', STR_PAD_LEFT) . '@ciencias.test';
+                $emailPadre = sprintf('padre%03d@ciencias.test', $alumnoCounter + 1);
                 $userPadre  = $this->demoUser($emailPadre, "Padre de $nombre $apellido1", 'padre');
                 $padre = Padre::where('dni', $dniPadre)->orWhere('user_id', $userPadre->id)->first();
                 if ($padre) {
@@ -335,7 +335,11 @@ class DemoCompleteSeeder extends Seeder
                 $this->padres[] = $padre;
 
                 // Matrícula
-                $codigoMat = 'MAT-2026-' . substr(str_replace('-', '', $seccion->id), -8) . '-' . str_pad($i + 1, 2, '0', STR_PAD_LEFT);
+                $codigoMat = sprintf(
+                    'MAT-2026-%s-%s',
+                    substr(str_replace('-', '', $seccion->id), -8),
+                    str_pad($i + 1, 2, '0', STR_PAD_LEFT)
+                );
                 $matricula = Matricula::updateOrCreate(
                     ['alumno_id' => $alumno->id, 'seccion_id' => $seccion->id],
                     [
@@ -717,7 +721,7 @@ class DemoCompleteSeeder extends Seeder
                 ]);
 
                 if ($pagado) {
-                    $recibo = 'REC-' . strtoupper(Str::random(8));
+                    $recibo = sprintf('REC-%s', strtoupper(Str::random(8)));
                     DB::table('movimientos_pago')->insert([
                         'id'                => (string) Str::uuid(),
                         'obligacion_pago_id' => $oblId,
