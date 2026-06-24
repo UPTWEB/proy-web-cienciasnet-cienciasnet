@@ -20,8 +20,7 @@ services:
       context: ./backend
       target: production
     restart: unless-stopped
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     environment: &backend-environment
       DB_CONNECTION: pgsql
       DB_HOST: db
@@ -67,8 +66,7 @@ services:
       context: ./backend
       target: production
     restart: unless-stopped
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     environment:
       <<: *backend-environment
       RUN_MIGRATIONS: "false"
@@ -86,8 +84,7 @@ services:
       context: ./backend
       target: production
     restart: unless-stopped
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     environment:
       <<: *backend-environment
       RUN_MIGRATIONS: "false"
@@ -103,8 +100,7 @@ services:
   facial-api:
     build: ./facial-service
     restart: unless-stopped
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     networks: [private]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
@@ -117,8 +113,7 @@ services:
       context: ./frontend
       target: serve
     restart: unless-stopped
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     ports:
       - "127.0.0.1:${FRONTEND_PORT:-8080}:80"
     networks: [public]
@@ -129,8 +124,7 @@ services:
   backup:
     image: postgres:16-alpine
     profiles: [operations]
-    env_file:
-      - ${CIENCIASNET_ENV_FILE:-/etc/cienciasnet/production.env}
+    env_file: .env
     volumes:
       - backend_storage:/var/lib/cienciasnet/private:ro
       - ${BACKUP_ROOT:-/backups/cienciasnet}:/backups
