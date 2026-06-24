@@ -41,14 +41,21 @@ class DemoCompleteSeeder extends Seeder
     // -------------------------------------------------------------------------
     // Datos maestros para referencias rápidas
     // -------------------------------------------------------------------------
-    private array $docentes  = [];
-    private array $alumnos   = [];
-    private array $padres    = [];
+    private array $docentes = [];
+
+    private array $alumnos = [];
+
+    private array $padres = [];
+
     private array $matriculas = [];
-    private array $cargas    = [];
+
+    private array $cargas = [];
+
     private ?string $coordinadorUserId = null;
-    private ?string $auxiliarUserId    = null;
-    private ?string $psicologiaUserId  = null;
+
+    private ?string $auxiliarUserId = null;
+
+    private ?string $psicologiaUserId = null;
 
     public function run(): void
     {
