@@ -47,7 +47,12 @@ RUN composer install --no-dev --no-interaction --optimize-autoloader \
 RUN mkdir -p storage/app/public/fotos \
     storage/app/public/separatas \
     storage/app/public/comprobantes \
-    storage/app/public/temp
+    storage/app/public/temp \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 

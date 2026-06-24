@@ -56,7 +56,7 @@ services:
       backend:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost/up"]
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/health"]
       interval: 30s
       timeout: 5s
       retries: 6
@@ -115,17 +115,23 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - "127.0.0.1:${FRONTEND_PORT:-8080}:80"
+      - "${FRONTEND_BIND_HOST:-127.0.0.1}:${FRONTEND_PORT:-8080}:80"
     networks: [public]
     depends_on:
       api:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 6
 
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
     depends_on:
-      - frontend
+      frontend:
+        condition: service_healthy
     env_file: .env
     command: tunnel run
     restart: always
