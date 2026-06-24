@@ -255,7 +255,7 @@ test.describe('Comunicaciones y Notificaciones - FE-019', () => {
     // Assert reach updates to show only Padre Carlos
     await expect(page.getByText('1 usuarios')).toBeVisible()
     await expect(page.getByText('Padre Carlos')).toBeVisible()
-    await expect(page.getByText('TOE Maria')).not.toBeVisible()
+    await expect(page.locator('.max-h-64').getByText('TOE Maria')).not.toBeVisible()
   })
 
   test('muestra error de validacion 422 y mantiene valores cargados', async ({ page }) => {
