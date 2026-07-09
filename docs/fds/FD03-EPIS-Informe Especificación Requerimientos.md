@@ -42,10 +42,11 @@ Informe de Especificación de Requerimientos
 
 Versión *1.0*
 
-| CONTROL DE VERSIONES |                     |              |                    |            |                  |
-|:--------------------:|:--------------------|:-------------|:-------------------|:-----------|:-----------------|
-|       Versión        | Hecha por           | Revisada por | Aprobada por       | Fecha      | Motivo           |
-|         1.0          | KZM, JVE, FYG, ACV, VLN | KZM, JVE, FYG, ACV, VLN | T. Ale Nieto | 2026-07-07 | Versión inicial |
+### Control de Versiones
+
+| Versión | Hecha por               | Revisada por            | Aprobada por | Fecha      | Motivo          |
+| :-----: | :---------------------- | :---------------------- | :----------- | :--------- | :-------------- |
+|   1.0   | KZM, JVE, FYG, ACV, VLN | KZM, JVE, FYG, ACV, VLN | T. Ale Nieto | 2026-07-07 | Versión inicial |
 
 # ÍNDICE GENERAL
 
@@ -294,15 +295,18 @@ flowchart LR
 
 ## 6.1 Perfil del usuario
 
-| Perfil                       | Características                                     | Necesidades principales                          |
-|------------------------------|-----------------------------------------------------|--------------------------------------------------|
-| Promotor (superadmin)        | Director con acceso total al sistema                | Control completo, reportes y visibilidad         |
-| Administrativo (Yanina)      | Gestión financiera y planilla docente               | Exactitud en cálculos y auditoría                |
-| Coordinador académico        | Gestión de estructura y evaluaciones                | Administración de períodos, cursos y notas       |
-| Docente                      | Registro de notas de sus cursos asignados           | Formularios simples y consulta de horarios       |
-| Auxiliar                     | Supervisión de asistencia y registro de incidencias | Flujos guiados y resolución de excepciones       |
-| Padre / Apoderado            | Consulta de información de hijos                    | Portal claro, rápido y accesible desde móvil     |
-| Alumno                       | Consulta de información propia                      | Acceso a notas, horarios y materiales            |
+| Perfil                       | Características                                                                                 | Necesidades principales                                                                        |
+|------------------------------|-------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Promotor (superadmin)        | Director con acceso total al sistema. Toma decisiones estratégicas.                             | Control completo, reportes gerenciales, visibilidad global de la institución.                  |
+| Gestor de Usuarios           | Delegado administrativo para operaciones de sistema.                                            | Gestión ágil de cuentas, perfiles, asignación de roles operativos y vínculos familiares.       |
+| Administrativo (Yanina)      | Encargada de contabilidad, gestión financiera y planilla.                                       | Exactitud en cálculos, trazabilidad, generación de reportes financieros y auditoría de pagos.  |
+| Coordinador académico        | Responsable de la currícula, asignación de cursos y períodos.                                   | Administración eficiente de grados, secciones, consolidación de notas y gestión académica.     |
+| Docente                      | Imparte clases, responsable de calificar y registrar asistencia.                                | Interfaz intuitiva para ingresar notas, consultar sus horarios y subir material de estudio.    |
+| Auxiliar                     | Primer contacto en control de puerta e incidencias.                                             | Herramienta rápida para resolver excepciones de asistencia facial y registro de incidencias.   |
+| TOE (Tutoría/Orientación)    | Supervisa la disciplina y orientación de los alumnos.                                           | Seguimiento de incidencias reportadas por auxiliares, comunicación con padres y psicología.    |
+| Psicología                   | Atiende el bienestar emocional y de salud mental del alumnado.                                  | Privacidad, acceso a historial de alumnos derivados y registro confidencial de atenciones.     |
+| Padre / Apoderado            | Tutor legal o financiero del estudiante.                                                        | Portal claro, rápido y accesible desde móvil para monitorear asistencia, notas y pagos.        |
+| Alumno                       | Estudiante activo de la institución.                                                            | Acceso a notas, horarios, comunicados, tareas y materiales de forma rápida.                    |
 
 ## 6.2 Modelo Conceptual
 
@@ -310,54 +314,243 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    FRONT[Frontend React SPA] --> API[Laravel API]
-    API --> AUTH[Módulo Auth]
-    API --> USERS[Módulo Usuarios]
-    API --> ACAD[Módulo Académico]
-    API --> ASIST[Módulo Asistencia]
-    API --> FIN[Módulo Finanzas]
-    API --> INCID[Módulo Incidencias]
-    API --> PSIC[Módulo Psicología]
-    API --> MAT[Módulo Materiales]
-    API --> HOR[Módulo Horarios]
-    API --> COM[Módulo Comunicados]
-    API --> NOTIF[Módulo Notificaciones]
-    ASIST --> FACIAL[Servicio Facial Python]
-    API --> DB[(PostgreSQL 16)]
-    ASIST --> R2[Cloudflare R2]
+    subgraph Frontend [Aplicación Cliente]
+        SPA[SPA React + Vite]
+        PORTAL_P[Portal Padres]
+        PORTAL_A[Portal Alumnos]
+        PANEL[Panel Administrativo]
+    end
+
+    subgraph Backend [Laravel API]
+        AUTH[Módulo Auth & Seguridad]
+        USERS[Módulo Usuarios & Roles]
+        ACAD[Módulo Académico]
+        ASIST[Módulo Asistencia]
+        FIN[Módulo Finanzas]
+        INCID[Módulo Incidencias]
+        PSIC[Módulo Psicología]
+        COM[Módulo Comunicaciones & Materiales]
+    end
+
+    subgraph Infraestructura [Servicios Externos]
+        FACIAL[Servicio Facial Python/FastAPI]
+        DB[(PostgreSQL 16)]
+        R2[Cloudflare R2 Storage]
+        MAIL[SMTP / Servicio de Correo]
+    end
+
+    SPA --> AUTH
+    SPA --> USERS
+    SPA --> ACAD
+    SPA --> FIN
+    SPA --> ASIST
+    
+    ASIST --> FACIAL
+    Backend --> DB
+    Backend --> R2
+    Backend --> MAIL
 ```
 
-### 6.2.2 Diagrama de casos de uso
+### 6.2.2 Diagramas de casos de uso por Módulo
 
+**1. Módulo: Identidad y Acceso (Usuarios)**
 ```mermaid
 flowchart LR
-    PROM[Promotor] --> UC1[Gestionar usuarios y roles]
-    PROM --> UC2[Ver reportes generales]
-    YAN[Yanina] --> UC3[Gestionar finanzas y pagos]
-    YAN --> UC4[Cerrar planilla docente]
-    COORD[Coordinador] --> UC5[Administrar estructura académica]
-    COORD --> UC6[Publicar notas y rankings]
-    DOC[Docente] --> UC7[Registrar notas]
-    DOC --> UC8[Subir materiales]
-    AUX[Auxiliar] --> UC9[Supervisar asistencia facial]
-    AUX --> UC10[Registrar incidencias]
-    TOE[TOE] --> UC11[Dar seguimiento a incidencias]
-    PSIC[Psicología] --> UC12[Registrar atención confidencial]
-    PAD[Padre] --> UC13[Consultar información de hijos]
-    ALU[Alumno] --> UC14[Consultar información propia]
-    EST[Estación web] --> UC15[Capturar y enviar imagen facial]
+    GESTOR[Gestor / Promotor] --> UC1[Crear/Actualizar cuenta y restablecer clave]
+    GESTOR --> UC2[Asignar rol y delegar permisos]
+    GESTOR --> UC3[Vincular padre y alumno]
+    USER[Cualquier Usuario] --> UC4[Seleccionar contexto de portal multi-rol]
 ```
 
-### 6.2.3 Escenarios de casos de uso (narrativas)
+**2. Módulo: Académico**
+```mermaid
+flowchart LR
+    COORD[Coordinador] --> UC5[Gestionar estructura, matrícula y carga académica]
+    COORD --> UC6[Gestionar horarios y sesiones de clase]
+    COORD --> UC7[Revisar, cerrar evaluaciones y generar rankings/libretas]
+    DOC[Docente] --> UC8[Crear evaluación y cargar notas individual/masivo]
+    DOC --> UC9[Publicar materiales de estudio y calendario]
+```
 
-| Caso de uso                           | Actor      | Flujo principal                                                                                                           | Resultado                                             |
-|---------------------------------------|------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| CU-01 Registrar asistencia facial     | Alumno     | Se presenta ante estación; Python identifica rostro; Laravel valida y registra                                            | Ingreso/salida registrado, padre notificado por correo |
-| CU-02 Gestionar pagos                 | Yanina     | Selecciona alumno, registra pago recibido, sistema actualiza estado de cuenta                                            | Deuda pagada e inmutable, movimiento auditado          |
-| CU-03 Registrar notas                 | Docente    | Selecciona curso/sección, ingresa notas por alumno, confirma                                                             | Notas guardadas y disponibles para ranking             |
-| CU-04 Consultar estado de cuenta      | Padre      | Accede al portal, selecciona hijo, visualiza deudas pendientes y pagos realizados                                        | Estado de cuenta en tiempo real                        |
-| CU-05 Registrar incidencia            | Auxiliar   | Describe incidencia, asigna alumno(s), envía a TOE                                                                       | Incidencia registrada con historial de seguimiento     |
-| CU-06 Cerrar planilla mensual         | Yanina     | Revisa asistencia docente del mes, sistema calcula descuentos, Yanina confirma cierre                                    | Liquidación mensual cerrada e inmutable                |
+**3. Módulo: Asistencia y Planilla**
+```mermaid
+flowchart LR
+    EST[Estación web] --> UC10[Procesar evento facial y capturar rostros]
+    AUX[Auxiliar] --> UC11[Registrar asistencia manual y salidas de emergencia]
+    AUX --> UC12[Resolver anomalías, dudosas y justificar faltas]
+    YAN[Administrativo] --> UC13[Ajustar planilla docente y registrar sustitutos]
+    YAN --> UC14[Cerrar liquidación mensual docente]
+```
+
+**4. Módulo: Finanzas**
+```mermaid
+flowchart LR
+    YAN[Administrativo] --> UC15[Configurar conceptos, beneficios y vencimientos]
+    YAN --> UC16[Generar deudas y ajustar pendientes masivamente]
+    YAN --> UC17[Registrar pagos completos y generar recibo]
+    YAN --> UC18[Registrar anulaciones y devoluciones]
+    YAN --> UC19[Consultar estado de cuenta, morosos y reporte de caja]
+```
+
+**5. Módulo: Incidencias, Psicología y Comunicaciones**
+```mermaid
+flowchart LR
+    AUX[Auxiliar] --> UC20[Registrar incidencia inicial y derivar a TOE]
+    TOE[TOE] --> UC21[Dar seguimiento, comentar y resolver incidencia]
+    PSIC[Psicología] --> UC22[Registrar atención psicológica confidencial]
+    PROM[Gestor / Coord] --> UC23[Publicar comunicados segmentados]
+    PAD[Padre / Alumno] --> UC24[Consultar comunicados y notificaciones]
+```
+
+### 6.2.3 Escenarios de casos de uso (narrativas) y Diagramas de Secuencia
+
+Por cada módulo se describe un caso de uso principal con su respectivo diagrama de secuencia.
+
+**Módulo 1: Identidad y Acceso**
+#### CU-01: Vincular Padre y Alumno
+**Actor:** Gestor de Usuarios
+**Flujo Principal:**
+1. El gestor busca el perfil del alumno en el sistema.
+2. Ingresa el correo electrónico del padre o apoderado.
+3. El sistema verifica si el correo existe; si no, crea una nueva cuenta de padre.
+4. El sistema crea el vínculo N:M entre padre y alumno.
+5. El sistema envía credenciales (si es cuenta nueva) al padre.
+**Resultado:** Padre vinculado, capaz de acceder al portal familiar.
+
+```mermaid
+sequenceDiagram
+    actor Gestor
+    participant API as Laravel API
+    participant DB as PostgreSQL
+    participant MAIL as Servicio Correo
+
+    Gestor ->> API: POST /api/v1/usuarios/vinculos (alumnoId, emailPadre)
+    API ->> DB: Buscar emailPadre
+    alt Email no existe
+        API ->> DB: INSERT usuario (rol: padre)
+        API ->> MAIL: Enviar credenciales
+    end
+    API ->> DB: INSERT vinculo_padre_alumno
+    DB -->> API: OK
+    API -->> Gestor: Vínculo registrado exitosamente
+```
+
+**Módulo 2: Académico**
+#### CU-02: Crear evaluación y cargar notas masivamente
+**Actor:** Docente
+**Flujo Principal:**
+1. El docente accede a su carga académica activa.
+2. Crea una nueva evaluación para el periodo y sección.
+3. El sistema carga la lista de estudiantes inscritos.
+4. El docente ingresa las notas (borrador) y guarda.
+5. Tras verificar, el docente o coordinador publica las notas (cierran la evaluación).
+**Resultado:** Notas publicadas y ranking recalculado automáticamente.
+
+```mermaid
+sequenceDiagram
+    actor Docente
+    participant FRONT as Portal Docente
+    participant API as Laravel API
+    participant DB as PostgreSQL
+
+    Docente ->> FRONT: Crear evaluación y cargar notas
+    FRONT ->> API: POST /api/v1/evaluaciones (datos)
+    API ->> DB: Validar carga activa y periodo
+    API ->> DB: INSERT evaluación y notas en borrador
+    DB -->> API: OK
+    API -->> FRONT: Evaluaciones creadas
+    Docente ->> FRONT: Publicar notas
+    FRONT ->> API: PATCH /api/v1/evaluaciones/{id}/publicar
+    API ->> DB: UPDATE estado='publicada'
+    API ->> DB: Recalcular ranking de sección
+    API -->> FRONT: Notas publicadas
+```
+
+**Módulo 3: Asistencia y Planilla**
+#### CU-03: Procesar asistencia facial y notificar
+**Actor:** Alumno / Servicio Python
+**Flujo Principal:**
+1. El alumno escanea su rostro en un dispositivo web autorizado.
+2. Laravel envía la imagen a Python para validación biométrica.
+3. Si la confianza es alta, Laravel identifica si es ingreso o salida.
+4. Se registra el movimiento de asistencia en la base de datos.
+5. Se despacha de forma asíncrona una notificación al padre.
+**Resultado:** Registro inmutable del pase y padre notificado.
+
+```mermaid
+sequenceDiagram
+    actor Alumno
+    participant EST as Estación Web
+    participant API as Laravel API
+    participant PY as API Facial Python
+    participant DB as PostgreSQL
+    participant MAIL as Servicio Correo
+
+    Alumno ->> EST: Se presenta frente a cámara
+    EST ->> API: POST /api/v1/asistencia/captura (img)
+    API ->> PY: POST /recognize (img)
+    PY -->> API: { match: true, userId, confidence: 0.98 }
+    API ->> DB: Determinar ingreso/salida y estado (tardanza)
+    API ->> DB: INSERT movimiento_asistencia
+    API ->> MAIL: Notificar a padres
+    API -->> EST: { status: "success", msg: "Asistencia registrada" }
+```
+
+**Módulo 4: Finanzas**
+#### CU-04: Registrar pago completo y generar recibo
+**Actor:** Administrativo (Yanina)
+**Flujo Principal:**
+1. Yanina verifica el dinero en cuenta (ej. banco/Yape).
+2. Localiza la obligación de pago del alumno correspondiente en el sistema.
+3. Verifica el monto exacto (ordinario o pronto pago según vigencia).
+4. Registra el pago inmutable por el monto completo.
+5. La deuda cambia a estado "pagada" y se emite recibo electrónico.
+**Resultado:** Deuda saldada, ingresos actualizados en el reporte de caja.
+
+```mermaid
+sequenceDiagram
+    actor Yanina
+    participant API as Laravel API
+    participant DB as PostgreSQL
+
+    Yanina ->> API: GET /api/v1/finanzas/alumnos/{id}/deudas
+    API -->> Yanina: Lista de deudas pendientes
+    Yanina ->> API: POST /api/v1/finanzas/pagos (deudaId, metodo, ref)
+    API ->> DB: Validar deuda pendiente y monto exacto
+    API ->> DB: UPDATE deuda SET estado='pagada'
+    API ->> DB: INSERT movimiento_pago
+    DB -->> API: Transacción OK
+    API -->> Yanina: Comprobante/Recibo generado
+```
+
+**Módulo 5: Incidencias, Psicología y Comunicaciones**
+#### CU-05: Derivar y resolver incidencia
+**Actor:** Auxiliar, TOE
+**Flujo Principal:**
+1. Auxiliar registra la incidencia inicial vinculando a un alumno.
+2. Auxiliar deriva la incidencia al departamento de TOE.
+3. TOE recibe notificación, investiga y cita al apoderado (si aplica).
+4. TOE registra las acciones correctivas, comentarios y cambia estado a "Resuelta".
+**Resultado:** Incidencia trazable y archivada en el expediente del alumno.
+
+```mermaid
+sequenceDiagram
+    actor Auxiliar
+    actor TOE
+    participant API as Laravel API
+    participant DB as PostgreSQL
+
+    Auxiliar ->> API: POST /api/v1/incidencias (datos, derivar_a: 'toe')
+    API ->> DB: INSERT incidencia
+    DB -->> API: OK
+    API -->> TOE: (Notificación asíncrona) Nueva incidencia asignada
+    TOE ->> API: GET /api/v1/incidencias/{id}
+    API -->> TOE: Historial de la incidencia
+    TOE ->> API: POST /api/v1/incidencias/{id}/acciones (comentario, resolucion)
+    API ->> DB: INSERT accion_incidencia
+    API ->> DB: UPDATE incidencia SET estado='resuelta'
+    API -->> TOE: Incidencia cerrada exitosamente
+```
 
 ## 6.3 Modelo Lógico
 
